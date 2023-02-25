@@ -1,0 +1,25 @@
+{
+    "api": {
+        "key": "2J3K5N6P7R9SATCVDWEYGZH2J4",
+        "url": "http://127.0.0.1:8000",
+        "websocket": "ws://127.0.0.1:8000"
+    },
+    "application": {
+        "contact": {
+            "phone": "+6285772723989",
+            "whatsapp": "+6285772723989"
+        },
+        "name": "Nutty",
+        "nucode": "PUBLIC",
+        "url": "https://www.preloode.com"
+    },
+    "encryption": {
+        "iv": "cZIeWuArtMSgu+frgBOn4w==",
+        "privateKey": "",
+        "publicKey": "-----BEGIN PUBLIC KEY-----MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAu3T0wDO0iITg+adZVNc6Ww0nVf0r3emSBVEU5NRetNJPRnzP7sQ4vCZjeRgpi11VSbD6SH6PrkhzrnnSzDrV3BtgcJzPUJJarWWiUS0a95iobkZlLmi6aSsoW8S1qxQb9X9L/p82kld6c199kr0iEgdjKTU1duxyuW/EVCm45qh6QsJAQYgb4fUOhAvM8xBcSutI6rwsPH0TcGfoFnvvb807lLDAKLgG0XhNvJovyh6FyLXPRPqbwXjEtQY+ndZTmxhvwbcR+fLrzBbI0O9M50vL9pTGnGZbFJ1ONHJlNvxrPmLvbb+YbWdeIt0qofkZqEIRTTX78o30+smk8a1BmRVkP736uNQcaKxwgf2EUkF3ewIqQNpiLNoRnJO/BebYYLZ8y0mU2WfB71UR0YqyhOIb0eyDu9aE49LYtSs6Qs17ri3fwxx5xFLi35UtOTAWu0Qkf+shCxTALO2KK72qNTOun4+GVwaCg0KlD2ZE0SF3OeGMy/wOcR65beiwdYCBKT/iWhFfwUvxSUzoxPzfQHArxScGFh46TZklxvlQcl+GyWryvRRIaTPwCsxxiU2F2vkDNjWMZozLSJGqKdkZX2z3kufhxi0SWPhDWsIbxisTq1XJ33TruKaQuRlNNEvPxH5TRJ5YgiG2cY9iWpCe5p+o5T2R42QFiZeLqITbbosCAwEAAQ==-----END PUBLIC KEY-----",
+        "secretKey": "whEbVQZgfOKk5YtLK90E9eMRWYFxruZg/xChCPvaPhA="
+    },
+    "resource": {
+        "url": "http://127.0.0.1:3001"
+    }
+}

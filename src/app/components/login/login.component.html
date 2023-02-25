@@ -1,0 +1,70 @@
+<div class="account-pages mt-5 mb-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="text-center">
+                    <a href="/" class="mb-5 d-block auth-logo">
+                        <img src="assets/images/logo-dark.png" alt="" height="22" class="logo logo-dark">
+                        <img src="assets/images/logo-light.png" alt="" height="22" class="logo logo-light">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row align-items-center justify-content-center">
+            <div class="col-md-8 col-lg-6 col-xl-5">
+                <div class="card overflow-hidden">
+                    <div class="card-body p-4">
+                        <div class="text-center mt-2">
+                            <h5 class="text-primary">Welcome Back !</h5>
+                            <p class="text-muted">Sign in to continue to Minible.</p>
+                        </div>
+                        <div class="p-2 mt-4">
+                            <form (ngSubmit)="login()">
+                                <ngb-alert type="danger" *ngIf="response"
+                                           [dismissible]="false">{{response}}</ngb-alert>
+                                <div class="mb-3">
+                                    <label for="email">Username</label>
+                                    <input type="email" formControlName="email" class="form-control" id="email"
+                                           placeholder="Email"
+                                           [ngClass]="{'is-invalid': submit}"/>
+                                    <div *ngIf="submit" class="invalid-feedback">
+                                        <div>Email is required</div>
+                                        <div>Email must be a valid email address</div>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="float-end">
+                                        <a href="/account/reset-password" class="text-muted">Forgot password?</a>
+                                    </div>
+                                    <label for="password">Password</label>
+                                    <input type="password" formControlName="password" class="form-control" id="password"
+                                           [ngClass]="{'is-invalid': submit}" placeholder="Password"/>
+                                    <div *ngIf="submit" class="invalid-feedback">
+                                        <div>Password is required</div>
+                                    </div>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="auth-remember-check">
+                                    <label class="form-check-label" for="auth-remember-check">Remember me</label>
+                                </div>
+                                <div class="mt-3 text-end">
+                                    <button class="btn btn-primary w-sm waves-effect waves-light" type="submit">Log In
+                                    </button>
+                                </div>
+                                <div *ngIf="configuration.application.nucode == 'PUBLIC'" class="mt-4 text-center">
+                                    <p class="mb-0">Don't have an account ?
+                                        <a class="fw-medium text-primary" [routerLink]="['register']">Signup Now</a>
+                                    </p>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-5 text-center">
+                    <p>© 2021 - {{year}} {{configuration.application.name}}. Crafted with
+                        <i class="mdi mdi-heart text-danger"></i> by Nutty Developer</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

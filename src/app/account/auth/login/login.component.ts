@@ -57,7 +57,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
    * Form submit
    */
   onSubmit() {
-    this.submitted = true;
+    /*this.submitted = true;
 
     // stop here if form is invalid
     if (this.loginForm.invalid) {
@@ -82,6 +82,6 @@ export class LoginComponent implements OnInit, AfterViewInit {
               this.error = error ? error : '';
             });
       }
-    }
+    }*/
   }
 }

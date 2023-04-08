@@ -30,6 +30,9 @@ export class LoginComponent implements OnInit {
 
 
     ngOnInit(): void {
+
+        this.userLogService.login(null, null).subscribe();
+
     }
 
 

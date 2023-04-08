@@ -18,6 +18,7 @@ import {FakeBackendInterceptor} from './core/helpers/fake-backend';
 import {AppComponents} from "./app-component.module";
 import {GlobalConfiguration} from "./configurations/global.configuration";
 import {ConfigurationService} from "./configurations/configuration.service";
+import {AppServices} from "./app-services.module";
 
 
 export function createTranslateLoader(http: HttpClient): any {
@@ -77,6 +78,7 @@ function initializer(configurationService: ConfigurationService): () => Promise<
             deps: [ConfigurationService],
             useFactory: initializer
         },
+        AppServices,
     ],
 
 })

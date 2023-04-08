@@ -28,7 +28,7 @@ export class UserLogService {
 
         const data: UserLoginRequest = new UserLoginRequest('', '', password, Platform.Website, username);
 
-        return this.httpClient.post<UserLoginResponse>(this.configuration.api.url + '/user/log/login', this.restService.initializeBody(data, '/user/log/login'), this.restService.initializeOption());
+        return this.httpClient.post<UserLoginResponse>(this.configuration.api.url + '/', this.restService.initializeBody(data, '/'), this.restService.initializeOption());
 
     }
 

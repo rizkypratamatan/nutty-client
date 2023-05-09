@@ -4,6 +4,22 @@ import { Routes, RouterModule } from '@angular/router';
 import { DefaultComponent } from './dashboards/default/default.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { ChatComponent } from './chat/chat.component';
+import { UserComponent } from './user/user.component';
+import { UserEntryComponent } from './user-entry/user-entry.component';
+import { UserRoleComponent } from './user-role/user-role.component';
+import { UserRoleEntryComponent } from './user-role-entry/user-role-entry.component';
+import { UserGroupComponent } from './user-group/user-group.component';
+import { UserGroupEntryComponent } from './user-group-entry/user-group-entry.component';
+import { WebsiteComponent } from './website/website.component';
+import { WebsiteEntryComponent } from './website-entry/website-entry.component';
+import { LicenseComponent } from './license/license.component';
+import { ReportComponent } from './report/report.component';
+import { ApiComponent } from './api/api.component';
+import { WorksheetComponent } from './worksheet/worksheet.component';
+import { WorksheetResultComponent } from './worksheet-result/worksheet-result.component';
+import { DatabaseComponent } from './database/database.component';
+import { DatabaseImportComponent } from './database-import/database-import.component';
+import { DatabaseHistoryComponent } from './database-history/database-history.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard' },
@@ -21,7 +37,23 @@ const routes: Routes = [
   { path: 'tables', loadChildren: () => import('./tables/tables.module').then(m => m.TablesModule) },
   { path: 'charts', loadChildren: () => import('./chart/chart.module').then(m => m.ChartModule) },
   { path: 'icons', loadChildren: () => import('./icons/icons.module').then(m => m.IconsModule) },
-  { path: 'maps', loadChildren: () => import('./maps/maps.module').then(m => m.MapsModule) }
+  { path: 'maps', loadChildren: () => import('./maps/maps.module').then(m => m.MapsModule) },
+  { path: 'user', component: UserComponent },
+  { path: 'user/entry', component: UserEntryComponent },
+  { path: 'user/role', component: UserRoleComponent },
+  { path: 'user/role/entry', component: UserRoleEntryComponent },
+  { path: 'user/group', component: UserGroupComponent },
+  { path: 'user/group/entry', component: UserGroupEntryComponent },
+  { path: 'website', component: WebsiteComponent },
+  { path: 'website/entry', component: WebsiteEntryComponent },
+  { path: 'worksheet', component: WorksheetComponent },
+  { path: 'worksheet/result', component: WorksheetResultComponent },
+  { path: 'database', component: DatabaseComponent },
+  { path: 'database/import', component: DatabaseImportComponent },
+  { path: 'database/history', component: DatabaseHistoryComponent },
+  { path: 'report', component: ReportComponent },
+  { path: 'api', component: ApiComponent },
+  { path: 'license', component: LicenseComponent },
 ];
 
 @NgModule({

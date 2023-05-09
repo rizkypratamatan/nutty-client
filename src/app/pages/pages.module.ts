@@ -26,6 +26,22 @@ import { LoaderService } from '../core/services/loader.service';
 
 import { CalendarComponent } from './calendar/calendar.component';
 import { ChatComponent } from './chat/chat.component';
+import { UserComponent } from './user/user.component';
+import { UserEntryComponent } from './user-entry/user-entry.component';
+import { UserRoleComponent } from './user-role/user-role.component';
+import { UserRoleEntryComponent } from './user-role-entry/user-role-entry.component';
+import { UserGroupComponent } from './user-group/user-group.component';
+import { UserGroupEntryComponent } from './user-group-entry/user-group-entry.component';
+import { WebsiteComponent } from './website/website.component';
+import { WebsiteEntryComponent } from './website-entry/website-entry.component';
+import { LicenseComponent } from './license/license.component';
+import { ReportComponent } from './report/report.component';
+import { ApiComponent } from './api/api.component';
+import { WorksheetComponent } from './worksheet/worksheet.component';
+import { WorksheetResultComponent } from './worksheet-result/worksheet-result.component';
+import { DatabaseComponent } from './database/database.component';
+import { DatabaseImportComponent } from './database-import/database-import.component';
+import { DatabaseHistoryComponent } from './database-history/database-history.component';
 
 
 FullCalendarModule.registerPlugins([
@@ -37,7 +53,7 @@ FullCalendarModule.registerPlugins([
 ]);
 
 @NgModule({
-  declarations: [CalendarComponent, ChatComponent],
+  declarations: [CalendarComponent, ChatComponent, UserComponent, UserEntryComponent, UserRoleComponent, UserRoleEntryComponent, UserGroupComponent, UserGroupEntryComponent, WebsiteComponent, WebsiteEntryComponent, LicenseComponent, ReportComponent, ApiComponent, WorksheetComponent, WorksheetResultComponent, DatabaseComponent, DatabaseImportComponent, DatabaseHistoryComponent],
   imports: [
     CommonModule,
     NgSelectModule,

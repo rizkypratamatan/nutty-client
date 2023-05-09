@@ -29,18 +29,17 @@ export const MENU: MenuItem[] = [
         id: 5,
         label: 'MENUITEMS.USER.LIST.USER',
         icon: 'uil-user',
-        link: '#',
         subItems: [
             {
                 id: 6,
                 label: 'MENUITEMS.USER.LIST.LIST',
-                link: '#',
+                link: '/user',
                 parentId: 5,
             },
             {
                 id: 7,
                 label: 'MENUITEMS.USER.LIST.ADD',
-                link: '#',
+                link: '/user/entry',
                 parentId: 5,
             },
         ],
@@ -49,18 +48,17 @@ export const MENU: MenuItem[] = [
         id: 8,
         label: 'MENUITEMS.USER.LIST.ROLE',
         icon: 'uil-user-check',
-        link: '#',
         subItems: [
             {
                 id: 9,
                 label: 'MENUITEMS.USER.LIST.LIST',
-                link: '#',
+                link: '/user/role',
                 parentId: 8,
             },
             {
                 id: 10,
                 label: 'MENUITEMS.USER.LIST.ADD',
-                link: '#',
+                link: '/user/role/entry',
                 parentId: 8,
             },
         ],
@@ -69,18 +67,17 @@ export const MENU: MenuItem[] = [
         id: 11,
         label: 'MENUITEMS.USER.LIST.GROUP',
         icon: 'uil-users-alt',
-        link: '#',
         subItems: [
             {
                 id: 12,
                 label: 'MENUITEMS.USER.LIST.LIST',
-                link: '#',
+                link: '/user/group',
                 parentId: 11,
             },
             {
                 id: 13,
                 label: 'MENUITEMS.USER.LIST.ADD',
-                link: '#',
+                link: '/user/group/entry',
                 parentId: 11,
             },
         ],
@@ -94,18 +91,17 @@ export const MENU: MenuItem[] = [
         id: 15,
         label: 'MENUITEMS.WEBSITE.LIST.WEBSITE',
         icon: 'uil-globe',
-        link: '#',
         subItems: [
             {
                 id: 16,
                 label: 'MENUITEMS.WEBSITE.LIST.LIST',
-                link: '#',
+                link: '/website',
                 parentId: 15,
             },
             {
                 id: 17,
                 label: 'MENUITEMS.WEBSITE.LIST.ADD',
-                link: '#',
+                link: '/website/entry',
                 parentId: 15,
             },
         ],
@@ -119,18 +115,17 @@ export const MENU: MenuItem[] = [
         id: 19,
         label: 'MENUITEMS.APPS.LIST.WORKSHEET',
         icon: 'uil-outgoing-call',
-        link: '#',
         subItems: [
             {
                 id: 20,
                 label: 'MENUITEMS.APPS.LIST.NEW_DATA',
-                link: '#',
+                link: '/worksheet',
                 parentId: 19,
             },
             {
                 id: 21,
                 label: 'MENUITEMS.APPS.LIST.RESULT',
-                link: '#',
+                link: '/worksheet/result',
                 parentId: 19,
             },
         ],
@@ -144,12 +139,11 @@ export const MENU: MenuItem[] = [
         id: 23,
         label: 'MENUITEMS.DATABASE.LIST.DATABASE',
         icon: 'uil-database',
-        link: '#',
         subItems: [
             {
                 id: 24,
                 label: 'MENUITEMS.DATABASE.LIST.LIST',
-                link: '#',
+                link: '/database',
                 parentId: 23,
             },
             {
@@ -160,13 +154,13 @@ export const MENU: MenuItem[] = [
                     {
                         id: 26,
                         label: 'MENUITEMS.DATABASE.LIST.NEW_DATA',
-                        link: '#',
+                        link: '/database/import',
                         parentId: 25,
                     },
                     {
                         id: 27,
                         label: 'MENUITEMS.DATABASE.LIST.HISTORY',
-                        link: '#',
+                        link: '/database/history',
                         parentId: 25,
                     },
                 ],
@@ -182,7 +176,7 @@ export const MENU: MenuItem[] = [
         id: 29,
         label: 'MENUITEMS.REPORT.LIST.REPORT',
         icon: 'uil-graph-bar',
-        link: '#',
+        link: '/report',
     },
     {
         id: 30,
@@ -199,7 +193,7 @@ export const MENU: MenuItem[] = [
         id: 32,
         label: 'MENUITEMS.SETTING.LIST.API',
         icon: 'uil-exchange',
-        link: '#',
+        link: '/api',
     },
     {
         id: 33,
@@ -210,7 +204,7 @@ export const MENU: MenuItem[] = [
         id: 34,
         label: 'MENUITEMS.LICENSE.LIST.LICENSE',
         icon: 'uil-file-bookmark-alt',
-        link: '#',
+        link: '/license',
     },
     // {
     //     id: 4,

@@ -63,7 +63,7 @@
       <div class="dropdown d-inline-block language-switch" ngbDropdown>
         <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown" ngbDropdownToggle>
           <img *ngIf="flagvalue !== undefined" src="{{flagvalue}}" alt="Header Language" height="16"><span
-          class="ms-1">{{countryName}}</span>
+          class="ms-1"></span>
           <img *ngIf="flagvalue === undefined" src="{{valueset}}" alt="Header Language" height="16">
           <span *ngIf="flagvalue === undefined" class="ms-1">English</span>
         </button>
@@ -252,11 +252,11 @@
         </div>
       </div>
 
-      <div class="dropdown d-inline-block">
+      <!-- <div class="dropdown d-inline-block">
         <button type="button" class="btn header-item noti-icon right-bar-toggle" (click)="toggleRightSidebar()">
           <i class="uil-cog"></i>
         </button>
-      </div>
+      </div> -->
 
     </div>
   </div>

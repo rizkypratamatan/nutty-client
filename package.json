@@ -45,6 +45,7 @@
     "chartist": "^0.11.4",
     "crypto-ts": "^1.0.2",
     "echarts": "^5.0.2",
+    "firebase": "^9.21.0",
     "flatpickr": "^4.6.9",
     "metismenujs": "^1.2.1",
     "ng-apexcharts": "^1.5.4",

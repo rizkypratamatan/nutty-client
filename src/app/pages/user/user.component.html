@@ -199,6 +199,26 @@
                                 <th>Action</th>
                             </tr>
                         </thead>
+                        <tbody>
+                            <tr *ngFor="let user of allUsers; let i = index;">
+                                <td>{{ i + 1 }}</td>
+                                <td>{{ user.username }}</td>
+                                <td>{{ user.name }}</td>
+                                <!-- @if(Session::has("account"))
+                                        @if(Session::get("account")->nucode == "system") -->
+                                <td>{{ user.nucode }}</td>
+                                <!-- @endif
+                                        @endif -->
+                                <td>{{ user.type }}</td>
+                                <td>{{ user.group.name }}</td>
+                                <td>{{ user.role.name }}</td>
+                                <td>{{ user.status }}</td>
+                                <td>{{ user.modified.timestamp.$date.$numberLong | date }}</td>
+                                <td>
+                                    <a href="#" class="btn btn-info btn-sm w-lg">Edit</a>
+                                </td>
+                            </tr>
+                        </tbody>
                         <tfoot>
                             <tr>
                                 <th>#</th>

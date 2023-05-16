@@ -47,6 +47,7 @@ import { DatabaseComponent } from './database/database.component';
 import { DatabaseImportComponent } from './database-import/database-import.component';
 import { DatabaseHistoryComponent } from './database-history/database-history.component';
 import { UserTableFilterPipe } from './user/table-filter.pipe';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 FullCalendarModule.registerPlugins([
     dayGridPlugin,
@@ -94,6 +95,7 @@ FullCalendarModule.registerPlugins([
         NgbNavModule,
         NgbTooltipModule,
         SimplebarAngularModule,
+        NgxPaginationModule
     ],
 })
 export class PagesModule {}

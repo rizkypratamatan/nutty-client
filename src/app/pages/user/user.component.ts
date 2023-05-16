@@ -24,6 +24,8 @@ export class UserComponent implements OnInit {
     };
 
     filter = {};
+    p: number = 1;
+    totalUser: number;
 
     typeFilter = ['Administrator', 'CRM', 'Telemarketer'];
     statusFilter = ['Active', 'Inactive'];
@@ -42,6 +44,8 @@ export class UserComponent implements OnInit {
             this.allUsers = response['dataUser'];
             this.allType = this.typeFilter;
             this.allStatus = this.statusFilter;
+            this.totalUser = this.allUsers.length;
+            console.log(this.totalUser);
         });
 
         this.service.getAllGroup().subscribe((response) => {

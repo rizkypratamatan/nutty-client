@@ -293,7 +293,14 @@
                         <tbody>
                             <tr
                                 *ngFor="
-                                    let user of allUsers | tableFilter : filter;
+                                    let user of allUsers
+                                        | tableFilter : filter
+                                        | paginate
+                                            : {
+                                                  itemsPerPage: 10,
+                                                  currentPage: p,
+                                                  totalItems: totalUser
+                                              };
                                     let i = index
                                 "
                             >
@@ -341,6 +348,12 @@
                             </tr>
                         </tfoot>
                     </table>
+                    <div class="paginate">
+                        <pagination-controls
+                            (pageChange)="p = $event"
+                            class="float-right"
+                        ></pagination-controls>
+                    </div>
                 </div>
             </div>
         </div>

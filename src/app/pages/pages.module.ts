@@ -5,7 +5,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { SimplebarAngularModule } from 'simplebar-angular';
 
-import { NgbNavModule, NgbDropdownModule, NgbModalModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import {
+    NgbNavModule,
+    NgbDropdownModule,
+    NgbModalModule,
+    NgbTooltipModule,
+} from '@ng-bootstrap/ng-bootstrap';
 import { NgApexchartsModule } from 'ng-apexcharts';
 
 import { FullCalendarModule } from '@fullcalendar/angular';
@@ -14,7 +19,6 @@ import interactionPlugin from '@fullcalendar/interaction';
 import bootstrapPlugin from '@fullcalendar/bootstrap';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
-
 
 import { UIModule } from '../shared/ui/ui.module';
 import { PagesRoutingModule } from './pages-routing.module';
@@ -42,34 +46,54 @@ import { WorksheetResultComponent } from './worksheet-result/worksheet-result.co
 import { DatabaseComponent } from './database/database.component';
 import { DatabaseImportComponent } from './database-import/database-import.component';
 import { DatabaseHistoryComponent } from './database-history/database-history.component';
-
+import { UserTableFilterPipe } from './user/table-filter.pipe';
 
 FullCalendarModule.registerPlugins([
-  dayGridPlugin,
-  interactionPlugin,
-  bootstrapPlugin,
-  timeGridPlugin,
-  listPlugin
+    dayGridPlugin,
+    interactionPlugin,
+    bootstrapPlugin,
+    timeGridPlugin,
+    listPlugin,
 ]);
 
 @NgModule({
-  declarations: [CalendarComponent, ChatComponent, UserComponent, UserEntryComponent, UserRoleComponent, UserRoleEntryComponent, UserGroupComponent, UserGroupEntryComponent, WebsiteComponent, WebsiteEntryComponent, LicenseComponent, ReportComponent, ApiComponent, WorksheetComponent, WorksheetResultComponent, DatabaseComponent, DatabaseImportComponent, DatabaseHistoryComponent],
-  imports: [
-    CommonModule,
-    NgSelectModule,
-    FormsModule,
-    NgbDropdownModule,
-    NgbModalModule,
-    UIModule,
-    PagesRoutingModule,
-    NgApexchartsModule,
-    ReactiveFormsModule,
-    DashboardsModule,
-    HttpClientModule,
-    FullCalendarModule,
-    NgbNavModule,
-    NgbTooltipModule,
-    SimplebarAngularModule
-  ]
+    declarations: [
+        CalendarComponent,
+        ChatComponent,
+        UserComponent,
+        UserEntryComponent,
+        UserRoleComponent,
+        UserRoleEntryComponent,
+        UserGroupComponent,
+        UserGroupEntryComponent,
+        WebsiteComponent,
+        WebsiteEntryComponent,
+        LicenseComponent,
+        ReportComponent,
+        ApiComponent,
+        WorksheetComponent,
+        WorksheetResultComponent,
+        DatabaseComponent,
+        DatabaseImportComponent,
+        DatabaseHistoryComponent,
+        UserTableFilterPipe,
+    ],
+    imports: [
+        CommonModule,
+        NgSelectModule,
+        FormsModule,
+        NgbDropdownModule,
+        NgbModalModule,
+        UIModule,
+        PagesRoutingModule,
+        NgApexchartsModule,
+        ReactiveFormsModule,
+        DashboardsModule,
+        HttpClientModule,
+        FullCalendarModule,
+        NgbNavModule,
+        NgbTooltipModule,
+        SimplebarAngularModule,
+    ],
 })
-export class PagesModule { }
+export class PagesModule {}

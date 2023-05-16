@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
     providedIn: 'root',
@@ -9,7 +10,15 @@ export class UserService {
 
     constructor(private http: HttpClient) {}
 
-    getAllUser() {
-        return this.http.post(this.base_url+'api/get-all-user', null);
+    public getAllUser(): Observable<any> {
+        return this.http.post(this.base_url + 'api/get-all-user', null);
+    }
+
+    public getAllGroup(): Observable<any> {
+        return this.http.post(this.base_url + 'api/get-user-group', null);
+    }
+
+    public getAllRole(): Observable<any> {
+        return this.http.post(this.base_url + 'api/get-all-role', null);
     }
 }

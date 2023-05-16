@@ -7,15 +7,49 @@ import { UserService } from 'src/app/services/user/user.service';
     styleUrls: ['./user.component.scss'],
 })
 export class UserComponent implements OnInit {
-    allUsers: any;
+    allUsers: any[] = [];
+    allType: any[] = [];
+    allGroup: any[] = [];
+    allRole: any[] = [];
+    allStatus: any[] = [];
+
+    fields = {
+        username: '',
+        name: '',
+        nucode: '',
+        type: '',
+        group: '',
+        role: '',
+        status: '',
+    };
+
+    filter = {};
+
+    typeFilter = ['Administrator', 'CRM', 'Telemarketer'];
+    statusFilter = ['Active', 'Inactive'];
+
+    updateFilters() {
+        Object.keys(this.fields).forEach((key) =>
+            this.fields[key] === '' ? delete this.fields[key] : key
+        );
+        this.filter = Object.assign({}, this.fields);
+    }
 
     constructor(private service: UserService) {}
 
     ngOnInit(): void {
         this.service.getAllUser().subscribe((response) => {
             this.allUsers = response['dataUser'];
+            this.allType = this.typeFilter;
+            this.allStatus = this.statusFilter;
+        });
+
+        this.service.getAllGroup().subscribe((response) => {
+            this.allGroup = response['dataUser'];
+        });
+
+        this.service.getAllRole().subscribe((response) => {
+            this.allRole = response['dataUser'];
         });
     }
-
-    public userLists: string[] = [];
 }

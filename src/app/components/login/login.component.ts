@@ -21,6 +21,11 @@ export class LoginComponent implements OnInit {
 
     public year: number = new Date().getFullYear();
 
+    fields = {
+        username: '',
+        password: ''
+    };
+
 
     constructor(private configurationService: ConfigurationService, private dataService: DataService, private encryptionService: EncryptionService, private userLogService: UserLogService) {
 
@@ -31,7 +36,7 @@ export class LoginComponent implements OnInit {
 
     ngOnInit(): void {
 
-        this.userLogService.login(null, null).subscribe();
+        this.userLogService.login('', '').subscribe();
 
     }
 
@@ -40,7 +45,9 @@ export class LoginComponent implements OnInit {
 
         this.submit = true;
 
-        this.userLogService.login(null, null).subscribe((response: UserLoginResponse) => {
+        console.log(this.fields['password']+ ' ' +this.fields['username'])
+
+        this.userLogService.login(this.fields['password'], this.fields['username']).subscribe((response: UserLoginResponse) => {
 
             if(response.result) {
 
@@ -51,9 +58,12 @@ export class LoginComponent implements OnInit {
 
                 window.location.href = '/';
 
+                console.log(response);
+
             } else {
 
                 this.dataService.alert('error', response.response);
+                console.log(response);
 
             }
 

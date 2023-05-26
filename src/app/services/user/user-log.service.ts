@@ -27,7 +27,7 @@ export class UserLogService {
     public login(password: string, username: string): Observable<UserLoginResponse> {
 
         const data: UserLoginRequest = new UserLoginRequest('', '', password, Platform.Website, username);
-        console.log(data);
+        // console.log(data);
 
         return this.httpClient.post<UserLoginResponse>(this.configuration.api.url + '/api/login', this.restService.initializeBody(data, 'api/login'), this.restService.initializeOption());
 

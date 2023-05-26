@@ -4,6 +4,7 @@ import { UserLogService } from '../../services/user/user-log.service';
 import { UserLoginResponse } from '../../models/user/user-login-response';
 import { EncryptionService } from '../../services/global/encryption.service';
 import { DataService } from '../../services/global/data.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-login',
@@ -28,13 +29,20 @@ export class LoginComponent implements OnInit {
         private configurationService: ConfigurationService,
         private dataService: DataService,
         private encryptionService: EncryptionService,
-        private userLogService: UserLogService
+        private userLogService: UserLogService,
+        private router: Router,
     ) {
         this.configuration = this.configurationService;
     }
 
     ngOnInit(): void {
-        this.userLogService.login('', '').subscribe();
+        // this.userLogService.login('', '').subscribe();
+
+        let account = localStorage.getItem('nu-account');
+
+        if (account) {
+            this.router.navigate(['/dashboard']);
+        }
     }
 
     public login() {

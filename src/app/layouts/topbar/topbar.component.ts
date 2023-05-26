@@ -75,7 +75,7 @@ export class TopbarComponent implements OnInit {
     this.accountData = localStorage.getItem('nu-account');
     this.auth = JSON.parse(this.encryptionService.aesDecrypt(this.accountData));
 
-    console.log(this.auth);
+    // console.log(this.auth);
   }
 
   /**

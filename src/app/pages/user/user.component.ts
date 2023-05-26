@@ -45,7 +45,7 @@ export class UserComponent implements OnInit {
             this.allType = this.typeFilter;
             this.allStatus = this.statusFilter;
             this.totalUser = this.allUsers.length;
-            console.log(this.totalUser);
+            // console.log(this.totalUser);
         });
 
         this.service.getAllGroup().subscribe((response) => {

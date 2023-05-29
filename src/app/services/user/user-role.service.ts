@@ -1,15 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { ConfigurationService } from 'src/app/configurations/configuration.service';
 import { EncryptionService } from '../global/encryption.service';
 import { RestService } from '../global/rest.service';
-import { ConfigurationService } from 'src/app/configurations/configuration.service';
+import { Observable } from 'rxjs';
 
 @Injectable({
     providedIn: 'root',
 })
-export class UserService {
-    // private base_url = 'http://localhost:8000/';
+export class UserRoleService {
     public configuration: ConfigurationService;
 
     accountData: string;
@@ -31,36 +30,6 @@ export class UserService {
         );
 
         return this.auth;
-    }
-
-    public getAllUser(): Observable<any> {
-        let auth = this.Auth();
-        let data = {
-            platform: 'Website',
-            limit: 10,
-            offset: 0,
-        };
-
-        return this.http.post(
-            this.configuration.api.url + '/api/get-all-user',
-            this.globalRestService.initializeBody(data, 'api/get-all-user'),
-            this.globalRestService.initializeHeaderGetData(auth['token-auth'])
-        );
-    }
-
-    public getAllGroup(): Observable<any> {
-        let auth = this.Auth();
-        let data = {
-            platform: 'Website',
-            limit: 10,
-            offset: 0,
-        };
-
-        return this.http.post(
-            this.configuration.api.url + '/api/get-user-group',
-            this.globalRestService.initializeBody(data, 'api/get-user-group'),
-            this.globalRestService.initializeHeaderGetData(auth['token-auth'])
-        );
     }
 
     public getAllRole(): Observable<any> {

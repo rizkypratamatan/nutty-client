@@ -30,6 +30,18 @@ export class RestService {
 
     }
 
+    public initializeHeaderGetData(token: string): any {
+        const header = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+                'nu-key': this.configuration.api.key,
+                'token-auth': token,
+            }),
+        };
+
+        return header;
+    }
 
     public initializeBody(data: any, path: string): any {
 

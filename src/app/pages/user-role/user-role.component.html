@@ -4,7 +4,7 @@
             <div
                 class="page-title-box d-flex align-items-center justify-content-between"
             >
-                <h4 class="mb-0">User Role</h4>
+                <h4 class="mb-0">Role List</h4>
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
@@ -89,7 +89,7 @@
                         <tbody>
                             <tr
                                 *ngFor="
-                                    let user of allRoles
+                                    let role of allRoles
                                         | tableFilter : filter
                                         | paginate
                                             : {
@@ -101,12 +101,12 @@
                                 "
                             >
                                 <td>{{ i + 1 }}</td>
-                                <td>{{ user.name }}</td>
-                                <td>{{ user.nucode }}</td>
-                                <td>{{ user.status }}</td>
+                                <td>{{ role.name }}</td>
+                                <td>{{ role.nucode }}</td>
+                                <td>{{ role.status }}</td>
                                 <td>
                                     {{
-                                        user.modified.timestamp.$date
+                                        role.modified.timestamp.$date
                                             .$numberLong | date
                                     }}
                                 </td>

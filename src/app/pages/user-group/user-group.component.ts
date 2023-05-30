@@ -34,11 +34,11 @@ export class UserGroupComponent implements OnInit {
     constructor(private service: UserGroupService) {}
 
     ngOnInit(): void {
-      this.service.getAllGroup().subscribe((response) => {
-        this.allGroups = response['dataUser'];
-        this.allStatus = this.statusFilter;
-        // this.totalGroup = this.allGroups.length;
-        // console.log(response);
-    });
+        this.service.getAllGroup().subscribe((response) => {
+            this.allGroups = response['dataUser'];
+            this.allStatus = this.statusFilter;
+            this.totalGroup = this.allGroups.length;
+            // console.log(response);
+        });
     }
 }

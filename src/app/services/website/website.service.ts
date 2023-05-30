@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 @Injectable({
     providedIn: 'root',
 })
-export class UserGroupService {
+export class WebsiteService {
     public configuration: ConfigurationService;
 
     accountData: string;
@@ -41,8 +41,8 @@ export class UserGroupService {
         };
 
         return this.http.post(
-            this.configuration.api.url + '/api/get-user-group',
-            this.globalRestService.initializeBody(data, 'api/get-user-group'),
+            this.configuration.api.url + '/api/get-websites',
+            this.globalRestService.initializeBody(data, 'api/get-websites'),
             this.globalRestService.initializeHeaderGetData(auth['token-auth'])
         );
     }

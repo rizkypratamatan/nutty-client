@@ -58,14 +58,14 @@
                                 [(ngModel)]="fields.status"
                                 (ngModelChange)="updateFilters()"
                             >
-                            <option value="">Status</option>
-                            <option *ngFor="let status of allStatus">
-                                {{ status }}
-                            </option>
+                                <option value="">Status</option>
+                                <option *ngFor="let status of allStatus">
+                                    {{ status }}
+                                </option>
                             </select>
                         </div>
                         <div class="col-md-2"></div>
-                        
+
                         <div class="col-md-2" style="text-align: right">
                             <a
                                 href="#"
@@ -114,7 +114,12 @@
                                 <td>{{ group.website.names }}</td>
                                 <td>{{ group.nucode }}</td>
                                 <td>{{ group.status }}</td>
-                                <td>{{ group.modified.timestamp.$date.$numberLong | date }}</td>
+                                <td>
+                                    {{
+                                        group.modified.timestamp.$date
+                                            .$numberLong | date
+                                    }}
+                                </td>
                                 <td>
                                     <a href="#" class="btn btn-info btn-sm w-lg"
                                         >Edit</a

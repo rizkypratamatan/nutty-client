@@ -48,33 +48,25 @@ export class UserService {
         );
     }
 
-    public getAllGroup(): Observable<any> {
+    public addUser(request): Observable<any> {
         let auth = this.Auth();
-        let data = {
-            platform: 'Website',
-            limit: 10,
-            offset: 0,
-        };
 
         return this.http.post(
-            this.configuration.api.url + '/api/get-user-group',
-            this.globalRestService.initializeBody(data, 'api/get-user-group'),
+            this.configuration.api.url + '/api/add-user',
+            this.globalRestService.initializeBody(request, 'api/add-user'),
             this.globalRestService.initializeHeaderGetData(auth['token-auth'])
         );
     }
 
-    public getAllRole(): Observable<any> {
-        let auth = this.Auth();
-        let data = {
-            platform: 'Website',
-            limit: 10,
-            offset: 0,
-        };
+    // public deleteUser(request): Observable<any> {
+    //     let auth = this.Auth();
 
-        return this.http.post(
-            this.configuration.api.url + '/api/get-all-role',
-            this.globalRestService.initializeBody(data, 'api/get-all-role'),
-            this.globalRestService.initializeHeaderGetData(auth['token-auth'])
-        );
-    }
+    //     console.log(this.globalRestService.initializeBody(request, 'api/delete-user'));
+
+    //     return this.http.post(
+    //         this.configuration.api.url + '/api/delete-user',
+    //         this.globalRestService.initializeBody(request, 'api/delete-user'),
+    //         this.globalRestService.initializeHeaderGetData(auth['token-auth'])
+    //     );
+    // }
 }

@@ -1,23 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AlertService } from 'src/app/services/global/alert.service';
 import { UserGroupService } from 'src/app/services/user/user-group.service';
 import { UserRoleService } from 'src/app/services/user/user-role.service';
 import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
-    selector: 'app-user-entry',
-    templateUrl: './user-entry.component.html',
-    styleUrls: ['./user-entry.component.scss'],
+  selector: 'app-add-edit',
+  templateUrl: './add-edit.component.html',
+  styleUrls: ['./add-edit.component.scss']
 })
-export class UserEntryComponent implements OnInit {
-    allRoles: any[] = [];
+export class AddEditComponent implements OnInit {
+  allRoles: any[] = [];
     allGroup: any[] = [];
     role: any = '';
     group: any = '';
     filteredRole: any;
     filteredGroup: any;
     confirm_password: string = '';
-    status = ['Active', 'Inactive'];
 
     fields = {
         username: '',
@@ -50,7 +50,8 @@ export class UserEntryComponent implements OnInit {
         private userService: UserService,
         private userRoleService: UserRoleService,
         private userGroupService: UserGroupService,
-        private router: Router
+        private alertService: AlertService,
+        private router: Router,
     ) {}
 
     ngOnInit(): void {
@@ -96,9 +97,12 @@ export class UserEntryComponent implements OnInit {
         };
 
         this.userService.addUser(this.fields).subscribe((response) => {
-            if (response.result === true) {
-                this.router.navigate(['/user']);
+            // this.response = response;
+            if(response.result === true){
+              this.alertService.success('User added', { keepAfterRouteChange: true });
+              this.router.navigate(['/user']);
             }
+            // console.log(response);
         });
 
         // console.log(this.fields);

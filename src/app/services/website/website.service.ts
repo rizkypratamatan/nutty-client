@@ -4,6 +4,7 @@ import { ConfigurationService } from 'src/app/configurations/configuration.servi
 import { EncryptionService } from '../global/encryption.service';
 import { RestService } from '../global/rest.service';
 import { Observable } from 'rxjs';
+import { UserService } from '../user/user.service';
 
 @Injectable({
     providedIn: 'root',
@@ -18,22 +19,14 @@ export class WebsiteService {
         private http: HttpClient,
         private configurationService: ConfigurationService,
         private encryptionService: EncryptionService,
-        private globalRestService: RestService
+        private globalRestService: RestService,
+        private userServices: UserService,
     ) {
         this.configuration = this.configurationService;
     }
 
-    public Auth() {
-        this.accountData = localStorage.getItem('nu-account');
-        this.auth = JSON.parse(
-            this.encryptionService.aesDecrypt(this.accountData)
-        );
-
-        return this.auth;
-    }
-
     public getAllGroup(): Observable<any> {
-        let auth = this.Auth();
+        let auth = this.userServices.Auth();
         let data = {
             platform: 'Website',
             limit: 10,

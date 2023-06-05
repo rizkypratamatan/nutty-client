@@ -117,10 +117,7 @@
                                     (ngModelChange)="onOptionsSelectedRole()"
                                 >
                                     <option value="">Role</option>
-                                    <option
-                                        *ngFor="let val of allRoles"
-                                        [value]="{}"
-                                    >
+                                    <option *ngFor="let val of allRoles" [value]="{}">
                                         {{ val.name }}
                                     </option>
                                 </select>
@@ -137,10 +134,7 @@
                                     (ngModelChange)="onOptionsSelectedGroup()"
                                 >
                                     <option value="">Group</option>
-                                    <option
-                                        *ngFor="let val of allGroup"
-                                        [value]="{}"
-                                    >
+                                    <option *ngFor="let val of allGroup" [value]="{}">
                                         {{ val.name }}
                                     </option>
                                 </select>
@@ -156,9 +150,8 @@
                                     [ngModelOptions]="{ standalone: true }"
                                 >
                                     <option value="">Status</option>
-                                    <option *ngFor="let val of status">
-                                        {{ val }}
-                                    </option>
+                                    <option value="Active">Active</option>
+                                    <option value="Inactive">Inactive</option>
                                 </select>
                                 <div id="response-status"></div>
                             </div>

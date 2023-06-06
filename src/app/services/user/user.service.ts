@@ -48,6 +48,20 @@ export class UserService {
         );
     }
 
+    public getUserById(id): Observable<any> {
+        let auth = this.Auth();
+        let data = {
+            platform: 'Website',
+            id: id
+        };
+
+        return this.http.post(
+            this.configuration.api.url + '/api/get-user-by-id',
+            this.globalRestService.initializeBody(data, 'api/get-user-by-id'),
+            this.globalRestService.initializeHeaderGetData(auth['token-auth'])
+        );
+    }
+
     public addUser(request): Observable<any> {
         let auth = this.Auth();
 
@@ -58,15 +72,29 @@ export class UserService {
         );
     }
 
-    // public deleteUser(request): Observable<any> {
-    //     let auth = this.Auth();
+    public updateUser(id, request): Observable<any> {
+        let auth = this.Auth();
+        request.id = id;
 
-    //     console.log(this.globalRestService.initializeBody(request, 'api/delete-user'));
+        // console.log(this.globalRestService.initializeBody(request, 'api/update-user'));
+        // return;
 
-    //     return this.http.post(
-    //         this.configuration.api.url + '/api/delete-user',
-    //         this.globalRestService.initializeBody(request, 'api/delete-user'),
-    //         this.globalRestService.initializeHeaderGetData(auth['token-auth'])
-    //     );
-    // }
+        return this.http.post(
+            this.configuration.api.url + '/api/update-user',
+            this.globalRestService.initializeBody(request, 'api/update-user'),
+            this.globalRestService.initializeHeaderGetData(auth['token-auth'])
+        );
+    }
+
+    public deleteUser(id): Observable<any> {
+        let auth = this.Auth();
+
+        // console.log(this.globalRestService.initializeBody(body, 'api/get-database')); return;
+
+        return this.http.post(
+            this.configuration.api.url + '/api/delete-user',
+            this.globalRestService.initializeBody(id, 'api/delete-user'),
+            this.globalRestService.initializeHeaderGetData(auth['token-auth'])
+        );
+    }
 }

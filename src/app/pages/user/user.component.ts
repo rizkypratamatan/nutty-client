@@ -40,7 +40,12 @@ export class UserComponent implements OnInit {
         this.filter = Object.assign({}, this.fields);
     }
 
-    constructor(private service: UserService, private userGroupService: UserGroupService, private userRoleService: UserRoleService, private router: Router) {}
+    constructor(
+        private service: UserService,
+        private userGroupService: UserGroupService,
+        private userRoleService: UserRoleService,
+        private router: Router
+    ) {}
 
     ngOnInit(): void {
         this.service.getAllUser().subscribe((response) => {
@@ -61,18 +66,32 @@ export class UserComponent implements OnInit {
     }
 
     create() {
-        this.router.navigate(['/user/entry']);
+        this.router.navigate(['/user/add-edit']);
     }
 
-    delete(id){
+    edit(id) {
+        this.router.navigate(['/user/add-edit/' + id]);
+    }
+
+    delete(id, name) {
+        const currentUrl = this.router.url;
+        console.log(currentUrl);
+
         let data = {
             platform: 'Website',
             id: id,
         };
 
-        // this.service.deleteUser(data).subscribe((response) => {
-            // this.allRoles = response['data'];
-            // console.log(response);
-        // });
+        if (confirm('Are you sure to delete user: ' + name)) {
+            // console.log("Implement delete functionality here");
+            this.service.deleteUser(data).subscribe((response) => {
+                // if (response.result === true) {
+                    // this.router.navigate(['/user']);
+                    this.router
+                        .navigateByUrl('/', { skipLocationChange: true })
+                        .then(() => this.router.navigate([currentUrl]));
+                // }
+            });
+        }
     }
 }

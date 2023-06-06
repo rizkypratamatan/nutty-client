@@ -39,7 +39,7 @@ export const MENU: MenuItem[] = [
             {
                 id: 7,
                 label: 'MENUITEMS.USER.LIST.ADD',
-                link: '/user/entry',
+                link: '/user/add-edit',
                 parentId: 5,
             },
         ],

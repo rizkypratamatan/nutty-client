@@ -20,6 +20,7 @@ import { WorksheetResultComponent } from './worksheet-result/worksheet-result.co
 import { DatabaseComponent } from './database/database.component';
 import { DatabaseImportComponent } from './database-import/database-import.component';
 import { DatabaseHistoryComponent } from './database-history/database-history.component';
+import { AddEditComponent } from './user/add-edit.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard' },
@@ -39,6 +40,8 @@ const routes: Routes = [
   { path: 'icons', loadChildren: () => import('./icons/icons.module').then(m => m.IconsModule) },
   { path: 'maps', loadChildren: () => import('./maps/maps.module').then(m => m.MapsModule) },
   { path: 'user', component: UserComponent },
+  { path: 'user/add-edit', component: AddEditComponent },
+  { path: 'user/add-edit/:id', component: AddEditComponent },
   { path: 'user/entry', component: UserEntryComponent },
   { path: 'user/role', component: UserRoleComponent },
   { path: 'user/role/entry', component: UserRoleEntryComponent },

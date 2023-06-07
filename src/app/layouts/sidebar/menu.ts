@@ -39,7 +39,7 @@ export const MENU: MenuItem[] = [
             {
                 id: 7,
                 label: 'MENUITEMS.USER.LIST.ADD',
-                link: '/user/entry',
+                link: '/user/add-edit',
                 parentId: 5,
             },
         ],
@@ -58,7 +58,7 @@ export const MENU: MenuItem[] = [
             {
                 id: 10,
                 label: 'MENUITEMS.USER.LIST.ADD',
-                link: '/user/role/entry',
+                link: '/user/role/add-edit',
                 parentId: 8,
             },
         ],
@@ -77,7 +77,7 @@ export const MENU: MenuItem[] = [
             {
                 id: 13,
                 label: 'MENUITEMS.USER.LIST.ADD',
-                link: '/user/group/entry',
+                link: '/user/group/add-edit',
                 parentId: 11,
             },
         ],

@@ -4,16 +4,13 @@ import {User} from './user';
 
 export class UserLoginResponse extends BaseResponse {
 
-    public account: User;
-
-    public authentication: string;
+    public dataUser: User;
 
 
-    constructor(response: string, result: boolean, account: User, authentication: string) {
+    constructor(response: string, result: boolean, dataUser: User) {
 
         super(response, result);
-        this.account = account;
-        this.authentication = authentication;
+        this.dataUser = dataUser;
 
     }
 

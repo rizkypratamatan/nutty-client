@@ -1,0 +1,178 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div
+                class="page-title-box d-flex align-items-center justify-content-between"
+            >
+                <h4 class="mb-0">User Role Entry</h4>
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">User</a></li>
+                        <li class="breadcrumb-item"><a href="#">Role</a></li>
+                        <li class="breadcrumb-item active">Entry</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <form>
+                        <div class="row">
+                            <div class="mb-3">
+                                <label class="form-label">Name</label>
+                                <input
+                                    id="user-role-name"
+                                    class="form-control"
+                                    type="text"
+                                    [(ngModel)]="fields.name"
+                                    [ngModelOptions]="{ standalone: true }"
+                                />
+                                <div id="response-name"></div>
+                            </div>
+                            <!-- @if(Session::has("account"))
+                                @if(Session::get("account")->nucode == "system") -->
+                            <div class="mb-3">
+                                <label class="form-label">Nucode</label>
+                                <input
+                                    id="user-role-nucode"
+                                    class="form-control"
+                                    type="text"
+                                    [(ngModel)]="fields.nucode"
+                                    [ngModelOptions]="{ standalone: true }"
+                                />
+                                <div id="response-nucode"></div>
+                            </div>
+                            <!-- @endif
+                            @endif -->
+                            <div class="mb-3">
+                                <label class="form-label">Description</label>
+                                <input
+                                    id="user-role-description"
+                                    class="form-control"
+                                    type="text"
+                                    [(ngModel)]="fields.description"
+                                    [ngModelOptions]="{ standalone: true }"
+                                />
+                                <div id="response-description"></div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Status</label>
+                                <select
+                                    id="user-status"
+                                    class="form-control select2"
+                                    required
+                                    [(ngModel)]="fields.status"
+                                    [ngModelOptions]="{ standalone: true }"
+                                >
+                                    <option value="">Status</option>
+                                    <option *ngFor="let val of status">
+                                        {{ val }}
+                                    </option>
+                                </select>
+                                <div id="response-status"></div>
+                            </div>
+                            <h6 class="mt-3 mb-3">Privileges</h6>
+
+                            <div
+                                *ngFor="let val of privilege_list"
+                                class="row mb-3"
+                            >
+                                <div class="col-2">
+                                    <label
+                                        class="form-label"
+                                        ng-bind="value.name"
+                                        >{{ val.name }}</label
+                                    >
+                                </div>
+                                <div class="col-10">
+                                    <ng-container
+                                        *ngFor="let item of prv_value"
+                                    >
+                                        <input
+                                            class="form-check-input"
+                                            type="checkbox"
+                                            [value]="item.name"
+                                            [(ngModel)]="privilege"
+                                            [ngModelOptions]="{
+                                                standalone: true
+                                            }"
+                                        />
+                                        <label class="form-check-label me-3">{{
+                                            item.name
+                                        }}</label>
+                                    </ng-container>
+                                    <!-- <input
+                                        class="form-check-input"
+                                        type="checkbox"
+                                        ng-checked="privileges[key].value.substr(0, 1) == '7'"
+                                        ng-click="togglePrivilege(key, 'view')"
+                                    />
+                                    <label class="form-check-label me-3"
+                                        >View</label
+                                    > -->
+                                    <!-- <input
+                                        class="form-check-input"
+                                        type="checkbox"
+                                        ng-checked="privileges[key].value.substr(1, 1) == '7'"
+                                        ng-click="togglePrivilege(key, 'add')"
+                                    />
+                                    <label class="form-check-label me-3"
+                                        >Add</label
+                                    >
+                                    <input
+                                        class="form-check-input"
+                                        type="checkbox"
+                                        ng-checked="privileges[key].value.substr(2, 1) == '7'"
+                                        ng-click="togglePrivilege(key, 'edit')"
+                                    />
+                                    <label class="form-check-label me-3"
+                                        >Edit</label
+                                    >
+                                    <input
+                                        class="form-check-input"
+                                        type="checkbox"
+                                        ng-checked="privileges[key].value.substr(3, 1) == '7'"
+                                        ng-click="togglePrivilege(key, 'delete')"
+                                    />
+                                    <label class="form-check-label me-3"
+                                        >Delete</label
+                                    > -->
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <!-- @if($model->userRole->_id != null) -->
+                                <button
+                                    *ngIf="!isAddMode"
+                                    class="btn btn-warning waves-effect waves-light me-1"
+                                    type="submit"
+                                >
+                                    Edit
+                                </button>
+                                <!-- @else -->
+                                <button
+                                    *ngIf="isAddMode"
+                                    class="btn btn-success waves-effect waves-light me-1"
+                                    type="submit"
+                                >
+                                    Add New
+                                </button>
+                                <!-- @endif -->
+                                <button
+                                    type="reset"
+                                    *ngIf="isAddMode"
+                                    class="btn btn-secondary waves-effect"
+                                >
+                                    Reset
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

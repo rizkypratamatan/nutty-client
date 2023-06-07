@@ -9,6 +9,7 @@ import { environment } from '../../../environments/environment';
 import { CookieService } from 'ngx-cookie-service';
 import { LanguageService } from '../../core/services/language.service';
 import { TranslateService } from '@ngx-translate/core';
+import { EncryptionService } from 'src/app/services/global/encryption.service';
 
 @Component({
   selector: 'app-topbar',
@@ -27,9 +28,12 @@ export class TopbarComponent implements OnInit {
   flagvalue: any;
   countryName: any;
   valueset;
+  accountData: string;
+  auth: [];
 
   constructor(@Inject(DOCUMENT) private document: any,
     private router: Router,
+    private encryptionService: EncryptionService,
     private authService: AuthenticationService,
     private authFackservice: AuthfakeauthenticationService,
     public languageService: LanguageService,
@@ -67,6 +71,11 @@ export class TopbarComponent implements OnInit {
     } else {
       this.flagvalue = val.map(element => element.flag);
     }
+
+    this.accountData = localStorage.getItem('nu-account');
+    this.auth = JSON.parse(this.encryptionService.aesDecrypt(this.accountData));
+
+    // console.log(this.auth);
   }
 
   /**

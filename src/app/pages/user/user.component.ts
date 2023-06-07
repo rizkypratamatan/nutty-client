@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { UserGroupService } from 'src/app/services/user/user-group.service';
+import { UserRoleService } from 'src/app/services/user/user-role.service';
 import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
@@ -37,7 +40,12 @@ export class UserComponent implements OnInit {
         this.filter = Object.assign({}, this.fields);
     }
 
-    constructor(private service: UserService) {}
+    constructor(
+        private service: UserService,
+        private userGroupService: UserGroupService,
+        private userRoleService: UserRoleService,
+        private router: Router
+    ) {}
 
     ngOnInit(): void {
         this.service.getAllUser().subscribe((response) => {
@@ -45,15 +53,45 @@ export class UserComponent implements OnInit {
             this.allType = this.typeFilter;
             this.allStatus = this.statusFilter;
             this.totalUser = this.allUsers.length;
-            console.log(this.totalUser);
+            // console.log(this.totalUser);
         });
 
-        this.service.getAllGroup().subscribe((response) => {
+        this.userGroupService.getAllGroup().subscribe((response) => {
             this.allGroup = response['dataUser'];
         });
 
-        this.service.getAllRole().subscribe((response) => {
+        this.userRoleService.getAllRole().subscribe((response) => {
             this.allRole = response['dataUser'];
         });
+    }
+
+    create() {
+        this.router.navigate(['/user/add-edit']);
+    }
+
+    edit(id) {
+        this.router.navigate(['/user/add-edit/' + id]);
+    }
+
+    delete(id, name) {
+        const currentUrl = this.router.url;
+        console.log(currentUrl);
+
+        let data = {
+            platform: 'Website',
+            id: id,
+        };
+
+        if (confirm('Are you sure to delete user: ' + name)) {
+            // console.log("Implement delete functionality here");
+            this.service.deleteUser(data).subscribe((response) => {
+                // if (response.result === true) {
+                    // this.router.navigate(['/user']);
+                    this.router
+                        .navigateByUrl('/', { skipLocationChange: true })
+                        .then(() => this.router.navigate([currentUrl]));
+                // }
+            });
+        }
     }
 }

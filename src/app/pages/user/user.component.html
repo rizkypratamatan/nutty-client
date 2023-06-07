@@ -256,7 +256,7 @@
                         </div>
                         <div class="col-md-1" style="text-align: right">
                             <a
-                                href="#"
+                                (click)="create()"
                                 class="btn btn-success waves-effect waves-light"
                                 ><i class="mdi mdi-plus me-2"></i> Add New</a
                             >
@@ -316,16 +316,21 @@
                                 <td>{{ user.group.name }}</td>
                                 <td>{{ user.role.name }}</td>
                                 <td>{{ user.status }}</td>
+                                <td>{{ user.created.timestamp | date }}</td>
                                 <td>
-                                    {{
-                                        user.modified.timestamp.$date
-                                            .$numberLong | date
-                                    }}
-                                </td>
-                                <td>
-                                    <a href="#" class="btn btn-info btn-sm w-lg"
+                                    <a
+                                        (click)="edit(user._id)"
+                                        class="btn btn-info btn-sm w-lg"
                                         >Edit</a
                                     >
+                                    &nbsp;
+                                    <button
+                                        ng-confirm-click="Are you sure to delete this record ?"
+                                        (click)="delete(user._id, user.name)"
+                                        class="btn btn-danger btn-sm w-lg"
+                                    >
+                                        Delete
+                                    </button>
                                 </td>
                             </tr>
                         </tbody>

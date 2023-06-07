@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { UserGroupService } from 'src/app/services/user/user-group.service';
 
 @Component({
@@ -31,7 +32,7 @@ export class UserGroupComponent implements OnInit {
         this.filter = Object.assign({}, this.fields);
     }
 
-    constructor(private service: UserGroupService) {}
+    constructor(private service: UserGroupService, private router: Router) {}
 
     ngOnInit(): void {
         this.service.getAllGroup().subscribe((response) => {
@@ -40,5 +41,9 @@ export class UserGroupComponent implements OnInit {
             this.totalGroup = this.allGroups.length;
             // console.log(response);
         });
+    }
+
+    create() {
+        this.router.navigate(['/user/group/add-edit']);
     }
 }

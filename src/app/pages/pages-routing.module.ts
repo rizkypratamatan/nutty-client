@@ -22,6 +22,7 @@ import { DatabaseImportComponent } from './database-import/database-import.compo
 import { DatabaseHistoryComponent } from './database-history/database-history.component';
 import { AddEditComponent } from './user/add-edit.component';
 import { AddEditRoleComponent } from './user-role/add-edit.component';
+import { AddEditGroupComponent } from './user-group/add-edit.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard' },
@@ -49,7 +50,7 @@ const routes: Routes = [
   { path: 'user/role/add-edit/:id', component: AddEditRoleComponent },
   { path: 'user/role/entry', component: UserRoleEntryComponent },
   { path: 'user/group', component: UserGroupComponent },
-  { path: 'user/group/entry', component: UserGroupEntryComponent },
+  { path: 'user/group/add-edit', component: AddEditGroupComponent },
   { path: 'website', component: WebsiteComponent },
   { path: 'website/entry', component: WebsiteEntryComponent },
   { path: 'worksheet', component: WorksheetComponent },

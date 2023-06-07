@@ -77,7 +77,7 @@ export const MENU: MenuItem[] = [
             {
                 id: 13,
                 label: 'MENUITEMS.USER.LIST.ADD',
-                link: '/user/group/entry',
+                link: '/user/group/add-edit',
                 parentId: 11,
             },
         ],

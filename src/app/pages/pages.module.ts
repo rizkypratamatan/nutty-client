@@ -49,6 +49,7 @@ import { DatabaseHistoryComponent } from './database-history/database-history.co
 import { UserTableFilterPipe } from './user/table-filter.pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { AddEditComponent } from './user/add-edit.component';
+import { AddEditRoleComponent } from './user-role/add-edit.component';
 
 FullCalendarModule.registerPlugins([
     dayGridPlugin,
@@ -80,6 +81,7 @@ FullCalendarModule.registerPlugins([
         DatabaseHistoryComponent,
         UserTableFilterPipe,
         AddEditComponent,
+        AddEditRoleComponent
     ],
     imports: [
         CommonModule,

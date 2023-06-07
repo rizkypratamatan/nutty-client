@@ -58,7 +58,7 @@ export const MENU: MenuItem[] = [
             {
                 id: 10,
                 label: 'MENUITEMS.USER.LIST.ADD',
-                link: '/user/role/entry',
+                link: '/user/role/add-edit',
                 parentId: 8,
             },
         ],

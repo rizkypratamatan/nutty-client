@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { UserRoleService } from 'src/app/services/user/user-role.service';
 
 @Component({
@@ -28,7 +29,7 @@ export class UserRoleComponent implements OnInit {
         this.filter = Object.assign({}, this.fields);
     }
 
-    constructor(private service: UserRoleService) {}
+    constructor(private service: UserRoleService, private router: Router) {}
 
     ngOnInit(): void {
         this.service.getAllRole().subscribe((response) => {
@@ -36,5 +37,9 @@ export class UserRoleComponent implements OnInit {
             this.totalRole = this.allRoles.length;
             // console.log(this.totalUser);
         });
+    }
+
+    create() {
+        this.router.navigate(['/user/role/add-edit']);
     }
 }

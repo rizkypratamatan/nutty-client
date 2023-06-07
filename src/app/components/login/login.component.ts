@@ -36,7 +36,11 @@ export class LoginComponent implements OnInit {
 
     ngOnInit(): void {
 
-        this.userLogService.login('', '').subscribe();
+        // this.userLogService.login('System123_!!', 'system').subscribe((response: UserLoginResponse) => {
+
+        //     console.log(response);
+
+        // });
 
     }
 

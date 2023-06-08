@@ -101,7 +101,7 @@ export const MENU: MenuItem[] = [
             {
                 id: 17,
                 label: 'MENUITEMS.WEBSITE.LIST.ADD',
-                link: '/website/entry',
+                link: '/website/add-edit',
                 parentId: 15,
             },
         ],

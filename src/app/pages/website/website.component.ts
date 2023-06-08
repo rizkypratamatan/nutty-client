@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { WebsiteService } from 'src/app/services/website/website.service';
 
 @Component({
@@ -30,14 +31,18 @@ export class WebsiteComponent implements OnInit {
         this.filter = Object.assign({}, this.fields);
     }
 
-    constructor(private service: WebsiteService) {}
+    constructor(private service: WebsiteService, private router: Router) {}
 
     ngOnInit(): void {
-        this.service.getAllGroup().subscribe((response) => {
+        this.service.getAllWebsite().subscribe((response) => {
             this.allWebsites = response['data'];
             this.allStatus = this.statusFilter;
             this.totalWebsite = this.allWebsites.length;
             // console.log(response);
         });
+    }
+
+    create() {
+        this.router.navigate(['/website/add-edit']);
     }
 }

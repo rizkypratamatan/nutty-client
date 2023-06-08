@@ -25,7 +25,7 @@ export class WebsiteService {
         this.configuration = this.configurationService;
     }
 
-    public getAllGroup(): Observable<any> {
+    public getAllWebsite(): Observable<any> {
         let auth = this.userServices.Auth();
         let data = {
             platform: 'Website',

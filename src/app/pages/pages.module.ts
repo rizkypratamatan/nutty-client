@@ -50,6 +50,7 @@ import { UserTableFilterPipe } from './user/table-filter.pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { AddEditComponent } from './user/add-edit.component';
 import { AddEditRoleComponent } from './user-role/add-edit.component';
+import { AddEditGroupComponent } from './user-group/add-edit.component';
 import { AddEditWebsiteComponent } from './website/add-edit.component';
 
 FullCalendarModule.registerPlugins([
@@ -83,6 +84,7 @@ FullCalendarModule.registerPlugins([
         UserTableFilterPipe,
         AddEditComponent,
         AddEditRoleComponent,
+        AddEditGroupComponent,
         AddEditWebsiteComponent,
     ],
     imports: [
@@ -101,7 +103,7 @@ FullCalendarModule.registerPlugins([
         NgbNavModule,
         NgbTooltipModule,
         SimplebarAngularModule,
-        NgxPaginationModule
+        NgxPaginationModule,
     ],
 })
 export class PagesModule {}

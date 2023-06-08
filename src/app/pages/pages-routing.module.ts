@@ -52,6 +52,7 @@ const routes: Routes = [
   { path: 'user/role/entry', component: UserRoleEntryComponent },
   { path: 'user/group', component: UserGroupComponent },
   { path: 'user/group/add-edit', component: AddEditGroupComponent },
+  { path: 'user/group/add-edit/:id', component: AddEditGroupComponent },
   { path: 'website', component: WebsiteComponent },
   { path: 'website/add-edit', component: AddEditWebsiteComponent },
   { path: 'worksheet', component: WorksheetComponent },

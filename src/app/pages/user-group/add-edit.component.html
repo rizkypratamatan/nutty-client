@@ -20,7 +20,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
-                    <form>
+                    <form (ngSubmit)="submit()">
                         <div class="row">
                             <div class="mb-3">
                                 <label class="form-label">Name</label>
@@ -28,8 +28,9 @@
                                     id="user-group-name"
                                     class="form-control"
                                     type="text"
-                                    ng-model="name.value"
-                                    ng-keyup="checkFormLengthRequired('name.value', 'user-group-name', 'response-name', 3, 50)"
+                                    required
+                                    [(ngModel)]="fields.name"
+                                    [ngModelOptions]="{ standalone: true }"
                                 />
                                 <div id="response-name"></div>
                             </div>
@@ -41,8 +42,9 @@
                                     id="user-group-nucode"
                                     class="form-control"
                                     type="text"
-                                    ng-model="nucode.value"
-                                    ng-keyup="checkFormLength('nucode.value', 'user-group-nucode', 'response-nucode', 2, 50)"
+                                    required
+                                    [(ngModel)]="fields.nucode"
+                                    [ngModelOptions]="{ standalone: true }"
                                 />
                                 <div id="response-nucode"></div>
                             </div>
@@ -54,8 +56,9 @@
                                     id="user-group-description"
                                     class="form-control"
                                     type="text"
-                                    ng-model="description.value"
-                                    ng-keyup="checkFormLength('description.value', 'user-group-description', 'response-description', 3, 250)"
+                                    required
+                                    [(ngModel)]="fields.description"
+                                    [ngModelOptions]="{ standalone: true }"
                                 />
                                 <div id="response-description"></div>
                             </div>
@@ -84,21 +87,21 @@
                                 <select
                                     id="user-group-status"
                                     class="form-control select2"
-                                    data-error="Please select status"
-                                    data-input="user-group-status"
-                                    data-required="true"
-                                    data-response="response-status"
-                                    data-scope="status.value"
+                                    required
+                                    [(ngModel)]="fields.status"
+                                    [ngModelOptions]="{ standalone: true }"
                                 >
                                     <option value="">Status</option>
-                                    <option value="Active">Active</option>
-                                    <option value="Inactive">Inactive</option>
+                                    <option *ngFor="let val of status">
+                                        {{ val }}
+                                    </option>
                                 </select>
                                 <div id="response-status"></div>
                             </div>
                             <div class="mb-3">
                                 <!-- @if($model->userGroup->_id != null) -->
                                 <button
+                                    *ngIf="!isAddMode"
                                     class="btn btn-warning waves-effect waves-light me-1"
                                     ng-click="update($event)"
                                 >
@@ -106,6 +109,7 @@
                                 </button>
                                 <!-- @else -->
                                 <button
+                                    *ngIf="isAddMode"
                                     class="btn btn-success waves-effect waves-light me-1"
                                     ng-click="insert($event)"
                                 >
@@ -113,6 +117,7 @@
                                 </button>
                                 <!-- @endif -->
                                 <button
+                                    *ngIf="isAddMode"
                                     type="reset"
                                     class="btn btn-secondary waves-effect"
                                 >

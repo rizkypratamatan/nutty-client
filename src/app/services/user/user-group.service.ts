@@ -20,7 +20,7 @@ export class UserGroupService {
         private configurationService: ConfigurationService,
         private encryptionService: EncryptionService,
         private globalRestService: RestService,
-        private userServices: UserService,
+        private userServices: UserService
     ) {
         this.configuration = this.configurationService;
     }
@@ -36,6 +36,53 @@ export class UserGroupService {
         return this.http.post(
             this.configuration.api.url + '/api/get-user-group',
             this.globalRestService.initializeBody(data, 'api/get-user-group'),
+            this.globalRestService.initializeHeaderGetData(auth['token-auth'])
+        );
+    }
+
+    public getGroupById(id): Observable<any> {
+        let auth = this.userServices.Auth();
+        let data = {
+            platform: 'Website',
+            id: id,
+        };
+
+        return this.http.post(
+            this.configuration.api.url + '/api/get-user-group-by-id',
+            this.globalRestService.initializeBody(
+                data,
+                'api/get-user-group-by-id'
+            ),
+            this.globalRestService.initializeHeaderGetData(auth['token-auth'])
+        );
+    }
+
+    public addGroup(request): Observable<any> {
+        let auth = this.userServices.Auth();
+
+        return this.http.post(
+            this.configuration.api.url + '/api/add-user-group',
+            this.globalRestService.initializeBody(
+                request,
+                'api/add-user-group'
+            ),
+            this.globalRestService.initializeHeaderGetData(auth['token-auth'])
+        );
+    }
+
+    public updateGroup(id, request): Observable<any> {
+        let auth = this.userServices.Auth();
+        request.id = id;
+
+        // console.log(this.globalRestService.initializeBody(request, 'api/update-user'));
+        // return;
+
+        return this.http.post(
+            this.configuration.api.url + '/api/update-user-group',
+            this.globalRestService.initializeBody(
+                request,
+                'api/update-user-group'
+            ),
             this.globalRestService.initializeHeaderGetData(auth['token-auth'])
         );
     }

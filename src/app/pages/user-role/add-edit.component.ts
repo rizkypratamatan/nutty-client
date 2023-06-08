@@ -51,4 +51,42 @@ export class AddEditRoleComponent implements OnInit {
         this.id = this.route.snapshot.params['id'];
         this.isAddMode = !this.id;
     }
+
+    submit() {
+        if (this.isAddMode) {
+            this.create();
+        } else {
+            this.update();
+        }
+    }
+
+    private create() {
+        this.fields = {
+            platform: 'Website',
+            description: this.fields['description'],
+            name: this.fields['name'],
+            nucode: this.fields['nucode'],
+            privilege: this.privilege,
+            status: this.fields['status'],
+        };
+
+        console.log(this.fields);
+
+        // this.service.addGroup(this.fields).subscribe((response) => {
+        //     if (response.result === true) {
+        //         this.router.navigate(['/user/group']);
+        //     }
+        // });
+    }
+
+    private update() {
+        let id = this.id;
+
+        console.log(this.fields);
+        // this.service.updateGroup(id, this.fields).subscribe((response) => {
+        //     if (response.result === true) {
+        //         this.router.navigate(['/user/group']);
+        //     }
+        // });
+    }
 }

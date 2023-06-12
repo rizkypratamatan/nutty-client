@@ -20,7 +20,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
-                    <form>
+                    <form (ngSubmit)="submit()" id="myForm">
                         <div class="row">
                             <div class="mb-3">
                                 <label class="form-label">Name</label>
@@ -28,6 +28,7 @@
                                     id="user-role-name"
                                     class="form-control"
                                     type="text"
+                                    name="name"
                                     [(ngModel)]="fields.name"
                                     [ngModelOptions]="{ standalone: true }"
                                 />
@@ -78,32 +79,39 @@
                             <h6 class="mt-3 mb-3">Privileges</h6>
 
                             <div
-                                *ngFor="let val of privilege_list"
+                                *ngFor="let item of privileges | keyvalue"
                                 class="row mb-3"
                             >
                                 <div class="col-2">
                                     <label
                                         class="form-label"
-                                        ng-bind="value.name"
-                                        >{{ val.name }}</label
+                                        >{{ item.key }}</label
                                     >
                                 </div>
                                 <div class="col-10">
                                     <ng-container
-                                        *ngFor="let item of prv_value"
+                                        *ngFor="let permission of item.value.split('');let i = index"
                                     >
-                                        <input
+                                        <!-- <input
+                                            checked="{{ permission }}"
                                             class="form-check-input"
                                             type="checkbox"
-                                            [value]="item.name"
+                                            [name]=""
+                                            [value]=""
                                             [(ngModel)]="privilege"
                                             [ngModelOptions]="{
                                                 standalone: true
                                             }"
+                                        /> -->
+                                        <input
+                                            [checked]="permission == 0?false:true"
+                                            [value]="permission"
+                                            type="checkbox"
+                                            name="{{item.key}}[]"
                                         />
-                                        <label class="form-check-label me-3">{{
-                                            item.name
-                                        }}</label>
+                                        <label class="form-check-label me-3">&nbsp;
+                                            {{ i == 0 ? "View" : i == 1 ? "Add" : i == 2 ? "Edit" : "Delete" }}
+                                    </label>
                                     </ng-container>
                                     <!-- <input
                                         class="form-check-input"

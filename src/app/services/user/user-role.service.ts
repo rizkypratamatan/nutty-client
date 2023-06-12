@@ -39,4 +39,18 @@ export class UserRoleService {
             this.globalRestService.initializeHeaderGetData(auth['token-auth'])
         );
     }
+
+    public getRoleById(id): Observable<any> {
+        let auth = this.userServices.Auth();
+        let data = {
+            platform: 'Website',
+            id: id,
+        };
+        console.log(data)
+        return this.http.post(
+            this.configuration.api.url + '/api/get-role-by-id',
+            this.globalRestService.initializeBody(data, 'api/get-role-by-id'),
+            this.globalRestService.initializeHeaderGetData(auth['token-auth'])
+        );
+    }
 }

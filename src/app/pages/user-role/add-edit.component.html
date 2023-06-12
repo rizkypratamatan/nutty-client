@@ -107,7 +107,7 @@
                                             [checked]="permission == 0?false:true"
                                             [value]="permission"
                                             type="checkbox"
-                                            name="{{item.key}}[]"
+                                            (change)="updatePrivilege(item.key, i, $event.target.checked ? '7' : '0')"
                                         />
                                         <label class="form-check-label me-3">&nbsp;
                                             {{ i == 0 ? "View" : i == 1 ? "Add" : i == 2 ? "Edit" : "Delete" }}

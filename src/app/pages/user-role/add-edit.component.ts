@@ -150,4 +150,10 @@ export class AddEditRoleComponent implements OnInit {
         //     }
         // });
     }
+
+    updatePrivilege(key: any, index: any, value: any){
+        let priv = this.privileges[key].split('');
+        priv[index] = value;
+        this.privileges[key] = priv.join("");
+    }
 }

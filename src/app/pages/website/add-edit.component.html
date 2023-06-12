@@ -4,12 +4,11 @@
             <div
                 class="page-title-box d-flex align-items-center justify-content-between"
             >
-                <h4 class="mb-0">User Group Entry</h4>
+                <h4 class="mb-0">Website Entry</h4>
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item"><a href="#">User</a></li>
-                        <li class="breadcrumb-item"><a href="#">Group</a></li>
+                        <li class="breadcrumb-item"><a href="#">Website</a></li>
                         <li class="breadcrumb-item active">Entry</li>
                     </ol>
                 </div>
@@ -25,10 +24,11 @@
                             <div class="mb-3">
                                 <label class="form-label">Name</label>
                                 <input
-                                    id="user-group-name"
+                                    id="website-name"
                                     class="form-control"
+                                    name="website-name"
                                     type="text"
-                                    required
+                                    placeholder="Name"
                                     [(ngModel)]="fields.name"
                                     [ngModelOptions]="{ standalone: true }"
                                 />
@@ -39,10 +39,11 @@
                             <div class="mb-3">
                                 <label class="form-label">Nucode</label>
                                 <input
-                                    id="user-group-nucode"
+                                    id="website-nucode"
                                     class="form-control"
+                                    name="website-nucode"
                                     type="text"
-                                    required
+                                    placeholder="Nucode"
                                     [(ngModel)]="fields.nucode"
                                     [ngModelOptions]="{ standalone: true }"
                                 />
@@ -52,42 +53,22 @@
                             @endif -->
                             <div class="mb-3">
                                 <label class="form-label">Description</label>
-                                <input
-                                    id="user-group-description"
+                                <textarea
+                                    id="website-description"
                                     class="form-control"
+                                    name="website-description"
                                     type="text"
-                                    required
+                                    placeholder="Description"
                                     [(ngModel)]="fields.description"
                                     [ngModelOptions]="{ standalone: true }"
-                                />
+                                ></textarea>
                                 <div id="response-description"></div>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Website</label>
-                                <div>
-                                    <span
-                                        ng-repeat="(key, value) in websites.option"
-                                        class="me-3"
-                                        ng-click="toggleWebsite(value._id)"
-                                    >
-                                        <input
-                                            class="form-check-input"
-                                            type="checkbox"
-                                            ng-checked="websites.value.includes(value._id)"
-                                        />
-                                        <label
-                                            class="form-check-label"
-                                            ng-bind="value.name"
-                                        ></label>
-                                    </span>
-                                </div>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Status</label>
                                 <select
-                                    id="user-group-status"
+                                    id="website-status"
                                     class="form-control select2"
-                                    required
                                     [(ngModel)]="fields.status"
                                     [ngModelOptions]="{ standalone: true }"
                                 >
@@ -99,7 +80,7 @@
                                 <div id="response-status"></div>
                             </div>
                             <div class="mb-3">
-                                <!-- @if($model->userGroup->_id != null) -->
+                                <!-- @if($model->website->_id != null) -->
                                 <button
                                     *ngIf="!isAddMode"
                                     class="btn btn-warning waves-effect waves-light me-1"
@@ -119,7 +100,7 @@
                                 <button
                                     *ngIf="isAddMode"
                                     type="reset"
-                                    class="btn btn-secondary waves-effect"
+                                    class="btn btn-secondary waves-effect me-1"
                                 >
                                     Reset
                                 </button>

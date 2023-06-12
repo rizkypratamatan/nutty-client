@@ -23,6 +23,7 @@ import { DatabaseHistoryComponent } from './database-history/database-history.co
 import { AddEditComponent } from './user/add-edit.component';
 import { AddEditRoleComponent } from './user-role/add-edit.component';
 import { AddEditGroupComponent } from './user-group/add-edit.component';
+import { AddEditWebsiteComponent } from './website/add-edit.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard' },
@@ -51,8 +52,10 @@ const routes: Routes = [
   { path: 'user/role/entry', component: UserRoleEntryComponent },
   { path: 'user/group', component: UserGroupComponent },
   { path: 'user/group/add-edit', component: AddEditGroupComponent },
+  { path: 'user/group/add-edit/:id', component: AddEditGroupComponent },
   { path: 'website', component: WebsiteComponent },
-  { path: 'website/entry', component: WebsiteEntryComponent },
+  { path: 'website/add-edit', component: AddEditWebsiteComponent },
+  { path: 'website/add-edit/:id', component: AddEditWebsiteComponent },
   { path: 'worksheet', component: WorksheetComponent },
   { path: 'worksheet/result', component: WorksheetResultComponent },
   { path: 'database', component: DatabaseComponent },

@@ -46,4 +46,8 @@ export class UserGroupComponent implements OnInit {
     create() {
         this.router.navigate(['/user/group/add-edit']);
     }
+
+    edit(id) {
+        this.router.navigate(['/user/group/add-edit/' + id]);
+    }
 }

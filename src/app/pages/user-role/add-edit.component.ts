@@ -121,49 +121,33 @@ export class AddEditRoleComponent implements OnInit {
         }
     }
 
-    private update(){
+    private create() {
+        this.fields = {
+            platform: 'Website',
+            description: this.fields['description'],
+            name: this.fields['name'],
+            nucode: this.fields['nucode'],
+            privileges: this.privileges,
+            status: this.fields['status'],
+        };
 
-    }
+        console.log(this.fields);
 
-    private create(){
-        
-        // this.fields = {
-        //     username: this.fields['username'],
-        //     name: this.fields['name'],
-        //     password: this.fields['password'],
-        //     nucode: this.fields['nucode'],
-        //     type: this.fields['type'],
-        //     role: this.role,
-        //     group: this.group,
-        //     status: this.fields['status'],
-        //     platform: 'Website',
-        //     gender: this.fields['gender'] ? this.fields['gender'] : '',
-        //     contact: {
-        //         email: this.fields['email'] ? this.fields['email'] : '',
-        //         fax: this.fields['fax'] ? this.fields['fax'] : '',
-        //         line: this.fields['line'] ? this.fields['line'] : '',
-        //         michat: this.fields['michat'] ? this.fields['michat'] : '',
-        //         phone: this.fields['phone'] ? this.fields['phone'] : '',
-        //         wechat: this.fields['wechat'] ? this.fields['wechat'] : '',
-        //         whatsapp: this.fields['whatsapp']
-        //             ? this.fields['whatsapp']
-        //             : '',
-        //         telegram: this.fields['telegram']
-        //             ? this.fields['telegram']
-        //             : '',
-        //     },
-        //     country: this.fields['country'] ? this.fields['country'] : '',
-        //     city: this.fields['city'] ? this.fields['city'] : '',
-        //     street: this.fields['street'] ? this.fields['street'] : '',
-        //     zip: this.fields['zip'] ? this.fields['zip'] : '',
-        // };
-
-        // this.userService.addUser(this.fields).subscribe((response) => {
+        // this.service.addGroup(this.fields).subscribe((response) => {
         //     if (response.result === true) {
-        //         this.router.navigate(['/user']);
+        //         this.router.navigate(['/user/group']);
         //     }
         // });
     }
 
+    private update() {
+        let id = this.id;
 
+        console.log(this.fields);
+        // this.service.updateGroup(id, this.fields).subscribe((response) => {
+        //     if (response.result === true) {
+        //         this.router.navigate(['/user/group']);
+        //     }
+        // });
+    }
 }

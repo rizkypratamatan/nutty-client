@@ -57,7 +57,7 @@
 
                         <div class="col-md-2" style="text-align: right">
                             <a
-                                href="#"
+                                (click)="create()"
                                 class="btn btn-success waves-effect waves-light"
                             >
                                 <i class="mdi mdi-plus me-2"></i> Add New
@@ -101,14 +101,11 @@
                                 <td>{{ website.name }}</td>
                                 <td>{{ website.nucode }}</td>
                                 <td>{{ website.status }}</td>
+                                <td>{{ website.modified.timestamp }}</td>
                                 <td>
-                                    {{
-                                        website.modified.timestamp.$date
-                                            .$numberLong | date
-                                    }}
-                                </td>
-                                <td>
-                                    <a href="#" class="btn btn-info btn-sm w-lg"
+                                    <a
+                                        (click)="edit(website._id)"
+                                        class="btn btn-info btn-sm w-lg"
                                         >Edit</a
                                     >
                                 </td>

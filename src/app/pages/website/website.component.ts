@@ -38,11 +38,14 @@ export class WebsiteComponent implements OnInit {
             this.allWebsites = response['data'];
             this.allStatus = this.statusFilter;
             this.totalWebsite = this.allWebsites.length;
-            // console.log(response);
         });
     }
 
     create() {
         this.router.navigate(['/website/add-edit']);
+    }
+
+    edit(id) {
+        this.router.navigate(['/website/add-edit/' + id]);
     }
 }

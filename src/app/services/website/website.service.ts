@@ -20,7 +20,7 @@ export class WebsiteService {
         private configurationService: ConfigurationService,
         private encryptionService: EncryptionService,
         private globalRestService: RestService,
-        private userServices: UserService,
+        private userServices: UserService
     ) {
         this.configuration = this.configurationService;
     }
@@ -36,6 +36,47 @@ export class WebsiteService {
         return this.http.post(
             this.configuration.api.url + '/api/get-websites',
             this.globalRestService.initializeBody(data, 'api/get-websites'),
+            this.globalRestService.initializeHeaderGetData(auth['token-auth'])
+        );
+    }
+
+    public getWebsiteById(id): Observable<any> {
+        let auth = this.userServices.Auth();
+        let data = {
+            platform: 'Website',
+            id: id,
+        };
+
+        return this.http.post(
+            this.configuration.api.url + '/api/get-website-by-id',
+            this.globalRestService.initializeBody(
+                data,
+                'api/get-website-by-id'
+            ),
+            this.globalRestService.initializeHeaderGetData(auth['token-auth'])
+        );
+    }
+
+    public addWebsite(request): Observable<any> {
+        let auth = this.userServices.Auth();
+
+        return this.http.post(
+            this.configuration.api.url + '/api/add-website',
+            this.globalRestService.initializeBody(request, 'api/add-website'),
+            this.globalRestService.initializeHeaderGetData(auth['token-auth'])
+        );
+    }
+
+    public updateWebsite(id, request): Observable<any> {
+        let auth = this.userServices.Auth();
+        request.id = id;
+
+        return this.http.post(
+            this.configuration.api.url + '/api/update-website',
+            this.globalRestService.initializeBody(
+                request,
+                'api/update-website'
+            ),
             this.globalRestService.initializeHeaderGetData(auth['token-auth'])
         );
     }

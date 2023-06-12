@@ -19,7 +19,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
-                    <form>
+                    <form (ngSubmit)="submit()">
                         <div class="row">
                             <div class="mb-3">
                                 <label class="form-label">Name</label>
@@ -29,8 +29,8 @@
                                     name="website-name"
                                     type="text"
                                     placeholder="Name"
-                                    ng-model="name.value"
-                                    ng-keyup="checkFormLengthRequired('name.value', 'website-name', 'response-name', 3, 50)"
+                                    [(ngModel)]="fields.name"
+                                    [ngModelOptions]="{ standalone: true }"
                                 />
                                 <div id="response-name"></div>
                             </div>
@@ -44,8 +44,8 @@
                                     name="website-nucode"
                                     type="text"
                                     placeholder="Nucode"
-                                    ng-model="nucode.value"
-                                    ng-keyup="checkFormLength('nucode.value', 'website-nucode', 'response-nucode', 1, 50)"
+                                    [(ngModel)]="fields.nucode"
+                                    [ngModelOptions]="{ standalone: true }"
                                 />
                                 <div id="response-nucode"></div>
                             </div>
@@ -59,8 +59,8 @@
                                     name="website-description"
                                     type="text"
                                     placeholder="Description"
-                                    ng-model="description.value"
-                                    ng-keyup="checkFormLength('description.value', 'website-description', 'response-description', 3, 250)"
+                                    [(ngModel)]="fields.description"
+                                    [ngModelOptions]="{ standalone: true }"
                                 ></textarea>
                                 <div id="response-description"></div>
                             </div>
@@ -69,15 +69,13 @@
                                 <select
                                     id="website-status"
                                     class="form-control select2"
-                                    data-error="Please select status"
-                                    data-input="website-status"
-                                    data-required="true"
-                                    data-response="response-status"
-                                    data-scope="status.value"
+                                    [(ngModel)]="fields.status"
+                                    [ngModelOptions]="{ standalone: true }"
                                 >
                                     <option value="">Status</option>
-                                    <option value="Active">Active</option>
-                                    <option value="Inactive">Inactive</option>
+                                    <option *ngFor="let val of status">
+                                        {{ val }}
+                                    </option>
                                 </select>
                                 <div id="response-status"></div>
                             </div>

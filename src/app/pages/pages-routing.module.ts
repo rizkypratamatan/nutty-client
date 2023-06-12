@@ -55,6 +55,7 @@ const routes: Routes = [
   { path: 'user/group/add-edit/:id', component: AddEditGroupComponent },
   { path: 'website', component: WebsiteComponent },
   { path: 'website/add-edit', component: AddEditWebsiteComponent },
+  { path: 'website/add-edit/:id', component: AddEditWebsiteComponent },
   { path: 'worksheet', component: WorksheetComponent },
   { path: 'worksheet/result', component: WorksheetResultComponent },
   { path: 'database', component: DatabaseComponent },

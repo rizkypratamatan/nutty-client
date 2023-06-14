@@ -258,6 +258,56 @@
                 "REPORT": "Report"
             }
         },
+        "SMS": {
+            "TEXT": "SMS",
+            "LIST": {
+                "SMS": "SMS",
+                "QUEUE": "Queue",
+                "SENT": "Sent",
+                "RECEIVED": "Received",
+                "CAMPAIGNS": "Campaigns",
+                "SCHEDULED": "Scheduled"
+            }
+        },
+        "WHATSAPP": {
+            "TEXT": "WHATSAPP",
+            "LIST": {
+                "WHATSAPP": "WhatsApp",
+                "QUEUE": "Queue",
+                "SENT": "Sent",
+                "RECEIVED": "Received",
+                "CAMPAIGNS": "Campaigns",
+                "SCHEDULED": "Scheduled",
+                "GROUP": "Group",
+                "ACCOUNTS": "Accounts"
+            }
+        },
+        "TOOLS": {
+            "TEXT": "TOOLS",
+            "LIST": {
+                "MESSAGE": {
+                    "TEXT": "Message Template",
+                    "LIST": {
+                        "LIST": "List",
+                        "ADD": "Add New"
+                    }
+                },
+                "GROUPCONTACT": {
+                    "TEXT": "Group Contact",
+                    "LIST": {
+                        "LIST": "List",
+                        "ADD": "Add New"
+                    }
+                },
+                "CONTACT": {
+                    "TEXT": "Contact",
+                    "LIST": {
+                        "LIST": "List",
+                        "ADD": "Add New"
+                    }
+                }
+            }
+        },
         "SETTING": {
             "TEXT": "SETTING",
             "LIST": {

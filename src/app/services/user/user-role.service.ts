@@ -46,10 +46,20 @@ export class UserRoleService {
             platform: 'Website',
             id: id,
         };
-        console.log(data)
+        // console.log(data);return;
         return this.http.post(
             this.configuration.api.url + '/api/get-role-by-id',
             this.globalRestService.initializeBody(data, 'api/get-role-by-id'),
+            this.globalRestService.initializeHeaderGetData(auth['token-auth'])
+        );
+    }
+
+    public addRole(request): Observable<any> {
+        let auth = this.userServices.Auth();
+
+        return this.http.post(
+            this.configuration.api.url + '/api/add-role',
+            this.globalRestService.initializeBody(request, 'api/add-role'),
             this.globalRestService.initializeHeaderGetData(auth['token-auth'])
         );
     }

@@ -42,4 +42,8 @@ export class UserRoleComponent implements OnInit {
     create() {
         this.router.navigate(['/user/role/add-edit']);
     }
+
+    edit(id) {
+        this.router.navigate(['/user/role/add-edit/' + id]);
+    }
 }

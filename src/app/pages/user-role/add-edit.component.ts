@@ -13,78 +13,68 @@ export class AddEditRoleComponent implements OnInit {
     status = ['Active', 'Inactive'];
     data: any;
     privileges = {
-        "database" : "0000",
-        "report" : "0000",
-        "setting" : "0000",
-        "settingApi" : "0000",
-        "user" : "0000",
-        "userGroup" : "0000",
-        "userRole" : "0000",
-        "website" : "0000",
-        "worksheet" : "0000",
-        "whatsapp" : "0000",
-        "sms" : "0000",
-        "email" : "0000"
+        database: '0000',
+        report: '0000',
+        setting: '0000',
+        settingApi: '0000',
+        user: '0000',
+        userGroup: '0000',
+        userRole: '0000',
+        website: '0000',
+        worksheet: '0000',
+        whatsapp: '0000',
+        sms: '0000',
+        email: '0000',
     };
 
-    // prv_value = [
-    //     { name: 'View', value: 0 },
-    //     { name: 'Add', value: 7 },
-    //     { name: 'Edit', value: 7 },
-    //     { name: 'Delete', value: 7 },
-    // ];
-
-    // view, add, edit, delete
-    
-
     privilege_list = [
-        { 
+        {
             name: 'database',
-            permission : "0000",
+            permission: '0000',
         },
-        { 
+        {
             name: 'report',
-            permission : "0000",
-         },
-        { 
+            permission: '0000',
+        },
+        {
             name: 'setting',
-            permission : "0000",
+            permission: '0000',
         },
-        { 
+        {
             name: 'settingApi',
-            permission : "0000",
+            permission: '0000',
         },
-        { 
+        {
             name: 'user',
-            permission : "0000",
-         },
-        { 
+            permission: '0000',
+        },
+        {
             name: 'userGroup',
-            permission : "0000",
+            permission: '0000',
         },
-        { 
+        {
             name: 'userRole',
-            permission : "0000"
+            permission: '0000',
         },
-        { 
+        {
             name: 'website',
-            permission : "0000"
+            permission: '0000',
         },
-        { 
+        {
             name: 'worksheet',
-            permission : "0000"
-         },
-        { 
+            permission: '0000',
+        },
+        {
             name: 'whatsapp',
-            permission : "0000"
+            permission: '0000',
         },
-        { 
+        {
             name: 'sms',
-            permission : "0000",
+            permission: '0000',
         },
-        { 
+        {
             name: 'email',
-            permission : "0000",
+            permission: '0000',
         },
     ];
 
@@ -96,21 +86,32 @@ export class AddEditRoleComponent implements OnInit {
         privileges: this.privileges,
         status: '',
     };
-    
+
     constructor(
-        private router: Router, 
+        private router: Router,
         private route: ActivatedRoute,
-        private userRoleService: UserRoleService,
-        ) {}
+        private userRoleService: UserRoleService
+    ) {}
 
     ngOnInit(): void {
         this.id = this.route.snapshot.params['id'];
         this.isAddMode = !this.id;
 
-        // this.userRoleService.getRoleById(this.id).subscribe((response) => {
-        //     console.log(response)
-        //     this.data = response.data
-        // });
+        if (!this.isAddMode) {
+            this.userRoleService.getRoleById(this.id).subscribe((response) => {
+                // console.log(response.data);return;
+                this.privileges = response.data.privilege;
+
+                this.fields = {
+                    platform: 'Website',
+                    description: response.data.description,
+                    name: response.data.name,
+                    nucode: response.data.nucode,
+                    privileges: this.privileges,
+                    status: response.data.status,
+                };
+            });
+        }
     }
 
     submit() {
@@ -133,9 +134,9 @@ export class AddEditRoleComponent implements OnInit {
 
         console.log(this.fields);
 
-        // this.service.addGroup(this.fields).subscribe((response) => {
+        // this.userRoleService.addRole(this.fields).subscribe((response) => {
         //     if (response.result === true) {
-        //         this.router.navigate(['/user/group']);
+        //         this.router.navigate(['/user/role']);
         //     }
         // });
     }
@@ -143,7 +144,7 @@ export class AddEditRoleComponent implements OnInit {
     private update() {
         let id = this.id;
 
-        console.log(this.fields);
+        // console.log(this.fields);
         // this.service.updateGroup(id, this.fields).subscribe((response) => {
         //     if (response.result === true) {
         //         this.router.navigate(['/user/group']);
@@ -151,9 +152,9 @@ export class AddEditRoleComponent implements OnInit {
         // });
     }
 
-    updatePrivilege(key: any, index: any, value: any){
+    updatePrivilege(key: any, index: any, value: any) {
         let priv = this.privileges[key].split('');
         priv[index] = value;
-        this.privileges[key] = priv.join("");
+        this.privileges[key] = priv.join('');
     }
 }

@@ -180,28 +180,195 @@ export const MENU: MenuItem[] = [
     },
     {
         id: 30,
-        label: 'MENUITEMS.SETTING.TEXT',
+        label: 'MENUITEMS.TOOLS.TEXT',
         isTitle: true,
     },
     {
         id: 31,
+        label: 'MENUITEMS.SMS.LIST.SMS',
+        icon: 'uil-comment-alt-message',
+        subItems: [
+            {
+                id: 32,
+                label: 'MENUITEMS.SMS.LIST.QUEUE',
+                link: '',
+                parentId: 31,
+            },
+            {
+                id: 33,
+                label: 'MENUITEMS.SMS.LIST.SENT',
+                link: '',
+                parentId: 31,
+            },
+            {
+                id: 34,
+                label: 'MENUITEMS.SMS.LIST.RECEIVED',
+                link: '',
+                parentId: 31,
+            },
+            {
+                id: 35,
+                label: 'MENUITEMS.SMS.LIST.CAMPAIGNS',
+                link: '',
+                parentId: 31,
+            },
+            {
+                id: 36,
+                label: 'MENUITEMS.SMS.LIST.SCHEDULED',
+                link: '',
+                parentId: 31,
+            },
+        ],
+    },
+    {
+        id: 37,
+        label: 'MENUITEMS.WHATSAPP.LIST.WHATSAPP',
+        icon: 'uil-whatsapp',
+        subItems: [
+            {
+                id: 38,
+                label: 'MENUITEMS.WHATSAPP.LIST.QUEUE',
+                link: '',
+                parentId: 37,
+            },
+            {
+                id: 39,
+                label: 'MENUITEMS.WHATSAPP.LIST.SENT',
+                link: '',
+                parentId: 37,
+            },
+            {
+                id: 40,
+                label: 'MENUITEMS.WHATSAPP.LIST.RECEIVED',
+                link: '',
+                parentId: 37,
+            },
+            {
+                id: 41,
+                label: 'MENUITEMS.WHATSAPP.LIST.CAMPAIGNS',
+                link: '',
+                parentId: 37,
+            },
+            {
+                id: 42,
+                label: 'MENUITEMS.WHATSAPP.LIST.SCHEDULED',
+                link: '',
+                parentId: 37,
+            },
+            {
+                id: 43,
+                label: 'MENUITEMS.WHATSAPP.LIST.GROUP',
+                link: '',
+                parentId: 37,
+            },
+            {
+                id: 44,
+                label: 'MENUITEMS.WHATSAPP.LIST.ACCOUNTS',
+                link: '',
+                parentId: 37,
+            },
+        ],
+    },
+    {
+        id: 45,
+        label: 'MENUITEMS.EMAIL.TEXT',
+        icon: 'uil-at',
+        subItems: [
+            {
+                id: 46,
+                label: 'MENUITEMS.EMAIL.LIST.INBOX',
+                link: '',
+                parentId: 45,
+            },
+            {
+                id: 47,
+                label: 'MENUITEMS.EMAIL.LIST.READEMAIL',
+                link: '',
+                parentId: 45,
+            },
+        ],
+    },
+    {
+        id: 48,
+        label: 'MENUITEMS.TOOLS.LIST.MESSAGE.TEXT',
+        icon: 'uil-comment-message',
+        subItems: [
+            {
+                id: 49,
+                label: 'MENUITEMS.EMAIL.LIST.INBOX',
+                link: '',
+                parentId: 48,
+            },
+            {
+                id: 49,
+                label: 'MENUITEMS.EMAIL.LIST.READEMAIL',
+                link: '',
+                parentId: 48,
+            },
+        ],
+    },
+    {
+        id: 50,
+        label: 'MENUITEMS.TOOLS.LIST.GROUPCONTACT.TEXT',
+        icon: 'uil-exchange',
+        subItems: [
+            {
+                id: 51,
+                label: 'MENUITEMS.EMAIL.LIST.INBOX',
+                link: '',
+                parentId: 50,
+            },
+            {
+                id: 52,
+                label: 'MENUITEMS.EMAIL.LIST.READEMAIL',
+                link: '',
+                parentId: 50,
+            },
+        ],
+    },
+    {
+        id: 53,
+        label: 'MENUITEMS.TOOLS.LIST.CONTACT.TEXT',
+        icon: 'uil-user-square',
+        subItems: [
+            {
+                id: 54,
+                label: 'MENUITEMS.TOOLS.LIST.CONTACT.LIST.LIST',
+                link: '',
+                parentId: 53,
+            },
+            {
+                id: 55,
+                label: 'MENUITEMS.TOOLS.LIST.CONTACT.LIST.ADD',
+                link: '',
+                parentId: 53,
+            },
+        ],
+    },
+    {
+        id: 56,
+        label: 'MENUITEMS.SETTING.TEXT',
+        isTitle: true,
+    },
+    {
+        id: 57,
         label: 'MENUITEMS.SETTING.LIST.SETTING',
         icon: 'uil-cog',
         link: '#',
     },
     {
-        id: 32,
+        id: 58,
         label: 'MENUITEMS.SETTING.LIST.API',
         icon: 'uil-exchange',
         link: '/api',
     },
     {
-        id: 33,
+        id: 59,
         label: 'MENUITEMS.LICENSE.TEXT',
         isTitle: true,
     },
     {
-        id: 34,
+        id: 60,
         label: 'MENUITEMS.LICENSE.LIST.LICENSE',
         icon: 'uil-file-bookmark-alt',
         link: '/license',
@@ -674,33 +841,33 @@ export const MENU: MenuItem[] = [
     //             id: 86,
     //             label: 'MENUITEMS.ICONS.LIST.UNICONS',
     //             link: '/icons/unicons',
-    //             parentId: 85
+    //             parentId: 85,
     //         },
     //         {
     //             id: 87,
     //             label: 'MENUITEMS.ICONS.LIST.BOXICONS',
     //             link: '/icons/boxicons',
-    //             parentId: 85
+    //             parentId: 85,
     //         },
     //         {
     //             id: 88,
     //             label: 'MENUITEMS.ICONS.LIST.MATERIALDESIGN',
     //             link: '/icons/materialdesign',
-    //             parentId: 85
+    //             parentId: 85,
     //         },
     //         {
     //             id: 89,
     //             label: 'MENUITEMS.ICONS.LIST.DRIPICONS',
     //             link: '/icons/dripicons',
-    //             parentId: 85
+    //             parentId: 85,
     //         },
     //         {
     //             id: 90,
     //             label: 'MENUITEMS.ICONS.LIST.FONTAWESOME',
     //             link: '/icons/fontawesome',
-    //             parentId: 85
+    //             parentId: 85,
     //         },
-    //     ]
+    //     ],
     // },
     // {
     //     id: 100,

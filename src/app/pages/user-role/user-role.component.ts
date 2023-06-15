@@ -33,6 +33,7 @@ export class UserRoleComponent implements OnInit {
 
     ngOnInit(): void {
         this.service.getAllRole().subscribe((response) => {
+            // console.log(response);return;
             this.allRoles = response['data'];
             this.totalRole = this.allRoles.length;
             // console.log(this.totalUser);

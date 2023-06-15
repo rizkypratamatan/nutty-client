@@ -12,7 +12,7 @@ export class AddEditRoleComponent implements OnInit {
     isAddMode: boolean;
     status = ['Active', 'Inactive'];
     data: any;
-    privileges = {
+    privilege = {
         database: '0000',
         report: '0000',
         setting: '0000',
@@ -83,7 +83,7 @@ export class AddEditRoleComponent implements OnInit {
         description: '',
         name: '',
         nucode: '',
-        privileges: this.privileges,
+        privileges: this.privilege,
         status: '',
     };
 
@@ -100,14 +100,14 @@ export class AddEditRoleComponent implements OnInit {
         if (!this.isAddMode) {
             this.userRoleService.getRoleById(this.id).subscribe((response) => {
                 // console.log(response.data);return;
-                this.privileges = response.data.privilege;
+                this.privilege = response.data.privilege;
 
                 this.fields = {
                     platform: 'Website',
                     description: response.data.description,
                     name: response.data.name,
                     nucode: response.data.nucode,
-                    privileges: this.privileges,
+                    privileges: this.privilege,
                     status: response.data.status,
                 };
             });
@@ -128,7 +128,7 @@ export class AddEditRoleComponent implements OnInit {
             description: this.fields['description'],
             name: this.fields['name'],
             nucode: this.fields['nucode'],
-            privileges: this.privileges,
+            privileges: this.privilege,
             status: this.fields['status'],
         };
 
@@ -153,8 +153,8 @@ export class AddEditRoleComponent implements OnInit {
     }
 
     updatePrivilege(key: any, index: any, value: any) {
-        let priv = this.privileges[key].split('');
+        let priv = this.privilege[key].split('');
         priv[index] = value;
-        this.privileges[key] = priv.join('');
+        this.privilege[key] = priv.join('');
     }
 }

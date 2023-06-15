@@ -105,8 +105,7 @@
                                 <td>{{ role.status }}</td>
                                 <td>
                                     {{
-                                        role.modified.timestamp.$date
-                                            .$numberLong | date
+                                        !role.modified.timestamp.$date ?  role.modified.timestamp : role.modified.timestamp.$date.$numberLong | date
                                     }}
                                 </td>
                                 <td>

@@ -36,6 +36,7 @@ export class UserGroupComponent implements OnInit {
 
     ngOnInit(): void {
         this.service.getAllGroup().subscribe((response) => {
+            // console.log()
             this.allGroups = response['dataUser'];
             this.allStatus = this.statusFilter;
             this.totalGroup = this.allGroups.length;

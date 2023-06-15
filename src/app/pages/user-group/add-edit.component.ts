@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserGroupService } from 'src/app/services/user/user-group.service';
+import { WebsiteService } from 'src/app/services/website/website.service';
 
 @Component({
     selector: 'app-add-edit',
@@ -8,7 +9,7 @@ import { UserGroupService } from 'src/app/services/user/user-group.service';
     styleUrls: ['./add-edit.component.scss'],
 })
 export class AddEditGroupComponent implements OnInit {
-    website: any = '';
+    website: any;
 
     id: string;
     isAddMode: boolean;
@@ -26,28 +27,43 @@ export class AddEditGroupComponent implements OnInit {
     constructor(
         private service: UserGroupService,
         private router: Router,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private serviceWebsite: WebsiteService
     ) {}
 
     ngOnInit(): void {
         this.id = this.route.snapshot.params['id'];
         this.isAddMode = !this.id;
+        // this.website = {};
 
-        this.service.getGroupById(this.id).subscribe((response) => {
-            this.website = {
-                _id: response.dataUser.website['ids'][0],
-                name: response.dataUser.website['names'][0],
-            };
+        this.serviceWebsite.getAllWebsite().subscribe((response) => {
+            // console.log(response.data);
+            // this.website = response.data;
 
-            this.fields = {
-                platform: 'Website',
-                description: response.dataUser.description,
-                name: response.dataUser.name,
-                status: response.dataUser.status,
-                website: this.website,
-                nucode: response.dataUser.nucode,
-            };
+            // this.website = [{
+            //     _id: response.data.website['ids'][0],
+            //     name: response.data.website['names'][0],
+            // }];
         });
+
+        if (!this.isAddMode) {
+            this.service.getGroupById(this.id).subscribe((response) => {
+                // this.website = {
+                //     _id: response.dataUser.website['ids'][0],
+                //     name: response.dataUser.website['names'][0],
+                // };
+                // console.log(response);
+
+                this.fields = {
+                    platform: 'Website',
+                    description: response.dataUser.description,
+                    name: response.dataUser.name,
+                    status: response.dataUser.status,
+                    website: {},
+                    nucode: response.dataUser.nucode,
+                };
+            });
+        }
     }
 
     submit() {
@@ -64,7 +80,7 @@ export class AddEditGroupComponent implements OnInit {
             description: this.fields['description'],
             name: this.fields['name'],
             status: this.fields['status'],
-            website: this.website,
+            website: {},
             nucode: this.fields['nucode'],
         };
 

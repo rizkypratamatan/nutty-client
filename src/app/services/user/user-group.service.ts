@@ -47,6 +47,8 @@ export class UserGroupService {
             id: id,
         };
 
+        console.log(this.globalRestService.initializeBody(data,'api/get-user-group-by-id'));return;
+        
         return this.http.post(
             this.configuration.api.url + '/api/get-user-group-by-id',
             this.globalRestService.initializeBody(

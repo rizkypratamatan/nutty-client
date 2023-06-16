@@ -4,12 +4,12 @@
             <div
                 class="page-title-box d-flex align-items-center justify-content-between"
             >
-                <h4 class="mb-0">SMS</h4>
+                <h4 class="mb-0">Whatsapp</h4>
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
                         <li class="breadcrumb-item">
-                            <a href="#">SMS</a>
+                            <a href="#">Whatsapp</a>
                         </li>
                         <li class="breadcrumb-item active">Sent</li>
                     </ol>
@@ -26,17 +26,17 @@
                             <div class="col-md-4">
                                 <div class="mb-3">
                                     <label class="form-label"
-                                        >Phone Number</label
+                                        >Recipient</label
                                     >
                                     <input
-                                        id="user-phone"
+                                        id="user-recipient"
                                         class="form-control"
                                         type="text"
                                         required
-                                        [(ngModel)]="fields.phone"
+                                        [(ngModel)]="fields.recipient"
                                         [ngModelOptions]="{ standalone: true }"
                                     />
-                                    <div id="response-phone"></div>
+                                    <div id="response-recipient"></div>
                                 </div>
                             </div>
 

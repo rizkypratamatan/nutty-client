@@ -234,7 +234,7 @@ export const MENU: MenuItem[] = [
             {
                 id: 39,
                 label: 'MENUITEMS.WHATSAPP.LIST.SENT',
-                link: '',
+                link: '/whatsapp/sent',
                 parentId: 37,
             },
             // {

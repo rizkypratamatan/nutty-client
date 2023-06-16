@@ -1,22 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SmsService } from 'src/app/services/sms/sms.service';
+import { WhatsappService } from 'src/app/services/whatsapp/whatsapp.service';
 
 @Component({
     selector: 'app-sent',
     templateUrl: './sent.component.html',
     styleUrls: ['./sent.component.scss'],
 })
-export class SMSSentComponent implements OnInit {
+export class WASentComponent implements OnInit {
     fields = {
         platform: 'Website',
-        phone: '',
+        campaign: '',
+        recipient: '',
+        type: 'text',
         message: '',
     };
 
     constructor(
         private route: ActivatedRoute,
-        private service: SmsService,
+        private service: WhatsappService,
         private router: Router
     ) {}
 
@@ -25,14 +27,16 @@ export class SMSSentComponent implements OnInit {
     submit() {
         this.fields = {
             platform: 'Website',
-            phone: this.fields['phone'],
+            campaign: '',
+            recipient: this.fields['recipient'],
+            type: 'text',
             message: this.fields['message'],
         };
 
-        this.service.sendSingleSMS(this.fields).subscribe((response) => {
+        this.service.sendSingleChat(this.fields).subscribe((response) => {
             if (response.result === true) {
-                console.log('SMS sent successfully');
-                this.router.navigate(['/sms/sent']);
+                console.log('WhatsApp Message sent successfully');
+                this.router.navigate(['/whatsapp/sent']);
             }
         });
     }

@@ -78,11 +78,10 @@ export class AddEditGroupComponent implements OnInit {
                 this.selectedWebsite.pop()
             }else{
                 let position = this.selectedWebsite.indexOf(id);
-                if ( position ) this.selectedWebsite.splice(position, 1);
+                    if ( position ) this.selectedWebsite.splice(position, 1);
             }
             
         }
-        console.log(this.selectedWebsite)
     }
 
     private create() {

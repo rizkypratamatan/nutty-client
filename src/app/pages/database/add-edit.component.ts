@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { DatabaseService } from 'src/app/services/database/database.service';
 
 @Component({
     selector: 'app-add-edit',
@@ -58,38 +59,46 @@ export class AddEditDatabaseComponent implements OnInit {
         zip: '',
     };
 
-    constructor(private route: ActivatedRoute) {}
+    constructor(
+        private route: ActivatedRoute,
+        private service: DatabaseService,
+        private router: Router
+    ) {}
 
     ngOnInit(): void {
         this.id = this.route.snapshot.params['id'];
         this.isAddMode = !this.id;
 
         if (!this.isAddMode) {
-            this.fields = {
-                city: '',
-                contact: {
-                    email: '',
-                    line: '',
-                    michat: '',
-                    phone: '',
-                    telegram: '',
-                    wechat: '',
-                    whatsapp: '',
-                },
-                country: '',
-                crm: {},
-                gender: '',
-                group: {},
-                import: {},
-                language: '',
-                name: '',
-                reference: '',
-                state: '',
-                status: '',
-                street: '',
-                telemarketer: {},
-                zip: '',
-            };
+            this.service.getDatabaseById(this.id).subscribe((response) => {
+                // console.log(response);
+
+                this.fields = {
+                    city: response.data.city,
+                    contact: {
+                        email: response.data.email,
+                        line: response.data.line,
+                        michat: response.data.michat,
+                        phone: response.data.phone,
+                        telegram: response.data.telegram,
+                        wechat: response.data.wechat,
+                        whatsapp: response.data.whatsapp,
+                    },
+                    country: response.data.country,
+                    crm: {},
+                    gender: response.data.gender,
+                    group: {},
+                    import: {},
+                    language: response.data.language,
+                    name: response.data.name,
+                    reference: response.data.reference,
+                    state: response.data.state,
+                    status: response.data.status,
+                    street: response.data.street,
+                    telemarketer: {},
+                    zip: response.data.zip,
+                };
+            });
         }
     }
 
@@ -102,48 +111,47 @@ export class AddEditDatabaseComponent implements OnInit {
     }
 
     private create() {
-        // this.fields = {
-        //     username: this.fields['username'],
-        //     name: this.fields['name'],
-        //     password: this.fields['password'],
-        //     nucode: this.fields['nucode'],
-        //     type: this.fields['type'],
-        //     role: this.role,
-        //     group: this.group,
-        //     status: this.fields['status'],
-        //     platform: 'Website',
-        //     gender: this.fields['gender'] ? this.fields['gender'] : '',
-        //     contact: {
-        //         email: this.fields['email'] ? this.fields['email'] : '',
-        //         fax: this.fields['fax'] ? this.fields['fax'] : '',
-        //         line: this.fields['line'] ? this.fields['line'] : '',
-        //         michat: this.fields['michat'] ? this.fields['michat'] : '',
-        //         phone: this.fields['phone'] ? this.fields['phone'] : '',
-        //         wechat: this.fields['wechat'] ? this.fields['wechat'] : '',
-        //         whatsapp: this.fields['whatsapp']
-        //             ? this.fields['whatsapp']
-        //             : '',
-        //         telegram: this.fields['telegram']
-        //             ? this.fields['telegram']
-        //             : '',
-        //     },
-        //     country: this.fields['country'] ? this.fields['country'] : '',
-        //     city: this.fields['city'] ? this.fields['city'] : '',
-        //     street: this.fields['street'] ? this.fields['street'] : '',
-        //     zip: this.fields['zip'] ? this.fields['zip'] : '',
-        // };
-        // this.userService.addUser(this.fields).subscribe((response) => {
-        //     if (response.result === true) {
-        //         this.router.navigate(['/user']);
-        //     }
-        // });
+        this.fields = {
+            city: this.fields['city'],
+            contact: {
+                email: this.fields['email'],
+                line: this.fields['line'],
+                michat: this.fields['michat'],
+                phone: this.fields['phone'],
+                telegram: this.fields['telegram'],
+                wechat: this.fields['wechat'],
+                whatsapp: this.fields['whatsapp'],
+            },
+            country: this.fields['country'],
+            crm: {},
+            gender: this.fields['gender'],
+            group: {},
+            import: {},
+            language: this.fields['language'],
+            name: this.fields['name'],
+            reference: this.fields['reference'],
+            state: this.fields['state'],
+            status: this.fields['status'],
+            street: this.fields['street'],
+            telemarketer: {},
+            zip: this.fields['zip'],
+        };
+
+        this.service.addDatabase(this.fields).subscribe((response) => {
+            if (response.result === true) {
+                this.router.navigate(['/database']);
+            }
+        });
     }
 
     private update() {
         let id = this.id;
-        // this.userService.updateUser(id, this.fields).subscribe((response) => {
+        console.log(this.fields);
+        
+        // this.service.updateDatabase(id, this.fields).subscribe((response) => {
+          
         //     if (response.result === true) {
-        //         this.router.navigate(['/user']);
+        //         this.router.navigate(['/database']);
         //     }
         // });
     }

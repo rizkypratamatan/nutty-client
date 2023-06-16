@@ -55,7 +55,7 @@ export class DatabaseComponent implements OnInit {
     constructor(private service: DatabaseService, private router: Router) {}
 
     ngOnInit(): void {
-        this.service.getAllWebsite().subscribe((response) => {
+        this.service.getAllDatabase().subscribe((response) => {
             this.allDatabase = response['data'];
             // this.allType = this.typeFilter;
             // this.allStatus = this.statusFilter;

@@ -25,7 +25,7 @@ export class DatabaseService {
         this.configuration = this.configurationService;
     }
 
-    public getAllWebsite(): Observable<any> {
+    public getAllDatabase(): Observable<any> {
         let auth = this.userServices.Auth();
         let data = {
             platform: 'Website',
@@ -36,6 +36,51 @@ export class DatabaseService {
         return this.http.post(
             this.configuration.api.url + '/api/get-database',
             this.globalRestService.initializeBody(data, 'api/get-database'),
+            this.globalRestService.initializeHeaderGetData(auth['token-auth'])
+        );
+    }
+
+    public getDatabaseById(id): Observable<any> {
+        let auth = this.userServices.Auth();
+        let data = {
+            platform: 'Website',
+            id: id,
+        };
+        
+        return this.http.post(
+            this.configuration.api.url + '/api/get-database-by-id',
+            this.globalRestService.initializeBody(
+                data,
+                'api/get-database-by-id'
+            ),
+            this.globalRestService.initializeHeaderGetData(auth['token-auth'])
+        );
+    }
+
+    public addDatabase(request): Observable<any> {
+        let auth = this.userServices.Auth();
+
+        return this.http.post(
+            this.configuration.api.url + '/api/add-database',
+            this.globalRestService.initializeBody(request, 'api/add-database'),
+            this.globalRestService.initializeHeaderGetData(auth['token-auth'])
+        );
+    }
+
+    public updateDatabase(id, request): Observable<any> {
+        let auth = this.userServices.Auth();
+        request.id = id;
+        // console.log(this.globalRestService.initializeBody(
+        //     request,
+        //     'api/update-database'
+        // ));return;
+        
+        return this.http.post(
+            this.configuration.api.url + '/api/update-database',
+            this.globalRestService.initializeBody(
+                request,
+                'api/update-database'
+            ),
             this.globalRestService.initializeHeaderGetData(auth['token-auth'])
         );
     }

@@ -197,7 +197,7 @@ export const MENU: MenuItem[] = [
             {
                 id: 33,
                 label: 'MENUITEMS.SMS.LIST.SENT',
-                link: '',
+                link: '/sms/sent',
                 parentId: 31,
             },
             // {

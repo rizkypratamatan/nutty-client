@@ -49,6 +49,7 @@ import { AddEditRoleComponent } from './user-role/add-edit.component';
 import { AddEditGroupComponent } from './user-group/add-edit.component';
 import { AddEditWebsiteComponent } from './website/add-edit.component';
 import { AddEditDatabaseComponent } from './database/add-edit.component';
+import { SentComponent } from './sms/sent/sent.component';
 
 FullCalendarModule.registerPlugins([
     dayGridPlugin,
@@ -80,6 +81,7 @@ FullCalendarModule.registerPlugins([
         AddEditGroupComponent,
         AddEditWebsiteComponent,
         AddEditDatabaseComponent,
+        SentComponent,
     ],
     imports: [
         CommonModule,

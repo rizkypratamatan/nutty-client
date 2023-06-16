@@ -5,13 +5,9 @@ import { DefaultComponent } from './dashboards/default/default.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { ChatComponent } from './chat/chat.component';
 import { UserComponent } from './user/user.component';
-import { UserEntryComponent } from './user-entry/user-entry.component';
 import { UserRoleComponent } from './user-role/user-role.component';
-import { UserRoleEntryComponent } from './user-role-entry/user-role-entry.component';
 import { UserGroupComponent } from './user-group/user-group.component';
-import { UserGroupEntryComponent } from './user-group-entry/user-group-entry.component';
 import { WebsiteComponent } from './website/website.component';
-import { WebsiteEntryComponent } from './website-entry/website-entry.component';
 import { LicenseComponent } from './license/license.component';
 import { ReportComponent } from './report/report.component';
 import { ApiComponent } from './api/api.component';
@@ -45,11 +41,9 @@ const routes: Routes = [
   { path: 'user', component: UserComponent },
   { path: 'user/add-edit', component: AddEditComponent },
   { path: 'user/add-edit/:id', component: AddEditComponent },
-  { path: 'user/entry', component: UserEntryComponent },
   { path: 'user/role', component: UserRoleComponent },
   { path: 'user/role/add-edit', component: AddEditRoleComponent },
   { path: 'user/role/add-edit/:id', component: AddEditRoleComponent },
-  { path: 'user/role/entry', component: UserRoleEntryComponent },
   { path: 'user/group', component: UserGroupComponent },
   { path: 'user/group/add-edit', component: AddEditGroupComponent },
   { path: 'user/group/add-edit/:id', component: AddEditGroupComponent },

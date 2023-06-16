@@ -10,6 +10,7 @@ import { WebsiteService } from 'src/app/services/website/website.service';
 })
 export class AddEditGroupComponent implements OnInit {
     website: any;
+    selectedWebsite: any[] = [];
 
     id: string;
     isAddMode: boolean;
@@ -37,13 +38,8 @@ export class AddEditGroupComponent implements OnInit {
         // this.website = {};
 
         this.serviceWebsite.getAllWebsite().subscribe((response) => {
-            // console.log(response.data);
-            // this.website = response.data;
-
-            // this.website = [{
-            //     _id: response.data.website['ids'][0],
-            //     name: response.data.website['names'][0],
-            // }];
+            console.log(response.data);
+            this.website = response.data;
         });
 
         if (!this.isAddMode) {
@@ -72,6 +68,21 @@ export class AddEditGroupComponent implements OnInit {
         } else {
             this.update();
         }
+    }
+
+    populateWebsite(id: any, checked: boolean){
+        if(checked){
+            this.selectedWebsite.push(id);
+        }else{
+            if(this.selectedWebsite.length == 1){
+                this.selectedWebsite.pop()
+            }else{
+                let position = this.selectedWebsite.indexOf(id);
+                if ( position ) this.selectedWebsite.splice(position, 1);
+            }
+            
+        }
+        console.log(this.selectedWebsite)
     }
 
     private create() {

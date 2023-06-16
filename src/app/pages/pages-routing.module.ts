@@ -24,6 +24,7 @@ import { AddEditComponent } from './user/add-edit.component';
 import { AddEditRoleComponent } from './user-role/add-edit.component';
 import { AddEditGroupComponent } from './user-group/add-edit.component';
 import { AddEditWebsiteComponent } from './website/add-edit.component';
+import { AddEditDatabaseComponent } from './database/add-edit.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard' },
@@ -59,6 +60,8 @@ const routes: Routes = [
   { path: 'worksheet', component: WorksheetComponent },
   { path: 'worksheet/result', component: WorksheetResultComponent },
   { path: 'database', component: DatabaseComponent },
+  { path: 'database/add-edit', component: AddEditDatabaseComponent },
+  { path: 'database/add-edit/:id', component: AddEditDatabaseComponent },
   { path: 'database/import', component: DatabaseImportComponent },
   { path: 'database/history', component: DatabaseHistoryComponent },
   { path: 'report', component: ReportComponent },

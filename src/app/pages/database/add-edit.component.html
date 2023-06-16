@@ -1,0 +1,248 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div
+                class="page-title-box d-flex align-items-center justify-content-between"
+            >
+                <h4 class="mb-0">User Entry</h4>
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">User</a></li>
+                        <li class="breadcrumb-item active">Entry</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <form (ngSubmit)="submit()">
+                        <div class="row">
+                            <div class="mb-3">
+                                <label class="form-label">City</label>
+                                <input
+                                    id="user-city"
+                                    class="form-control"
+                                    type="text"
+                                    required
+                                    [(ngModel)]="fields.city"
+                                    [ngModelOptions]="{ standalone: true }"
+                                />
+                                <div id="response-city"></div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Contact</label>
+                                <input
+                                    id="user-contact"
+                                    class="form-control"
+                                    type="text"
+                                    required
+                                    [(ngModel)]="fields.contact"
+                                    [ngModelOptions]="{ standalone: true }"
+                                />
+                                <div id="response-contact"></div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Country</label>
+                                <input
+                                    id="user-country"
+                                    class="form-control"
+                                    type="text"
+                                    required
+                                    [(ngModel)]="fields.country"
+                                    [ngModelOptions]="{ standalone: true }"
+                                />
+                                <div id="response-country"></div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">CRM</label>
+                                <input
+                                    id="user-crm"
+                                    class="form-control"
+                                    type="text"
+                                    required
+                                    [(ngModel)]="fields.crm"
+                                    [ngModelOptions]="{ standalone: true }"
+                                />
+                                <div id="response-crm"></div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Gender</label>
+                                <input
+                                    id="user-gender"
+                                    class="form-control"
+                                    type="text"
+                                    required
+                                    [(ngModel)]="fields.gender"
+                                    [ngModelOptions]="{ standalone: true }"
+                                />
+                                <div id="response-gender"></div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Group</label>
+                                <select
+                                    id="user-group"
+                                    class="form-control select2"
+                                    required
+                                    [(ngModel)]="fields.group"
+                                    [ngModelOptions]="{ standalone: true }"
+                                    (ngModelChange)="onOptionsSelectedGroup()"
+                                >
+                                    <option value="">Group</option>
+                                    <option
+                                        *ngFor="let val of allGroup"
+                                        [value]="{}"
+                                    >
+                                        {{ val.name }}
+                                    </option>
+                                </select>
+                                <div id="response-group"></div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Import</label>
+                                <input
+                                    id="user-import"
+                                    class="form-control"
+                                    type="text"
+                                    required
+                                    [(ngModel)]="fields.import"
+                                    [ngModelOptions]="{ standalone: true }"
+                                />
+                                <div id="response-import"></div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Language</label>
+                                <input
+                                    id="user-language"
+                                    class="form-control"
+                                    type="text"
+                                    required
+                                    [(ngModel)]="fields.language"
+                                    [ngModelOptions]="{ standalone: true }"
+                                />
+                                <div id="response-language"></div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Name</label>
+                                <input
+                                    id="user-name"
+                                    class="form-control"
+                                    type="text"
+                                    required
+                                    [(ngModel)]="fields.name"
+                                    [ngModelOptions]="{ standalone: true }"
+                                />
+                                <div id="response-name"></div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Reference</label>
+                                <input
+                                    id="user-reference"
+                                    class="form-control"
+                                    type="text"
+                                    required
+                                    [(ngModel)]="fields.reference"
+                                    [ngModelOptions]="{ standalone: true }"
+                                />
+                                <div id="response-reference"></div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">State</label>
+                                <input
+                                    id="user-state"
+                                    class="form-control"
+                                    type="text"
+                                    required
+                                    [(ngModel)]="fields.state"
+                                    [ngModelOptions]="{ standalone: true }"
+                                />
+                                <div id="response-state"></div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Status</label>
+                                <select
+                                    id="user-status"
+                                    class="form-control select2"
+                                    required
+                                    [(ngModel)]="fields.status"
+                                    [ngModelOptions]="{ standalone: true }"
+                                >
+                                    <option value="">Status</option>
+                                    <option *ngFor="let val of status">
+                                        {{ val }}
+                                    </option>
+                                </select>
+                                <div id="response-status"></div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Street</label>
+                                <input
+                                    id="user-street"
+                                    class="form-control"
+                                    type="text"
+                                    required
+                                    [(ngModel)]="fields.street"
+                                    [ngModelOptions]="{ standalone: true }"
+                                />
+                                <div id="response-street"></div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Telemarketer</label>
+                                <input
+                                    id="user-telemarketer"
+                                    class="form-control"
+                                    type="text"
+                                    required
+                                    [(ngModel)]="fields.telemarketer"
+                                    [ngModelOptions]="{ standalone: true }"
+                                />
+                                <div id="response-telemarketer"></div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">ZIP</label>
+                                <input
+                                    id="user-zip"
+                                    class="form-control"
+                                    type="text"
+                                    required
+                                    [(ngModel)]="fields.zip"
+                                    [ngModelOptions]="{ standalone: true }"
+                                />
+                                <div id="response-zip"></div>
+                            </div>
+
+                            <div class="mb-3">
+                                <button
+                                    *ngIf="!isAddMode"
+                                    class="btn btn-success waves-effect waves-light me-1"
+                                    type="submit"
+                                >
+                                    Update
+                                </button>
+
+                                <button
+                                    *ngIf="isAddMode"
+                                    class="btn btn-success waves-effect waves-light me-1"
+                                    type="submit"
+                                >
+                                    Add New
+                                </button>
+
+                                <button
+                                    *ngIf="isAddMode"
+                                    type="reset"
+                                    class="btn btn-secondary waves-effect"
+                                >
+                                    Reset
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

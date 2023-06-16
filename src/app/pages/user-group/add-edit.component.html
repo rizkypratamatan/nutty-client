@@ -64,30 +64,38 @@
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Website</label>
-                                <!-- <div
-                                    *ngFor="let item of website"
-                                    class="row mb-3"
-                                >
-                                    <div class="col-2">
-                                        <label class="form-label">{{
-                                            item
-                                        }}</label>
-                                    </div>
-                                </div> -->
-                                <!-- <div>
-                                    <span
-                                        ng-repeat="(key, value) in websites.option"
-                                        class="me-3"
-                                        ng-click="toggleWebsite(value._id)"
+                                <div class="row mb-3">
+                                    <div 
+                                        class="col-3"
+                                        *ngFor="let item of website"
                                     >
                                         <input
                                             class="form-check-input"
                                             type="checkbox"
-                                            ng-checked="websites.value.includes(value._id)"
+                                            value="{{ item._id }}"
+                                            (change)="populateWebsite(item._id, $event.target.checked ? true : false)"
+                                        />
+                                        <label class="form-label">&nbsp;&nbsp;{{
+                                            item.name
+                                        }}</label>
+                                        
+                                    </div>
+                                    
+                                </div>
+                                <!-- <div>
+                                    <span
+                                        ng-repeat="let item of website"
+                                        class="me-3"
+                                        ng-click="toggleWebsite(item._id)"
+                                    >
+                                        <input
+                                            class="form-check-input"
+                                            type="checkbox"
+                                            ng-checked="websites.value.includes(item._id)"
                                         />
                                         <label
                                             class="form-check-label"
-                                            ng-bind="value.name"
+                                            ng-bind="item.name"
                                         ></label>
                                     </span>
                                 </div> -->

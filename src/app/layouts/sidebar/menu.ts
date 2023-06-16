@@ -188,30 +188,30 @@ export const MENU: MenuItem[] = [
         label: 'MENUITEMS.SMS.LIST.SMS',
         icon: 'uil-comment-alt-message',
         subItems: [
-            {
-                id: 32,
-                label: 'MENUITEMS.SMS.LIST.QUEUE',
-                link: '',
-                parentId: 31,
-            },
+            // {
+            //     id: 32,
+            //     label: 'MENUITEMS.SMS.LIST.QUEUE',
+            //     link: '',
+            //     parentId: 31,
+            // },
             {
                 id: 33,
                 label: 'MENUITEMS.SMS.LIST.SENT',
                 link: '',
                 parentId: 31,
             },
-            {
-                id: 34,
-                label: 'MENUITEMS.SMS.LIST.RECEIVED',
-                link: '',
-                parentId: 31,
-            },
-            {
-                id: 35,
-                label: 'MENUITEMS.SMS.LIST.CAMPAIGNS',
-                link: '',
-                parentId: 31,
-            },
+            // {
+            //     id: 34,
+            //     label: 'MENUITEMS.SMS.LIST.RECEIVED',
+            //     link: '',
+            //     parentId: 31,
+            // },
+            // {
+            //     id: 35,
+            //     label: 'MENUITEMS.SMS.LIST.CAMPAIGNS',
+            //     link: '',
+            //     parentId: 31,
+            // },
             {
                 id: 36,
                 label: 'MENUITEMS.SMS.LIST.SCHEDULED',
@@ -225,48 +225,48 @@ export const MENU: MenuItem[] = [
         label: 'MENUITEMS.WHATSAPP.LIST.WHATSAPP',
         icon: 'uil-whatsapp',
         subItems: [
-            {
-                id: 38,
-                label: 'MENUITEMS.WHATSAPP.LIST.QUEUE',
-                link: '',
-                parentId: 37,
-            },
+            // {
+            //     id: 38,
+            //     label: 'MENUITEMS.WHATSAPP.LIST.QUEUE',
+            //     link: '',
+            //     parentId: 37,
+            // },
             {
                 id: 39,
                 label: 'MENUITEMS.WHATSAPP.LIST.SENT',
                 link: '',
                 parentId: 37,
             },
-            {
-                id: 40,
-                label: 'MENUITEMS.WHATSAPP.LIST.RECEIVED',
-                link: '',
-                parentId: 37,
-            },
-            {
-                id: 41,
-                label: 'MENUITEMS.WHATSAPP.LIST.CAMPAIGNS',
-                link: '',
-                parentId: 37,
-            },
+            // {
+            //     id: 40,
+            //     label: 'MENUITEMS.WHATSAPP.LIST.RECEIVED',
+            //     link: '',
+            //     parentId: 37,
+            // },
+            // {
+            //     id: 41,
+            //     label: 'MENUITEMS.WHATSAPP.LIST.CAMPAIGNS',
+            //     link: '',
+            //     parentId: 37,
+            // },
             {
                 id: 42,
                 label: 'MENUITEMS.WHATSAPP.LIST.SCHEDULED',
                 link: '',
                 parentId: 37,
             },
-            {
-                id: 43,
-                label: 'MENUITEMS.WHATSAPP.LIST.GROUP',
-                link: '',
-                parentId: 37,
-            },
-            {
-                id: 44,
-                label: 'MENUITEMS.WHATSAPP.LIST.ACCOUNTS',
-                link: '',
-                parentId: 37,
-            },
+            // {
+            //     id: 43,
+            //     label: 'MENUITEMS.WHATSAPP.LIST.GROUP',
+            //     link: '',
+            //     parentId: 37,
+            // },
+            // {
+            //     id: 44,
+            //     label: 'MENUITEMS.WHATSAPP.LIST.ACCOUNTS',
+            //     link: '',
+            //     parentId: 37,
+            // },
         ],
     },
     {

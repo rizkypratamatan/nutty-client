@@ -26,13 +26,12 @@ export class SmsService {
 
     public sendSingleSMS(request): Observable<any> {
         let auth = this.userServices.Auth();
-        console.log(request);return;
 
         return this.http.post(
-            this.configuration.api.url + '/api/sms/send-test-single-message',
+            this.configuration.api.url + '/api/sms/send-single-message',
             this.globalRestService.initializeBody(
                 request,
-                'api/sms/send-test-single-message'
+                'api/sms/send-single-message'
             ),
             this.globalRestService.initializeHeaderGetData(auth['token-auth'])
         );

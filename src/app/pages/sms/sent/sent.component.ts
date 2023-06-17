@@ -30,8 +30,10 @@ export class SMSSentComponent implements OnInit {
         };
 
         this.service.sendSingleSMS(this.fields).subscribe((response) => {
-            if (response.result === true) {
-                console.log('SMS sent successfully');
+            // console.log(response);
+
+            if (response.status === true) {
+                // console.log('SMS sent successfully');
                 this.router.navigate(['/sms/sent']);
             }
         });

@@ -4,6 +4,7 @@ import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { Email } from './inbox.model';
 import { emailData } from './data';
 import Swal from 'sweetalert2';
+import { EmailService } from 'src/app/services/email/email.service';
 
 @Component({
   selector: 'app-inbox',
@@ -34,12 +35,18 @@ export class InboxComponent implements OnInit {
   startIndex = 1;
   endIndex = 15;
 
-  constructor(private modalService: NgbModal) {
+  constructor(private modalService: NgbModal, private service: EmailService) {
   }
 
   ngOnInit() {
     this.breadCrumbItems = [{ label: 'Email' }, { label: 'Inbox', active: true }];
-    this.emailData = emailData;
+    this.service.getEmailInbox().subscribe((response) => {
+      console.log(response);
+      // return;
+      this.emailData = response;
+      // console.log(this.totalUser);
+  });
+    // this.emailData = emailData;
     this.totalRecords = emailData.length;
   }
 

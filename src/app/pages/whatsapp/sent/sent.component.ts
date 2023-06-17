@@ -34,8 +34,10 @@ export class WASentComponent implements OnInit {
         };
 
         this.service.sendSingleChat(this.fields).subscribe((response) => {
-            if (response.result === true) {
-                console.log('WhatsApp Message sent successfully');
+            // console.log(response);
+
+            if (response.status === true) {
+                // console.log('WhatsApp Message sent successfully');
                 this.router.navigate(['/whatsapp/sent']);
             }
         });

@@ -277,7 +277,7 @@ export const MENU: MenuItem[] = [
             {
                 id: 46,
                 label: 'MENUITEMS.EMAIL.LIST.INBOX',
-                link: '',
+                link: '/email/inbox',
                 parentId: 45,
             },
             {

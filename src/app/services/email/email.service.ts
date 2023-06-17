@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 @Injectable({
     providedIn: 'root',
 })
-export class WhatsappService {
+export class EmailService {
     public configuration: ConfigurationService;
 
     accountData: string;
@@ -23,15 +23,19 @@ export class WhatsappService {
         this.configuration = this.configurationService;
     }
 
-    public sendSingleChat(request): Observable<any> {
+    public getEmailInbox(): Observable<any> {
         let auth = this.userServices.Auth();
+        let data = {
+            platform: 'Website',
+            limit: 10,
+            offset: 0,
+        };
+        // console.log(this.globalRestService.initializeBody(data, 'api/email/get-emails'));
+        // return;
 
         return this.http.post(
-            this.configuration.api.url + '/api/whatsapp/send-single-chat',
-            this.globalRestService.initializeBody(
-                request,
-                'api/whatsapp/send-single-chat'
-            ),
+            this.configuration.api.url + '/api/email/get-emails',
+            this.globalRestService.initializeBody(data, 'api/email/get-emails'),
             this.globalRestService.initializeHeaderGetData(auth['token-auth'])
         );
     }

@@ -51,6 +51,8 @@ import { AddEditWebsiteComponent } from './website/add-edit.component';
 import { AddEditDatabaseComponent } from './database/add-edit.component';
 import { SMSSentComponent } from './sms/sent/sent.component';
 import { WASentComponent } from './whatsapp/sent/sent.component';
+import { SMSBulkComponent } from './sms/bulk/bulk.component';
+import { NgxDropzoneModule } from 'ngx-dropzone';
 
 FullCalendarModule.registerPlugins([
     dayGridPlugin,
@@ -84,6 +86,7 @@ FullCalendarModule.registerPlugins([
         AddEditDatabaseComponent,
         SMSSentComponent,
         WASentComponent,
+        SMSBulkComponent,
     ],
     imports: [
         CommonModule,
@@ -102,6 +105,7 @@ FullCalendarModule.registerPlugins([
         NgbTooltipModule,
         SimplebarAngularModule,
         NgxPaginationModule,
+        NgxDropzoneModule,
     ],
 })
 export class PagesModule {}

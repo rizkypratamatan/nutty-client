@@ -12,6 +12,7 @@ import { LicenseComponent } from './license/license.component';
 import { ReportComponent } from './report/report.component';
 import { ApiComponent } from './api/api.component';
 import { SMSSentComponent } from './sms/sent/sent.component';
+import { SMSBulkComponent } from './sms/bulk/bulk.component';
 import { WASentComponent } from './whatsapp/sent/sent.component';
 import { WorksheetComponent } from './worksheet/worksheet.component';
 import { WorksheetResultComponent } from './worksheet-result/worksheet-result.component';
@@ -64,6 +65,7 @@ const routes: Routes = [
   { path: 'api', component: ApiComponent },
   { path: 'license', component: LicenseComponent },
   { path: 'sms/sent', component: SMSSentComponent },
+  { path: 'sms/bulk', component: SMSBulkComponent },
   { path: 'whatsapp/sent', component: WASentComponent },
 ];
 

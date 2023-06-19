@@ -36,4 +36,17 @@ export class SmsService {
             this.globalRestService.initializeHeaderGetData(auth['token-auth'])
         );
     }
+
+    public sendBulkSMS(request): Observable<any> {
+        let auth = this.userServices.Auth();
+
+        return this.http.post(
+            this.configuration.api.url + '/api/sms/send-bulk-message',
+            this.globalRestService.initializeBody(
+                request,
+                'api/sms/send-bulk-message'
+            ),
+            this.globalRestService.initializeHeaderGetData(auth['token-auth'])
+        );
+    }
 }

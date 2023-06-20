@@ -55,14 +55,14 @@
                             </select>
                         </div>
                         <div class="col-md-4"></div>
-                        <div class="col-md-2" style="text-align: right">
+                        <!-- <div class="col-md-2" style="text-align: right">
                             <a
                                 (click)="create()"
                                 class="btn btn-success waves-effect waves-light"
                             >
                                 <i class="mdi mdi-plus me-2"></i> Add New
                             </a>
-                        </div>
+                        </div> -->
                     </div>
                     <!-- Filter -->
 
@@ -89,7 +89,6 @@
                             <tr
                                 *ngFor="
                                     let role of allRoles
-                                        | tableFilter : filter
                                         | paginate
                                             : {
                                                   itemsPerPage: 10,
@@ -111,8 +110,8 @@
                                 <td>
                                     <a
                                         (click)="edit(role._id)"
-                                        class="btn btn-info btn-sm w-lg"
-                                        >Edit</a
+                                        class="btn btn-outline-secondary btn-sm"
+                                        ><i class="bx uil-edit"></i></a
                                     >
                                 </td>
                             </tr>

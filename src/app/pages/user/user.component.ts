@@ -68,7 +68,7 @@ export class UserComponent implements OnInit {
             this.allGroup = response['dataUser'];
         });
 
-        this.userRoleService.getAllRole().subscribe((response) => {
+        this.userRoleService.getAllRole({}).subscribe((response) => {
             this.allRole = response['dataUser'];
         });
     }

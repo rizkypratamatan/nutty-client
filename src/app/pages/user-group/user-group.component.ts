@@ -32,10 +32,8 @@ export class UserGroupComponent implements OnInit {
         //     this.fields[key] === '' ? delete this.fields[key] : key
         // );
         // this.filter = Object.assign({}, this.fields);
-        console.log(this.fields.website)
         this.service.getAllGroup(this.fields).subscribe((response) => {
             this.allGroups = response['dataUser'];
-            
         });
     }
 

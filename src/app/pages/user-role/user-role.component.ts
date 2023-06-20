@@ -23,20 +23,22 @@ export class UserRoleComponent implements OnInit {
     statusFilter = ['Active', 'Inactive'];
 
     updateFilters() {
-        Object.keys(this.fields).forEach((key) =>
-            this.fields[key] === '' ? delete this.fields[key] : key
-        );
-        this.filter = Object.assign({}, this.fields);
+        // Object.keys(this.fields).forEach((key) =>
+        //     this.fields[key] === '' ? delete this.fields[key] : key
+        // );
+        // this.filter = Object.assign({}, this.fields);
+        this.service.getAllRole(this.fields).subscribe((response) => {
+            this.allRoles = response['data'];
+            this.totalRole = response['total_data'];
+        });
     }
 
     constructor(private service: UserRoleService, private router: Router) {}
 
     ngOnInit(): void {
-        this.service.getAllRole().subscribe((response) => {
-            // console.log(response);return;
+        this.service.getAllRole(this.fields).subscribe((response) => {
             this.allRoles = response['data'];
-            this.totalRole = this.allRoles.length;
-            // console.log(this.totalUser);
+            this.totalRole = response['total_data'];            
         });
     }
 

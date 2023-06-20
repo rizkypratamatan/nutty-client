@@ -11,8 +11,12 @@ export class AddEditRoleComponent implements OnInit {
     id: string;
     isAddMode: boolean;
     status = ['Active', 'Inactive'];
+    isValid: boolean =  true;
+    errorMsg: any[] = [];
+    loadingIndicator : boolean = false;
+
     data: any;
-    privilege = {
+    privileges = {
         database: '0000',
         report: '0000',
         setting: '0000',
@@ -27,63 +31,12 @@ export class AddEditRoleComponent implements OnInit {
         email: '0000',
     };
 
-    privilege_list = [
-        {
-            name: 'database',
-            permission: '0000',
-        },
-        {
-            name: 'report',
-            permission: '0000',
-        },
-        {
-            name: 'setting',
-            permission: '0000',
-        },
-        {
-            name: 'settingApi',
-            permission: '0000',
-        },
-        {
-            name: 'user',
-            permission: '0000',
-        },
-        {
-            name: 'userGroup',
-            permission: '0000',
-        },
-        {
-            name: 'userRole',
-            permission: '0000',
-        },
-        {
-            name: 'website',
-            permission: '0000',
-        },
-        {
-            name: 'worksheet',
-            permission: '0000',
-        },
-        {
-            name: 'whatsapp',
-            permission: '0000',
-        },
-        {
-            name: 'sms',
-            permission: '0000',
-        },
-        {
-            name: 'email',
-            permission: '0000',
-        },
-    ];
-
     fields = {
         platform: 'Website',
         description: '',
         name: '',
         nucode: '',
-        privileges: this.privilege,
+        privileges: this.privileges,
         status: '',
     };
 
@@ -99,15 +52,14 @@ export class AddEditRoleComponent implements OnInit {
 
         if (!this.isAddMode) {
             this.userRoleService.getRoleById(this.id).subscribe((response) => {
-                // console.log(response.data);return;
-                this.privilege = response.data.privilege;
+                this.privileges = response.data.privileges;
 
                 this.fields = {
                     platform: 'Website',
                     description: response.data.description,
                     name: response.data.name,
                     nucode: response.data.nucode,
-                    privileges: this.privilege,
+                    privileges: this.privileges,
                     status: response.data.status,
                 };
             });
@@ -115,46 +67,61 @@ export class AddEditRoleComponent implements OnInit {
     }
 
     submit() {
-        if (this.isAddMode) {
-            this.create();
-        } else {
-            this.update();
+        this.errorMsg = [];
+        this.validateInput();
+        if(this.isValid){
+            this.loadingIndicator = true;
+            if (this.isAddMode) {
+                this.create();
+            } else {
+                this.update();
+            }
+        }
+    }
+
+    validateInput(){
+        this.isValid = true;
+        if(!this.fields.description){
+            this.isValid = false;
+            this.errorMsg.push("Description is Required");
+        }
+        if(!this.fields.name){
+            this.isValid = false;
+            this.errorMsg.push("Name is Required");
+        }
+        if(!this.fields.status){
+            this.isValid = false;
+            this.errorMsg.push("Status is Required");
+        }
+        if(!this.fields.nucode){
+            this.isValid = false;
+            this.errorMsg.push("Nucode is Required");
         }
     }
 
     private create() {
-        this.fields = {
-            platform: 'Website',
-            description: this.fields['description'],
-            name: this.fields['name'],
-            nucode: this.fields['nucode'],
-            privileges: this.privilege,
-            status: this.fields['status'],
-        };
-
-        console.log(this.fields);
-
-        // this.userRoleService.addRole(this.fields).subscribe((response) => {
-        //     if (response.result === true) {
-        //         this.router.navigate(['/user/role']);
-        //     }
-        // });
+        this.userRoleService.addRole(this.fields).subscribe((response) => {
+            if (response.result === true) {
+                this.loadingIndicator = false;
+                this.router.navigate(['/user/role']);
+            }
+        });
     }
 
     private update() {
         let id = this.id;
-
-        // console.log(this.fields);
-        // this.service.updateGroup(id, this.fields).subscribe((response) => {
-        //     if (response.result === true) {
-        //         this.router.navigate(['/user/group']);
-        //     }
-        // });
+        this.userRoleService.updateRole(id, this.fields).subscribe((response) => {
+            if (response.result === true) {
+                this.loadingIndicator = false;
+                this.router.navigate(['/user/role']);
+            }
+        });
     }
 
     updatePrivilege(key: any, index: any, value: any) {
-        let priv = this.privilege[key].split('');
+        let priv = this.privileges[key].split('');
         priv[index] = value;
-        this.privilege[key] = priv.join('');
+        this.privileges[key] = priv.join('');
+        this.fields.privileges = this.privileges
     }
 }

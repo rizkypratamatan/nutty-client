@@ -128,7 +128,7 @@
                                 <!-- @if($model->userGroup->_id != null) -->
                                 <button
                                     *ngIf="!isAddMode"
-                                    class="btn btn-warning waves-effect waves-light me-1 btn-sm"
+                                    class="btn btn-outline-warning waves-effect waves-light me-1"
                                     ng-click="update($event)"
                                 >
                                 <div class="spinner-border spinner-border-sm" role="status" *ngIf="loadingIndicator == true">
@@ -139,7 +139,7 @@
                                 <!-- @else -->
                                 <button
                                     *ngIf="isAddMode"
-                                    class="btn btn-success waves-effect waves-light me-1 btn-sm"
+                                    class="btn btn-outline-success waves-effect waves-light me-1"
                                     ng-click="insert($event)"
                                 >
                                 <div class="spinner-border spinner-border-sm" role="status" *ngIf="loadingIndicator == true">
@@ -151,7 +151,7 @@
                                 <button
                                     *ngIf="isAddMode"
                                     type="reset"
-                                    class="btn btn-secondary waves-effect btn-sm"
+                                    class="btn btn-secondary waves-effect"
                                 >
                                     Reset
                                 </button>

@@ -25,12 +25,15 @@ export class UserRoleService {
         this.configuration = this.configurationService;
     }
 
-    public getAllRole(): Observable<any> {
+    public getAllRole(filter): Observable<any> {
         let auth = this.userServices.Auth();
         let data = {
             platform: 'Website',
             limit: 10,
             offset: 0,
+            name:filter.name,
+            nucode:filter.nucode,
+            status:filter.status
         };
 
         return this.http.post(
@@ -46,7 +49,7 @@ export class UserRoleService {
             platform: 'Website',
             id: id,
         };
-        // console.log(data);return;
+        
         return this.http.post(
             this.configuration.api.url + '/api/get-role-by-id',
             this.globalRestService.initializeBody(data, 'api/get-role-by-id'),
@@ -59,7 +62,24 @@ export class UserRoleService {
 
         return this.http.post(
             this.configuration.api.url + '/api/add-role',
-            this.globalRestService.initializeBody(request, 'api/add-role'),
+            this.globalRestService.initializeBody(
+                request,
+                'api/add-role'
+            ),
+            this.globalRestService.initializeHeaderGetData(auth['token-auth'])
+        );
+    }
+
+    public updateRole(id, request): Observable<any> {
+        let auth = this.userServices.Auth();
+        request.id = id;
+
+        return this.http.post(
+            this.configuration.api.url + '/api/update-role',
+            this.globalRestService.initializeBody(
+                request,
+                'api/update-role'
+            ),
             this.globalRestService.initializeHeaderGetData(auth['token-auth'])
         );
     }

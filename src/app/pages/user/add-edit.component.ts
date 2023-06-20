@@ -61,7 +61,7 @@ export class AddEditComponent implements OnInit {
         this.id = this.route.snapshot.params['id'];
         this.isAddMode = !this.id;
 
-        this.userRoleService.getAllRole().subscribe((response) => {
+        this.userRoleService.getAllRole({}).subscribe((response) => {
             this.allRoles = response['data'];
         });
 

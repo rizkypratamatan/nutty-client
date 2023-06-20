@@ -49,9 +49,7 @@ import { AddEditRoleComponent } from './user-role/add-edit.component';
 import { AddEditGroupComponent } from './user-group/add-edit.component';
 import { AddEditWebsiteComponent } from './website/add-edit.component';
 import { AddEditDatabaseComponent } from './database/add-edit.component';
-import { SMSSentComponent } from './sms/sent/sent.component';
 import { WASentComponent } from './whatsapp/sent/sent.component';
-import { SMSBulkComponent } from './sms/bulk/bulk.component';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 
 FullCalendarModule.registerPlugins([
@@ -84,9 +82,8 @@ FullCalendarModule.registerPlugins([
         AddEditGroupComponent,
         AddEditWebsiteComponent,
         AddEditDatabaseComponent,
-        SMSSentComponent,
         WASentComponent,
-        SMSBulkComponent,
+        UserTableFilterPipe,
     ],
     imports: [
         CommonModule,

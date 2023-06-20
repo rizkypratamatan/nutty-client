@@ -24,6 +24,21 @@ export class SmsService {
         this.configuration = this.configurationService;
     }
 
+    public getAllSMS(): Observable<any> {
+        let auth = this.userServices.Auth();
+        let data = {
+            platform: 'Website',
+            limit: 10,
+            offset: 0,
+        };
+        
+        return this.http.post(
+            this.configuration.api.url + '/api/sms/get-messages',
+            this.globalRestService.initializeBody(data, 'api/sms/get-messages'),
+            this.globalRestService.initializeHeaderGetData(auth['token-auth'])
+        );
+    }
+
     public sendSingleSMS(request): Observable<any> {
         let auth = this.userServices.Auth();
 

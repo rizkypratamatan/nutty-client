@@ -223,7 +223,7 @@
                                 (ngModelChange)="updateFilters()"
                             >
                                 <option value="">Group</option>
-                                <option *ngFor="let group of allGroup">
+                                <option *ngFor="let group of allGroup" [value]="group._id">
                                     {{ group.name }}
                                 </option>
                             </select>
@@ -236,7 +236,7 @@
                                 (ngModelChange)="updateFilters()"
                             >
                                 <option value="">Role</option>
-                                <option *ngFor="let role of allRole">
+                                <option *ngFor="let role of allRole" [value]="role._id">
                                     {{ role.name }}
                                 </option>
                             </select>
@@ -274,7 +274,7 @@
                     >
                         <thead>
                             <tr>
-                                <th>#</th>
+                                <!-- <th>#</th> -->
                                 <th>Username</th>
                                 <th>Name</th>
                                 <!-- @if(Session::has("account"))
@@ -294,7 +294,6 @@
                             <tr
                                 *ngFor="
                                     let user of allUsers
-                                        | tableFilter : filter
                                         | paginate
                                             : {
                                                   itemsPerPage: 10,
@@ -304,7 +303,7 @@
                                     let i = index
                                 "
                             >
-                                <td>{{ i + 1 }}</td>
+                                <!-- <td>{{ i + 1 }}</td> -->
                                 <td>{{ user.username }}</td>
                                 <td>{{ user.name }}</td>
                                 <!-- @if(Session::has("account"))
@@ -336,7 +335,7 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th>#</th>
+                                <!-- <th>#</th> -->
                                 <th>Username</th>
                                 <th>Name</th>
                                 <!-- @if(Session::has("account"))
@@ -353,14 +352,20 @@
                             </tr>
                         </tfoot>
                     </table>
+                    <div class="spinner-border spinner-border-sm" role="status" *ngIf="loading == true">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <div style="float:right">
+                        <pagination-controls (pageChange)="getPage($event)"></pagination-controls>
+                    </div>
                     </div>
                     
-                    <div class="paginate">
+                    <!-- <div class="paginate">
                         <pagination-controls
                             (pageChange)="p = $event"
                             class="float-right"
                         ></pagination-controls>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>

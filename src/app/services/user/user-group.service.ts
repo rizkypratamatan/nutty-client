@@ -25,13 +25,18 @@ export class UserGroupService {
         this.configuration = this.configurationService;
     }
 
-    public getAllGroup(filter): Observable<any> {
+    public getAllGroup(filter,page): Observable<any> {
         
         let auth = this.userServices.Auth();
+        let limit = 10
+        let offset = 0
+        if(page > 1){
+            offset = limit * (page - 1);
+        }
         let data = {
             platform: 'Website',
-            limit: 10,
-            offset: 0,
+            limit: limit,
+            offset: offset,
             name: (filter.name)?filter.name:"",
             website: (filter.website)?filter.website:"",
             nucode: (filter.nucode)?filter.nucode:"",

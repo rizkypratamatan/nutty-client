@@ -40,7 +40,7 @@ export class AddEditGroupComponent implements OnInit {
         this.selectedWebsite = [];
         this.isAddMode = !this.id;
 
-        this.serviceWebsite.getAllWebsite({}).subscribe((response) => {
+        this.serviceWebsite.getAllWebsite({}, 1).subscribe((response) => {
             this.website = response.data;
         });
 

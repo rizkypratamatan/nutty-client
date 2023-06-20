@@ -19,6 +19,10 @@ export class AddEditComponent implements OnInit {
     confirm_password: string = '';
     status = ['Active', 'Inactive'];
 
+    isValid: boolean =  true;
+    errorMsg: any[] = [];
+    loadingIndicator : boolean = false;
+
     id: string;
     isAddMode: boolean;
 
@@ -61,25 +65,18 @@ export class AddEditComponent implements OnInit {
         this.id = this.route.snapshot.params['id'];
         this.isAddMode = !this.id;
 
-        this.userRoleService.getAllRole({}).subscribe((response) => {
+        this.userRoleService.getAllRole({}, 1).subscribe((response) => {
             this.allRoles = response['data'];
         });
 
-        this.userGroupService.getAllGroup({}).subscribe((response) => {
+        this.userGroupService.getAllGroup({}, 1).subscribe((response) => {
             this.allGroup = response['dataUser'];
         });
 
         if (!this.isAddMode) {
             this.userService.getUserById(this.id).subscribe((response) => {
-                this.role = {
-                    "_id": response.dataUser.role._id.$oid,
-                    "name": response.dataUser.role.name
-                };
-
-                this.group = {
-                    "_id": response.dataUser.group._id.$oid,
-                    "name": response.dataUser.group.name
-                };
+                this.role = response.dataUser.role._id.$oid;
+                this.group = response.dataUser.group._id.$oid
 
                 this.fields = {
                     username: response.dataUser.username,
@@ -87,8 +84,14 @@ export class AddEditComponent implements OnInit {
                     password: '',
                     nucode: response.dataUser.nucode,
                     type: response.dataUser.type,
-                    role: this.role,
-                    group: this.group,
+                    role: {
+                        "_id": response.dataUser.role._id.$oid,
+                        "name": response.dataUser.role.name
+                    },
+                    group: {
+                        "_id": response.dataUser.group._id.$oid,
+                        "name": response.dataUser.group.name
+                    },
                     status: response.dataUser.status,
                     platform: 'Website',
                     gender: response.dataUser.gender
@@ -132,45 +135,90 @@ export class AddEditComponent implements OnInit {
     }
 
     submit() {
-        if (this.isAddMode) {
-            this.create();
-        } else {
-            this.update();
+        this.errorMsg = [];
+        this.validateInput();
+        if(this.isValid){
+            this.loadingIndicator = true;
+            if (this.isAddMode) {
+                this.create();
+            } else {
+                this.update();
+            }
         }
     }
 
-    private create() {
-        this.fields = {
-            username: this.fields['username'],
-            name: this.fields['name'],
-            password: this.fields['password'],
-            nucode: this.fields['nucode'],
-            type: this.fields['type'],
-            role: this.role,
-            group: this.group,
-            status: this.fields['status'],
-            platform: 'Website',
-            gender: this.fields['gender'] ? this.fields['gender'] : '',
-            contact: {
-                email: this.fields['email'] ? this.fields['email'] : '',
-                fax: this.fields['fax'] ? this.fields['fax'] : '',
-                line: this.fields['line'] ? this.fields['line'] : '',
-                michat: this.fields['michat'] ? this.fields['michat'] : '',
-                phone: this.fields['phone'] ? this.fields['phone'] : '',
-                wechat: this.fields['wechat'] ? this.fields['wechat'] : '',
-                whatsapp: this.fields['whatsapp']
-                    ? this.fields['whatsapp']
-                    : '',
-                telegram: this.fields['telegram']
-                    ? this.fields['telegram']
-                    : '',
-            },
-            country: this.fields['country'] ? this.fields['country'] : '',
-            city: this.fields['city'] ? this.fields['city'] : '',
-            street: this.fields['street'] ? this.fields['street'] : '',
-            zip: this.fields['zip'] ? this.fields['zip'] : '',
-        };
+    validateInput(){
+        this.isValid = true;
+        if(!this.fields.username){
+            this.isValid = false;
+            this.errorMsg.push("Username is Required");
+        }
+        if(!this.fields.name){
+            this.isValid = false;
+            this.errorMsg.push("Name is Required");
+        }
+        if(this.isAddMode){
+            if(!this.fields.password){
+                this.isValid = false;
+                this.errorMsg.push("Password is Required");
+            }
+        }
+        if(!this.fields.nucode){
+            this.isValid = false;
+            this.errorMsg.push("Nucode is Required");
+        }
+        if(!this.fields.type){
+            this.isValid = false;
+            this.errorMsg.push("Type is Required");
+        }
+        if(!this.fields.role){
+            this.isValid = false;
+            this.errorMsg.push("Role is Required");
+        }
+        if(!this.fields.group){
+            this.isValid = false;
+            this.errorMsg.push("Type is Required");
+        }
+        if(!this.fields.status){
+            this.isValid = false;
+            this.errorMsg.push("Status is Required");
+        }
+        
+    }
 
+    private create() {
+        // this.fields = {
+        //     username: this.fields['username'],
+        //     name: this.fields['name'],
+        //     password: this.fields['password'],
+        //     nucode: this.fields['nucode'],
+        //     type: this.fields['type'],
+        //     role: this.role,
+        //     group: this.group,
+        //     status: this.fields['status'],
+        //     platform: 'Website',
+        //     gender: this.fields['gender'] ? this.fields['gender'] : '',
+        //     contact: {
+        //         email: this.fields['email'] ? this.fields['email'] : '',
+        //         fax: this.fields['fax'] ? this.fields['fax'] : '',
+        //         line: this.fields['line'] ? this.fields['line'] : '',
+        //         michat: this.fields['michat'] ? this.fields['michat'] : '',
+        //         phone: this.fields['phone'] ? this.fields['phone'] : '',
+        //         wechat: this.fields['wechat'] ? this.fields['wechat'] : '',
+        //         whatsapp: this.fields['whatsapp']
+        //             ? this.fields['whatsapp']
+        //             : '',
+        //         telegram: this.fields['telegram']
+        //             ? this.fields['telegram']
+        //             : '',
+        //     },
+        //     country: this.fields['country'] ? this.fields['country'] : '',
+        //     city: this.fields['city'] ? this.fields['city'] : '',
+        //     street: this.fields['street'] ? this.fields['street'] : '',
+        //     zip: this.fields['zip'] ? this.fields['zip'] : '',
+        // };
+
+        console.log(this.fields)
         this.userService.addUser(this.fields).subscribe((response) => {
             if (response.result === true) {
                 this.router.navigate(['/user']);
@@ -189,17 +237,17 @@ export class AddEditComponent implements OnInit {
     }
 
     onOptionsSelectedRole() {
-        // console.log(this.role);
+        console.log(this.role);
 
         if (this.role !== null && this.role !== undefined) {
-            this.filteredRole = this.allRoles.filter((t) => t == this.role);
-
+            this.filteredRole = this.allRoles.filter((t) => t._id == this.role);
+            console.log(this.filteredRole);
             if (
                 this.filteredRole !== undefined &&
                 this.filteredRole !== null &&
                 this.filteredRole.length !== 0
             ) {
-                this.role = {
+                this.fields.role = {
                     _id: this.filteredRole[0]._id,
                     name: this.filteredRole[0].name,
                 };
@@ -211,14 +259,14 @@ export class AddEditComponent implements OnInit {
         // console.log(this.group);
 
         if (this.group !== null && this.group !== undefined) {
-            this.filteredGroup = this.allGroup.filter((t) => t == this.group);
+            this.filteredGroup = this.allGroup.filter((t) => t._id == this.group);
 
             if (
                 this.filteredGroup !== undefined &&
                 this.filteredGroup !== null &&
                 this.filteredGroup.length !== 0
             ) {
-                this.group = {
+                this.fields.group = {
                     _id: this.filteredGroup[0]._id,
                     name: this.filteredGroup[0].name,
                 };

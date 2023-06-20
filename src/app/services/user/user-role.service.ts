@@ -25,8 +25,13 @@ export class UserRoleService {
         this.configuration = this.configurationService;
     }
 
-    public getAllRole(filter): Observable<any> {
+    public getAllRole(filter, page): Observable<any> {
         let auth = this.userServices.Auth();
+        let limit = 10;
+        let offset = 0;
+        if(page > 1){
+            offset = limit * (page -1)
+        }
         let data = {
             platform: 'Website',
             limit: 10,

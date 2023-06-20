@@ -9,6 +9,7 @@ import { UserRoleService } from 'src/app/services/user/user-role.service';
 })
 export class UserRoleComponent implements OnInit {
     allRoles: any[] = [];
+    loading: boolean= false;
 
     fields = {
         name: '',
@@ -27,18 +28,21 @@ export class UserRoleComponent implements OnInit {
         //     this.fields[key] === '' ? delete this.fields[key] : key
         // );
         // this.filter = Object.assign({}, this.fields);
-        this.service.getAllRole(this.fields).subscribe((response) => {
-            this.allRoles = response['data'];
-            this.totalRole = response['total_data'];
-        });
+        this.getPage(1)
     }
 
     constructor(private service: UserRoleService, private router: Router) {}
 
     ngOnInit(): void {
-        this.service.getAllRole(this.fields).subscribe((response) => {
+       this.getPage(1);
+    }
+    getPage(page: number) {
+        this.loading = true;
+        this.service.getAllRole(this.fields, page).subscribe((response) => {
             this.allRoles = response['data'];
-            this.totalRole = response['total_data'];            
+            this.totalRole = response['total_data'];  
+            this.p = page;
+            this.loading = false
         });
     }
 

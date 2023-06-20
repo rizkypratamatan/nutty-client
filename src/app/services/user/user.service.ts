@@ -33,12 +33,17 @@ export class UserService {
         return this.auth;
     }
 
-    public getAllUser(filter): Observable<any> {
+    public getAllUser(filter, page): Observable<any> {
         let auth = this.Auth();
+        let limit = 10;
+        let offset = 0;
+        if(page > 1){
+            offset = limit * (page - 1);
+        }
         let data = {
             platform: 'Website',
-            limit: 10,
-            offset: 0,
+            limit: limit,
+            offset: offset,
             username: filter.username,
             name: filter.name,
             nucode: filter.nucode,

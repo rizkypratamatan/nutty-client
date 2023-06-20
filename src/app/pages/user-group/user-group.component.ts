@@ -12,6 +12,7 @@ export class UserGroupComponent implements OnInit {
     allGroups: any[] = [];
     allStatus: any[] = [];
     allWebsite: any[] = [];
+    loading: boolean = false;
 
     fields = {
         name: '',
@@ -32,9 +33,7 @@ export class UserGroupComponent implements OnInit {
         //     this.fields[key] === '' ? delete this.fields[key] : key
         // );
         // this.filter = Object.assign({}, this.fields);
-        this.service.getAllGroup(this.fields).subscribe((response) => {
-            this.allGroups = response['dataUser'];
-        });
+       this.getPage(1)
     }
 
     constructor(
@@ -44,16 +43,21 @@ export class UserGroupComponent implements OnInit {
         ) {}
 
     ngOnInit(): void {
-        this.service.getAllGroup(this.fields).subscribe((response) => {
-            
+        
+        this.getPage(1)
+
+        this.websiteService.getAllWebsite({}, 1).subscribe((response) => {
+            this.allWebsite = response['data'];
+        });
+    }
+    getPage(page: number) {
+        this.loading = true;
+        this.service.getAllGroup(this.fields, page).subscribe((response) => {
             this.allGroups = response['dataUser'];
-            console.log(this.allGroups)
             this.allStatus = this.statusFilter;
             this.totalGroup = response['totalData'];
-        });
-
-        this.websiteService.getAllWebsite({}).subscribe((response) => {
-            this.allWebsite = response['data'];
+            this.p = page
+            this.loading = false
         });
     }
 

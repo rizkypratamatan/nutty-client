@@ -77,7 +77,7 @@
                     >
                         <thead>
                             <tr>
-                                <th>#</th>
+                                <!-- <th>#</th> -->
                                 <th>Name</th>
                                 <th>Nucode</th>
                                 <th>Status</th>
@@ -98,7 +98,7 @@
                                     let i = index
                                 "
                             >
-                                <td>{{ i + 1 }}</td>
+                                <!-- <td>{{ i + 1 }}</td> -->
                                 <td>{{ role.name }}</td>
                                 <td>{{ role.nucode }}</td>
                                 <td>{{ role.status }}</td>
@@ -118,7 +118,7 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th>#</th>
+                                <!-- <th>#</th> -->
                                 <th>Name</th>
                                 <th>Nucode</th>
                                 <th>Status</th>
@@ -127,6 +127,12 @@
                             </tr>
                         </tfoot>
                     </table>
+                    <div class="spinner-border spinner-border-sm" role="status" *ngIf="loading == true">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <div style="float:right">
+                        <pagination-controls (pageChange)="getPage($event)"></pagination-controls>
+                    </div>
                 </div>
             </div>
         </div>

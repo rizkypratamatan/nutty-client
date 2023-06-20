@@ -10,6 +10,10 @@ import { WebsiteService } from 'src/app/services/website/website.service';
 export class WebsiteComponent implements OnInit {
     allWebsites: any[] = [];
     allStatus: any[] = [];
+    limit: number = 10;
+    offset: number = 0;
+    page: number = 1;
+    loading: boolean = false;
 
     fields = {
         name: '',
@@ -29,18 +33,27 @@ export class WebsiteComponent implements OnInit {
         //     this.fields[key] === '' ? delete this.fields[key] : key
         // );
         // this.filter = Object.assign({}, this.fields);
-        this.service.getAllWebsite(this.fields).subscribe((response) => {
-            this.allWebsites = response['data'];
-        });
+        this.getPage(1);
     }
 
     constructor(private service: WebsiteService, private router: Router) {}
 
     ngOnInit(): void {
-        this.service.getAllWebsite(this.fields).subscribe((response) => {
+        // this.service.getAllWebsite(this.fields).subscribe((response) => {
+        //     console.log(response)
+        //     this.allWebsites = response['data'];
+        //     this.totalWebsite = response['total_data'];
+        // });
+        this.getPage(1);
+    }
+
+    getPage(page: number) {
+        this.loading = true;
+        this.service.getAllWebsite(this.fields, page).subscribe((response) => {
             this.allWebsites = response['data'];
-            this.allStatus = this.statusFilter;
-            this.totalWebsite = this.allWebsites.length;
+            this.totalWebsite = response['total_data'];
+            this.p = page;
+            this.loading = false;
         });
     }
 

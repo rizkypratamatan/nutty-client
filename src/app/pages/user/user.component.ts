@@ -15,6 +15,7 @@ export class UserComponent implements OnInit {
     allGroup: any[] = [];
     allRole: any[] = [];
     allStatus: any[] = [];
+    loading: boolean = false;
 
     fields = {
         username: '',
@@ -34,10 +35,11 @@ export class UserComponent implements OnInit {
     statusFilter = ['Active', 'Inactive'];
 
     updateFilters() {
-        Object.keys(this.fields).forEach((key) =>
-            this.fields[key] === '' ? delete this.fields[key] : key
-        );
-        this.filter = Object.assign({}, this.fields);
+        // Object.keys(this.fields).forEach((key) =>
+        //     this.fields[key] === '' ? delete this.fields[key] : key
+        // );
+        // this.filter = Object.assign({}, this.fields);
+        this.getPage(1)
     }
 
     constructor(
@@ -48,20 +50,24 @@ export class UserComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        this.service.getAllUser().subscribe((response) => {
-            this.allUsers = response['dataUser'];
-            this.allType = this.typeFilter;
-            this.allStatus = this.statusFilter;
-            this.totalUser = this.allUsers.length;
-            // console.log(this.totalUser);
-        });
-
-        this.userGroupService.getAllGroup().subscribe((response) => {
+        this.getPage(1)
+        this.userGroupService.getAllGroup({}, 1).subscribe((response) => {
             this.allGroup = response['dataUser'];
         });
+        this.userRoleService.getAllRole({}, 1).subscribe((response) => {
+            this.allRole = response['data'];
+        });
+    }
 
-        this.userRoleService.getAllRole().subscribe((response) => {
-            this.allRole = response['dataUser'];
+    getPage(page: number) {
+        this.loading = true;
+        this.service.getAllUser(this.fields, page).subscribe((response) => {
+            this.allUsers = response['dataUser'];
+            this.allType = this.typeFilter;
+            this.p = page;
+            this.allStatus = this.statusFilter;
+            this.totalUser = response['total_data'];
+            this.loading = false;
         });
     }
 
@@ -83,14 +89,14 @@ export class UserComponent implements OnInit {
         };
 
         if (confirm('Are you sure to delete user: ' + name)) {
-            // console.log("Implement delete functionality here");
             this.service.deleteUser(data).subscribe((response) => {
-                // if (response.result === true) {
-                    // this.router.navigate(['/user']);
-                    this.router
-                        .navigateByUrl('/', { skipLocationChange: true })
-                        .then(() => this.router.navigate([currentUrl]));
-                // }
+                console.log(response)
+                if (response.result === true) {
+                    this.router.navigate(['/user']);
+                    // this.router
+                    //     .navigateByUrl('/', { skipLocationChange: true })
+                    //     .then(() => this.router.navigate([currentUrl]));
+                }
             });
         }
     }

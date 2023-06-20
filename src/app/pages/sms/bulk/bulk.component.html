@@ -11,7 +11,7 @@
                         <li class="breadcrumb-item">
                             <a href="#">SMS</a>
                         </li>
-                        <li class="breadcrumb-item active">Sent</li>
+                        <li class="breadcrumb-item active">Bulk</li>
                     </ol>
                 </div>
             </div>
@@ -26,7 +26,7 @@
                 <ul
                     ngbNav
                     #justifiednav="ngbNav"
-                    [activeId]="1"
+                    [activeId]="2"
                     class="nav-pills"
                 >
                     <li [ngbNavItem]="1">
@@ -66,84 +66,74 @@
     <!-- End Justified Tabs -->
 
     <!-- Tab Content Single Message -->
-    <ng-template #TabContent>
+    <ng-template #TabContent1>
         <!-- Single Message -->
         <div class="row">
             <div class="card-body">
                 <form (ngSubmit)="submit()">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="mb-3">
-                                <label class="form-label">Phone Number</label>
-                                <div class="row">
-                                    <div class="col-md-5">
-                                        <ng-select
-                                            [items]="allPrefix"
-                                            bindLabel="countryCode"
-                                            bindValue="code"
-                                            [searchable]="true"
-                                            [(ngModel)]="selectedPrefix"
-                                            [ngModelOptions]="{
-                                                standalone: true
-                                            }"
-                                        >
-                                            <ng-template
-                                                ng-optgroup-tmp
-                                                let-item="item"
-                                            >
-                                            </ng-template>
-                                        </ng-select>
-                                    </div>
-                                    <div class="col-md-7">
-                                        <input
-                                            id="user-phone"
-                                            class="form-control"
-                                            type="text"
-                                            required
-                                            [(ngModel)]="fields.phone"
-                                            [ngModelOptions]="{
-                                                standalone: true
-                                            }"
-                                        />
-                                    </div>
-                                </div>
-                                <div id="response-phone"></div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-12">
-                            <div class="mb-3">
-                                <label class="form-label">Message</label>
-                                <textarea
-                                    class="form-control"
-                                    required
-                                    [(ngModel)]="fields.message"
-                                    [ngModelOptions]="{
-                                        standalone: true
-                                    }"
-                                    cols="20"
-                                    rows="5"
-                                ></textarea>
-                                <div id="response-message"></div>
-                            </div>
-                        </div>
-
+                    <div class="row phone-upload">
                         <div class="mb-3">
-                            <button
-                                class="btn btn-success waves-effect waves-light me-1"
-                                type="submit"
-                                style="float: right"
-                            >
-                                Send
-                            </button>
+                            <label class="form-label">Phone Number</label>
+                            <div class="row">
+                                <div class="col-md-12 download-template">
+                                    Download Template
+                                </div>
+                            </div>
+                            <div class="row dropzone">
+                                <ngx-dropzone (change)="onSelect($event)">
+                                    <ngx-dropzone-label
+                                        >Upload Files Here</ngx-dropzone-label
+                                    >
+                                    <ngx-dropzone-preview
+                                        *ngFor="let f of files"
+                                        [removable]="true"
+                                        (removed)="onRemove(f)"
+                                    >
+                                        <ngx-dropzone-label
+                                            >{{ f.name }} ({{
+                                                f.type
+                                            }})</ngx-dropzone-label
+                                        >
+                                    </ngx-dropzone-preview>
+                                </ngx-dropzone>
+                            </div>
 
-                            <!-- <button
+                            <div id="response-phone"></div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="mb-3">
+                            <label class="form-label">Message</label>
+                            <textarea
+                                class="form-control"
+                                required
+                                [(ngModel)]="fields.message"
+                                [ngModelOptions]="{
+                                    standalone: true
+                                }"
+                                cols="20"
+                                rows="5"
+                            ></textarea>
+                            <div id="response-message"></div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <button
+                            class="btn btn-success waves-effect waves-light me-1"
+                            type="submit"
+                            style="float: right"
+                        >
+                            Send
+                        </button>
+
+                        <!-- <button
                                         type="reset"
                                         class="btn btn-secondary waves-effect"
                                     >
                                         Reset
                                     </button> -->
-                        </div>
                     </div>
                 </form>
             </div>
@@ -153,7 +143,6 @@
 
     <!-- Tab Content Bulk Message-->
     <ng-template #TabContent1> </ng-template>
-
 
     <!-- History -->
     <app-history></app-history>

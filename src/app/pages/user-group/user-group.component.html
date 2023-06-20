@@ -33,13 +33,15 @@
                             <select
                                 id="user-group-filter-website"
                                 class="select2 form-select dt-select"
+                                [(ngModel)]="fields.website"
                                 data-column="2"
                                 data-regex="false"
+                                (ngModelChange)="updateFilters()"
                             >
                                 <option value="">Website</option>
-                                <!-- @foreach($model->websites as $value)
-                                    <option value="{{$value->_id}}">{{$value->name}}</option>
-                                @endforeach -->
+                                <option *ngFor="let data of allWebsite" value="{{ data._id }}">
+                                    {{ data.name }}
+                                </option>
                             </select>
                         </div>
                         <div class="col-md-2">
@@ -86,7 +88,7 @@
                     >
                         <thead>
                             <tr>
-                                <th>#</th>
+                                <!-- <th>#</th> -->
                                 <th>Name</th>
                                 <th>Website</th>
                                 <th>Nucode</th>
@@ -99,7 +101,6 @@
                             <tr
                                 *ngFor="
                                     let group of allGroups
-                                        | tableFilter : filter
                                         | paginate
                                             : {
                                                   itemsPerPage: 10,
@@ -109,29 +110,32 @@
                                     let i = index
                                 "
                             >
-                                <td>{{ i + 1 }}</td>
+                                <!-- <td>{{ i + 1 }}</td> -->
                                 <td>{{ group.name }}</td>
-                                <td>{{ group.website.names }}</td>
+                                <td>
+                                    <span *ngFor="let website of group.websites" class="badge bg-info" style="margin-right:2px">
+                                        {{ website.name }}
+                                    </span>
+                                </td>
                                 <td>{{ group.nucode }}</td>
                                 <td>{{ group.status }}</td>
                                 <td>
                                     {{
-                                        group.modified.timestamp.$date
-                                            .$numberLong | date
+                                        group.modified.timestamp | date
                                     }}
                                 </td>
                                 <td>
                                     <a
                                         (click)="edit(group._id)"
-                                        class="btn btn-info btn-sm w-lg"
-                                        >Edit</a
+                                        class="btn btn-outline-secondary btn-sm"
+                                        ><i class="bx uil-edit"></i></a
                                     >
                                 </td>
                             </tr>
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th>#</th>
+                                <!-- <th>#</th> -->
                                 <th>Name</th>
                                 <th>Website</th>
                                 <th>Nucode</th>
@@ -141,6 +145,12 @@
                             </tr>
                         </tfoot>
                     </table>
+                    <div class="spinner-border spinner-border-sm" role="status" *ngIf="loading == true">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <div style="float:right">
+                        <pagination-controls (pageChange)="getPage($event)"></pagination-controls>
+                    </div>
                 </div>
             </div>
         </div>

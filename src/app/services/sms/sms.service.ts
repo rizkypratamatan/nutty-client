@@ -24,6 +24,21 @@ export class SmsService {
         this.configuration = this.configurationService;
     }
 
+    public getAllSMS(): Observable<any> {
+        let auth = this.userServices.Auth();
+        let data = {
+            platform: 'Website',
+            limit: 10,
+            offset: 0,
+        };
+        
+        return this.http.post(
+            this.configuration.api.url + '/api/sms/get-messages',
+            this.globalRestService.initializeBody(data, 'api/sms/get-messages'),
+            this.globalRestService.initializeHeaderGetData(auth['token-auth'])
+        );
+    }
+
     public sendSingleSMS(request): Observable<any> {
         let auth = this.userServices.Auth();
 
@@ -32,6 +47,19 @@ export class SmsService {
             this.globalRestService.initializeBody(
                 request,
                 'api/sms/send-single-message'
+            ),
+            this.globalRestService.initializeHeaderGetData(auth['token-auth'])
+        );
+    }
+
+    public sendBulkSMS(request): Observable<any> {
+        let auth = this.userServices.Auth();
+
+        return this.http.post(
+            this.configuration.api.url + '/api/sms/send-bulk-message',
+            this.globalRestService.initializeBody(
+                request,
+                'api/sms/send-bulk-message'
             ),
             this.globalRestService.initializeHeaderGetData(auth['token-auth'])
         );

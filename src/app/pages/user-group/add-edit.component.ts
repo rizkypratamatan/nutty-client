@@ -11,6 +11,9 @@ import { WebsiteService } from 'src/app/services/website/website.service';
 export class AddEditGroupComponent implements OnInit {
     website: any;
     selectedWebsite: any[] = [];
+    isValid: boolean =  true;
+    errorMsg: any[] = [];
+    loadingIndicator : boolean = false;
 
     id: string;
     isAddMode: boolean;
@@ -21,7 +24,7 @@ export class AddEditGroupComponent implements OnInit {
         description: '',
         name: '',
         status: '',
-        website: {},
+        websites: this.selectedWebsite,
         nucode: '',
     };
 
@@ -34,39 +37,70 @@ export class AddEditGroupComponent implements OnInit {
 
     ngOnInit(): void {
         this.id = this.route.snapshot.params['id'];
+        this.selectedWebsite = [];
         this.isAddMode = !this.id;
-        // this.website = {};
 
-        this.serviceWebsite.getAllWebsite().subscribe((response) => {
-            console.log(response.data);
+        this.serviceWebsite.getAllWebsite({}, 1).subscribe((response) => {
             this.website = response.data;
         });
 
         if (!this.isAddMode) {
+            
             this.service.getGroupById(this.id).subscribe((response) => {
-                // this.website = {
-                //     _id: response.dataUser.website['ids'][0],
-                //     name: response.dataUser.website['names'][0],
-                // };
-                // console.log(response);
+                let dataWebsite = []; 
+                response['dataUser'].websites.forEach(function(item){  
+                    dataWebsite.push(item._id)
+                });
+
+                this.selectedWebsite = dataWebsite
 
                 this.fields = {
                     platform: 'Website',
-                    description: response.dataUser.description,
-                    name: response.dataUser.name,
-                    status: response.dataUser.status,
-                    website: {},
-                    nucode: response.dataUser.nucode,
+                    description: response['dataUser'].description,
+                    name: response['dataUser'].name,
+                    status: response['dataUser'].status,
+                    websites: this.selectedWebsite,
+                    nucode: response['dataUser'].nucode,
                 };
+                console.log(this.fields)
             });
         }
     }
 
     submit() {
-        if (this.isAddMode) {
-            this.create();
-        } else {
-            this.update();
+        this.errorMsg = [];
+        this.validateInput();
+        if(this.isValid){
+            this.loadingIndicator = true;
+            if (this.isAddMode) {
+                this.create();
+            } else {
+                this.update();
+            }
+        }
+    }
+
+    validateInput(){
+        this.isValid = true;
+        if(!this.fields.description){
+            this.isValid = false;
+            this.errorMsg.push("Description is Required");
+        }
+        if(!this.fields.name){
+            this.isValid = false;
+            this.errorMsg.push("Name is Required");
+        }
+        if(!this.fields.status){
+            this.isValid = false;
+            this.errorMsg.push("Status is Required");
+        }
+        if(this.selectedWebsite.length < 1){
+            this.isValid = false;
+            this.errorMsg.push("Please select at least 1 website");
+        }
+        if(!this.fields.nucode){
+            this.isValid = false;
+            this.errorMsg.push("Nucode is Required");
         }
     }
 
@@ -90,27 +124,29 @@ export class AddEditGroupComponent implements OnInit {
             description: this.fields['description'],
             name: this.fields['name'],
             status: this.fields['status'],
-            website: {},
+            websites: this.selectedWebsite,
             nucode: this.fields['nucode'],
         };
 
         console.log(this.fields);
 
-        // this.service.addGroup(this.fields).subscribe((response) => {
-        //     if (response.result === true) {
-        //         this.router.navigate(['/user/group']);
-        //     }
-        // });
+        this.service.addGroup(this.fields).subscribe((response) => {
+            if (response.result === true) {
+                this.loadingIndicator = false;
+                this.router.navigate(['/user/group']);
+            }
+        });
     }
 
     private update() {
         let id = this.id;
 
         console.log(this.fields);
-        // this.service.updateGroup(id, this.fields).subscribe((response) => {
-        //     if (response.result === true) {
-        //         this.router.navigate(['/user/group']);
-        //     }
-        // });
+        this.service.updateGroup(id, this.fields).subscribe((response) => {
+            if (response.result === true) {
+                this.loadingIndicator = false;
+                this.router.navigate(['/user/group']);
+            }
+        });
     }
 }

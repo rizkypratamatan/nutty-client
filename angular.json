@@ -133,5 +133,8 @@
             }
         }
     },
-    "defaultProject": "minible-ng"
+    "defaultProject": "minible-ng",
+    "cli": {
+      "analytics": false
+    }
 }

@@ -4,13 +4,7 @@
             <div
                 class="page-title-box d-flex align-items-center justify-content-between"
             >
-                <h4 class="mb-0">Website</h4>
-                <div class="page-title-right">
-                    <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Website</li>
-                    </ol>
-                </div>
+                <h4 class="mb-0">History</h4>
             </div>
         </div>
     </div>
@@ -19,23 +13,13 @@
             <div class="card">
                 <div class="card-body">
                     <form class="row g-1 mb-3" method="POST" action="">
-                        <div class="col-md-2">
+                        <!-- <div class="col-md-2">
                             <input
                                 class="form-control dt-input"
                                 name="website-filter-name"
                                 type="text"
                                 placeholder="Name"
                                 [(ngModel)]="fields.name"
-                                (ngModelChange)="updateFilters()"
-                            />
-                        </div>
-                        <div class="col-md-2">
-                            <input
-                                class="form-control dt-input"
-                                name="website-filter-nucode"
-                                type="text"
-                                placeholder="Nucode"
-                                [(ngModel)]="fields.nucode"
                                 (ngModelChange)="updateFilters()"
                             />
                         </div>
@@ -52,17 +36,8 @@
                                     {{ status }}
                                 </option>
                             </select>
-                        </div>
+                        </div> -->
                         <div class="col-md-4"></div>
-
-                        <div class="col-md-2" style="text-align: right">
-                            <a
-                                (click)="create()"
-                                class="btn btn-success waves-effect waves-light"
-                            >
-                                <i class="mdi mdi-plus me-2"></i> Add New
-                            </a>
-                        </div>
                     </form>
                     <table
                         id="website"
@@ -75,9 +50,9 @@
                     >
                         <thead>
                             <tr>
-                                <!-- <th>#</th> -->
-                                <th>Name</th>
-                                <th>Nucode</th>
+                                <th>#</th>
+                                <th>Phone</th>
+                                <th>Message</th>
                                 <th>Status</th>
                                 <th>Modified</th>
                                 <th>Action</th>
@@ -86,47 +61,41 @@
                         <tbody>
                             <tr
                                 *ngFor="
-                                    let website of allWebsites
+                                    let sms of allSMS
                                         | paginate
                                             : {
                                                   itemsPerPage: 10,
                                                   currentPage: p,
-                                                  totalItems: totalWebsite
+                                                  totalItems: totalSMS
                                               };
                                     let i = index
                                 "
                             >
-                                <!-- <td>{{ i + 1 }}</td> -->
-                                <td>{{ website.name }}</td>
-                                <td>{{ website.nucode }}</td>
-                                <td>{{ website.status }}</td>
-                                <td>{{ website.modified.timestamp }}</td>
+                                <td>{{ i + 1 }}</td>
+                                <td>{{ sms.phone }}</td>
+                                <td>{{ sms.message }}</td>
+                                <td>{{ sms.status }}</td>
+                                <td>{{ sms.modified.timestamp }}</td>
                                 <td>
-                                    <a
-                                        (click)="edit(website._id)"
-                                        class="btn btn-outline-secondary btn-sm"
-                                        ><i class="bx uil-edit"></i></a
-                                    >
+                                    <!-- <a
+                                        (click)="edit(sms._id)"
+                                        class="btn btn-info btn-sm w-lg"
+                                        >Edit</a
+                                    > -->
                                 </td>
                             </tr>
                         </tbody>
                         <tfoot>
                             <tr>
-                                <!-- <th>#</th> -->
-                                <th>Name</th>
-                                <th>Nucode</th>
+                                <th>#</th>
+                                <th>Phone</th>
+                                <th>Message</th>
                                 <th>Status</th>
                                 <th>Modified</th>
                                 <th>Action</th>
                             </tr>
                         </tfoot>
                     </table>
-                    <div class="spinner-border spinner-border-sm" role="status" *ngIf="loading == true">
-                        <span class="sr-only">Loading...</span>
-                    </div>
-                    <div style="float:right">
-                        <pagination-controls (pageChange)="getPage($event)"></pagination-controls>
-                    </div>
                 </div>
             </div>
         </div>

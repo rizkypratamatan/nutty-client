@@ -25,14 +25,25 @@ export class WebsiteService {
         this.configuration = this.configurationService;
     }
 
-    public getAllWebsite(): Observable<any> {
+    public getAllWebsite(filter, page): Observable<any> {
         let auth = this.userServices.Auth();
+        let limit = 10
+        let offset = 0
+        if(page > 1){
+            offset = (limit * (page - 1));
+        }
+        
         let data = {
             platform: 'Website',
-            limit: 10,
-            offset: 0,
+            limit: limit,
+            offset: offset,
+            page: page,
+            name: (filter.name)?filter.name:"",
+            nucode: (filter.nucode)?filter.nucode:"",
+            type: (filter.type)?filter.type:"",
+            status: (filter.status)?filter.status:"",
         };
-
+        console.log(data);
         return this.http.post(
             this.configuration.api.url + '/api/get-websites',
             this.globalRestService.initializeBody(data, 'api/get-websites'),

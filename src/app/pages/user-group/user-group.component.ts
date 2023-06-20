@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserGroupService } from 'src/app/services/user/user-group.service';
+import { WebsiteService } from 'src/app/services/website/website.service';
 
 @Component({
     selector: 'app-user-group',
@@ -10,6 +11,8 @@ import { UserGroupService } from 'src/app/services/user/user-group.service';
 export class UserGroupComponent implements OnInit {
     allGroups: any[] = [];
     allStatus: any[] = [];
+    allWebsite: any[] = [];
+    loading: boolean = false;
 
     fields = {
         name: '',
@@ -21,26 +24,40 @@ export class UserGroupComponent implements OnInit {
 
     filter = {};
     p: number = 1;
-    totalGroup: number;
+    totalGroup: any;
 
     statusFilter = ['Active', 'Inactive'];
 
     updateFilters() {
-        Object.keys(this.fields).forEach((key) =>
-            this.fields[key] === '' ? delete this.fields[key] : key
-        );
-        this.filter = Object.assign({}, this.fields);
+        // Object.keys(this.fields).forEach((key) =>
+        //     this.fields[key] === '' ? delete this.fields[key] : key
+        // );
+        // this.filter = Object.assign({}, this.fields);
+       this.getPage(1)
     }
 
-    constructor(private service: UserGroupService, private router: Router) {}
+    constructor(
+        private service: UserGroupService,
+        private websiteService: WebsiteService,
+        private router: Router,
+        ) {}
 
     ngOnInit(): void {
-        this.service.getAllGroup().subscribe((response) => {
-            // console.log()
+        
+        this.getPage(1)
+
+        this.websiteService.getAllWebsite({}, 1).subscribe((response) => {
+            this.allWebsite = response['data'];
+        });
+    }
+    getPage(page: number) {
+        this.loading = true;
+        this.service.getAllGroup(this.fields, page).subscribe((response) => {
             this.allGroups = response['dataUser'];
             this.allStatus = this.statusFilter;
-            this.totalGroup = this.allGroups.length;
-            // console.log(response);
+            this.totalGroup = response['totalData'];
+            this.p = page
+            this.loading = false
         });
     }
 

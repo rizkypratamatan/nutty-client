@@ -11,7 +11,8 @@ import { WebsiteComponent } from './website/website.component';
 import { LicenseComponent } from './license/license.component';
 import { ReportComponent } from './report/report.component';
 import { ApiComponent } from './api/api.component';
-import { SMSSentComponent } from './sms/sent/sent.component';
+// import { SMSSentComponent } from './sms/sent/sent.component';
+// import { SMSBulkComponent } from './sms/bulk/bulk.component';
 import { WASentComponent } from './whatsapp/sent/sent.component';
 import { WorksheetComponent } from './worksheet/worksheet.component';
 import { WorksheetResultComponent } from './worksheet-result/worksheet-result.component';
@@ -63,7 +64,7 @@ const routes: Routes = [
   { path: 'report', component: ReportComponent },
   { path: 'api', component: ApiComponent },
   { path: 'license', component: LicenseComponent },
-  { path: 'sms/sent', component: SMSSentComponent },
+  { path: 'sms', loadChildren: () => import('./sms/sms.module').then(m => m.SmsModule) },
   { path: 'whatsapp/sent', component: WASentComponent },
 ];
 

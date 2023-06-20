@@ -55,14 +55,14 @@
                             </select>
                         </div>
                         <div class="col-md-4"></div>
-                        <div class="col-md-2" style="text-align: right">
+                        <!-- <div class="col-md-2" style="text-align: right">
                             <a
                                 (click)="create()"
                                 class="btn btn-success waves-effect waves-light"
                             >
                                 <i class="mdi mdi-plus me-2"></i> Add New
                             </a>
-                        </div>
+                        </div> -->
                     </div>
                     <!-- Filter -->
 
@@ -77,7 +77,7 @@
                     >
                         <thead>
                             <tr>
-                                <th>#</th>
+                                <!-- <th>#</th> -->
                                 <th>Name</th>
                                 <th>Nucode</th>
                                 <th>Status</th>
@@ -89,7 +89,6 @@
                             <tr
                                 *ngFor="
                                     let role of allRoles
-                                        | tableFilter : filter
                                         | paginate
                                             : {
                                                   itemsPerPage: 10,
@@ -99,7 +98,7 @@
                                     let i = index
                                 "
                             >
-                                <td>{{ i + 1 }}</td>
+                                <!-- <td>{{ i + 1 }}</td> -->
                                 <td>{{ role.name }}</td>
                                 <td>{{ role.nucode }}</td>
                                 <td>{{ role.status }}</td>
@@ -111,15 +110,15 @@
                                 <td>
                                     <a
                                         (click)="edit(role._id)"
-                                        class="btn btn-info btn-sm w-lg"
-                                        >Edit</a
+                                        class="btn btn-outline-secondary btn-sm"
+                                        ><i class="bx uil-edit"></i></a
                                     >
                                 </td>
                             </tr>
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th>#</th>
+                                <!-- <th>#</th> -->
                                 <th>Name</th>
                                 <th>Nucode</th>
                                 <th>Status</th>
@@ -128,6 +127,12 @@
                             </tr>
                         </tfoot>
                     </table>
+                    <div class="spinner-border spinner-border-sm" role="status" *ngIf="loading == true">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <div style="float:right">
+                        <pagination-controls (pageChange)="getPage($event)"></pagination-controls>
+                    </div>
                 </div>
             </div>
         </div>

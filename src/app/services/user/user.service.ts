@@ -33,12 +33,19 @@ export class UserService {
         return this.auth;
     }
 
-    public getAllUser(): Observable<any> {
+    public getAllUser(filter): Observable<any> {
         let auth = this.Auth();
         let data = {
             platform: 'Website',
             limit: 10,
             offset: 0,
+            username: filter.username,
+            name: filter.name,
+            nucode: filter.nucode,
+            type: filter.type,
+            group: filter.group,
+            role: filter.role,
+            status: filter.status
         };
 
         return this.http.post(

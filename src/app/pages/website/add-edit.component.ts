@@ -11,6 +11,9 @@ export class AddEditWebsiteComponent implements OnInit {
     id: string;
     isAddMode: boolean;
     status = ['Active', 'Inactive'];
+    isValid: boolean =  true;
+    errorMsg: any[] = [];
+    loadingIndicator : boolean = false;
 
     fields = {
         platform: 'Website',
@@ -50,27 +53,62 @@ export class AddEditWebsiteComponent implements OnInit {
     }
 
     submit() {
-        if (this.isAddMode) {
-            this.create();
-        } else {
-            this.update();
+        this.errorMsg = [];
+        this.validateInput();
+        if(this.isValid){
+            this.loadingIndicator = true
+            if (this.isAddMode) {
+                this.create();
+            } else {
+                this.update();
+            }
         }
+        
+    }
+
+    validateInput(){
+        this.isValid = true;
+        if(!this.fields.name){
+            this.isValid = false;
+            this.errorMsg.push("Name is Required");
+        }
+        if(!this.fields.nucode){
+            this.isValid = false;
+            this.errorMsg.push("Nucode is Required");
+        }
+        if(!this.fields.description){
+            this.isValid = false;
+            this.errorMsg.push("Description is Required");
+        }
+        if(!this.fields.status){
+            this.isValid = false;
+            this.errorMsg.push("Status is Required");
+        }
+        
     }
 
     private create() {
-        this.fields = {
-            platform: 'Website',
-            timestamp: this.fields['timestamp'],
-            token: this.fields['token'],
-            description: this.fields['description'],
-            name: this.fields['name'],
-            nucode: this.fields['nucode'],
-            status: this.fields['status'],
-            sync: this.fields['sync'],
-        };
+        // this.fields = {
+        //     platform: 'Website',
+        //     description: this.fields['description'],
+        //     name: this.fields['name'],
+        //     status: this.fields['status'],
+        //     websites: this.selectedWebsite,
+        //     nucode: this.fields['nucode'],
+        // };
 
+        // this.fields = {
+        //     platform: 'Website',
+        //     name: this.fields['name'],
+        //     nucode: this.fields['nucode'],
+        //     description: this.fields['description'],
+        //     status: this.fields['status'],
+        //     sync: this.fields['sync'],
+        // };
+        console.log(this.fields);
         this.service.addWebsite(this.fields).subscribe((response) => {
             if (response.result === true) {
+                this.loadingIndicator = false
                 this.router.navigate(['/website']);
             }
         });

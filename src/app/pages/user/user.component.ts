@@ -34,10 +34,18 @@ export class UserComponent implements OnInit {
     statusFilter = ['Active', 'Inactive'];
 
     updateFilters() {
-        Object.keys(this.fields).forEach((key) =>
-            this.fields[key] === '' ? delete this.fields[key] : key
-        );
-        this.filter = Object.assign({}, this.fields);
+        // Object.keys(this.fields).forEach((key) =>
+        //     this.fields[key] === '' ? delete this.fields[key] : key
+        // );
+        // this.filter = Object.assign({}, this.fields);
+
+        this.service.getAllUser(this.fields).subscribe((response) => {
+            this.allUsers = response['dataUser'];
+            // this.allType = this.typeFilter;
+            // this.allStatus = this.statusFilter;
+            // this.totalUser = this.allUsers.length;
+            // console.log(this.totalUser);
+        });
     }
 
     constructor(
@@ -48,7 +56,7 @@ export class UserComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        this.service.getAllUser().subscribe((response) => {
+        this.service.getAllUser(this.fields).subscribe((response) => {
             this.allUsers = response['dataUser'];
             this.allType = this.typeFilter;
             this.allStatus = this.statusFilter;
@@ -56,7 +64,7 @@ export class UserComponent implements OnInit {
             // console.log(this.totalUser);
         });
 
-        this.userGroupService.getAllGroup().subscribe((response) => {
+        this.userGroupService.getAllGroup({}).subscribe((response) => {
             this.allGroup = response['dataUser'];
         });
 

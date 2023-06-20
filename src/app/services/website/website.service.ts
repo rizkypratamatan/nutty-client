@@ -25,12 +25,16 @@ export class WebsiteService {
         this.configuration = this.configurationService;
     }
 
-    public getAllWebsite(): Observable<any> {
+    public getAllWebsite(filter): Observable<any> {
         let auth = this.userServices.Auth();
         let data = {
             platform: 'Website',
             limit: 10,
             offset: 0,
+            name: (filter.name)?filter.name:"",
+            nucode: (filter.nucode)?filter.nucode:"",
+            type: (filter.type)?filter.type:"",
+            status: (filter.status)?filter.status:"",
         };
 
         return this.http.post(

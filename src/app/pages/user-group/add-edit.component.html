@@ -19,6 +19,15 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
+                <div class="card-header" *ngIf="isValid == false">
+                    <div class="alert alert-danger">
+                        <ul>
+                            <li *ngFor="let item of errorMsg">
+                                {{ item }}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
                 <div class="card-body">
                     <form (ngSubmit)="submit()">
                         <div class="row">
@@ -42,7 +51,6 @@
                                     id="user-group-nucode"
                                     class="form-control"
                                     type="text"
-                                    required
                                     [(ngModel)]="fields.nucode"
                                     [ngModelOptions]="{ standalone: true }"
                                 />
@@ -67,9 +75,9 @@
                                 <div class="row mb-3">
                                     <div 
                                         class="col-3"
-                                        *ngFor="let item of website"
-                                    >
+                                        *ngFor="let item of website">
                                         <input
+                                            [checked]="selectedWebsite.indexOf(item._id) > -1"
                                             class="form-check-input"
                                             type="checkbox"
                                             value="{{ item._id }}"
@@ -120,24 +128,30 @@
                                 <!-- @if($model->userGroup->_id != null) -->
                                 <button
                                     *ngIf="!isAddMode"
-                                    class="btn btn-warning waves-effect waves-light me-1"
+                                    class="btn btn-warning waves-effect waves-light me-1 btn-sm"
                                     ng-click="update($event)"
                                 >
-                                    Edit
+                                <div class="spinner-border spinner-border-sm" role="status" *ngIf="loadingIndicator == true">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                                <span *ngIf="loadingIndicator == false">Edit</span>
                                 </button>
                                 <!-- @else -->
                                 <button
                                     *ngIf="isAddMode"
-                                    class="btn btn-success waves-effect waves-light me-1"
+                                    class="btn btn-success waves-effect waves-light me-1 btn-sm"
                                     ng-click="insert($event)"
                                 >
-                                    Add New
+                                <div class="spinner-border spinner-border-sm" role="status" *ngIf="loadingIndicator == true">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                                <span *ngIf="loadingIndicator == false">Add New</span>
                                 </button>
                                 <!-- @endif -->
                                 <button
                                     *ngIf="isAddMode"
                                     type="reset"
-                                    class="btn btn-secondary waves-effect"
+                                    class="btn btn-secondary waves-effect btn-sm"
                                 >
                                     Reset
                                 </button>

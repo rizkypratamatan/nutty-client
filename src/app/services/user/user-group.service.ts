@@ -25,12 +25,18 @@ export class UserGroupService {
         this.configuration = this.configurationService;
     }
 
-    public getAllGroup(): Observable<any> {
+    public getAllGroup(filter): Observable<any> {
+        
         let auth = this.userServices.Auth();
         let data = {
             platform: 'Website',
             limit: 10,
             offset: 0,
+            name: (filter.name)?filter.name:"",
+            website: (filter.website)?filter.website:"",
+            nucode: (filter.nucode)?filter.nucode:"",
+            type: (filter.type)?filter.type:"",
+            status: (filter.status)?filter.status:""
         };
 
         return this.http.post(
@@ -47,7 +53,7 @@ export class UserGroupService {
             id: id,
         };
 
-        console.log(this.globalRestService.initializeBody(data,'api/get-user-group-by-id'));return;
+        console.log(this.globalRestService.initializeBody(data,'api/get-user-group-by-id'));
         
         return this.http.post(
             this.configuration.api.url + '/api/get-user-group-by-id',

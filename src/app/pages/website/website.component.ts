@@ -25,16 +25,19 @@ export class WebsiteComponent implements OnInit {
     statusFilter = ['Active', 'Inactive'];
 
     updateFilters() {
-        Object.keys(this.fields).forEach((key) =>
-            this.fields[key] === '' ? delete this.fields[key] : key
-        );
-        this.filter = Object.assign({}, this.fields);
+        // Object.keys(this.fields).forEach((key) =>
+        //     this.fields[key] === '' ? delete this.fields[key] : key
+        // );
+        // this.filter = Object.assign({}, this.fields);
+        this.service.getAllWebsite(this.fields).subscribe((response) => {
+            this.allWebsites = response['data'];
+        });
     }
 
     constructor(private service: WebsiteService, private router: Router) {}
 
     ngOnInit(): void {
-        this.service.getAllWebsite().subscribe((response) => {
+        this.service.getAllWebsite(this.fields).subscribe((response) => {
             this.allWebsites = response['data'];
             this.allStatus = this.statusFilter;
             this.totalWebsite = this.allWebsites.length;

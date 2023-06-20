@@ -65,7 +65,7 @@ export class AddEditComponent implements OnInit {
             this.allRoles = response['data'];
         });
 
-        this.userGroupService.getAllGroup().subscribe((response) => {
+        this.userGroupService.getAllGroup({}).subscribe((response) => {
             this.allGroup = response['dataUser'];
         });
 

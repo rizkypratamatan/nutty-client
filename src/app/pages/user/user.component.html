@@ -254,16 +254,16 @@
                                 </option>
                             </select>
                         </div>
-                        <div class="col-md-1" style="text-align: right">
+                        <!-- <div class="col-md-1" style="text-align: right">
                             <a
                                 (click)="create()"
                                 class="btn btn-success waves-effect waves-light"
                                 ><i class="mdi mdi-plus me-2"></i> Add New</a
                             >
-                        </div>
+                        </div> -->
                     </div>
-
-                    <table
+                    <div class="table-responsive">
+                        <table
                         id="user"
                         class="table table-striped table-bordered dt-responsive nowrap"
                         style="
@@ -320,16 +320,16 @@
                                 <td>
                                     <a
                                         (click)="edit(user._id)"
-                                        class="btn btn-info btn-sm w-lg"
-                                        >Edit</a
+                                        class="btn btn-outline-secondary btn-sm"
+                                        ><i class="bx uil-edit"></i></a
                                     >
                                     &nbsp;
                                     <button
                                         ng-confirm-click="Are you sure to delete this record ?"
                                         (click)="delete(user._id, user.name)"
-                                        class="btn btn-danger btn-sm w-lg"
+                                        class="btn btn-outline-secondary btn-sm"
                                     >
-                                        Delete
+                                    <i class="bx uil-trash"></i>
                                     </button>
                                 </td>
                             </tr>
@@ -353,6 +353,8 @@
                             </tr>
                         </tfoot>
                     </table>
+                    </div>
+                    
                     <div class="paginate">
                         <pagination-controls
                             (pageChange)="p = $event"

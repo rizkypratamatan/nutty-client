@@ -47,6 +47,7 @@
     "echarts": "^5.0.2",
     "firebase": "^9.21.0",
     "flatpickr": "^4.6.9",
+    "jquery": "^3.7.0",
     "metismenujs": "^1.2.1",
     "ng-apexcharts": "^1.5.4",
     "ng-click-outside": "^9.0.0",
@@ -69,7 +70,7 @@
     "ngx-ui-switch": "^10.0.2",
     "rxjs": "~6.6.0",
     "simplebar-angular": "^2.3.0",
-    "sweetalert2": "^10.3.6",
+    "sweetalert2": "^10.16.11",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {

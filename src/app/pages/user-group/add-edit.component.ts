@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import Swal from 'sweetalert2';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserGroupService } from 'src/app/services/user/user-group.service';
 import { WebsiteService } from 'src/app/services/website/website.service';
@@ -128,11 +129,15 @@ export class AddEditGroupComponent implements OnInit {
             nucode: this.fields['nucode'],
         };
 
-        console.log(this.fields);
-
         this.service.addGroup(this.fields).subscribe((response) => {
             if (response.result === true) {
                 this.loadingIndicator = false;
+                Swal.fire({
+                    title: 'Success!',
+                    text: 'Add Group Success',
+                    icon: 'success',
+                    confirmButtonText: 'Close'
+                });
                 this.router.navigate(['/user/group']);
             }
         });
@@ -145,6 +150,12 @@ export class AddEditGroupComponent implements OnInit {
         this.service.updateGroup(id, this.fields).subscribe((response) => {
             if (response.result === true) {
                 this.loadingIndicator = false;
+                Swal.fire({
+                    title: 'Success!',
+                    text: 'Update Success',
+                    icon: 'success',
+                    confirmButtonText: 'Close'
+                });
                 this.router.navigate(['/user/group']);
             }
         });

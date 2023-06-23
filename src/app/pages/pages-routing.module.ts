@@ -24,6 +24,8 @@ import { AddEditRoleComponent } from './user-role/add-edit.component';
 import { AddEditGroupComponent } from './user-group/add-edit.component';
 import { AddEditWebsiteComponent } from './website/add-edit.component';
 import { AddEditDatabaseComponent } from './database/add-edit.component';
+import { MessageTemplateComponent } from './message-template/message-template.component';
+import { AddEditMessageTemplateComponent } from './message-template/add-edit.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard' },
@@ -66,6 +68,9 @@ const routes: Routes = [
   { path: 'license', component: LicenseComponent },
   { path: 'sms', loadChildren: () => import('./sms/sms.module').then(m => m.SmsModule) },
   { path: 'whatsapp/sent', component: WASentComponent },
+  { path: 'message/list', component: MessageTemplateComponent },
+  { path: 'message/add-edit', component: AddEditMessageTemplateComponent },
+  { path: 'message/add-edit/:id', component: MessageTemplateComponent },
 ];
 
 @NgModule({

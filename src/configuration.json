@@ -1,7 +1,7 @@
 {
     "api": {
         "key": "CVDXFYGZJ3K4M6P7Q8SATBUDWE",
-        "url": "http://nutty-api.test",
+        "url": "http://127.0.0.1:8001",
         "websocket": "ws://127.0.0.1:8000"
     },
     "application": {

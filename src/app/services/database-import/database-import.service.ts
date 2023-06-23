@@ -43,4 +43,37 @@ export class DatabaseImportService {
         headers
     );
   }
+
+  public getHistory(page) : Observable<any> {
+    let auth = this.Auth();
+    let limit = 10
+    let offset = 0
+    if(page > 1){
+        offset = limit * (page - 1);
+    }
+    let data = {
+        platform: 'Website',
+        limit: limit,
+        offset: offset,
+    };
+
+    return this.http.post(
+        this.configuration.api.url + '/api/import-database-history/',
+        this.globalRestService.initializeBody(data, 'api/import-database-history'),
+        this.globalRestService.initializeHeaderGetData(auth['token-auth'])
+    );
+  }
+
+  public delete(id) : Observable<any> {
+    let auth = this.Auth();
+    let data = {
+        platform: 'Website',
+        id: id
+    };
+    return this.http.post(
+        this.configuration.api.url + '/api/import-database-delete',
+        this.globalRestService.initializeBody(data, 'api/import-database-delete'),
+        this.globalRestService.initializeHeaderGetData(auth['token-auth'])
+    );
+  }
 }

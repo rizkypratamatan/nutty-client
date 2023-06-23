@@ -96,29 +96,7 @@ export class DatabaseImportComponent implements OnInit {
         this.loadingIndicator = true;
         this.router.navigate(['/database/import']);
       }
-  });
-    
-    
-   
-
-    // let rest = {
-    //     "data": formData, "url": $scope.global.url.base + "/database/import/import"
-    // };
-    // global.restMultipart(rest, function(response) {
-
-    //     if(response.result) {
-
-    //         $scope.import.view = false;
-
-    //         sweetAlert("success", response.response);
-
-    //     } else {
-
-    //         sweetAlert("error", response.response);
-
-    //     }
-
-    // });
+    });
   }
 
 

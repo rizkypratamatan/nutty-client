@@ -100,7 +100,9 @@
                                 <td>{{ website.name }}</td>
                                 <td>{{ website.nucode }}</td>
                                 <td>{{ website.status }}</td>
-                                <td>{{ website.modified.timestamp }}</td>
+                                <td>
+                                    {{ !website.modified.timestamp.$date ?  website.modified.timestamp : website.modified.timestamp.$date.$numberLong | date }}
+                                </td>
                                 <td>
                                     <a
                                         (click)="edit(website._id)"

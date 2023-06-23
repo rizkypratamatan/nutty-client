@@ -12,22 +12,30 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
-                    <form class="row g-1 mb-3" method="POST" action="">
-                        <!-- <div class="col-md-2">
+                    <!-- Filter -->
+                    <div class="row g-1 mb-3">
+                        <div class="col-md-2">
                             <input
                                 class="form-control dt-input"
-                                name="website-filter-name"
                                 type="text"
-                                placeholder="Name"
-                                [(ngModel)]="fields.name"
+                                placeholder="Phone"
+                                [(ngModel)]="fields.phone"
+                                (ngModelChange)="updateFilters()"
+                            />
+                        </div>
+                        <div class="col-md-8">
+                            <input
+                                class="form-control dt-input"
+                                type="text"
+                                placeholder="Message"
+                                [(ngModel)]="fields.message"
                                 (ngModelChange)="updateFilters()"
                             />
                         </div>
                         <div class="col-md-2">
                             <select
-                                id="website-filter-status"
+                                id="user-filter-status"
                                 class="select2 form-select dt-select"
-                                name="website-filter-status"
                                 [(ngModel)]="fields.status"
                                 (ngModelChange)="updateFilters()"
                             >
@@ -36,66 +44,87 @@
                                     {{ status }}
                                 </option>
                             </select>
-                        </div> -->
-                        <div class="col-md-4"></div>
-                    </form>
-                    <table
-                        id="website"
-                        class="table table-bordered dt-responsive nowrap"
-                        style="
-                            border-collapse: collapse;
-                            border-spacing: 0;
-                            width: 100%;
-                        "
-                    >
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Phone</th>
-                                <th>Message</th>
-                                <th>Status</th>
-                                <th>Modified</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr
-                                *ngFor="
-                                    let sms of allSMS
-                                        | paginate
-                                            : {
-                                                  itemsPerPage: 10,
-                                                  currentPage: p,
-                                                  totalItems: totalSMS
-                                              };
-                                    let i = index
-                                "
-                            >
-                                <td>{{ i + 1 }}</td>
-                                <td>{{ sms.phone }}</td>
-                                <td>{{ sms.message }}</td>
-                                <td>{{ sms.status }}</td>
-                                <td>{{ sms.modified.timestamp }}</td>
-                                <td>
-                                    <!-- <a
+                        </div>
+                    </div>
+                    <!-- Filter -->
+
+                    <!-- Table -->
+                    <div class="table-responsive">
+                        <table
+                            id="sms"
+                            class="table table-bordered dt-responsive nowrap"
+                            style="
+                                border-collapse: collapse;
+                                border-spacing: 0;
+                                width: 100%;
+                            "
+                        >
+                            <thead>
+                                <tr>
+                                    <!-- <th>#</th> -->
+                                    <th>Phone</th>
+                                    <th>Message</th>
+                                    <th>Status</th>
+                                    <th>Modified</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr
+                                    *ngFor="
+                                        let sms of allSMS
+                                            | paginate
+                                                : {
+                                                      itemsPerPage: 10,
+                                                      currentPage: p,
+                                                      totalItems: totalSMS
+                                                  };
+                                        let i = index
+                                    "
+                                >
+                                    <!-- <td>{{ i + 1 }}</td> -->
+                                    <td>{{ sms.phone }}</td>
+                                    <td>{{ sms.message }}</td>
+                                    <td>{{ sms.status }}</td>
+                                    <!-- <td>{{ sms.modified.timestamp }}</td> -->
+                                    <td>{{ !sms.modified.timestamp.$date ? sms.modified.timestamp : sms.modified.timestamp.$date.$numberLong | date }}</td>
+                                    <td>
+                                        <!-- <a
                                         (click)="edit(sms._id)"
                                         class="btn btn-info btn-sm w-lg"
                                         >Edit</a
                                     > -->
-                                </td>
-                            </tr>
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <th>#</th>
-                                <th>Phone</th>
-                                <th>Message</th>
-                                <th>Status</th>
-                                <th>Modified</th>
-                                <th>Action</th>
-                            </tr>
-                        </tfoot>
-                    </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <!-- <th>#</th> -->
+                                    <th>Phone</th>
+                                    <th>Message</th>
+                                    <th>Status</th>
+                                    <th>Modified</th>
+                                    <th>Action</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+
+                        <!-- Spinner Loading -->
+                        <div
+                            class="spinner-border spinner-border-sm"
+                            role="status"
+                            *ngIf="loading == true"
+                        >
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                        <div style="float: right">
+                            <pagination-controls
+                                (pageChange)="getPage($event)"
+                            ></pagination-controls>
+                        </div>
+                        <!-- Spinner Loading -->
+                    </div>
+                    <!-- Table -->
                 </div>
             </div>
         </div>

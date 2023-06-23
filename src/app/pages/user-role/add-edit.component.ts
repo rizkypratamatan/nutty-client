@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import Swal from 'sweetalert2';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserRoleService } from 'src/app/services/user/user-role.service';
 
@@ -16,7 +17,7 @@ export class AddEditRoleComponent implements OnInit {
     loadingIndicator : boolean = false;
 
     data: any;
-    privileges = {
+    privilege = {
         database: '0000',
         report: '0000',
         setting: '0000',
@@ -26,9 +27,8 @@ export class AddEditRoleComponent implements OnInit {
         userRole: '0000',
         website: '0000',
         worksheet: '0000',
-        whatsapp: '0000',
-        sms: '0000',
-        email: '0000',
+        tools: '0000',
+        worksheetCrm: '0000'
     };
 
     fields = {
@@ -36,7 +36,7 @@ export class AddEditRoleComponent implements OnInit {
         description: '',
         name: '',
         nucode: '',
-        privileges: this.privileges,
+        privilege: this.privilege,
         status: '',
     };
 
@@ -52,14 +52,14 @@ export class AddEditRoleComponent implements OnInit {
 
         if (!this.isAddMode) {
             this.userRoleService.getRoleById(this.id).subscribe((response) => {
-                this.privileges = response.data.privileges;
+                this.privilege = response.data.privilege;
 
                 this.fields = {
                     platform: 'Website',
                     description: response.data.description,
                     name: response.data.name,
                     nucode: response.data.nucode,
-                    privileges: this.privileges,
+                    privilege: this.privilege,
                     status: response.data.status,
                 };
             });
@@ -103,6 +103,12 @@ export class AddEditRoleComponent implements OnInit {
         this.userRoleService.addRole(this.fields).subscribe((response) => {
             if (response.result === true) {
                 this.loadingIndicator = false;
+                Swal.fire({
+                    title: 'Success!',
+                    text: 'Add Role Success',
+                    icon: 'success',
+                    confirmButtonText: 'Close'
+                });
                 this.router.navigate(['/user/role']);
             }
         });
@@ -113,15 +119,21 @@ export class AddEditRoleComponent implements OnInit {
         this.userRoleService.updateRole(id, this.fields).subscribe((response) => {
             if (response.result === true) {
                 this.loadingIndicator = false;
+                Swal.fire({
+                    title: 'Success!',
+                    text: 'Update Success',
+                    icon: 'success',
+                    confirmButtonText: 'Close'
+                });
                 this.router.navigate(['/user/role']);
             }
         });
     }
 
     updatePrivilege(key: any, index: any, value: any) {
-        let priv = this.privileges[key].split('');
+        let priv = this.privilege[key].split('');
         priv[index] = value;
-        this.privileges[key] = priv.join('');
-        this.fields.privileges = this.privileges
+        this.privilege[key] = priv.join('');
+        this.fields.privilege = this.privilege
     }
 }

@@ -43,10 +43,14 @@
                                 class="select2 form-select dt-select"
                                 data-column="3"
                                 data-regex="false"
+                                [(ngModel)]="filter.website"
+                                [ngModelOptions]="{standalone: true}"
+                                (change)="updateFilters()"
                             >
-                                <!-- @foreach($model->websites as $value)
-                                    <option value="{{$value->_id}}">{{$value->name}}</option>
-                                @endforeach -->
+                                <option *ngFor="let item of allWebsite;let i = index" [value]="item._id" [selected]="i==0">
+                                    {{ item.name }}
+                                </option>
+                            
                             </select>
                         </div>
                         <div class="col-md-4"></div>
@@ -56,6 +60,7 @@
                                     class="mdi mdi-plus me-2"></i> Add New</a>-->
                         </div>
                     </form>
+                    <div class="table-responsive">
                     <table
                         id="database"
                         class="table table-bordered dt-responsive nowrap"
@@ -67,7 +72,7 @@
                     >
                         <thead>
                             <tr>
-                                <th>#</th>
+                                <!-- <th>#</th> -->
                                 <th>Name</th>
                                 <th>Phone</th>
                                 <th>Group</th>
@@ -81,19 +86,18 @@
                         <tbody>
                             <tr
                                 *ngFor="
-                                    let database of allDatabase
-                                        | tableFilter : filter
+                                    let database of allData
                                         | paginate
                                             : {
-                                                  itemsPerPage: 10,
+                                                  itemsPerPage: 20,
                                                   currentPage: p,
-                                                  totalItems: totalDatabase
+                                                  totalItems: totalData
                                               };
                                     let i = index
                                 "
                             >
-                                <td>{{ i + 1 }}</td>
-                                <td>{{ database.username }}</td>
+                                <!-- <td>{{ i + 1 }}</td> -->
+                                <td>{{ database.name }}</td>
                                 <td>{{ database.contact.phone }}</td>
                                 <!-- @if(Session::has("account"))
                                         @if(Session::get("account")->nucode == "system") -->
@@ -103,27 +107,29 @@
                                 <td>{{ database.telemarketer.name }}</td>
                                 <td>{{ database.crm.name }}</td>
                                 <td>{{ database.status }}</td>
-                                <td>{{ database.modified.timestamp }}</td>
                                 <td>
-                                    <a
+                                    {{ !database.modified.timestamp.$date ?  database.modified.timestamp : database.modified.timestamp.$date.$numberLong | date }}
+                                </td>
+                                <td>
+                                    <!-- <a
                                         (click)="edit(database._id)"
                                         class="btn btn-info btn-sm w-lg"
                                         >Edit</a
-                                    >
+                                    > -->
                                     &nbsp;
                                     <button
-                                        ng-confirm-click="Are you sure to delete this record ?"
-                                        (click)="delete(user._id, user.name)"
-                                        class="btn btn-danger btn-sm w-lg"
+                                    ng-confirm-click="Are you sure to delete this record ?"
+                                    (click)="delete(database._id, database.name)"
+                                    class="btn btn-outline-secondary btn-sm"
                                     >
-                                        Delete
+                                    <i class="bx uil-trash"></i>
                                     </button>
                                 </td>
                             </tr>
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th>#</th>
+                                <!-- <th>#</th> -->
                                 <th>Name</th>
                                 <th>Phone</th>
                                 <th>Group</th>
@@ -135,6 +141,13 @@
                             </tr>
                         </tfoot>
                     </table>
+                    </div>
+                    <div class="spinner-border spinner-border-sm" role="status" *ngIf="loading == true">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <div style="float:right">
+                        <pagination-controls (pageChange)="getPage($event)"></pagination-controls>
+                    </div>
                 </div>
             </div>
         </div>

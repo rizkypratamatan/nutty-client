@@ -20,6 +20,15 @@
 
     <div class="col-lg-6">
         <div class="card">
+            <div class="card-header" *ngIf="isValid == false">
+                <div class="alert alert-danger">
+                    <ul>
+                        <li *ngFor="let item of errorMsg">
+                            {{ item }}
+                        </li>
+                    </ul>
+                </div>
+            </div>
             <div class="card-body">
                 <!-- <h4 class="card-title">Nav pills</h4>
                 <p class="card-title-desc">Example of Nav pills</p> -->
@@ -86,6 +95,7 @@
                                             [ngModelOptions]="{
                                                 standalone: true
                                             }"
+                                            [disabled]="isSubmit"
                                         >
                                             <ng-template
                                                 ng-optgroup-tmp
@@ -100,10 +110,11 @@
                                             class="form-control"
                                             type="text"
                                             required
-                                            [(ngModel)]="fields.phone"
+                                            [(ngModel)]="phone"
                                             [ngModelOptions]="{
                                                 standalone: true
                                             }"
+                                            [readOnly]="this.isSubmit"
                                         />
                                     </div>
                                 </div>
@@ -123,6 +134,7 @@
                                     }"
                                     cols="20"
                                     rows="5"
+                                    [readOnly]="this.isSubmit"
                                 ></textarea>
                                 <div id="response-message"></div>
                             </div>
@@ -153,7 +165,6 @@
 
     <!-- Tab Content Bulk Message-->
     <ng-template #TabContent1> </ng-template>
-
 
     <!-- History -->
     <app-history></app-history>

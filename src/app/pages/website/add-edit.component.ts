@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import Swal from 'sweetalert2';
 import { ActivatedRoute, Router } from '@angular/router';
 import { WebsiteService } from 'src/app/services/website/website.service';
 
@@ -88,27 +89,15 @@ export class AddEditWebsiteComponent implements OnInit {
     }
 
     private create() {
-        // this.fields = {
-        //     platform: 'Website',
-        //     description: this.fields['description'],
-        //     name: this.fields['name'],
-        //     status: this.fields['status'],
-        //     websites: this.selectedWebsite,
-        //     nucode: this.fields['nucode'],
-        // };
-
-        // this.fields = {
-        //     platform: 'Website',
-        //     name: this.fields['name'],
-        //     nucode: this.fields['nucode'],
-        //     description: this.fields['description'],
-        //     status: this.fields['status'],
-        //     sync: this.fields['sync'],
-        // };
-        console.log(this.fields);
         this.service.addWebsite(this.fields).subscribe((response) => {
             if (response.result === true) {
                 this.loadingIndicator = false
+                Swal.fire({
+                    title: 'Success!',
+                    text: 'Add Website Success',
+                    icon: 'success',
+                    confirmButtonText: 'Close'
+                });
                 this.router.navigate(['/website']);
             }
         });
@@ -119,6 +108,13 @@ export class AddEditWebsiteComponent implements OnInit {
 
         this.service.updateWebsite(id, this.fields).subscribe((response) => {
             if (response.result === true) {
+                this.loadingIndicator = false
+                Swal.fire({
+                    title: 'Success!',
+                    text: 'Update Success',
+                    icon: 'success',
+                    confirmButtonText: 'Close'
+                });
                 this.router.navigate(['/website']);
             }
         });

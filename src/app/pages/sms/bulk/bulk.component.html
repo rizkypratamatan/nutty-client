@@ -75,29 +75,25 @@
                         <div class="mb-3">
                             <label class="form-label">Phone Number</label>
                             <div class="row">
-                                <div class="col-md-12 download-template">
-                                    Download Template
+                                <div class="col-md-12">
+                                    <input
+                                        id="user-phone"
+                                        class="form-control"
+                                        type="text"
+                                        placeholder="+628123456789, +628123456790"
+                                        required
+                                        [(ngModel)]="fields.phone"
+                                        [ngModelOptions]="{
+                                            standalone: true
+                                        }"
+                                    />
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="hint">
+                                        Please use comma after each phone number
+                                    </div>
                                 </div>
                             </div>
-                            <div class="row dropzone">
-                                <ngx-dropzone (change)="onSelect($event)">
-                                    <ngx-dropzone-label
-                                        >Upload Files Here</ngx-dropzone-label
-                                    >
-                                    <ngx-dropzone-preview
-                                        *ngFor="let f of files"
-                                        [removable]="true"
-                                        (removed)="onRemove(f)"
-                                    >
-                                        <ngx-dropzone-label
-                                            >{{ f.name }} ({{
-                                                f.type
-                                            }})</ngx-dropzone-label
-                                        >
-                                    </ngx-dropzone-preview>
-                                </ngx-dropzone>
-                            </div>
-
                             <div id="response-phone"></div>
                         </div>
                     </div>

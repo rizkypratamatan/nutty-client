@@ -10,9 +10,11 @@ import { SmsService } from 'src/app/services/sms/sms.service';
 export class HistoryComponent implements OnInit {
     allSMS: any[] = [];
     allStatus: any[] = [];
+    loading: boolean = false;
 
     fields = {
-        name: '',
+        phone: '',
+        message: '',
         status: '',
     };
 
@@ -20,24 +22,31 @@ export class HistoryComponent implements OnInit {
     p: number = 1;
     totalSMS: number;
 
-    statusFilter = ['Active', 'Inactive'];
+    statusFilter = ['sent', 'queued'];
 
     updateFilters() {
-        Object.keys(this.fields).forEach((key) =>
-            this.fields[key] === '' ? delete this.fields[key] : key
-        );
-        this.filter = Object.assign({}, this.fields);
+        // Object.keys(this.fields).forEach((key) =>
+        //     this.fields[key] === '' ? delete this.fields[key] : key
+        // );
+        // this.filter = Object.assign({}, this.fields);
+
+        this.getPage(1)
     }
 
     constructor(private service: SmsService, private router: Router) {}
 
     ngOnInit(): void {
-        this.service.getAllSMS().subscribe((response) => {
-          console.log(response);
-          // return;
+        this.getPage(1)
+    }
+
+    getPage(page: number) {
+        this.loading = true;
+        this.service.getAllSMS(this.fields, page).subscribe((response) => {
             this.allSMS = response['data'];
-            // this.allStatus = this.statusFilter;
-            this.totalSMS = this.allSMS.length;
+            this.p = page;
+            this.allStatus = this.statusFilter;
+            this.totalSMS = response['total_data'];
+            this.loading = false;
         });
     }
 }

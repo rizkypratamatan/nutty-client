@@ -24,12 +24,21 @@ export class SmsService {
         this.configuration = this.configurationService;
     }
 
-    public getAllSMS(): Observable<any> {
+    public getAllSMS(filter, page): Observable<any> {
         let auth = this.userServices.Auth();
+        let limit = 10;
+        let offset = 0;
+        if(page > 1){
+            offset = limit * (page - 1);
+        }
+
         let data = {
             platform: 'Website',
-            limit: 10,
-            offset: 0,
+            limit: limit,
+            offset: offset,
+            phone: filter.phone,
+            message: filter.message,
+            status: filter.status
         };
         
         return this.http.post(

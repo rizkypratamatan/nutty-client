@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DatabaseService } from 'src/app/services/database/database.service';
+import { UserService } from 'src/app/services/user/user.service';
+import { WebsiteService } from 'src/app/services/website/website.service';
 
 @Component({
     selector: 'app-database',
@@ -8,64 +10,57 @@ import { DatabaseService } from 'src/app/services/database/database.service';
     styleUrls: ['./database.component.scss'],
 })
 export class DatabaseComponent implements OnInit {
-    allDatabase: any[] = [];
+    allData: any[] = [];
+    loading: boolean = false;
+    allWebsite: any[] = [];
 
-    fields = {
-        city: '',
-        contact: {
-            email: '',
-            line: '',
-            michat: '',
-            phone: '',
-            telegram: '',
-            wechat: '',
-            whatsapp: '',
-        },
-        country: '',
-        crm: {},
-        gender: '',
-        group: {},
-        import: {},
-        language: '',
-        name: '',
-        reference: '',
-        state: '',
-        status: '',
-        street: '',
-        telemarketer: {},
-        zip: '',
-        created: {},
-        modified: {},
+    filter = {
+        'website' : '',
+        'name'  : '',
+        'phone' : ''        
     };
 
-    filter = {};
     p: number = 1;
-    totalDatabase: number;
-
-    typeFilter = ['Administrator', 'CRM', 'Telemarketer'];
-    statusFilter = ['Active', 'Inactive'];
+    totalData: number;
 
     updateFilters() {
-        Object.keys(this.fields).forEach((key) =>
-            this.fields[key] === '' ? delete this.fields[key] : key
-        );
-        this.filter = Object.assign({}, this.fields);
+        this.getPage(1);
     }
 
-    constructor(private service: DatabaseService, private router: Router) {}
+    constructor(
+        private service: DatabaseService, 
+        private router: Router,
+        private userService: UserService,
+        private websiteService: WebsiteService
+    ) {}
 
     ngOnInit(): void {
-        this.service.getAllDatabase().subscribe((response) => {
-            this.allDatabase = response['data'];
-            // this.allType = this.typeFilter;
-            // this.allStatus = this.statusFilter;
-            this.totalDatabase = this.allDatabase.length;
-            // console.log(response);
-        });
+        let auth = this.userService.Auth();
+
+        if(auth['role'].name.toLowerCase() == 'system'){
+            this.websiteService.getAllWebsite({}, 1).subscribe((response) => {
+                this.allWebsite = response['data'];
+                this.filter.website = response['data'][0]['_id'];
+                this.getPage(1);
+            });
+            
+        }else{
+            this.filter.website = auth['group']._id;
+            this.allWebsite = [
+                    auth['website']
+                ];
+            this.getPage(1);
+        }
     }
 
-    create() {
-        this.router.navigate(['/database/add-edit']);
+    getPage(page: number) {
+        this.loading = true;
+        this.service.getAllDatabase(this.filter, page).subscribe((response) => {
+            this.allData = response['data'];
+            this.p = page;
+            this.totalData = response['total_data'];
+            this.loading = false;
+        });
     }
 
     edit(id) {

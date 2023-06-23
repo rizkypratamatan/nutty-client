@@ -24,35 +24,79 @@
                         <div class="col-md-2" style="text-align: right;">
                         </div>
                     </form>
-                    <table id="database-import-history" class="table table-bordered dt-responsive nowrap"
-                           style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-                        <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>File Name</th>
-                            <th>Website</th>
-                            <th>Group</th>
-                            <th>Total</th>
-                            <th>Status</th>
-                            <th>Importer</th>
-                            <th>Modified</th>
-                            <th>Action</th>
-                        </tr>
-                        </thead>
-                        <tfoot>
-                        <tr>
-                            <th>#</th>
-                            <th>File Name</th>
-                            <th>Website</th>
-                            <th>Group</th>
-                            <th>Total</th>
-                            <th>Status</th>
-                            <th>Importer</th>
-                            <th>Modified</th>
-                            <th>Action</th>
-                        </tr>
-                        </tfoot>
-                    </table>
+                    <div class="table-responsive">
+                        <table id="database-import-history" class="table table-bordered dt-responsive nowrap"
+                            style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                            <thead>
+                            <tr>
+                                <!-- <th>#</th> -->
+                                <th>File Name</th>
+                                <th>Website</th>
+                                <th>Group</th>
+                                <th>Total</th>
+                                <th>Status</th>
+                                <th>Importer</th>
+                                <th>Modified</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <tr
+                                    *ngFor="
+                                        let item of dataHistory
+                                            | paginate
+                                                : {
+                                                    itemsPerPage: 10,
+                                                    currentPage: p,
+                                                    totalItems: totalData
+                                                };
+                                        let i = index
+                                    "
+                                >
+                                    <!-- <td>{{ i + 1 }}</td> -->
+                                    <td>{{ item.file }}</td>
+                                    <td>{{ item.website.name }}</td>
+                                    <td>{{ item.group.name }}</td>
+                                    <td>{{ item.row }}</td>
+                                    <td>{{ item.status }}</td>
+                                    <td>{{ item.created.user.name }}</td>
+                                    <td>
+                                        {{
+                                            !item.modified.timestamp.$date ?  item.modified.timestamp : item.modified.timestamp.$date.$numberLong | date
+                                        }}
+                                    </td>
+                                    <td>
+                                        <button
+                                            ng-confirm-click="Are you sure to delete this record?"
+                                            (click)="delete(item._id, item.name)"
+                                            class="btn btn-outline-secondary btn-sm"
+                                        >
+                                        <i class="bx uil-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <!-- <th>#</th> -->
+                                <th>File Name</th>
+                                <th>Website</th>
+                                <th>Group</th>
+                                <th>Total</th>
+                                <th>Status</th>
+                                <th>Importer</th>
+                                <th>Modified</th>
+                                <th>Action</th>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <div class="spinner-border spinner-border-sm" role="status" *ngIf="loading == true">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <div style="float:right">
+                        <pagination-controls (pageChange)="getPage($event)"></pagination-controls>
+                    </div>
                 </div>
             </div>
         </div>

@@ -56,7 +56,11 @@
                             <div class="mb-3">
                                 <input id="database-import-data" style="display: none;" type="file" (change)="processFile()"/>
                                 <button class="btn btn-primary waves-effect waves-light me-1"
-                                        (click)="selectFile()" ng-disabled="import.view">Import
+                                        (click)="selectFile()" ng-disabled="import.view">
+                                        <div class="spinner-border spinner-border-sm" role="status" *ngIf="loadingIndicator == true">
+                                            <span class="sr-only">Loading...</span>
+                                        </div>
+                                        <span *ngIf="loadingIndicator == false">Import</span>
                                 </button>
                                 <button type="reset" class="btn btn-secondary waves-effect">Reset</button>
                             </div>

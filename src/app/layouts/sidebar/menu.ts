@@ -295,14 +295,14 @@ export const MENU: MenuItem[] = [
         subItems: [
             {
                 id: 49,
-                label: 'MENUITEMS.EMAIL.LIST.INBOX',
-                link: '',
+                label: 'MENUITEMS.TOOLS.LIST.MESSAGE.LIST.LIST',
+                link: '/message/list',
                 parentId: 48,
             },
             {
                 id: 49,
-                label: 'MENUITEMS.EMAIL.LIST.READEMAIL',
-                link: '',
+                label: 'MENUITEMS.TOOLS.LIST.MESSAGE.LIST.ADD',
+                link: '/message/add-edit',
                 parentId: 48,
             },
         ],

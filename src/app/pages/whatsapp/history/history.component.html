@@ -18,8 +18,8 @@
                             <input
                                 class="form-control dt-input"
                                 type="text"
-                                placeholder="Phone"
-                                [(ngModel)]="fields.phone"
+                                placeholder="Recipient"
+                                [(ngModel)]="fields.recipient"
                                 (ngModelChange)="updateFilters()"
                             />
                         </div>
@@ -62,7 +62,7 @@
                             <thead>
                                 <tr>
                                     <!-- <th>#</th> -->
-                                    <th>Phone</th>
+                                    <th>Recipient</th>
                                     <th>Message</th>
                                     <th>Status</th>
                                     <th>Modified</th>
@@ -72,22 +72,22 @@
                             <tbody>
                                 <tr
                                     *ngFor="
-                                        let sms of allSMS
+                                        let chat of allChats
                                             | paginate
                                                 : {
                                                       itemsPerPage: 10,
                                                       currentPage: p,
-                                                      totalItems: totalSMS
+                                                      totalItems: totalChats
                                                   };
                                         let i = index
                                     "
                                 >
                                     <!-- <td>{{ i + 1 }}</td> -->
-                                    <td>{{ sms.phone }}</td>
-                                    <td>{{ sms.message }}</td>
-                                    <td>{{ sms.status }}</td>
-                                    <!-- <td>{{ sms.modified.timestamp }}</td> -->
-                                    <td>{{ !sms.modified.timestamp.$date ? sms.modified.timestamp : sms.modified.timestamp.$date.$numberLong | date }}</td>
+                                    <td>{{ chat.recipient }}</td>
+                                    <td>{{ chat.message }}</td>
+                                    <td>{{ chat.status }}</td>
+                                    <!-- <td>{{ chat.modified.timestamp }}</td> -->
+                                    <td>{{ !chat.modified.timestamp.$date ? chat.modified.timestamp : chat.modified.timestamp.$date.$numberLong | date }}</td>
                                     <td>
                                         <!-- <a
                                         (click)="edit(sms._id)"
@@ -100,7 +100,7 @@
                             <tfoot>
                                 <tr>
                                     <!-- <th>#</th> -->
-                                    <th>Phone</th>
+                                    <th>Recipient</th>
                                     <th>Message</th>
                                     <th>Status</th>
                                     <th>Modified</th>

@@ -49,8 +49,11 @@ import { AddEditRoleComponent } from './user-role/add-edit.component';
 import { AddEditGroupComponent } from './user-group/add-edit.component';
 import { AddEditWebsiteComponent } from './website/add-edit.component';
 import { AddEditDatabaseComponent } from './database/add-edit.component';
-import { WASentComponent } from './whatsapp/sent/sent.component';
 import { NgxDropzoneModule } from 'ngx-dropzone';
+import { MessageTemplateComponent } from './message-template/message-template.component';
+import { AddEditMessageTemplateComponent } from './message-template/add-edit.component';
+
+
 
 FullCalendarModule.registerPlugins([
     dayGridPlugin,
@@ -82,8 +85,9 @@ FullCalendarModule.registerPlugins([
         AddEditGroupComponent,
         AddEditWebsiteComponent,
         AddEditDatabaseComponent,
-        WASentComponent,
         UserTableFilterPipe,
+        MessageTemplateComponent,
+        AddEditMessageTemplateComponent,
     ],
     imports: [
         CommonModule,

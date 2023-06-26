@@ -5,26 +5,28 @@ import { WhatsappService } from 'src/app/services/whatsapp/whatsapp.service';
 import Swal from 'sweetalert2';
 
 @Component({
-    selector: 'app-sent',
-    templateUrl: './sent.component.html',
-    styleUrls: ['./sent.component.scss'],
+    selector: 'app-bulk',
+    templateUrl: './bulk.component.html',
+    styleUrls: ['./bulk.component.scss'],
 })
-export class WASentComponent implements OnInit {
+export class WABulkComponent implements OnInit {
     allPrefix: any[];
     selectedPrefix = '62';
     id: string;
+    files: File[] = [];
 
     isValid: boolean = true;
     errorMsg: any[] = [];
     loadingIndicator: boolean = false;
     isSubmit: boolean = false;
 
-    phone: string;
+    numbers: string;
 
     fields = {
         platform: 'Website',
         campaign: '',
-        recipient: '',
+        recipients: '',
+        groups: '',
         type: 'text',
         message: '',
     };
@@ -51,34 +53,33 @@ export class WASentComponent implements OnInit {
 
         this.fields = {
             platform: 'Website',
-            campaign: '',
-            recipient: '+' + this.selectedPrefix + this.phone,
-            type: 'text',
+            recipients: this.numbers,
             message: this.fields['message'],
+            campaign: '',
+            groups: '',
+            type: 'text',
         };
 
         if (this.isValid) {
             this.loadingIndicator = true;
-            this.service.sendSingleChat(this.fields).subscribe((response) => {
-
+            this.service.sendBulkChat(this.fields).subscribe((response) => {
                 if (response.result === true) {
                     this.isSubmit = false;
                     this.formReset();
                     Swal.fire({
                         title: 'Success!',
-                        text: 'SMS Sent Successfully',
+                        text: 'SMS Bulk Sent Successfully',
                         icon: 'success',
                         confirmButtonText: 'Close',
                     });
-                    // console.log('WhatsApp Message sent successfully');
-                    // this.router.navigate(['/whatsapp/sent']);
+                    // console.log('SMS sent successfully');
+                    // this.router.navigate(['/sms/sent']);
                 }
             });
         }
     }
-
     validateInput() {
-        if (!this.phone) {
+        if (!this.numbers) {
             this.isValid = false;
             this.errorMsg.push('Phone is Required');
         }
@@ -94,11 +95,12 @@ export class WASentComponent implements OnInit {
     }
 
     formReset() {
-        this.phone = '';
+        this.numbers = '';
         this.fields = {
             platform: 'Website',
             campaign: '',
-            recipient: '',
+            recipients: '',
+            groups: '',
             type: 'text',
             message: '',
         };

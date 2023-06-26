@@ -11,9 +11,6 @@ import { WebsiteComponent } from './website/website.component';
 import { LicenseComponent } from './license/license.component';
 import { ReportComponent } from './report/report.component';
 import { ApiComponent } from './api/api.component';
-// import { SMSSentComponent } from './sms/sent/sent.component';
-// import { SMSBulkComponent } from './sms/bulk/bulk.component';
-import { WASentComponent } from './whatsapp/sent/sent.component';
 import { WorksheetComponent } from './worksheet/worksheet.component';
 import { WorksheetResultComponent } from './worksheet-result/worksheet-result.component';
 import { DatabaseComponent } from './database/database.component';
@@ -24,6 +21,8 @@ import { AddEditRoleComponent } from './user-role/add-edit.component';
 import { AddEditGroupComponent } from './user-group/add-edit.component';
 import { AddEditWebsiteComponent } from './website/add-edit.component';
 import { AddEditDatabaseComponent } from './database/add-edit.component';
+import { MessageTemplateComponent } from './message-template/message-template.component';
+import { AddEditMessageTemplateComponent } from './message-template/add-edit.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard' },
@@ -65,7 +64,10 @@ const routes: Routes = [
   { path: 'api', component: ApiComponent },
   { path: 'license', component: LicenseComponent },
   { path: 'sms', loadChildren: () => import('./sms/sms.module').then(m => m.SmsModule) },
-  { path: 'whatsapp/sent', component: WASentComponent },
+  { path: 'whatsapp', loadChildren: () => import('./whatsapp/whatsapp.module').then(m => m.WhatsappModule) },
+  { path: 'message/list', component: MessageTemplateComponent },
+  { path: 'message/add-edit', component: AddEditMessageTemplateComponent },
+  { path: 'message/add-edit/:id', component: MessageTemplateComponent },
 ];
 
 @NgModule({

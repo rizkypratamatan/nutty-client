@@ -283,7 +283,7 @@ export const MENU: MenuItem[] = [
             {
                 id: 47,
                 label: 'MENUITEMS.EMAIL.LIST.READEMAIL',
-                link: '',
+                link: '/email/read-email',
                 parentId: 45,
             },
         ],

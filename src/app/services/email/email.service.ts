@@ -4,6 +4,7 @@ import { ConfigurationService } from 'src/app/configurations/configuration.servi
 import { RestService } from '../global/rest.service';
 import { UserService } from '../user/user.service';
 import { Observable } from 'rxjs';
+import { AuthService } from '../global/auth.service';
 
 @Injectable({
     providedIn: 'root',
@@ -18,13 +19,13 @@ export class EmailService {
         private http: HttpClient,
         private configurationService: ConfigurationService,
         private globalRestService: RestService,
-        private userServices: UserService
+        private authServices: AuthService
     ) {
         this.configuration = this.configurationService;
     }
 
     public getEmailInbox(): Observable<any> {
-        let auth = this.userServices.Auth();
+        let auth = this.authServices.Auth();
         let data = {
             platform: 'Website',
             limit: 10,

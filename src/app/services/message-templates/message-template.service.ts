@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { ConfigurationService } from 'src/app/configurations/configuration.service';
 import { EncryptionService } from '../global/encryption.service';
 import { RestService } from '../global/rest.service';
+import { AuthService } from '../global/auth.service';
 
 @Injectable({
     providedIn: 'root',
@@ -19,22 +20,13 @@ export class MessageTemplateService {
         private configurationService: ConfigurationService,
         private encryptionService: EncryptionService,
         private globalRestService: RestService,
-        private userServices: UserService
+        private authServices: AuthService
     ) {
         this.configuration = this.configurationService;
     }
 
-    public Auth() {
-        this.accountData = localStorage.getItem('nu-account');
-        this.auth = JSON.parse(
-            this.encryptionService.aesDecrypt(this.accountData)
-        );
-
-        return this.auth;
-    }
-
     public getAllMessageTemplate(filter, page): Observable<any> {
-        let auth = this.userServices.Auth();
+        let auth = this.authServices.Auth();
 
         let limit = 10;
         let offset = 0;
@@ -55,7 +47,7 @@ export class MessageTemplateService {
     }
 
     public addMessage(request): Observable<any> {
-        let auth = this.userServices.Auth();
+        let auth = this.authServices.Auth();
 
         return this.http.post(
             this.configuration.api.url + '/api/add-template',
@@ -65,7 +57,7 @@ export class MessageTemplateService {
     }
 
     public getMessageById(id): Observable<any> {
-        let auth = this.Auth();
+        let auth = this.authServices.Auth();
         let data = {
             platform: 'Website',
             id: id,
@@ -82,7 +74,7 @@ export class MessageTemplateService {
     }
 
     public updateTemplate(id, request): Observable<any> {
-        let auth = this.Auth();
+        let auth = this.authServices.Auth();
         request.id = id;
 
         // console.log(this.globalRestService.initializeBody(request, 'api/update-user'));
@@ -99,7 +91,7 @@ export class MessageTemplateService {
     }
 
     public deleteTemplate(id): Observable<any> {
-        let auth = this.Auth();
+        let auth = this.authServices.Auth();
 
         // console.log(this.globalRestService.initializeBody(id, 'api/get-database')); return;
 

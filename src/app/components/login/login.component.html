@@ -45,7 +45,6 @@
                                         class="form-control"
                                         id="username"
                                         placeholder="username"
-                                        [ngClass]="{ 'is-invalid': submit }"
                                         [(ngModel)]="fields.username"
                                         [ngModelOptions]="{standalone: true}"
                                     />
@@ -72,7 +71,6 @@
                                         type="password"
                                         class="form-control"
                                         id="password"
-                                        [ngClass]="{ 'is-invalid': submit }"
                                         placeholder="Password"
                                         [(ngModel)]="fields.password"
                                         [ngModelOptions]="{standalone: true}"

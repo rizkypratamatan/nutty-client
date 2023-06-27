@@ -113,8 +113,8 @@
                                 <!-- <td>{{ i + 1 }}</td> -->
                                 <td>{{ group.name }}</td>
                                 <td>
-                                    <span *ngFor="let website of group.websites" class="badge bg-info" style="margin-right:2px">
-                                        {{ website.name }}
+                                    <span *ngFor="let website of group.website.names" class="badge bg-info" style="margin-right:2px">
+                                        {{ website }}
                                     </span>
                                 </td>
                                 <td>{{ group.nucode }}</td>
@@ -130,6 +130,14 @@
                                         class="btn btn-outline-secondary btn-sm"
                                         ><i class="bx uil-edit"></i></a
                                     >
+                                    &nbsp;
+                                    <button
+                                        ng-confirm-click="Are you sure to delete this record ?"
+                                        (click)="delete(group._id, group.name)"
+                                        class="btn btn-outline-secondary btn-sm"
+                                    >
+                                    <i class="bx uil-trash"></i>
+                                    </button>
                                 </td>
                             </tr>
                         </tbody>

@@ -25,6 +25,15 @@ export class UserGroupService {
         this.configuration = this.configurationService;
     }
 
+    public Auth() {
+        this.accountData = localStorage.getItem('nu-account');
+        this.auth = JSON.parse(
+            this.encryptionService.aesDecrypt(this.accountData)
+        );
+
+        return this.auth;
+    }
+    
     public getAllGroup(filter,page): Observable<any> {
         
         let auth = this.authServices.Auth();
@@ -96,6 +105,18 @@ export class UserGroupService {
                 request,
                 'api/update-user-group'
             ),
+            this.globalRestService.initializeHeaderGetData(auth['token-auth'])
+        );
+    }
+
+    public deleteGroup(id): Observable<any> {
+        let auth = this.Auth();
+
+        // console.log(this.globalRestService.initializeBody(body, 'api/get-database')); return;
+
+        return this.http.post(
+            this.configuration.api.url + '/api/delete-user-group',
+            this.globalRestService.initializeBody(id, 'api/delete-user-group'),
             this.globalRestService.initializeHeaderGetData(auth['token-auth'])
         );
     }

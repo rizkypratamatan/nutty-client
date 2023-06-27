@@ -67,7 +67,7 @@
             <ng-container *ngFor="let item of menuItems">
 
                 <!-- Check Permission -->
-                <ng-container *ngIf="auth['role'] === 'System'">
+                <ng-container *ngIf="auth['role']['name'] === 'System'">
                     <li class="menu-title" *ngIf="item.isTitle">
                         {{ item.label | translate }}
                     </li>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EmailService } from 'src/app/services/email/email.service';
+import Swal from 'sweetalert2';
 
 @Component({
     selector: 'app-history',
@@ -50,5 +51,34 @@ export class HistoryComponent implements OnInit {
             this.totalEmail = response['total_data'];
             this.loading = false;
         });
+    }
+
+    delete(id, phone) {
+        let data = {
+            platform: 'Website',
+            id: id.$oid,
+        };
+
+        if (confirm('Are you sure to delete email: ' + phone)) {
+            this.service.deleteEmail(data).subscribe((response) => {
+                console.log(response);
+                if (response.result === true) {
+                    Swal.fire({
+                        title: 'Success!',
+                        text: 'Email deleted successfully',
+                        icon: 'success',
+                        confirmButtonText: 'Close',
+                    });
+                    this.getPage(1);
+                } else {
+                    Swal.fire({
+                        title: 'Error!',
+                        text: response.response,
+                        icon: 'error',
+                        confirmButtonText: 'Close',
+                    });
+                }
+            });
+        }
     }
 }

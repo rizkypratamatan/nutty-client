@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { WhatsappService } from 'src/app/services/whatsapp/whatsapp.service';
+import Swal from 'sweetalert2';
 
 @Component({
     selector: 'app-history',
@@ -48,5 +49,34 @@ export class WAHistoryComponent implements OnInit {
             this.totalChats = response['total_data'];
             this.loading = false;
         });
+    }
+
+    delete(id, phone) {
+        let data = {
+            platform: 'Website',
+            id: id.$oid,
+        };
+
+        if (confirm('Are you sure to delete Chat: ' + phone)) {
+            this.service.deleteChat(data).subscribe((response) => {
+                // console.log(response);
+                if (response.result === true) {
+                    Swal.fire({
+                        title: 'Success!',
+                        text: 'Chat deleted successfully',
+                        icon: 'success',
+                        confirmButtonText: 'Close',
+                    });
+                    this.getPage(1);
+                } else {
+                    Swal.fire({
+                        title: 'Error!',
+                        text: response.response,
+                        icon: 'error',
+                        confirmButtonText: 'Close',
+                    });
+                }
+            });
+        }
     }
 }

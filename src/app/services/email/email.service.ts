@@ -75,4 +75,18 @@ export class EmailService {
             this.globalRestService.initializeHeaderGetData(auth['token-auth'])
         );
     }
+
+    public deleteEmail(id): Observable<any> {
+        let auth = this.authServices.Auth();
+        let data = {
+            platform: 'Website',
+            id: id.id,
+        };
+
+        return this.http.post(
+            this.configuration.api.url + '/api/email/delete-email',
+            this.globalRestService.initializeBody(data, 'api/email/delete-email'),
+            this.globalRestService.initializeHeaderGetData(auth['token-auth'])
+        );
+    }
 }

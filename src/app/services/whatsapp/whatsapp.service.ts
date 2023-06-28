@@ -72,4 +72,18 @@ export class WhatsappService {
             this.globalRestService.initializeHeaderGetData(auth['token-auth'])
         );
     }
+
+    public deleteChat(id): Observable<any> {
+        let auth = this.authServices.Auth();
+        let data = {
+            platform: 'Website',
+            id: id.id,
+        };
+
+        return this.http.post(
+            this.configuration.api.url + '/api/whatsapp/delete-chat',
+            this.globalRestService.initializeBody(data, 'api/whatsapp/delete-chat'),
+            this.globalRestService.initializeHeaderGetData(auth['token-auth'])
+        );
+    }
 }

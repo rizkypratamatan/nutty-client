@@ -73,4 +73,18 @@ export class SmsService {
             this.globalRestService.initializeHeaderGetData(auth['token-auth'])
         );
     }
+
+    public deleteSMS(id): Observable<any> {
+        let auth = this.authServices.Auth();
+        let data = {
+            platform: 'Website',
+            id: id.id,
+        };
+
+        return this.http.post(
+            this.configuration.api.url + '/api/sms/delete-message',
+            this.globalRestService.initializeBody(data, 'api/sms/delete-message'),
+            this.globalRestService.initializeHeaderGetData(auth['token-auth'])
+        );
+    }
 }

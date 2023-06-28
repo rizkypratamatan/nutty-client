@@ -49,8 +49,8 @@ export class AddEditGroupComponent implements OnInit {
             
             this.service.getGroupById(this.id).subscribe((response) => {
                 let dataWebsite = []; 
-                response['dataUser'].websites.forEach(function(item){  
-                    dataWebsite.push(item._id)
+                response['dataUser'].website.ids.forEach(function(item){  
+                    dataWebsite.push(item)
                 });
 
                 this.selectedWebsite = dataWebsite
@@ -139,6 +139,13 @@ export class AddEditGroupComponent implements OnInit {
                     confirmButtonText: 'Close'
                 });
                 this.router.navigate(['/user/group']);
+            }else{
+                Swal.fire({
+                    title: 'Error!',
+                    text: response.response,
+                    icon: 'error',
+                    confirmButtonText: 'Close'
+                });
             }
         });
     }
@@ -157,6 +164,13 @@ export class AddEditGroupComponent implements OnInit {
                     confirmButtonText: 'Close'
                 });
                 this.router.navigate(['/user/group']);
+            }else{
+                Swal.fire({
+                    title: 'Error!',
+                    text: response.response,
+                    icon: 'error',
+                    confirmButtonText: 'Close'
+                });
             }
         });
     }

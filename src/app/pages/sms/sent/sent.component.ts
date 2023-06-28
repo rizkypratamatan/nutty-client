@@ -62,7 +62,7 @@ export class SMSSentComponent implements OnInit {
                     this.formReset();
                     Swal.fire({
                         title: 'Success!',
-                        text: 'Sent SMS Success',
+                        text: 'SMS Sent Successfully',
                         icon: 'success',
                         confirmButtonText: 'Close',
                     });

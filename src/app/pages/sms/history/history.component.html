@@ -87,13 +87,22 @@
                                     <td>{{ sms.message }}</td>
                                     <td>{{ sms.status }}</td>
                                     <!-- <td>{{ sms.modified.timestamp }}</td> -->
-                                    <td>{{ !sms.modified.timestamp.$date ? sms.modified.timestamp : sms.modified.timestamp.$date.$numberLong | date }}</td>
                                     <td>
-                                        <!-- <a
-                                        (click)="edit(sms._id)"
-                                        class="btn btn-info btn-sm w-lg"
-                                        >Edit</a
-                                    > -->
+                                        {{
+                                            !sms.modified.timestamp.$date
+                                                ? sms.modified.timestamp
+                                                : (sms.modified.timestamp.$date
+                                                      .$numberLong | date)
+                                        }}
+                                    </td>
+                                    <td>
+                                        <button
+                                            ng-confirm-click="Are you sure to delete this record ?"
+                                            (click)="delete(sms._id, sms.name)"
+                                            class="btn btn-outline-danger btn-sm"
+                                        >
+                                            <i class="bx uil-trash"></i>
+                                        </button>
                                     </td>
                                 </tr>
                             </tbody>

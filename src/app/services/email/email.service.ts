@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ConfigurationService } from 'src/app/configurations/configuration.service';
 import { RestService } from '../global/rest.service';
-import { UserService } from '../user/user.service';
 import { Observable } from 'rxjs';
+import { AuthService } from '../global/auth.service';
 
 @Injectable({
     providedIn: 'root',
@@ -18,24 +18,60 @@ export class EmailService {
         private http: HttpClient,
         private configurationService: ConfigurationService,
         private globalRestService: RestService,
-        private userServices: UserService
+        private authServices: AuthService
     ) {
         this.configuration = this.configurationService;
     }
 
-    public getEmailInbox(): Observable<any> {
-        let auth = this.userServices.Auth();
+    public getEmails(filter, page): Observable<any> {
+        let auth = this.authServices.Auth();
+        let limit = 10;
+        let offset = 0;
+        if (page > 1) {
+            offset = limit * (page - 1);
+        }
         let data = {
             platform: 'Website',
-            limit: 10,
-            offset: 0,
+            limit: limit,
+            offset: offset,
+            from_name: filter.from_name,
+            email: filter.email,
+            subject: filter.subject,
+            message: filter.message,
         };
+
         // console.log(this.globalRestService.initializeBody(data, 'api/email/get-emails'));
         // return;
 
         return this.http.post(
             this.configuration.api.url + '/api/email/get-emails',
             this.globalRestService.initializeBody(data, 'api/email/get-emails'),
+            this.globalRestService.initializeHeaderGetData(auth['token-auth'])
+        );
+    }
+
+    public sendSingleEmail(request): Observable<any> {
+        let auth = this.authServices.Auth();
+        
+        return this.http.post(
+            this.configuration.api.url + '/api/email/send-single-email',
+            this.globalRestService.initializeBody(
+                request,
+                'api/email/send-single-email'
+            ),
+            this.globalRestService.initializeHeaderGetData(auth['token-auth'])
+        );
+    }
+
+    public sendBulkEmail(request): Observable<any> {
+        let auth = this.authServices.Auth();
+
+        return this.http.post(
+            this.configuration.api.url + '/api/email/send-bulk-email',
+            this.globalRestService.initializeBody(
+                request,
+                'api/email/send-bulk-email'
+            ),
             this.globalRestService.initializeHeaderGetData(auth['token-auth'])
         );
     }

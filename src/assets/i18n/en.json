@@ -90,8 +90,12 @@
         "EMAIL": {
             "TEXT": "Email",
             "LIST": {
-                "INBOX": "Inbox",
-                "READEMAIL": "Read Email"
+                "EMAIL": "Email",
+                "QUEUE": "Queue",
+                "SENT": "Sent",
+                "RECEIVED": "Received",
+                "CAMPAIGNS": "Campaigns",
+                "SCHEDULED": "Scheduled"
             }
         },
        

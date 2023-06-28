@@ -20,6 +20,15 @@
 
     <div class="col-lg-6">
         <div class="card">
+            <div class="card-header" *ngIf="isValid == false">
+                <div class="alert alert-danger">
+                    <ul>
+                        <li *ngFor="let item of errorMsg">
+                            {{ item }}
+                        </li>
+                    </ul>
+                </div>
+            </div>
             <div class="card-body">
                 <!-- <h4 class="card-title">Nav pills</h4>
                 <p class="card-title-desc">Example of Nav pills</p> -->
@@ -82,10 +91,11 @@
                                         type="text"
                                         placeholder="+628123456789, +628123456790"
                                         required
-                                        [(ngModel)]="fields.phone"
+                                        [(ngModel)]="numbers"
                                         [ngModelOptions]="{
                                             standalone: true
                                         }"
+                                        [readOnly]="this.isSubmit"
                                     />
                                 </div>
                                 <div class="col-md-12">
@@ -110,6 +120,7 @@
                                 }"
                                 cols="20"
                                 rows="5"
+                                [readOnly]="this.isSubmit"
                             ></textarea>
                             <div id="response-message"></div>
                         </div>

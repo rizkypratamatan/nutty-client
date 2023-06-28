@@ -4,7 +4,7 @@ import { ConfigurationService } from 'src/app/configurations/configuration.servi
 import { EncryptionService } from '../global/encryption.service';
 import { RestService } from '../global/rest.service';
 import { Observable } from 'rxjs';
-import { UserService } from './user.service';
+import { AuthService } from '../global/auth.service';
 
 @Injectable({
     providedIn: 'root',
@@ -20,14 +20,23 @@ export class UserGroupService {
         private configurationService: ConfigurationService,
         private encryptionService: EncryptionService,
         private globalRestService: RestService,
-        private userServices: UserService
+        private authServices: AuthService
     ) {
         this.configuration = this.configurationService;
     }
 
+    public Auth() {
+        this.accountData = localStorage.getItem('nu-account');
+        this.auth = JSON.parse(
+            this.encryptionService.aesDecrypt(this.accountData)
+        );
+
+        return this.auth;
+    }
+    
     public getAllGroup(filter,page): Observable<any> {
         
-        let auth = this.userServices.Auth();
+        let auth = this.authServices.Auth();
         let limit = 10
         let offset = 0
         if(page > 1){
@@ -52,7 +61,7 @@ export class UserGroupService {
     }
 
     public getGroupById(id): Observable<any> {
-        let auth = this.userServices.Auth();
+        let auth = this.authServices.Auth();
         let data = {
             platform: 'Website',
             id: id,
@@ -71,7 +80,7 @@ export class UserGroupService {
     }
 
     public addGroup(request): Observable<any> {
-        let auth = this.userServices.Auth();
+        let auth = this.authServices.Auth();
 
         return this.http.post(
             this.configuration.api.url + '/api/add-user-group',
@@ -84,7 +93,7 @@ export class UserGroupService {
     }
 
     public updateGroup(id, request): Observable<any> {
-        let auth = this.userServices.Auth();
+        let auth = this.authServices.Auth();
         request.id = id;
 
         // console.log(this.globalRestService.initializeBody(request, 'api/update-user'));
@@ -96,6 +105,18 @@ export class UserGroupService {
                 request,
                 'api/update-user-group'
             ),
+            this.globalRestService.initializeHeaderGetData(auth['token-auth'])
+        );
+    }
+
+    public deleteGroup(id): Observable<any> {
+        let auth = this.Auth();
+
+        // console.log(this.globalRestService.initializeBody(body, 'api/get-database')); return;
+
+        return this.http.post(
+            this.configuration.api.url + '/api/delete-user-group',
+            this.globalRestService.initializeBody(id, 'api/delete-user-group'),
             this.globalRestService.initializeHeaderGetData(auth['token-auth'])
         );
     }

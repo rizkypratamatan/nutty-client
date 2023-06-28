@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageTemplateService } from 'src/app/services/message-templates/message-template.service';
+import Swal from 'sweetalert2';
 
 @Component({
     selector: 'app-add-edit',
@@ -16,6 +17,7 @@ export class AddEditMessageTemplateComponent implements OnInit {
 
     id: string;
     isAddMode: boolean;
+    isSubmit: boolean = false;
     status = ['Active', 'Inactive'];
 
     fields = {
@@ -57,6 +59,7 @@ export class AddEditMessageTemplateComponent implements OnInit {
     }
     submit() {
         this.errorMsg = [];
+        this.isSubmit = true;
         this.validateInput();
         if (this.isValid) {
             this.loadingIndicator = true;
@@ -90,6 +93,14 @@ export class AddEditMessageTemplateComponent implements OnInit {
 
         this.service.addMessage(this.fields).subscribe((response) => {
             if (response.result === true) {
+                this.isSubmit = false;
+                this.formReset();
+                Swal.fire({
+                    title: 'Success!',
+                    text: 'Success',
+                    icon: 'success',
+                    confirmButtonText: 'Close',
+                });
                 this.loadingIndicator = false;
                 this.router.navigate(['/message']);
             }
@@ -99,10 +110,25 @@ export class AddEditMessageTemplateComponent implements OnInit {
     private update() {
         let id = this.id;
 
+        console.log(this.fields);
         this.service.updateTemplate(id, this.fields).subscribe((response) => {
             if (response.result === true) {
-                this.router.navigate(['/message/add-edit']);
+                this.loadingIndicator = false;
+                Swal.fire({
+                    title: 'Success!',
+                    text: 'Update Success',
+                    icon: 'success',
+                    confirmButtonText: 'Close'
+                });
+                this.router.navigate(['/message']);
             }
         });
+    }
+
+    formReset() {
+        this.fields = {
+            name: '',
+            format: '',
+        };
     }
 }

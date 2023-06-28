@@ -87,13 +87,24 @@
                                     <td>{{ chat.message }}</td>
                                     <td>{{ chat.status }}</td>
                                     <!-- <td>{{ chat.modified.timestamp }}</td> -->
-                                    <td>{{ !chat.modified.timestamp.$date ? chat.modified.timestamp : chat.modified.timestamp.$date.$numberLong | date }}</td>
                                     <td>
-                                        <!-- <a
-                                        (click)="edit(sms._id)"
-                                        class="btn btn-info btn-sm w-lg"
-                                        >Edit</a
-                                    > -->
+                                        {{
+                                            !chat.modified.timestamp.$date
+                                                ? chat.modified.timestamp
+                                                : (chat.modified.timestamp.$date
+                                                      .$numberLong | date)
+                                        }}
+                                    </td>
+                                    <td>
+                                        <button
+                                            ng-confirm-click="Are you sure to delete this record ?"
+                                            (click)="
+                                                delete(user._id, user.name)
+                                            "
+                                            class="btn btn-outline-danger btn-sm"
+                                        >
+                                            <i class="bx uil-trash"></i>
+                                        </button>
                                     </td>
                                 </tr>
                             </tbody>

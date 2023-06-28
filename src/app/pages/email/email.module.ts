@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { InboxComponent } from './inbox/inbox.component';
-import { ReadEmailComponent } from './read-email/read-email.component';
 import { EmailRoutingModule } from './email-routing.module';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -14,9 +12,12 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 import { SimplebarAngularModule } from 'simplebar-angular';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgxDropzoneModule } from 'ngx-dropzone';
+import { SentComponent } from './sent/sent.component';
+import { BulkComponent } from './bulk/bulk.component';
+import { HistoryComponent } from './history/history.component';
 
 @NgModule({
-    declarations: [InboxComponent, ReadEmailComponent],
+    declarations: [SentComponent, BulkComponent, HistoryComponent],
     imports: [
         CommonModule,
         EmailRoutingModule,

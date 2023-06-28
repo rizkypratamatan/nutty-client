@@ -52,10 +52,6 @@ import { AddEditDatabaseComponent } from './database/add-edit.component';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { MessageTemplateComponent } from './message-template/message-template.component';
 import { AddEditMessageTemplateComponent } from './message-template/add-edit.component';
-import { InboxComponent } from './email/inbox/inbox.component';
-import { ReadEmailComponent } from './email/read-email/read-email.component';
-
-
 
 FullCalendarModule.registerPlugins([
     dayGridPlugin,

@@ -49,4 +49,30 @@ export class EmailService {
             this.globalRestService.initializeHeaderGetData(auth['token-auth'])
         );
     }
+
+    public sendSingleEmail(request): Observable<any> {
+        let auth = this.authServices.Auth();
+        
+        return this.http.post(
+            this.configuration.api.url + '/api/email/send-single-email',
+            this.globalRestService.initializeBody(
+                request,
+                'api/email/send-single-email'
+            ),
+            this.globalRestService.initializeHeaderGetData(auth['token-auth'])
+        );
+    }
+
+    public sendBulkEmail(request): Observable<any> {
+        let auth = this.authServices.Auth();
+
+        return this.http.post(
+            this.configuration.api.url + '/api/email/send-bulk-email',
+            this.globalRestService.initializeBody(
+                request,
+                'api/email/send-bulk-email'
+            ),
+            this.globalRestService.initializeHeaderGetData(auth['token-auth'])
+        );
+    }
 }

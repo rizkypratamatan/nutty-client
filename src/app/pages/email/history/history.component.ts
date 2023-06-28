@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { EmailService } from 'src/app/services/email/email.service';
 
 @Component({
-    selector: 'app-read-email',
-    templateUrl: './read-email.component.html',
-    styleUrls: ['./read-email.component.scss'],
+    selector: 'app-history',
+    templateUrl: './history.component.html',
+    styleUrls: ['./history.component.scss'],
 })
-export class ReadEmailComponent implements OnInit {
+export class HistoryComponent implements OnInit {
     allEmails: any[] = [];
     allStatus: any[] = [];
     loading: boolean = false;
@@ -37,7 +37,7 @@ export class ReadEmailComponent implements OnInit {
     constructor(private service: EmailService) {}
 
     ngOnInit(): void {
-      this.getPage(1)
+        this.getPage(1);
     }
 
     getPage(page: number) {

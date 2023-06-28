@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ReadEmailComponent } from './read-email.component';
+import { SentComponent } from './sent.component';
 
-describe('ReadEmailComponent', () => {
-  let component: ReadEmailComponent;
-  let fixture: ComponentFixture<ReadEmailComponent>;
+describe('SentComponent', () => {
+  let component: SentComponent;
+  let fixture: ComponentFixture<SentComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ReadEmailComponent ]
+      declarations: [ SentComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ReadEmailComponent);
+    fixture = TestBed.createComponent(SentComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -276,14 +276,14 @@ export const MENU: MenuItem[] = [
         subItems: [
             {
                 id: 46,
-                label: 'MENUITEMS.EMAIL.LIST.INBOX',
-                link: '/email/inbox',
+                label: 'MENUITEMS.EMAIL.LIST.SENT',
+                link: '/email/sent',
                 parentId: 45,
             },
             {
                 id: 47,
-                label: 'MENUITEMS.EMAIL.LIST.READEMAIL',
-                link: '/email/read-email',
+                label: 'MENUITEMS.EMAIL.LIST.SCHEDULED',
+                link: '',
                 parentId: 45,
             },
         ],
@@ -307,44 +307,44 @@ export const MENU: MenuItem[] = [
             },
         ],
     },
-    {
-        id: 50,
-        label: 'MENUITEMS.TOOLS.LIST.GROUPCONTACT.TEXT',
-        icon: 'uil-exchange',
-        subItems: [
-            {
-                id: 51,
-                label: 'MENUITEMS.EMAIL.LIST.INBOX',
-                link: '',
-                parentId: 50,
-            },
-            {
-                id: 52,
-                label: 'MENUITEMS.EMAIL.LIST.READEMAIL',
-                link: '',
-                parentId: 50,
-            },
-        ],
-    },
-    {
-        id: 53,
-        label: 'MENUITEMS.TOOLS.LIST.CONTACT.TEXT',
-        icon: 'uil-user-square',
-        subItems: [
-            {
-                id: 54,
-                label: 'MENUITEMS.TOOLS.LIST.CONTACT.LIST.LIST',
-                link: '',
-                parentId: 53,
-            },
-            {
-                id: 55,
-                label: 'MENUITEMS.TOOLS.LIST.CONTACT.LIST.ADD',
-                link: '',
-                parentId: 53,
-            },
-        ],
-    },
+    // {
+    //     id: 50,
+    //     label: 'MENUITEMS.TOOLS.LIST.GROUPCONTACT.TEXT',
+    //     icon: 'uil-exchange',
+    //     subItems: [
+    //         {
+    //             id: 51,
+    //             label: 'MENUITEMS.EMAIL.LIST.INBOX',
+    //             link: '',
+    //             parentId: 50,
+    //         },
+    //         {
+    //             id: 52,
+    //             label: 'MENUITEMS.EMAIL.LIST.READEMAIL',
+    //             link: '',
+    //             parentId: 50,
+    //         },
+    //     ],
+    // },
+    // {
+    //     id: 53,
+    //     label: 'MENUITEMS.TOOLS.LIST.CONTACT.TEXT',
+    //     icon: 'uil-user-square',
+    //     subItems: [
+    //         {
+    //             id: 54,
+    //             label: 'MENUITEMS.TOOLS.LIST.CONTACT.LIST.LIST',
+    //             link: '',
+    //             parentId: 53,
+    //         },
+    //         {
+    //             id: 55,
+    //             label: 'MENUITEMS.TOOLS.LIST.CONTACT.LIST.ADD',
+    //             link: '',
+    //             parentId: 53,
+    //         },
+    //     ],
+    // },
     {
         id: 56,
         label: 'MENUITEMS.SETTING.TEXT',

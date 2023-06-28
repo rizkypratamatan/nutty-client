@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { InboxComponent } from './inbox/inbox.component';
-import { ReadEmailComponent } from './read-email/read-email.component';
+import { SentComponent } from './sent/sent.component';
+import { BulkComponent } from './bulk/bulk.component';
 
 const routes: Routes = [
     {
-        path: 'inbox',
-        component: InboxComponent,
+        path: 'sent',
+        component: SentComponent,
     },
     {
-        path: 'read-email',
-        component: ReadEmailComponent,
+        path: 'bulk',
+        component: BulkComponent,
     },
 ];
 

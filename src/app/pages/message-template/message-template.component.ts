@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MessageTemplateService } from 'src/app/services/message-templates/message-template.service';
+import Swal from 'sweetalert2';
 
 @Component({
     selector: 'app-message-template',
@@ -51,12 +52,12 @@ export class MessageTemplateComponent implements OnInit {
     getPage(page: number) {
         this.loading = true;
         this.service.getAllMessageTemplate(this.fields, page).subscribe((response) => {
-          console.log(response);
+        //   console.log(response);
             this.allMessage = response['data'];
             this.allType = this.typeFilter;
             this.p = page;
-            this.allStatus = this.statusFilter;
-            this.totalMessage = response['total_data'];
+            // this.allStatus = this.statusFilter;
+            // this.totalMessage = response['total_data'];
             this.loading = false;
         });
     }
@@ -71,22 +72,32 @@ export class MessageTemplateComponent implements OnInit {
 
     delete(id, name) {
         const currentUrl = this.router.url;
-        // console.log(id);
+        // console.log(currentUrl);
 
         let data = {
             platform: 'Website',
             id: id.$oid,
         };
 
-        if (confirm('Are you sure to delete user: ' + name)) {
+        if (confirm('Are you sure to delete message: ' + name)) {
             this.service.deleteTemplate(data).subscribe((response) => {
-                console.log(response)
+                // console.log(response);
                 if (response.result === true) {
-                    this.router.navigate(['/message-template']);
-                    // this.router
-                    //     .navigateByUrl('/', { skipLocationChange: true })
-                    //     .then(() => this.router.navigate([currentUrl]));
-                }
+                    this.getPage(1)
+                    Swal.fire({
+                      title: 'Success!',
+                      text: response['response'],
+                      icon: 'success',
+                      confirmButtonText: 'Close'
+                    });
+                  }else{
+                    Swal.fire({
+                      title: 'Error!',
+                      text: response['response'],
+                      icon: 'error',
+                      confirmButtonText: 'Close'
+                    });
+                  }
             });
         }
     }

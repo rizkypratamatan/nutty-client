@@ -71,6 +71,8 @@ export class MessageTemplateService {
             id: id,
         };
 
+        // console.log(this.globalRestService.initializeBody(data,'api/get-template-by-id'));return;
+
         return this.http.post(
             this.configuration.api.url + '/api/get-template-by-id',
             this.globalRestService.initializeBody(
@@ -100,12 +102,16 @@ export class MessageTemplateService {
 
     public deleteTemplate(id): Observable<any> {
         let auth = this.Auth();
+        let data = {
+            platform: 'Website',
+            id: id.id,
+        };
 
-        // console.log(this.globalRestService.initializeBody(id, 'api/get-database')); return;
+        // console.log(this.globalRestService.initializeBody(id, 'api/delete-template')); return;
 
         return this.http.post(
             this.configuration.api.url + '/api/delete-template',
-            this.globalRestService.initializeBody(id, 'api/delete-template'),
+            this.globalRestService.initializeBody(data, 'api/delete-template'),
             this.globalRestService.initializeHeaderGetData(auth['token-auth'])
         );
     }

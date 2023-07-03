@@ -4,7 +4,7 @@ import { ConfigurationService } from 'src/app/configurations/configuration.servi
 import { EncryptionService } from '../global/encryption.service';
 import { RestService } from '../global/rest.service';
 import { Observable } from 'rxjs';
-import { UserService } from './user.service';
+import { AuthService } from '../global/auth.service';
 
 @Injectable({
     providedIn: 'root',
@@ -20,13 +20,13 @@ export class UserRoleService {
         private configurationService: ConfigurationService,
         private encryptionService: EncryptionService,
         private globalRestService: RestService,
-        private userServices: UserService,
+        private authServices: AuthService,
     ) {
         this.configuration = this.configurationService;
     }
 
     public getAllRole(filter, page): Observable<any> {
-        let auth = this.userServices.Auth();
+        let auth = this.authServices.Auth();
         let limit = 10;
         let offset = 0;
         if(page > 1){
@@ -49,7 +49,7 @@ export class UserRoleService {
     }
 
     public getRoleById(id): Observable<any> {
-        let auth = this.userServices.Auth();
+        let auth = this.authServices.Auth();
         let data = {
             platform: 'Website',
             id: id,
@@ -63,7 +63,7 @@ export class UserRoleService {
     }
 
     public addRole(request): Observable<any> {
-        let auth = this.userServices.Auth();
+        let auth = this.authServices.Auth();
 
         return this.http.post(
             this.configuration.api.url + '/api/add-role',
@@ -76,7 +76,7 @@ export class UserRoleService {
     }
 
     public updateRole(id, request): Observable<any> {
-        let auth = this.userServices.Auth();
+        let auth = this.authServices.Auth();
         request.id = id;
 
         return this.http.post(

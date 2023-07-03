@@ -26,6 +26,7 @@ export class AddEditApiComponent implements OnInit {
       timestamp: '',
       token: '',
       start: '',
+      sync:'Synced',
       api: {
         nexus: {
           code:'',
@@ -50,6 +51,7 @@ export class AddEditApiComponent implements OnInit {
                 this.response = response['data'];
                 this.name = response['data'].name;
                 this.nucode = response['data'].nucode;
+                this.fields.sync = (response['data'].sync)?response['data'].sync:"NoSync";
                 this.fields.start = this.initializeDate(response['data'].start.$date.$numberLong);
                 this.fields.api.nexus.code = response['data'].api.nexus.code;
                 this.fields.api.nexus.url = response['data'].api.nexus.url;
@@ -118,6 +120,7 @@ export class AddEditApiComponent implements OnInit {
                   icon: 'success',
                   confirmButtonText: 'Close'
               });
+              this.router.navigate(['/api']);
           }else{
             this.loadingSync = false;
             Swal.fire({

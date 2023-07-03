@@ -4,6 +4,7 @@ import { ConfigurationService } from 'src/app/configurations/configuration.servi
 import { EncryptionService } from '../global/encryption.service';
 import { RestService } from '../global/rest.service';
 import { Observable } from 'rxjs';
+import { AuthService } from '../global/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,22 +20,14 @@ export class DatabaseImportService {
     private http: HttpClient,
     private configurationService: ConfigurationService,
     private encryptionService: EncryptionService,
-    private globalRestService: RestService
+    private globalRestService: RestService,
+    private authService: AuthService
   ) {
     this.configuration = this.configurationService;
   }
 
-  public Auth() {
-    this.accountData = localStorage.getItem('nu-account');
-    this.auth = JSON.parse(
-        this.encryptionService.aesDecrypt(this.accountData)
-    );
-
-    return this.auth;
-  }
-
   public import(data): Observable<any> {
-    let auth = this.Auth();
+    let auth = this.authService.Auth();
     let headers = this.globalRestService.initializeHeaderMultipartData(auth['token-auth']);
 
     return this.http.post(
@@ -45,7 +38,7 @@ export class DatabaseImportService {
   }
 
   public getHistory(page) : Observable<any> {
-    let auth = this.Auth();
+    let auth = this.authService.Auth();
     let limit = 10
     let offset = 0
     if(page > 1){
@@ -65,7 +58,7 @@ export class DatabaseImportService {
   }
 
   public delete(id) : Observable<any> {
-    let auth = this.Auth();
+    let auth = this.authService.Auth();
     let data = {
         platform: 'Website',
         id: id

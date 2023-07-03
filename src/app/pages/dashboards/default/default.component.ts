@@ -1,46 +1,54 @@
 import { Component, OnInit } from '@angular/core';
-import { transactions, lineColumAreaChart, revenueColumnChart, customerRadialBarChart, orderRadialBarChart, growthColumnChart} from './data';
+import {
+    transactions,
+    lineColumAreaChart,
+    revenueColumnChart,
+    customerRadialBarChart,
+    orderRadialBarChart,
+    growthColumnChart,
+} from './data';
 
 import { ChartType } from './dashboard.model';
+import { AuthService } from 'src/app/services/global/auth.service';
 
 @Component({
-  selector: 'app-default',
-  templateUrl: './default.component.html',
-  styleUrls: ['./default.component.scss']
+    selector: 'app-default',
+    templateUrl: './default.component.html',
+    styleUrls: ['./default.component.scss'],
 })
-
 export class DefaultComponent implements OnInit {
+    authPermission: any;
+    lineColumAreaChart: ChartType;
+    revenueColumnChart: ChartType;
+    orderRadialBarChart: ChartType;
+    customerRadialBarChart: ChartType;
+    growthColumnChart: ChartType;
+    transactions;
+    breadCrumbItems: Array<{}>;
 
-  lineColumAreaChart: ChartType;
-  revenueColumnChart: ChartType;
-  orderRadialBarChart: ChartType;
-  customerRadialBarChart: ChartType;
-  growthColumnChart: ChartType;
-  transactions;
-  breadCrumbItems: Array<{}>;
+    constructor() {}
 
-  constructor() { }
+    ngOnInit() {
+        /**
+         * Fetches the data
+         */
+        this.fetchData();
+        this.breadCrumbItems = [
+            { label: 'Minible' },
+            { label: 'Dashboard', active: true },
+        ];
+    }
 
-  ngOnInit() {
     /**
      * Fetches the data
      */
-    this.fetchData();
-    this.breadCrumbItems = [{ label: 'Minible' }, { label: 'Dashboard', active: true }];
-  }
+    private fetchData() {
+        this.lineColumAreaChart = lineColumAreaChart;
+        this.revenueColumnChart = revenueColumnChart;
+        this.orderRadialBarChart = orderRadialBarChart;
+        this.customerRadialBarChart = customerRadialBarChart;
+        this.growthColumnChart = growthColumnChart;
 
-  /**
-   * Fetches the data
-   */
-  private fetchData() {
-    
-    this.lineColumAreaChart = lineColumAreaChart;
-    this.revenueColumnChart = revenueColumnChart;
-    this.orderRadialBarChart = orderRadialBarChart;
-    this.customerRadialBarChart = customerRadialBarChart;
-    this.growthColumnChart = growthColumnChart;
-    
-    this.transactions = transactions;
-  }
-
+        this.transactions = transactions;
+    }
 }

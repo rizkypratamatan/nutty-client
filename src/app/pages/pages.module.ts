@@ -55,8 +55,6 @@ import { MessageTemplateComponent } from './message-template/message-template.co
 import { AddEditMessageTemplateComponent } from './message-template/add-edit.component';
 import { WorksheetCrmComponent } from './worksheet-crm/worksheet-crm.component';
 
-
-
 FullCalendarModule.registerPlugins([
     dayGridPlugin,
     interactionPlugin,

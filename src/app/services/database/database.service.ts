@@ -5,6 +5,7 @@ import { EncryptionService } from '../global/encryption.service';
 import { RestService } from '../global/rest.service';
 import { UserService } from '../user/user.service';
 import { Observable } from 'rxjs';
+import { AuthService } from '../global/auth.service';
 
 @Injectable({
     providedIn: 'root',
@@ -20,13 +21,13 @@ export class DatabaseService {
         private configurationService: ConfigurationService,
         private encryptionService: EncryptionService,
         private globalRestService: RestService,
-        private userServices: UserService
+        private authServices: AuthService
     ) {
         this.configuration = this.configurationService;
     }
 
     public getAllDatabase(filter, page): Observable<any> {
-        let auth = this.userServices.Auth();
+        let auth = this.authServices.Auth();
         let limit = 20;
         let offset = 0;
         if(page > 1){
@@ -49,7 +50,7 @@ export class DatabaseService {
     }
 
     public getDatabaseById(id): Observable<any> {
-        let auth = this.userServices.Auth();
+        let auth = this.authServices.Auth();
         let data = {
             platform: 'Website',
             id: id,
@@ -66,7 +67,7 @@ export class DatabaseService {
     }
 
     public addDatabase(request): Observable<any> {
-        let auth = this.userServices.Auth();
+        let auth = this.authServices.Auth();
 
         return this.http.post(
             this.configuration.api.url + '/api/add-database',
@@ -76,7 +77,7 @@ export class DatabaseService {
     }
 
     public updateDatabase(id, request): Observable<any> {
-        let auth = this.userServices.Auth();
+        let auth = this.authServices.Auth();
         request.id = id;
         // console.log(this.globalRestService.initializeBody(
         //     request,
@@ -94,7 +95,7 @@ export class DatabaseService {
     }
 
     public deleteDatabase(data): Observable<any> {
-        let auth = this.userServices.Auth();
+        let auth = this.authServices.Auth();
 
         return this.http.post(
             this.configuration.api.url + '/api/delete-database',

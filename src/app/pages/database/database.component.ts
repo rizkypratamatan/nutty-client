@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { DatabaseService } from 'src/app/services/database/database.service';
+import { AuthService } from 'src/app/services/global/auth.service';
 import { UserService } from 'src/app/services/user/user.service';
 import { WebsiteService } from 'src/app/services/website/website.service';
 
@@ -31,14 +32,14 @@ export class DatabaseComponent implements OnInit {
     constructor(
         private service: DatabaseService, 
         private router: Router,
-        private userService: UserService,
+        private authService: AuthService,
         private websiteService: WebsiteService
     ) {}
 
     ngOnInit(): void {
-        let auth = this.userService.Auth();
-        console.log(auth);
-        if(auth['role'].toLowerCase() == 'system'){
+        let auth = this.authService.Auth();
+
+        if(auth['role'].name.toLowerCase() == 'system'){
             this.websiteService.getAllWebsite({}, 1).subscribe((response) => {
                 this.allWebsite = response['data'];
                 this.filter.website = response['data'][0]['_id'];

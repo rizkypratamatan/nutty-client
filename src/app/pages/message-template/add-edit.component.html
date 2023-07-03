@@ -34,11 +34,21 @@
                                     [ngModelOptions]="{ standalone: true }" />
                                 <div id="response-name"></div>
                             </div>
-                            <div class="mb-3">
+                            <!-- <div class="mb-3">
                                 <label class="form-label">Format</label>
                                 <input id="format" class="form-control" type="text" required [(ngModel)]="fields.format"
                                     [ngModelOptions]="{ standalone: true }" />
                                 <div id="response-format"></div>
+                            </div> -->
+                            <div class="col-md-12">
+                                <div class="mb-3">
+                                    <label class="form-label">Format</label>
+                                    <textarea class="form-control" required [(ngModel)]="fields.format"
+                                        [ngModelOptions]="{
+                                            standalone: true
+                                        }" cols="20" rows="5" [readOnly]="this.isSubmit"></textarea>
+                                    <div id="response-format"></div>
+                                </div>
                             </div>
                             <div class="mb-3">
                                 <button *ngIf="!isAddMode" class="btn btn-outline-success waves-effect waves-light me-1"
@@ -59,9 +69,9 @@
                                     <span *ngIf="loadingIndicator == false">Add New</span>
                                 </button>
 
-                                <button *ngIf="isAddMode" type="reset" class="btn btn-secondary waves-effect">
+                                <!-- <button *ngIf="isAddMode" type="reset" class="btn btn-secondary waves-effect">
                                     Reset
-                                </button>
+                                </button> -->
                             </div>
                         </div>
                     </form>

@@ -4,7 +4,7 @@ import { ConfigurationService } from 'src/app/configurations/configuration.servi
 import { EncryptionService } from '../global/encryption.service';
 import { RestService } from '../global/rest.service';
 import { Observable } from 'rxjs';
-import { UserService } from '../user/user.service';
+import { AuthService } from '../global/auth.service';
 
 @Injectable({
     providedIn: 'root',
@@ -20,13 +20,13 @@ export class WebsiteService {
         private configurationService: ConfigurationService,
         private encryptionService: EncryptionService,
         private globalRestService: RestService,
-        private userServices: UserService
+        private authServices: AuthService
     ) {
         this.configuration = this.configurationService;
     }
 
     public getAllWebsite(filter, page): Observable<any> {
-        let auth = this.userServices.Auth();
+        let auth = this.authServices.Auth();
         let limit = 10
         let offset = 0
         if(page > 1){
@@ -52,7 +52,7 @@ export class WebsiteService {
     }
 
     public getWebsiteById(id): Observable<any> {
-        let auth = this.userServices.Auth();
+        let auth = this.authServices.Auth();
         let data = {
             platform: 'Website',
             id: id,
@@ -69,7 +69,7 @@ export class WebsiteService {
     }
 
     public addWebsite(request): Observable<any> {
-        let auth = this.userServices.Auth();
+        let auth = this.authServices.Auth();
 
         return this.http.post(
             this.configuration.api.url + '/api/add-website',
@@ -79,7 +79,7 @@ export class WebsiteService {
     }
 
     public updateWebsite(id, request): Observable<any> {
-        let auth = this.userServices.Auth();
+        let auth = this.authServices.Auth();
         request.id = id;
 
         return this.http.post(
@@ -92,7 +92,7 @@ export class WebsiteService {
         );
     }
     public deleteWebsite(id): Observable<any> {
-        let auth = this.userServices.Auth();
+        let auth = this.authServices.Auth();
 
         // console.log(this.globalRestService.initializeBody(body, 'api/get-database')); return;
 

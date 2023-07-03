@@ -131,7 +131,7 @@
                                     type="button"
                                     class="btn btn-outline-info waves-effect waves-light me-1"
                                     (click)="sync()"
-                                    *ngIf="response.sync == 'NoSync'"
+                                    *ngIf="fields.sync == 'NoSync'"
                                 >
                                     <div class="spinner-border spinner-border-sm" role="status" *ngIf="loadingSync == true">
                                         <span class="sr-only">Loading...</span>
@@ -141,16 +141,18 @@
                                 <!-- @elseif($model->website->sync == "OnGoing") -->
                                 <button
                                     type="button"
-                                    class="btn btn-outline-warning waves-effect waves-light me-1"
-                                    *ngIf="response.sync == 'OnGoing'"
+                                    disabled
+                                    class="btn btn-warning me-1"
+                                    *ngIf="fields.sync == 'OnGoing'"
                                 >
                                     <span>On Going</span>
                                 </button>
                                 <!-- @else -->
                                 <button
                                     type="button"
-                                    class="btn btn-outline-success waves-effect waves-light me-1"
-                                    *ngIf="response.sync == 'Synced'"
+                                    disabled
+                                    class="btn btn-success me-1"
+                                    *ngIf="fields.sync == 'Synced'"
                                 >
                                     <span>Synced</span>
                                 </button>

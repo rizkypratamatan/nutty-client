@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { ConfigurationService } from 'src/app/configurations/configuration.service';
 import { EncryptionService } from '../global/encryption.service';
 import { RestService } from '../global/rest.service';
-import { UserService } from '../user/user.service';
+import { AuthService } from '../global/auth.service';
 
 @Injectable({
     providedIn: 'root',
@@ -19,13 +19,13 @@ export class SmsService {
         private http: HttpClient,
         private configurationService: ConfigurationService,
         private globalRestService: RestService,
-        private userServices: UserService
+        private authServices: AuthService
     ) {
         this.configuration = this.configurationService;
     }
 
     public getAllSMS(filter, page): Observable<any> {
-        let auth = this.userServices.Auth();
+        let auth = this.authServices.Auth();
         let limit = 10;
         let offset = 0;
         if(page > 1){
@@ -49,7 +49,7 @@ export class SmsService {
     }
 
     public sendSingleSMS(request): Observable<any> {
-        let auth = this.userServices.Auth();
+        let auth = this.authServices.Auth();
 
         return this.http.post(
             this.configuration.api.url + '/api/sms/send-single-message',
@@ -62,7 +62,7 @@ export class SmsService {
     }
 
     public sendBulkSMS(request): Observable<any> {
-        let auth = this.userServices.Auth();
+        let auth = this.authServices.Auth();
 
         return this.http.post(
             this.configuration.api.url + '/api/sms/send-bulk-message',
@@ -70,6 +70,20 @@ export class SmsService {
                 request,
                 'api/sms/send-bulk-message'
             ),
+            this.globalRestService.initializeHeaderGetData(auth['token-auth'])
+        );
+    }
+
+    public deleteSMS(id): Observable<any> {
+        let auth = this.authServices.Auth();
+        let data = {
+            platform: 'Website',
+            id: id.id,
+        };
+
+        return this.http.post(
+            this.configuration.api.url + '/api/sms/delete-message',
+            this.globalRestService.initializeBody(data, 'api/sms/delete-message'),
             this.globalRestService.initializeHeaderGetData(auth['token-auth'])
         );
     }

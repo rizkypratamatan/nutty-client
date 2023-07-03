@@ -193,74 +193,6 @@
                                 (ngModelChange)="updateFilters()"
                             />
                         </div>
-                        <!-- <div class="col-md-1">
-                            <input
-                                class="form-control dt-input"
-                                type="text"
-                                placeholder="Nucode"
-                                [(ngModel)]="fields.nucode"
-                                (ngModelChange)="updateFilters()"
-                            />
-                        </div>
-                        <div class="col-md-2">
-                            <select
-                                id="user-filter-type"
-                                class="select2 form-select dt-select"
-                                [(ngModel)]="fields.type"
-                                (ngModelChange)="updateFilters()"
-                            >
-                                <option value="">Choose type</option>
-                                <option *ngFor="let type of allType">
-                                    {{ type }}
-                                </option>
-                            </select>
-                        </div>
-                        <div class="col-md-2">
-                            <select
-                                id="user-filter-group"
-                                class="select2 form-select dt-select"
-                                [(ngModel)]="fields.group"
-                                (ngModelChange)="updateFilters()"
-                            >
-                                <option value="">Group</option>
-                                <option *ngFor="let group of allGroup" [value]="group._id">
-                                    {{ group.name }}
-                                </option>
-                            </select>
-                        </div>
-                        <div class="col-md-2">
-                            <select
-                                id="user-filter-role"
-                                class="select2 form-select dt-select"
-                                [(ngModel)]="fields.role"
-                                (ngModelChange)="updateFilters()"
-                            >
-                                <option value="">Role</option>
-                                <option *ngFor="let role of allRole" [value]="role._id">
-                                    {{ role.name }}
-                                </option>
-                            </select>
-                        </div>
-                        <div class="col-md-2">
-                            <select
-                                id="user-filter-status"
-                                class="select2 form-select dt-select"
-                                [(ngModel)]="fields.status"
-                                (ngModelChange)="updateFilters()"
-                            >
-                                <option value="">Status</option>
-                                <option *ngFor="let status of allStatus">
-                                    {{ status }}
-                                </option>
-                            </select>
-                        </div> -->
-                        <!-- <div class="col-md-1" style="text-align: right">
-                            <a
-                                (click)="create()"
-                                class="btn btn-success waves-effect waves-light"
-                                ><i class="mdi mdi-plus me-2"></i> Add New</a
-                            >
-                        </div> -->
                     </div>
                     <div class="table-responsive">
                         <table
@@ -284,7 +216,7 @@
                         <tbody>
                             <tr
                                 *ngFor="
-                                    let user of allMessage
+                                    let message of allMessage
                                         | paginate
                                             : {
                                                   itemsPerPage: 10,
@@ -295,20 +227,20 @@
                                 "
                             >
                                 <!-- <td>{{ i + 1 }}</td> -->
-                                <td>{{ user.name }}</td>
-                                <td>{{ user.format }}</td>
+                                <td>{{ message.name }}</td>
+                                <td>{{ message.format }}</td>
                                 
-                                <td>{{ user.created.timestamp | date }}</td>
+                                <td>{{ !message.modified.timestamp.$date ?  message.modified.timestamp : message.modified.timestamp.$date.$numberLong | date }}</td>
                                 <td>
                                     <a
-                                        (click)="edit(user._id)"
+                                        (click)="edit(message._id)"
                                         class="btn btn-outline-secondary btn-sm"
                                         ><i class="bx uil-edit"></i></a
                                     >
                                     &nbsp;
                                     <button
                                         ng-confirm-click="Are you sure to delete this record ?"
-                                        (click)="delete(user._id, user.name)"
+                                        (click)="delete(message._id, message.name)"
                                         class="btn btn-outline-secondary btn-sm"
                                     >
                                     <i class="bx uil-trash"></i>

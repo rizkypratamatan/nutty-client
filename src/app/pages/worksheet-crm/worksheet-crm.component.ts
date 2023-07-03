@@ -39,7 +39,7 @@ export class WorksheetCrmComponent implements OnInit {
       let auth = this.userService.Auth();
       console.log(auth)
       
-      if(auth['role'].toLowerCase() == 'system'){
+      if(auth['role'].name.toLowerCase() == 'system'){
           this.websiteService.getAllWebsite({}, 1).subscribe((response) => {
               this.allWebsite = response['data'];
               // this.getPage(1);

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { WhatsappService } from 'src/app/services/whatsapp/whatsapp.service';
+import { EmailService } from 'src/app/services/email/email.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -8,33 +7,35 @@ import Swal from 'sweetalert2';
     templateUrl: './history.component.html',
     styleUrls: ['./history.component.scss'],
 })
-export class WAHistoryComponent implements OnInit {
-    allChats: any[] = [];
+export class HistoryComponent implements OnInit {
+    allEmails: any[] = [];
     allStatus: any[] = [];
     loading: boolean = false;
 
     fields = {
-        recipient: '',
+        platform: 'Website',
+        from_name: '',
+        email: '',
+        subject: '',
         message: '',
+        attachment: '',
+        initiated_time: '',
+        schedule_status: 'now',
         status: '',
     };
 
     filter = {};
     p: number = 1;
-    totalChats: number;
+    totalEmail: number;
 
-    statusFilter = ['sent', 'queued'];
+    typeFilter = ['Administrator', 'CRM', 'Telemarketer'];
+    statusFilter = ['Active', 'Inactive'];
 
     updateFilters() {
-        // Object.keys(this.fields).forEach((key) =>
-        //     this.fields[key] === '' ? delete this.fields[key] : key
-        // );
-        // this.filter = Object.assign({}, this.fields);
-
         this.getPage(1);
     }
 
-    constructor(private service: WhatsappService, private router: Router) {}
+    constructor(private service: EmailService) {}
 
     ngOnInit(): void {
         this.getPage(1);
@@ -42,11 +43,12 @@ export class WAHistoryComponent implements OnInit {
 
     getPage(page: number) {
         this.loading = true;
-        this.service.getAllWA(this.fields, page).subscribe((response) => {
-            this.allChats = response['data'];
+        this.service.getEmails(this.fields, page).subscribe((response) => {
+            // console.log(response);
+            this.allEmails = response['data'];
             this.p = page;
             this.allStatus = this.statusFilter;
-            this.totalChats = response['total_data'];
+            this.totalEmail = response['total_data'];
             this.loading = false;
         });
     }
@@ -57,13 +59,13 @@ export class WAHistoryComponent implements OnInit {
             id: id.$oid,
         };
 
-        if (confirm('Are you sure to delete Chat: ' + phone)) {
-            this.service.deleteChat(data).subscribe((response) => {
-                // console.log(response);
+        if (confirm('Are you sure to delete email: ' + phone)) {
+            this.service.deleteEmail(data).subscribe((response) => {
+                console.log(response);
                 if (response.result === true) {
                     Swal.fire({
                         title: 'Success!',
-                        text: 'Chat deleted successfully',
+                        text: 'Email deleted successfully',
                         icon: 'success',
                         confirmButtonText: 'Close',
                     });

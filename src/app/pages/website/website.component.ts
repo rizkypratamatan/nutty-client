@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 import { WebsiteService } from 'src/app/services/website/website.service';
 
 @Component({
@@ -63,5 +64,36 @@ export class WebsiteComponent implements OnInit {
 
     edit(id) {
         this.router.navigate(['/website/add-edit/' + id]);
+    }
+
+    delete(id, name) {
+        const currentUrl = this.router.url;
+        console.log(currentUrl);
+
+        let data = {
+            platform: 'Website',
+            id: id,
+        };
+
+        if (confirm('Are you sure to delete website: ' + name)) {
+            this.service.deleteWebsite(data).subscribe((response) => {
+                if (response.result === true) {
+                    Swal.fire({
+                        title: 'Success!',
+                        text: response.response,
+                        icon: 'success',
+                        confirmButtonText: 'Close'
+                    });
+                    this.getPage(1)
+                }else{
+                    Swal.fire({
+                        title: 'Error!',
+                        text: response.response,
+                        icon: 'error',
+                        confirmButtonText: 'Close'
+                    });
+                }
+            });
+        }
     }
 }

@@ -121,6 +121,13 @@ export const MENU: MenuItem[] = [
                 label: 'MENUITEMS.APPS.LIST.NEW_DATA',
                 link: '/worksheet',
                 parentId: 19,
+
+            },
+            {
+                id: 61,
+                label: 'MENUITEMS.APPS.LIST.WR_CRM',
+                link: '/worksheet/crm',
+                parentId: 19,
             },
             {
                 id: 21,

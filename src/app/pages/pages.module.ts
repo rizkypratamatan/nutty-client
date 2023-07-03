@@ -37,6 +37,7 @@ import { WebsiteComponent } from './website/website.component';
 import { LicenseComponent } from './license/license.component';
 import { ReportComponent } from './report/report.component';
 import { ApiComponent } from './api/api.component';
+import { AddEditApiComponent } from './api/add-edit.component';
 import { WorksheetComponent } from './worksheet/worksheet.component';
 import { WorksheetResultComponent } from './worksheet-result/worksheet-result.component';
 import { DatabaseComponent } from './database/database.component';
@@ -52,6 +53,7 @@ import { AddEditDatabaseComponent } from './database/add-edit.component';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { MessageTemplateComponent } from './message-template/message-template.component';
 import { AddEditMessageTemplateComponent } from './message-template/add-edit.component';
+import { WorksheetCrmComponent } from './worksheet-crm/worksheet-crm.component';
 
 
 
@@ -74,8 +76,10 @@ FullCalendarModule.registerPlugins([
         LicenseComponent,
         ReportComponent,
         ApiComponent,
+        AddEditApiComponent,
         WorksheetComponent,
         WorksheetResultComponent,
+        WorksheetCrmComponent,
         DatabaseComponent,
         DatabaseImportComponent,
         DatabaseHistoryComponent,
@@ -88,6 +92,7 @@ FullCalendarModule.registerPlugins([
         UserTableFilterPipe,
         MessageTemplateComponent,
         AddEditMessageTemplateComponent,
+        WorksheetCrmComponent,
     ],
     imports: [
         CommonModule,

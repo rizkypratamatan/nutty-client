@@ -80,7 +80,7 @@
                                 <th>CRM</th>
                                 <th>Status</th>
                                 <th>Modified</th>
-                                <th>Action</th>
+                                <!-- <th>Action</th> -->
                             </tr>
                         </thead>
                         <tbody>
@@ -98,7 +98,7 @@
                             >
                                 <!-- <td>{{ i + 1 }}</td> -->
                                 <td>{{ database.name }}</td>
-                                <td>{{ database.contact.phone }}</td>
+                                <td>{{ hidePhone(database.contact.phone) }}</td>
                                 <!-- @if(Session::has("account"))
                                         @if(Session::get("account")->nucode == "system") -->
                                 <td>{{ database.group.name }}</td>
@@ -110,12 +110,12 @@
                                 <td>
                                     {{ !database.modified.timestamp.$date ?  database.modified.timestamp : database.modified.timestamp.$date.$numberLong | date }}
                                 </td>
-                                <td>
-                                    <!-- <a
+                                <!-- <td>
+                                    <a
                                         (click)="edit(database._id)"
                                         class="btn btn-info btn-sm w-lg"
                                         >Edit</a
-                                    > -->
+                                    >
                                     &nbsp;
                                     <button
                                     ng-confirm-click="Are you sure to delete this record ?"
@@ -124,7 +124,7 @@
                                     >
                                     <i class="bx uil-trash"></i>
                                     </button>
-                                </td>
+                                </td> -->
                             </tr>
                         </tbody>
                         <tfoot>
@@ -137,7 +137,7 @@
                                 <th>CRM</th>
                                 <th>Status</th>
                                 <th>Modified</th>
-                                <th>Action</th>
+                                <!-- <th>Action</th> -->
                             </tr>
                         </tfoot>
                     </table>

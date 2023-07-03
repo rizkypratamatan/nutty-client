@@ -3,14 +3,14 @@ import { Injectable } from '@angular/core';
 import { ConfigurationService } from 'src/app/configurations/configuration.service';
 import { EncryptionService } from '../global/encryption.service';
 import { RestService } from '../global/rest.service';
-import { Observable } from 'rxjs';
 import { UserService } from '../user/user.service';
+import { Observable } from 'rxjs';
 
 @Injectable({
-    providedIn: 'root',
+  providedIn: 'root'
 })
-export class WebsiteService {
-    public configuration: ConfigurationService;
+export class WorksheetService {
+  public configuration: ConfigurationService;
 
     accountData: string;
     auth: [];
@@ -25,80 +25,79 @@ export class WebsiteService {
         this.configuration = this.configurationService;
     }
 
-    public getAllWebsite(filter, page): Observable<any> {
+    public getAllCrm(filter, page): Observable<any> {
         let auth = this.userServices.Auth();
-        let limit = 10
-        let offset = 0
+        let limit = 20;
+        let offset = 0;
         if(page > 1){
-            offset = (limit * (page - 1));
+            offset = limit * (page - 1);
         }
-        
         let data = {
             platform: 'Website',
             limit: limit,
             offset: offset,
-            page: page,
-            name: (filter.name)?filter.name:"",
-            nucode: (filter.nucode)?filter.nucode:"",
-            type: (filter.type)?filter.type:"",
-            status: (filter.status)?filter.status:"",
+            websiteId: filter.websiteId,
+            days:filter.days
         };
-        console.log(data);
+        
         return this.http.post(
-            this.configuration.api.url + '/api/get-websites',
-            this.globalRestService.initializeBody(data, 'api/get-websites'),
+            this.configuration.api.url + '/api/worksheet/crm',
+            this.globalRestService.initializeBody(data, 'api/worksheet/crm'),
             this.globalRestService.initializeHeaderGetData(auth['token-auth'])
         );
     }
 
-    public getWebsiteById(id): Observable<any> {
+    public getDatabaseById(id): Observable<any> {
         let auth = this.userServices.Auth();
         let data = {
             platform: 'Website',
             id: id,
         };
-
+        
         return this.http.post(
-            this.configuration.api.url + '/api/get-website-by-id',
+            this.configuration.api.url + '/api/get-database-by-id',
             this.globalRestService.initializeBody(
                 data,
-                'api/get-website-by-id'
+                'api/get-database-by-id'
             ),
             this.globalRestService.initializeHeaderGetData(auth['token-auth'])
         );
     }
 
-    public addWebsite(request): Observable<any> {
+    public addDatabase(request): Observable<any> {
         let auth = this.userServices.Auth();
 
         return this.http.post(
-            this.configuration.api.url + '/api/add-website',
-            this.globalRestService.initializeBody(request, 'api/add-website'),
+            this.configuration.api.url + '/api/add-database',
+            this.globalRestService.initializeBody(request, 'api/add-database'),
             this.globalRestService.initializeHeaderGetData(auth['token-auth'])
         );
     }
 
-    public updateWebsite(id, request): Observable<any> {
+    public updateDatabase(id, request): Observable<any> {
         let auth = this.userServices.Auth();
         request.id = id;
-
+        // console.log(this.globalRestService.initializeBody(
+        //     request,
+        //     'api/update-database'
+        // ));return;
+        
         return this.http.post(
-            this.configuration.api.url + '/api/update-website',
+            this.configuration.api.url + '/api/update-database',
             this.globalRestService.initializeBody(
                 request,
-                'api/update-website'
+                'api/update-database'
             ),
             this.globalRestService.initializeHeaderGetData(auth['token-auth'])
         );
     }
-    public deleteWebsite(id): Observable<any> {
+
+    public deleteDatabase(data): Observable<any> {
         let auth = this.userServices.Auth();
 
-        // console.log(this.globalRestService.initializeBody(body, 'api/get-database')); return;
-
         return this.http.post(
-            this.configuration.api.url + '/api/delete-website',
-            this.globalRestService.initializeBody(id, 'api/delete-website'),
+            this.configuration.api.url + '/api/delete-database',
+            this.globalRestService.initializeBody(data, 'api/delete-database'),
             this.globalRestService.initializeHeaderGetData(auth['token-auth'])
         );
     }

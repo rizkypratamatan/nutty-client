@@ -92,4 +92,14 @@ export class DatabaseService {
             this.globalRestService.initializeHeaderGetData(auth['token-auth'])
         );
     }
+
+    public deleteDatabase(data): Observable<any> {
+        let auth = this.userServices.Auth();
+
+        return this.http.post(
+            this.configuration.api.url + '/api/delete-database',
+            this.globalRestService.initializeBody(data, 'api/delete-database'),
+            this.globalRestService.initializeHeaderGetData(auth['token-auth'])
+        );
+    }
 }

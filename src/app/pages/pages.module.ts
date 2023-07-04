@@ -12,6 +12,8 @@ import {
     NgbTooltipModule,
 } from '@ng-bootstrap/ng-bootstrap';
 import { NgApexchartsModule } from 'ng-apexcharts';
+import { FlatpickrModule } from 'angularx-flatpickr';
+import { Ng2FlatpickrModule } from 'ng2-flatpickr';
 
 import { FullCalendarModule } from '@fullcalendar/angular';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -93,6 +95,8 @@ FullCalendarModule.registerPlugins([
         WorksheetCrmComponent,
     ],
     imports: [
+        Ng2FlatpickrModule,
+        FlatpickrModule,
         CommonModule,
         NgSelectModule,
         FormsModule,

@@ -64,15 +64,17 @@
                             @endif -->
                             <div class="mb-3">
                                 <label class="form-label">Start Date</label>
-                                <input
+                                <ng2-flatpickr 
                                     id="api-start"
-                                    class="form-control"
+                                    class="form-control flatpickr-input" 
                                     name="api-start"
-                                    type="text"
-                                    placeholder="Nucode"
+                                    [config]="datePickerOption" 
+                                    placeholder="date"
                                     [(ngModel)]="fields.start"
                                     [ngModelOptions]="{ standalone: true }"
-                                />
+                                    [setDate]="fields.start"
+                                >
+                                </ng2-flatpickr>
                                 <div id="response-start"></div>
                             </div>
                             <div class="mb-3">

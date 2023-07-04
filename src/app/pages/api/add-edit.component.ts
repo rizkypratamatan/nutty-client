@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api/api.service';
+import { FlatpickrOptions } from 'ng2-flatpickr';
+
 
 @Component({
   selector: 'app-add-edit',
@@ -58,6 +60,10 @@ export class AddEditApiComponent implements OnInit {
                 this.fields.api.nexus.salt = response['data'].api.nexus.salt;
           });
       }
+  }
+
+  datePickerOption: FlatpickrOptions = {
+    "dateFormat": "Y/m/d"
   }
 
   private initializeDate(timestamp) {

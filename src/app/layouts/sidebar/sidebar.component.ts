@@ -20,6 +20,20 @@ import { AuthService } from 'src/app/services/global/auth.service';
  */
 export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
   auth: [];
+  privilege: any = {
+    database: [],
+    setting: [],
+    settingApi: [],
+    sms: [],
+    user: [],
+    userGroup:[],
+    userRole:[],
+    website:[],
+    whatsapp:[],
+    worksheet:[],
+    worksheetCrm:[],
+    tools:[],
+  };
 
   @Input() isCondensed = false;
   @Output() mobileMenuButtonClicked = new EventEmitter();
@@ -45,6 +59,26 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
     this._scrollElement();
     document.body.setAttribute('data-sidebar', 'light');
     this.auth = this.authService.Auth();
+    console.log(this.auth['privilege']);
+    this.populatePrivilege(this.auth['privilege']);
+  }
+
+  populatePrivilege(privilege){
+    this.privilege['database'] = privilege['database'].split('');
+    this.privilege['setting'] = privilege['setting'].split('');
+    this.privilege['settingApi'] = privilege['settingApi'].split('');
+    this.privilege['sms'] = privilege['sms'].split('');
+    this.privilege['user'] = privilege['user'].split('');
+    this.privilege['userGroup'] = privilege['userGroup'].split('');
+    this.privilege['userRole'] = privilege['userRole'].split('');
+    this.privilege['website'] = privilege['website'].split('');
+    this.privilege['whatsapp'] = privilege['whatsapp'].split('');
+    this.privilege['worksheet'] = privilege['worksheet'].split('');
+    this.privilege['worksheetCrm'] = privilege['worksheetCrm'].split('');
+    this.privilege['tools'] = (privilege['tools'])?privilege['tools'].split(''):['0','0','0','0'];
+    
+
+    console.log(this.privilege);
   }
   /**
    * Change the layout onclick

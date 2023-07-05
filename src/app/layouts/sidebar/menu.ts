@@ -1,10 +1,14 @@
 import { MenuItem } from './menu.model';
+// Permission
+// view, add, edit, delete
 
 export const MENU: MenuItem[] = [
     {
         id: 1,
         label: 'MENUITEMS.MENU.TEXT',
         isTitle: true,
+        name: 'dashboard',
+        permission: 0
     },
     {
         id: 2,
@@ -15,20 +19,28 @@ export const MENU: MenuItem[] = [
             text: '01', //'MENUITEMS.DASHBOARDS.BADGE',
         },
         link: '/dashboard',
+        name: 'dashboard',
+        permission: 0
     },
     {
         id: 3,
         isLayout: true,
+        name: 'dashboard',
+        permission: 0
     },
     {
         id: 4,
         label: 'MENUITEMS.USER.TEXT',
         isTitle: true,
+        name: 'user',
+        permission: 0
     },
     {
         id: 5,
         label: 'MENUITEMS.USER.LIST.USER',
         icon: 'uil-user',
+        name: 'user',
+        permission: 0,
         subItems: [
             {
                 id: 6,
@@ -48,6 +60,8 @@ export const MENU: MenuItem[] = [
         id: 8,
         label: 'MENUITEMS.USER.LIST.ROLE',
         icon: 'uil-user-check',
+        name: 'userRole',
+        permission: 0,
         subItems: [
             {
                 id: 9,
@@ -67,6 +81,8 @@ export const MENU: MenuItem[] = [
         id: 11,
         label: 'MENUITEMS.USER.LIST.GROUP',
         icon: 'uil-users-alt',
+        name: 'userGroup',
+        permission: 0,
         subItems: [
             {
                 id: 12,
@@ -86,11 +102,15 @@ export const MENU: MenuItem[] = [
         id: 14,
         label: 'MENUITEMS.WEBSITE.TEXT',
         isTitle: true,
+        name: 'website',
+        permission: 0
     },
     {
         id: 15,
         label: 'MENUITEMS.WEBSITE.LIST.WEBSITE',
         icon: 'uil-globe',
+        name: 'website',
+        permission: 0,
         subItems: [
             {
                 id: 16,
@@ -110,11 +130,15 @@ export const MENU: MenuItem[] = [
         id: 18,
         label: 'MENUITEMS.APPS.TEXT',
         isTitle: true,
+        name: 'worksheet',
+        permission: 0
     },
     {
         id: 19,
         label: 'MENUITEMS.APPS.LIST.WORKSHEET',
         icon: 'uil-outgoing-call',
+        name: 'worksheet',
+        permission: 0,
         subItems: [
             {
                 id: 20,
@@ -141,11 +165,15 @@ export const MENU: MenuItem[] = [
         id: 22,
         label: 'MENUITEMS.DATABASE.TEXT',
         isTitle: true,
+        name: 'database',
+        permission: 0
     },
     {
         id: 23,
         label: 'MENUITEMS.DATABASE.LIST.DATABASE',
         icon: 'uil-database',
+        name: 'database',
+        permission: 0,
         subItems: [
             {
                 id: 24,
@@ -178,22 +206,30 @@ export const MENU: MenuItem[] = [
         id: 28,
         label: 'MENUITEMS.REPORT.TEXT',
         isTitle: true,
+        name: 'report',
+        permission: 0
     },
     {
         id: 29,
         label: 'MENUITEMS.REPORT.LIST.REPORT',
         icon: 'uil-graph-bar',
         link: '/report',
+        name: 'report',
+        permission: 0
     },
     {
         id: 30,
         label: 'MENUITEMS.TOOLS.TEXT',
         isTitle: true,
+        name: 'tools',
+        permission: 0
     },
     {
         id: 31,
         label: 'MENUITEMS.SMS.LIST.SMS',
         icon: 'uil-comment-alt-message',
+        name: 'tools',
+        permission: 0,
         subItems: [
             // {
             //     id: 32,
@@ -231,6 +267,8 @@ export const MENU: MenuItem[] = [
         id: 37,
         label: 'MENUITEMS.WHATSAPP.LIST.WHATSAPP',
         icon: 'uil-whatsapp',
+        name: 'tools',
+        permission: 0,
         subItems: [
             // {
             //     id: 38,
@@ -280,6 +318,8 @@ export const MENU: MenuItem[] = [
         id: 45,
         label: 'MENUITEMS.EMAIL.TEXT',
         icon: 'uil-at',
+        name: 'tools',
+        permission: 0,
         subItems: [
             {
                 id: 46,
@@ -299,6 +339,8 @@ export const MENU: MenuItem[] = [
         id: 48,
         label: 'MENUITEMS.TOOLS.LIST.MESSAGE.TEXT',
         icon: 'uil-comment-message',
+        name: 'tools',
+        permission: 0,
         subItems: [
             {
                 id: 49,
@@ -356,29 +398,39 @@ export const MENU: MenuItem[] = [
         id: 56,
         label: 'MENUITEMS.SETTING.TEXT',
         isTitle: true,
+        name: 'setting',
+        permission: 0
     },
     {
         id: 57,
         label: 'MENUITEMS.SETTING.LIST.SETTING',
         icon: 'uil-cog',
         link: '#',
+        name: 'setting',
+        permission: 0
     },
     {
         id: 58,
         label: 'MENUITEMS.SETTING.LIST.API',
         icon: 'uil-exchange',
         link: '/api',
+        name: 'settingApi',
+        permission: 0
     },
     {
         id: 59,
         label: 'MENUITEMS.LICENSE.TEXT',
         isTitle: true,
+        name: 'setting',
+        permission: 0
     },
     {
         id: 60,
         label: 'MENUITEMS.LICENSE.LIST.LICENSE',
         icon: 'uil-file-bookmark-alt',
         link: '/license',
+        name: 'setting',
+        permission: 0
     },
     // {
     //     id: 4,

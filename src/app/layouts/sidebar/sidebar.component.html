@@ -67,122 +67,123 @@
             <ng-container *ngFor="let item of menuItems">
 
                 <!-- Check Permission -->
-                <ng-container *ngIf="auth['role']['name'] === 'System'">
+                <ng-container *ngIf="auth['role']['name'] === 'System' || privilege[item.name][item.permission] == 7">
                     <li class="menu-title" *ngIf="item.isTitle">
                         {{ item.label | translate }}
                     </li>
                     <!-- Layouts menu -->
                     <!-- <li *ngIf="item.isLayout">
-          <a href="javascript: void(0);" class="has-arrow">
-            <i class="uil-window-section"></i>
-            <span> {{'MENUITEMS.LAYOUTS.TEXT' | translate}}</span>
-          </a>
-          <ul class="sub-menu" aria-expanded="false">
-            <li><a (click)="changeLayout('horizontal')" href="javascript: void(0);"> {{
-                'MENUITEMS.LAYOUTS.LIST.HORIZONTAL' | translate}} </a></li>
-            <li><a (click)="darkSidebar()" href="javascript: void(0);">{{ 'MENUITEMS.LAYOUTS.LIST.DARKSIDEBAR' |
-                translate }} </a></li>
-            <li><a (click)="compactSidebar()" href="javascript: void(0);">{{ 'MENUITEMS.LAYOUTS.LIST.COMPACTSIDEBAR' |
-                translate}} </a></li>
-            <li><a (click)="iconSidebar()" href="javascript: void(0);">{{ 'MENUITEMS.LAYOUTS.LIST.ICONSIDEBAR' |
-                translate }} </a></li>
-            <li><a (click)="boxedLayout()" href="javascript: void(0);">{{ 'MENUITEMS.LAYOUTS.LIST.BOXEDWITH' | translate
-                }} </a></li>
-            <li><a (click)="coloredSidebar()" href="javascript: void(0);">{{ 'MENUITEMS.LAYOUTS.LIST.COLOREDSIDEBAR' |
-                translate}} </a></li>
-          </ul>
-        </li> -->
+                    <a href="javascript: void(0);" class="has-arrow">
+                        <i class="uil-window-section"></i>
+                        <span> {{'MENUITEMS.LAYOUTS.TEXT' | translate}}</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a (click)="changeLayout('horizontal')" href="javascript: void(0);"> {{
+                            'MENUITEMS.LAYOUTS.LIST.HORIZONTAL' | translate}} </a></li>
+                        <li><a (click)="darkSidebar()" href="javascript: void(0);">{{ 'MENUITEMS.LAYOUTS.LIST.DARKSIDEBAR' |
+                            translate }} </a></li>
+                        <li><a (click)="compactSidebar()" href="javascript: void(0);">{{ 'MENUITEMS.LAYOUTS.LIST.COMPACTSIDEBAR' |
+                            translate}} </a></li>
+                        <li><a (click)="iconSidebar()" href="javascript: void(0);">{{ 'MENUITEMS.LAYOUTS.LIST.ICONSIDEBAR' |
+                            translate }} </a></li>
+                        <li><a (click)="boxedLayout()" href="javascript: void(0);">{{ 'MENUITEMS.LAYOUTS.LIST.BOXEDWITH' | translate
+                            }} </a></li>
+                        <li><a (click)="coloredSidebar()" href="javascript: void(0);">{{ 'MENUITEMS.LAYOUTS.LIST.COLOREDSIDEBAR' |
+                            translate}} </a></li>
+                    </ul>
+                    </li> -->
                     <!-- end Layout menu -->
-                    <!-- {{auth['role']}} -->
+                    <!-- <ng-container *ngIf="!item.name ? NULL : item.name ? privilege[item.name][item.permission] == 7 : NULL "> -->
+                    
+                    
+                        <li *ngIf="!item.isTitle && !item.isLayout">
+                            <!-- {{auth['role']}} -->
 
-                    <li *ngIf="!item.isTitle && !item.isLayout">
-                        <!-- {{auth['role']}} -->
-
-                        <a
-                            *ngIf="hasItems(item)"
-                            href="javascript:void(0);"
-                            class="is-parent"
-                            [ngClass]="{
-                                'has-arrow': !item.badge,
-                                'has-dropdown': item.badge
-                            }"
-                        >
-                            <i class="bx {{ item.icon }}" *ngIf="item.icon"></i>
-                            <span> {{ item.label | translate }}</span>
-                            <span
-                                class="badge rounded-pill bg-{{
-                                    item.badge.variant
-                                }} float-end"
-                                *ngIf="item.badge"
-                                >{{ item.badge.text | translate }}</span
+                            <a
+                                *ngIf="hasItems(item)"
+                                href="javascript:void(0);"
+                                class="is-parent"
+                                [ngClass]="{
+                                    'has-arrow': !item.badge,
+                                    'has-dropdown': item.badge
+                                }"
                             >
-                        </a>
+                                <i class="bx {{ item.icon }}" *ngIf="item.icon"></i>
+                                <span> {{ item.label | translate }}</span>
+                                <span
+                                    class="badge rounded-pill bg-{{
+                                        item.badge.variant
+                                    }} float-end"
+                                    *ngIf="item.badge"
+                                    >{{ item.badge.text | translate }}</span
+                                >
+                            </a>
 
-                        <a
-                            [routerLink]="item.link"
-                            *ngIf="!hasItems(item)"
-                            class="side-nav-link-ref"
-                            routerLinkActive="active"
-                        >
-                            <i class="bx {{ item.icon }}" *ngIf="item.icon"></i>
-                            <span> {{ item.label | translate }}</span>
-                            <span
-                                class="badge rounded-pill bg-{{
-                                    item.badge.variant
-                                }} float-end"
-                                *ngIf="item.badge"
-                                >{{ item.badge.text | translate }}</span
+                            <a
+                                [routerLink]="item.link"
+                                *ngIf="!hasItems(item)"
+                                class="side-nav-link-ref"
+                                routerLinkActive="active"
                             >
-                        </a>
+                                <i class="bx {{ item.icon }}" *ngIf="item.icon"></i>
+                                <span> {{ item.label | translate }}</span>
+                                <span
+                                    class="badge rounded-pill bg-{{
+                                        item.badge.variant
+                                    }} float-end"
+                                    *ngIf="item.badge"
+                                    >{{ item.badge.text | translate }}</span
+                                >
+                            </a>
 
-                        <ul
-                            *ngIf="hasItems(item)"
-                            class="sub-menu"
-                            aria-expanded="false"
-                        >
-                            <li *ngFor="let subitem of item.subItems">
-                                <a
-                                    [routerLink]="subitem.link"
-                                    *ngIf="!hasItems(subitem)"
-                                    class="side-nav-link-ref"
-                                    [attr.data-parent]="subitem.parentId"
-                                    routerLinkActive="active"
-                                >
-                                    {{ subitem.label | translate }}
-                                </a>
-                                <a
-                                    *ngIf="hasItems(subitem)"
-                                    class="side-nav-link-a-ref has-arrow"
-                                    href="javascript:void(0);"
-                                    [attr.data-parent]="subitem.parentId"
-                                >
-                                    {{ subitem.label | translate }}
-                                </a>
-                                <ul
-                                    *ngIf="hasItems(subitem)"
-                                    class="sub-menu mm-collapse"
-                                    aria-expanded="false"
-                                >
-                                    <li
-                                        *ngFor="
-                                            let subSubitem of subitem.subItems
-                                        "
+                            <ul
+                                *ngIf="hasItems(item)"
+                                class="sub-menu"
+                                aria-expanded="false"
+                            >
+                                <li *ngFor="let subitem of item.subItems">
+                                    <a
+                                        [routerLink]="subitem.link"
+                                        *ngIf="!hasItems(subitem)"
+                                        class="side-nav-link-ref"
+                                        [attr.data-parent]="subitem.parentId"
+                                        routerLinkActive="active"
                                     >
-                                        <a
-                                            [attr.data-parent]="
-                                                subSubitem.parentId
+                                        {{ subitem.label | translate }}
+                                    </a>
+                                    <a
+                                        *ngIf="hasItems(subitem)"
+                                        class="side-nav-link-a-ref has-arrow"
+                                        href="javascript:void(0);"
+                                        [attr.data-parent]="subitem.parentId"
+                                    >
+                                        {{ subitem.label | translate }}
+                                    </a>
+                                    <ul
+                                        *ngIf="hasItems(subitem)"
+                                        class="sub-menu mm-collapse"
+                                        aria-expanded="false"
+                                    >
+                                        <li
+                                            *ngFor="
+                                                let subSubitem of subitem.subItems
                                             "
-                                            [routerLink]="subSubitem.link"
-                                            routerLinkActive="active"
-                                            class="side-nav-link-ref"
                                         >
-                                            {{ subSubitem.label | translate }}
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
+                                            <a
+                                                [attr.data-parent]="
+                                                    subSubitem.parentId
+                                                "
+                                                [routerLink]="subSubitem.link"
+                                                routerLinkActive="active"
+                                                class="side-nav-link-ref"
+                                            >
+                                                {{ subSubitem.label | translate }}
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
                 </ng-container>
                 <!-- Check Permission -->
 

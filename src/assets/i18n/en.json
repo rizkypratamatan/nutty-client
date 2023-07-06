@@ -261,7 +261,9 @@
         "REPORT": {
             "TEXT": "REPORT",
             "LIST": {
-                "REPORT": "Report"
+                "REPORT": "Report",
+                "USER": "User",
+                "WEBSITE": "Website"
             }
         },
         "SMS": {

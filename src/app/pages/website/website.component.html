@@ -48,7 +48,7 @@
                                 (ngModelChange)="updateFilters()"
                             >
                                 <option value="">Status</option>
-                                <option *ngFor="let status of allStatus">
+                                <option *ngFor="let status of statusFilter">
                                     {{ status }}
                                 </option>
                             </select>
@@ -109,6 +109,14 @@
                                         class="btn btn-outline-secondary btn-sm"
                                         ><i class="bx uil-edit"></i></a
                                     >
+                                    &nbsp;
+                                    <button
+                                        ng-confirm-click="Are you sure to delete this record ?"
+                                        (click)="delete(website._id, website.name)"
+                                        class="btn btn-outline-secondary btn-sm"
+                                    >
+                                    <i class="bx uil-trash"></i>
+                                    </button>
                                 </td>
                             </tr>
                         </tbody>

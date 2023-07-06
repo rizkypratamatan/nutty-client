@@ -5,13 +5,12 @@ import { EncryptionService } from '../global/encryption.service';
 import { RestService } from '../global/rest.service';
 import { UserService } from '../user/user.service';
 import { Observable } from 'rxjs';
-import { AuthService } from '../global/auth.service';
 
 @Injectable({
-    providedIn: 'root',
+  providedIn: 'root'
 })
-export class DatabaseService {
-    public configuration: ConfigurationService;
+export class WorksheetService {
+  public configuration: ConfigurationService;
 
     accountData: string;
     auth: [];
@@ -21,13 +20,13 @@ export class DatabaseService {
         private configurationService: ConfigurationService,
         private encryptionService: EncryptionService,
         private globalRestService: RestService,
-        private authServices: AuthService
+        private userServices: UserService
     ) {
         this.configuration = this.configurationService;
     }
 
-    public getAllDatabase(filter, page): Observable<any> {
-        let auth = this.authServices.Auth();
+    public getAllCrm(filter, page): Observable<any> {
+        let auth = this.userServices.Auth();
         let limit = 20;
         let offset = 0;
         if(page > 1){
@@ -37,20 +36,19 @@ export class DatabaseService {
             platform: 'Website',
             limit: limit,
             offset: offset,
-            name: filter.name,
-            phone: filter.phone,
-            website: filter.website,
+            websiteId: filter.websiteId,
+            days:filter.days
         };
         
         return this.http.post(
-            this.configuration.api.url + '/api/get-database',
-            this.globalRestService.initializeBody(data, 'api/get-database'),
+            this.configuration.api.url + '/api/worksheet/crm',
+            this.globalRestService.initializeBody(data, 'api/worksheet/crm'),
             this.globalRestService.initializeHeaderGetData(auth['token-auth'])
         );
     }
 
     public getDatabaseById(id): Observable<any> {
-        let auth = this.authServices.Auth();
+        let auth = this.userServices.Auth();
         let data = {
             platform: 'Website',
             id: id,
@@ -67,7 +65,7 @@ export class DatabaseService {
     }
 
     public addDatabase(request): Observable<any> {
-        let auth = this.authServices.Auth();
+        let auth = this.userServices.Auth();
 
         return this.http.post(
             this.configuration.api.url + '/api/add-database',
@@ -77,7 +75,7 @@ export class DatabaseService {
     }
 
     public updateDatabase(id, request): Observable<any> {
-        let auth = this.authServices.Auth();
+        let auth = this.userServices.Auth();
         request.id = id;
         // console.log(this.globalRestService.initializeBody(
         //     request,
@@ -95,7 +93,7 @@ export class DatabaseService {
     }
 
     public deleteDatabase(data): Observable<any> {
-        let auth = this.authServices.Auth();
+        let auth = this.userServices.Auth();
 
         return this.http.post(
             this.configuration.api.url + '/api/delete-database',

@@ -11,8 +11,10 @@ import { WebsiteComponent } from './website/website.component';
 import { LicenseComponent } from './license/license.component';
 import { ReportComponent } from './report/report.component';
 import { ApiComponent } from './api/api.component';
+import { AddEditApiComponent } from './api/add-edit.component';
 import { WorksheetComponent } from './worksheet/worksheet.component';
 import { WorksheetResultComponent } from './worksheet-result/worksheet-result.component';
+import { WorksheetCrmComponent } from './worksheet-crm/worksheet-crm.component';
 import { DatabaseComponent } from './database/database.component';
 import { DatabaseImportComponent } from './database-import/database-import.component';
 import { DatabaseHistoryComponent } from './database-history/database-history.component';
@@ -55,6 +57,7 @@ const routes: Routes = [
   { path: 'website/add-edit/:id', component: AddEditWebsiteComponent },
   { path: 'worksheet', component: WorksheetComponent },
   { path: 'worksheet/result', component: WorksheetResultComponent },
+  { path: 'worksheet/crm', component: WorksheetCrmComponent },
   { path: 'database', component: DatabaseComponent },
   { path: 'database/add-edit', component: AddEditDatabaseComponent },
   { path: 'database/add-edit/:id', component: AddEditDatabaseComponent },
@@ -62,6 +65,7 @@ const routes: Routes = [
   { path: 'database/history', component: DatabaseHistoryComponent },
   { path: 'report', component: ReportComponent },
   { path: 'api', component: ApiComponent },
+  { path: 'api/add-edit/:id', component: AddEditApiComponent },
   { path: 'license', component: LicenseComponent },
   { path: 'sms', loadChildren: () => import('./sms/sms.module').then(m => m.SmsModule) },
   { path: 'whatsapp', loadChildren: () => import('./whatsapp/whatsapp.module').then(m => m.WhatsappModule) },

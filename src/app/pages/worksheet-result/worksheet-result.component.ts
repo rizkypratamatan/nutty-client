@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FlatpickrOptions } from 'ng2-flatpickr';
 
 @Component({
   selector: 'app-worksheet-result',
@@ -10,6 +11,10 @@ export class WorksheetResultComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  datePickerOption: FlatpickrOptions = {
+    "dateFormat": "Y/m/d"
   }
 
 }

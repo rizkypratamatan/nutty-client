@@ -26,14 +26,14 @@ export class UserService {
         this.configuration = this.configurationService;
     }
 
-    // public Auth() {
-    //     this.accountData = localStorage.getItem('nu-account');
-    //     this.auth = JSON.parse(
-    //         this.encryptionService.aesDecrypt(this.accountData)
-    //     );
+    public Auth() {
+        this.accountData = localStorage.getItem('nu-account');
+        this.auth = JSON.parse(
+            this.encryptionService.aesDecrypt(this.accountData)
+        );
 
-    //     return this.auth;
-    // }
+        return this.auth;
+    }
 
     public getAllUser(filter, page): Observable<any> {
         let auth = this.authServices.Auth();

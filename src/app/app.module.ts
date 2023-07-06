@@ -7,6 +7,7 @@ import {
     HttpClientModule,
 } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { Ng2FlatpickrModule } from 'ng2-flatpickr';
 
 import {
     NgbAccordionModule,
@@ -45,6 +46,7 @@ function initializer(
 @NgModule({
     declarations: [AppComponent, AppComponents],
     imports: [
+        Ng2FlatpickrModule,
         BrowserModule,
         BrowserAnimationsModule,
         HttpClientModule,

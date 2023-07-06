@@ -8,7 +8,7 @@ export const MENU: MenuItem[] = [
         label: 'MENUITEMS.MENU.TEXT',
         isTitle: true,
         name: 'dashboard',
-        permission: 0
+        permission: 0,
     },
     {
         id: 2,
@@ -20,20 +20,20 @@ export const MENU: MenuItem[] = [
         },
         link: '/dashboard',
         name: 'dashboard',
-        permission: 0
+        permission: 0,
     },
     {
         id: 3,
         isLayout: true,
         name: 'dashboard',
-        permission: 0
+        permission: 0,
     },
     {
         id: 4,
         label: 'MENUITEMS.USER.TEXT',
         isTitle: true,
         name: 'user',
-        permission: 0
+        permission: 0,
     },
     {
         id: 5,
@@ -47,12 +47,16 @@ export const MENU: MenuItem[] = [
                 label: 'MENUITEMS.USER.LIST.LIST',
                 link: '/user',
                 parentId: 5,
+                name: 'user',
+                permission: 0,
             },
             {
                 id: 7,
                 label: 'MENUITEMS.USER.LIST.ADD',
                 link: '/user/add-edit',
                 parentId: 5,
+                name: 'user',
+                permission: 1,
             },
         ],
     },
@@ -68,12 +72,16 @@ export const MENU: MenuItem[] = [
                 label: 'MENUITEMS.USER.LIST.LIST',
                 link: '/user/role',
                 parentId: 8,
+                name: 'userRole',
+                permission: 0,
             },
             {
                 id: 10,
                 label: 'MENUITEMS.USER.LIST.ADD',
                 link: '/user/role/add-edit',
                 parentId: 8,
+                name: 'userRole',
+                permission: 1,
             },
         ],
     },
@@ -89,12 +97,16 @@ export const MENU: MenuItem[] = [
                 label: 'MENUITEMS.USER.LIST.LIST',
                 link: '/user/group',
                 parentId: 11,
+                name: 'userGroup',
+                permission: 0,
             },
             {
                 id: 13,
                 label: 'MENUITEMS.USER.LIST.ADD',
                 link: '/user/group/add-edit',
                 parentId: 11,
+                name: 'userGroup',
+                permission: 1,
             },
         ],
     },
@@ -103,7 +115,7 @@ export const MENU: MenuItem[] = [
         label: 'MENUITEMS.WEBSITE.TEXT',
         isTitle: true,
         name: 'website',
-        permission: 0
+        permission: 0,
     },
     {
         id: 15,
@@ -117,12 +129,16 @@ export const MENU: MenuItem[] = [
                 label: 'MENUITEMS.WEBSITE.LIST.LIST',
                 link: '/website',
                 parentId: 15,
+                name: 'website',
+                permission: 0,
             },
             {
                 id: 17,
                 label: 'MENUITEMS.WEBSITE.LIST.ADD',
                 link: '/website/add-edit',
                 parentId: 15,
+                name: 'website',
+                permission: 1,
             },
         ],
     },
@@ -131,7 +147,7 @@ export const MENU: MenuItem[] = [
         label: 'MENUITEMS.APPS.TEXT',
         isTitle: true,
         name: 'worksheet',
-        permission: 0
+        permission: 0,
     },
     {
         id: 19,
@@ -145,19 +161,24 @@ export const MENU: MenuItem[] = [
                 label: 'MENUITEMS.APPS.LIST.NEW_DATA',
                 link: '/worksheet',
                 parentId: 19,
-
+                name: 'worksheet',
+                permission: 1,
             },
             {
                 id: 61,
                 label: 'MENUITEMS.APPS.LIST.WR_CRM',
                 link: '/worksheet/crm',
                 parentId: 19,
+                name: 'worksheet',
+                permission: 0,
             },
             {
                 id: 21,
                 label: 'MENUITEMS.APPS.LIST.RESULT',
                 link: '/worksheet/result',
                 parentId: 19,
+                name: 'worksheet',
+                permission: 0,
             },
         ],
     },
@@ -166,7 +187,7 @@ export const MENU: MenuItem[] = [
         label: 'MENUITEMS.DATABASE.TEXT',
         isTitle: true,
         name: 'database',
-        permission: 0
+        permission: 0,
     },
     {
         id: 23,
@@ -180,23 +201,31 @@ export const MENU: MenuItem[] = [
                 label: 'MENUITEMS.DATABASE.LIST.LIST',
                 link: '/database',
                 parentId: 23,
+                name: 'database',
+                permission: 0,
             },
             {
                 id: 25,
                 label: 'MENUITEMS.DATABASE.LIST.IMPORT',
                 parentId: 23,
+                name: 'database',
+                permission: 0,
                 subItems: [
                     {
                         id: 26,
                         label: 'MENUITEMS.DATABASE.LIST.NEW_DATA',
                         link: '/database/import',
                         parentId: 25,
+                        name: 'database',
+                        permission: 1,
                     },
                     {
                         id: 27,
                         label: 'MENUITEMS.DATABASE.LIST.HISTORY',
                         link: '/database/history',
                         parentId: 25,
+                        name: 'database',
+                        permission: 0,
                     },
                 ],
             },
@@ -207,7 +236,7 @@ export const MENU: MenuItem[] = [
         label: 'MENUITEMS.REPORT.TEXT',
         isTitle: true,
         name: 'report',
-        permission: 0
+        permission: 0,
     },
     {
         id: 29,
@@ -215,14 +244,14 @@ export const MENU: MenuItem[] = [
         icon: 'uil-graph-bar',
         link: '/report',
         name: 'report',
-        permission: 0
+        permission: 0,
     },
     {
         id: 30,
         label: 'MENUITEMS.TOOLS.TEXT',
         isTitle: true,
         name: 'tools',
-        permission: 0
+        permission: 0,
     },
     {
         id: 31,
@@ -242,6 +271,8 @@ export const MENU: MenuItem[] = [
                 label: 'MENUITEMS.SMS.LIST.SENT',
                 link: '/sms/sent',
                 parentId: 31,
+                name: 'tools',
+                permission: 1,
             },
             // {
             //     id: 34,
@@ -260,6 +291,8 @@ export const MENU: MenuItem[] = [
                 label: 'MENUITEMS.SMS.LIST.SCHEDULED',
                 link: '',
                 parentId: 31,
+                name: 'tools',
+                permission: 0,
             },
         ],
     },
@@ -281,6 +314,8 @@ export const MENU: MenuItem[] = [
                 label: 'MENUITEMS.WHATSAPP.LIST.SENT',
                 link: '/whatsapp/sent',
                 parentId: 37,
+                name: 'tools',
+                permission: 1,
             },
             // {
             //     id: 40,
@@ -299,6 +334,8 @@ export const MENU: MenuItem[] = [
                 label: 'MENUITEMS.WHATSAPP.LIST.SCHEDULED',
                 link: '',
                 parentId: 37,
+                name: 'tools',
+                permission: 0,
             },
             // {
             //     id: 43,
@@ -326,12 +363,16 @@ export const MENU: MenuItem[] = [
                 label: 'MENUITEMS.EMAIL.LIST.SENT',
                 link: '/email/sent',
                 parentId: 45,
+                name: 'tools',
+                permission: 1,
             },
             {
                 id: 47,
                 label: 'MENUITEMS.EMAIL.LIST.SCHEDULED',
                 link: '',
                 parentId: 45,
+                name: 'tools',
+                permission: 0,
             },
         ],
     },
@@ -347,12 +388,16 @@ export const MENU: MenuItem[] = [
                 label: 'MENUITEMS.TOOLS.LIST.MESSAGE.LIST.LIST',
                 link: '/message/list',
                 parentId: 48,
+                name: 'tools',
+                permission: 0,
             },
             {
                 id: 49,
                 label: 'MENUITEMS.TOOLS.LIST.MESSAGE.LIST.ADD',
                 link: '/message/add-edit',
                 parentId: 48,
+                name: 'tools',
+                permission: 1,
             },
         ],
     },
@@ -399,7 +444,7 @@ export const MENU: MenuItem[] = [
         label: 'MENUITEMS.SETTING.TEXT',
         isTitle: true,
         name: 'setting',
-        permission: 0
+        permission: 0,
     },
     {
         id: 57,
@@ -407,7 +452,7 @@ export const MENU: MenuItem[] = [
         icon: 'uil-cog',
         link: '#',
         name: 'setting',
-        permission: 0
+        permission: 0,
     },
     {
         id: 58,
@@ -415,14 +460,14 @@ export const MENU: MenuItem[] = [
         icon: 'uil-exchange',
         link: '/api',
         name: 'settingApi',
-        permission: 0
+        permission: 0,
     },
     {
         id: 59,
         label: 'MENUITEMS.LICENSE.TEXT',
         isTitle: true,
         name: 'setting',
-        permission: 0
+        permission: 0,
     },
     {
         id: 60,
@@ -430,7 +475,7 @@ export const MENU: MenuItem[] = [
         icon: 'uil-file-bookmark-alt',
         link: '/license',
         name: 'setting',
-        permission: 0
+        permission: 0,
     },
     // {
     //     id: 4,

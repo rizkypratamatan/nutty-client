@@ -233,14 +233,14 @@
                                 <td>{{ !message.modified.timestamp.$date ?  message.modified.timestamp : message.modified.timestamp.$date.$numberLong | date }}</td>
                                 <td>
                                     <a
-                                        (click)="edit(message._id)"
+                                        (click)="edit(message._id.$oid)"
                                         class="btn btn-outline-secondary btn-sm"
                                         ><i class="bx uil-edit"></i></a
                                     >
                                     &nbsp;
                                     <button
                                         ng-confirm-click="Are you sure to delete this record ?"
-                                        (click)="delete(message._id, message.name)"
+                                        (click)="delete(message._id.$oid, message.name)"
                                         class="btn btn-outline-secondary btn-sm"
                                     >
                                     <i class="bx uil-trash"></i>

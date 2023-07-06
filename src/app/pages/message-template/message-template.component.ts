@@ -52,12 +52,12 @@ export class MessageTemplateComponent implements OnInit {
     getPage(page: number) {
         this.loading = true;
         this.service.getAllMessageTemplate(this.fields, page).subscribe((response) => {
-        //   console.log(response);
+        //   console.log(response['data']);
             this.allMessage = response['data'];
             this.allType = this.typeFilter;
             this.p = page;
             // this.allStatus = this.statusFilter;
-            // this.totalMessage = response['total_data'];
+            this.totalMessage = response['total_data'];
             this.loading = false;
         });
     }

@@ -37,6 +37,7 @@ export class MessageTemplateService {
             platform: 'Website',
             limit: limit,
             offset: offset,
+            name: filter.name,
         };
         // console.log(this.globalRestService.initializeBody(data, 'api/get-all-template'));return;
         return this.http.post(
@@ -79,7 +80,7 @@ export class MessageTemplateService {
         let auth = this.authServices.Auth();
         request.id = id;
 
-        // console.log(this.globalRestService.initializeBody(request, 'api/update-user'));
+        // console.log(this.globalRestService.initializeBody(request, 'api/update-template'));
         // return;
 
         return this.http.post(

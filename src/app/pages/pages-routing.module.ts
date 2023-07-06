@@ -71,7 +71,7 @@ const routes: Routes = [
   { path: 'whatsapp', loadChildren: () => import('./whatsapp/whatsapp.module').then(m => m.WhatsappModule) },
   { path: 'message/list', component: MessageTemplateComponent },
   { path: 'message/add-edit', component: AddEditMessageTemplateComponent },
-  { path: 'message/add-edit/:id', component: MessageTemplateComponent },
+  { path: 'message/add-edit/:id', component: AddEditMessageTemplateComponent },
 ];
 
 @NgModule({

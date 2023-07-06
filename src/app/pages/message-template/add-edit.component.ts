@@ -47,6 +47,7 @@ export class AddEditMessageTemplateComponent implements OnInit {
 
         if (!this.isAddMode) {
             this.service.getMessageById(this.id).subscribe((response) => {
+                console.log(response);
                 // this.role = response.dataUser.role._id.$oid;
                 // this.group = response.dataUser.group._id.$oid
 

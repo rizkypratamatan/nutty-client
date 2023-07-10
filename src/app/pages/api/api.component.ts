@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { ApiService } from 'src/app/services/api/api.service';
+import { HelperService } from 'src/app/services/helper.service';
 
 @Component({
     selector: 'app-api',
@@ -30,7 +31,7 @@ export class ApiComponent implements OnInit {
         this.getPage(1);
     }
 
-    constructor(private service: ApiService, private router: Router) {}
+    constructor(private service: ApiService, private router: Router, private helper: HelperService) {}
 
     ngOnInit(): void {
         this.getPage(1);
@@ -48,5 +49,9 @@ export class ApiComponent implements OnInit {
 
     edit(id) {
         this.router.navigate(['/api/add-edit/' + id]);
+    }
+
+    initializeDate(timestamp){
+        return this.helper.initializeDate(timestamp);
     }
 }

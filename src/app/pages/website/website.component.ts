@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { WebsiteService } from 'src/app/services/website/website.service';
+import { HelperService } from 'src/app/services/helper.service';
 
 @Component({
     selector: 'app-website',
@@ -37,7 +38,7 @@ export class WebsiteComponent implements OnInit {
         this.getPage(1);
     }
 
-    constructor(private service: WebsiteService, private router: Router) {}
+    constructor(private service: WebsiteService, private router: Router, private helper: HelperService) {}
 
     ngOnInit(): void {
         // this.service.getAllWebsite(this.fields).subscribe((response) => {
@@ -95,5 +96,9 @@ export class WebsiteComponent implements OnInit {
                 }
             });
         }
+    }
+
+    initializeTimestamp(timestamp){
+        return this.helper.initializeTimestamp(timestamp);
     }
 }

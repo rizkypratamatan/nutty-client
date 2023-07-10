@@ -75,7 +75,6 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
         this.auth = this.authService.Auth();
         this.populatePrivilege(this.auth['privilege']);
 
-        // console.log(this.privilege);
     }
 
     populatePrivilege(privilege) {

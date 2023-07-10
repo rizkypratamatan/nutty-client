@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { UserGroupService } from 'src/app/services/user/user-group.service';
 import { UserRoleService } from 'src/app/services/user/user-role.service';
 import { UserService } from 'src/app/services/user/user.service';
+import { HelperService } from 'src/app/services/helper.service';
 
 @Component({
     selector: 'app-user',
@@ -46,7 +47,8 @@ export class UserComponent implements OnInit {
         private service: UserService,
         private userGroupService: UserGroupService,
         private userRoleService: UserRoleService,
-        private router: Router
+        private router: Router,
+        private helper: HelperService
     ) {}
 
     ngOnInit(): void {
@@ -99,5 +101,9 @@ export class UserComponent implements OnInit {
                 }
             });
         }
+    }
+
+    initializeTimestamp(timestamp){
+        return this.helper.initializeTimestamp(timestamp);
     }
 }

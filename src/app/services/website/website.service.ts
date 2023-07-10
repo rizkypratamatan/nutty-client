@@ -43,7 +43,6 @@ export class WebsiteService {
             type: (filter.type)?filter.type:"",
             status: (filter.status)?filter.status:"",
         };
-        console.log(data);
         return this.http.post(
             this.configuration.api.url + '/api/get-websites',
             this.globalRestService.initializeBody(data, 'api/get-websites'),
@@ -93,8 +92,6 @@ export class WebsiteService {
     }
     public deleteWebsite(id): Observable<any> {
         let auth = this.authServices.Auth();
-
-        // console.log(this.globalRestService.initializeBody(body, 'api/get-database')); return;
 
         return this.http.post(
             this.configuration.api.url + '/api/delete-website',

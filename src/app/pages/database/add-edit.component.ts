@@ -71,7 +71,6 @@ export class AddEditDatabaseComponent implements OnInit {
 
         if (!this.isAddMode) {
             this.service.getDatabaseById(this.id).subscribe((response) => {
-                // console.log(response);
 
                 this.fields = {
                     city: response.data.city,
@@ -146,7 +145,7 @@ export class AddEditDatabaseComponent implements OnInit {
 
     private update() {
         let id = this.id;
-        console.log(this.fields);
+        
         
         // this.service.updateDatabase(id, this.fields).subscribe((response) => {
           
@@ -157,7 +156,6 @@ export class AddEditDatabaseComponent implements OnInit {
     }
 
     onOptionsSelectedGroup() {
-        // console.log(this.group);
 
         if (this.group !== null && this.group !== undefined) {
             this.filteredGroup = this.allGroup.filter((t) => t == this.group);

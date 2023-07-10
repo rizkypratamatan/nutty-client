@@ -63,7 +63,8 @@ export class AddEditApiComponent implements OnInit {
   }
 
   datePickerOption: FlatpickrOptions = {
-    "dateFormat": "Y/m/d"
+    dateFormat: 'Y/m/d',
+    onChange: ( selectedDates: any ) => {  this.fields.start = this.initializeDate(selectedDates[0]); }
   }
 
   private initializeDate(timestamp) {
@@ -141,7 +142,7 @@ export class AddEditApiComponent implements OnInit {
 
   private update() {
       let id = this.id;
-
+      
       this.service.updateApi(id, this.fields).subscribe((response) => {
           if (response.result === true) {
               this.loadingIndicator = false
@@ -151,7 +152,6 @@ export class AddEditApiComponent implements OnInit {
                   icon: 'success',
                   confirmButtonText: 'Close'
               });
-              this.router.navigate(['/api']);
           }else{
             this.loadingIndicator = false
             Swal.fire({

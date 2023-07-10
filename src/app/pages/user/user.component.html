@@ -316,7 +316,7 @@
                                 <td>{{ user.role.name }}</td>
                                 <td>{{ user.status }}</td>
                                 <td>
-                                    {{ !user.modified.timestamp.$date ?  user.modified.timestamp : user.modified.timestamp.$date.$numberLong | date }}
+                                    {{ !user.modified.timestamp.$date ?  user.modified.timestamp : initializeTimestamp(user.modified.timestamp.$date.$numberLong) }}
                                 </td>
                                 <td>
                                     <a

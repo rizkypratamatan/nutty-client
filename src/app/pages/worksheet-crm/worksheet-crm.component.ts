@@ -15,6 +15,7 @@ export class WorksheetCrmComponent implements OnInit {
   loading: boolean = false;
   allWebsite: any[] = [];
   websiteId: boolean= false;
+  auth:any;
 
   filter = {
       'websiteId' : '',
@@ -36,21 +37,28 @@ export class WorksheetCrmComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-      let auth = this.userService.Auth();
-      console.log(auth)
+      this.auth = this.userService.Auth();
       
-      if(auth['role'].name.toLowerCase() == 'system'){
+      if(this.auth['role'].name.toLowerCase() == 'system'){
           this.websiteService.getAllWebsite({}, 1).subscribe((response) => {
               this.allWebsite = response['data'];
               // this.getPage(1);
           });
           
       }else{
-          if(auth['group']._id){
-            this.websiteId = true;
-            this.filter.websiteId = auth['group']._id;
+          if(this.auth['group']._id){
+            this.websiteService.getAllWebsite({}, 1).subscribe((response) => {
+              response['data'].forEach(value => {
+                if(this.auth['group']['website']['ids'].includes(value._id)){
+                  this.allWebsite.push(value);
+                }
+              });
+              // this.getPage(1);
+            });
+            // this.websiteId = true;
+            // this.filter.websiteId = auth['website']._id.$oid;
           }
-          this.getPage(1);
+        //   this.getPage(1);
       }
   }
 

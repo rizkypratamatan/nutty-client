@@ -121,7 +121,7 @@
                                 <td>{{ group.status }}</td>
                                 <td>
                                     {{
-                                        !group.modified.timestamp.$date ?  group.modified.timestamp : group.modified.timestamp.$date.$numberLong | date
+                                        !group.modified.timestamp.$date ?  group.modified.timestamp : initializeTimestamp(group.modified.timestamp.$date.$numberLong)
                                     }}
                                 </td>
                                 <td>

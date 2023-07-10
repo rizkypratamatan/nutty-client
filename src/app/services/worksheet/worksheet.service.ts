@@ -77,10 +77,6 @@ export class WorksheetService {
     public updateDatabase(id, request): Observable<any> {
         let auth = this.userServices.Auth();
         request.id = id;
-        // console.log(this.globalRestService.initializeBody(
-        //     request,
-        //     'api/update-database'
-        // ));return;
         
         return this.http.post(
             this.configuration.api.url + '/api/update-database',

@@ -101,7 +101,7 @@
                                 <td>{{ website.nucode }}</td>
                                 <td>{{ website.status }}</td>
                                 <td>
-                                    {{ !website.modified.timestamp.$date ?  website.modified.timestamp : website.modified.timestamp.$date.$numberLong | date }}
+                                    {{ !website.modified.timestamp.$date ?  website.modified.timestamp : initializeTimestamp(website.modified.timestamp.$date.$numberLong) }}
                                 </td>
                                 <td>
                                     <a

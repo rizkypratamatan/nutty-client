@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { WebsiteService } from 'src/app/services/website/website.service';
 import { HelperService } from 'src/app/services/helper.service';
+import { AuthService } from 'src/app/services/global/auth.service';
 
 @Component({
     selector: 'app-website',
@@ -29,23 +30,23 @@ export class WebsiteComponent implements OnInit {
     totalWebsite: number;
 
     statusFilter = ['Active', 'Inactive'];
+    auth: any;
 
-    updateFilters() {
-        // Object.keys(this.fields).forEach((key) =>
-        //     this.fields[key] === '' ? delete this.fields[key] : key
-        // );
-        // this.filter = Object.assign({}, this.fields);
+    
+
+    constructor(private service: WebsiteService, 
+        private router: Router, 
+        private helper: HelperService,
+        private authService: AuthService
+        ) {
+            this.auth = this.authService.Auth();
+        }
+
+    ngOnInit(): void {
         this.getPage(1);
     }
 
-    constructor(private service: WebsiteService, private router: Router, private helper: HelperService) {}
-
-    ngOnInit(): void {
-        // this.service.getAllWebsite(this.fields).subscribe((response) => {
-        //     console.log(response)
-        //     this.allWebsites = response['data'];
-        //     this.totalWebsite = response['total_data'];
-        // });
+    updateFilters() {
         this.getPage(1);
     }
 

@@ -18,136 +18,172 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
-                    <form class="row g-1 mb-3" method="POST" action="">
+                    <div class="row g-1 mb-3">
                         <div class="col-md-3">
-                            <ng2-flatpickr class="form-control flatpickr-input" [config]="datePickerOption" placeholder="date"></ng2-flatpickr>
+                            <ng2-flatpickr class="form-control flatpickr-input" 
+                                            [config]="datePickerOption" 
+                                            placeholder="date"
+                                            ></ng2-flatpickr>
                         </div>
-                        <!-- @if(Session::has("account"))
-                            @if(Session::get("account")->type == "Administrator") -->
-                                <div class="col-md-3">
-                                    <select id="worksheet-result-filter-user"
-                                            class="select2 form-select dt-select"
-                                            name="worksheet-result-filter-user" data-column="2"
-                                            data-regex="false" data-value="">
-                                        <option value="">User</option>
-                                        <!-- @foreach($model->users as $value)
-                                            <option value="{{$value->_id}}">{{$value->username}}</option>
-                                        @endforeach -->
-                                    </select>
-                                </div>
-                                <div class="col-md-3">
-                                    <input class="form-control dt-input" type="text" placeholder="Username"
-                                           data-column="3" data-regex="true"/>
-                                </div>
-                                <div class="col-md-3">
-                                    <input class="form-control dt-input" type="text" placeholder="Name"
-                                           data-column="4" data-regex="true"/>
-                                </div>
-                                <div class="col-md-3">
-                                    <input class="form-control dt-input" type="text" placeholder="Phone"
-                                           data-column="4" data-regex="true"/>
-                                </div>
-                                <div class="col-md-3">
-                                    <input class="form-control dt-input" type="text" placeholder="Whatsapp"
-                                           data-column="4" data-regex="true"/>
-                                </div>
-                                <div class="col-md-3">
-                                    <select class="select2 form-select dt-select"
-                                            name="worksheet-result-filter-status"
-                                            data-column="5" data-regex="false">
-                                        <option value="">Website</option>
-                                        <!-- @foreach($model->websites as $value)
-                                            <option value="{{$value->_id}}">{{$value->name}}</option>
-                                        @endforeach -->
-                                    </select>
-                                </div>
-                                <div class="col-md-3">
-                                    <select class="select2 form-select dt-select"
-                                            name="worksheet-result-filter-status"
-                                            data-column="6" data-regex="false">
-                                        <option value="">Status</option>
-                                        <option value="Registered">Registered</option>
-                                        <option value="Interested">Interested</option>
-                                        <option value="FollowUp">Follow Up</option>
-                                        <option value="NotActive">Not Active</option>
-                                        <option value="NotPickedUp">Not Picked Up</option>
-                                        <option value="NotInterested">Not Interested</option>
-                                        <option value="InvalidNumber">Invalid Number</option>
-                                    </select>
-                                </div>
-                            <!-- @else -->
-                                <!-- <div class="col-md-2">
-                                    <input class="form-control dt-input" type="text" placeholder="Username"
-                                           data-column="2" data-regex="true"/>
-                                </div>
-                                <div class="col-md-2">
-                                    <input class="form-control dt-input" type="text" placeholder="Name"
-                                           data-column="3" data-regex="true"/>
-                                </div>
-                                <div class="col-md-2">
-                                    <select class="select2 form-select dt-select"
-                                            name="worksheet-result-filter-status"
-                                            data-column="4" data-regex="false">
-                                        <option value="">Website</option>
-                                        @foreach($model->websites as $value)
-                                            <option value="{{$value->_id}}">{{$value->name}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="col-md-2">
-                                    <select class="select2 form-select dt-select"
-                                            name="worksheet-result-filter-status"
-                                            data-column="5" data-regex="false">
-                                        <option value="">Status</option>
-                                        <option value="Registered">Registered</option>
-                                        <option value="Interested">Interested</option>
-                                        <option value="FollowUp">Follow Up</option>
-                                        <option value="NotActive">Not Active</option>
-                                        <option value="NotPickedUp">Not Picked Up</option>
-                                        <option value="NotInterested">Not Interested</option>
-                                        <option value="InvalidNumber">Invalid Number</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-2"></div> -->
-                            <!-- @endif
-                        @endif -->
-                    </form>
-                    <div class="col-12 overflow-auto">
-                        <table id="worksheet-result" class="table table-striped table-bordered nowrap"
-                               style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-                            <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Date</th>
-                                <!-- @if(Session::has("account"))
-                                    @if(Session::get("account")->type == "Administrator") -->
-                                        <th>User</th>
-                                    <!-- @endif
-                                @endif -->
-                                <th>Username</th>
-                                <th>Name</th>
-                                <th>Website</th>
-                                <th>Status</th>
-                                <th>Action</th>
-                            </tr>
-                            </thead>
-                            <tfoot>
-                            <tr>
-                                <th>#</th>
-                                <th>Date</th>
-                                <!-- @if(Session::has("account"))
-                                    @if(Session::get("account")->type == "Administrator") -->
-                                        <th>User</th>
-                                    <!-- @endif
-                                @endif -->
-                                <th>Username</th>
-                                <th>Name</th>
-                                <th>Website</th>
-                                <th>Status</th>
-                                <th>Action</th>
-                            </tr>
-                            </tfoot>
-                        </table>
+                        <div class="col-md-3" *ngIf="auth.type == 'Administrator'">
+                            <select id="worksheet-result-filter-user"
+                                    class="select2 form-select dt-select"
+                                    name="worksheet-result-filter-user" data-column="2"
+                                    data-regex="false" data-value="">
+                                <option value="">User</option>
+                                <option *ngFor="let item of allUser" value="">
+
+                                </option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <input
+                                class="form-control dt-input"
+                                type="text"
+                                placeholder="Username"
+                                [(ngModel)]="filter.filter_username"
+                                (ngModelChange)="updateFilters()"
+                            />
+                        </div>
+                
+                        <div class="col-md-3">
+                            <input
+                                class="form-control dt-input"
+                                type="text"
+                                placeholder="Name"
+                                [(ngModel)]="filter.filter_name"
+                                (ngModelChange)="updateFilters()"
+                            />
+                        </div>
+                        <div class="col-md-3">
+                            <input
+                                class="form-control dt-input"
+                                type="text"
+                                placeholder="Phone"
+                                [(ngModel)]="filter.filter_phone"
+                                (ngModelChange)="updateFilters()"
+                            />
+                        </div>
+                        <div class="col-md-3">
+                            <input
+                                class="form-control dt-input"
+                                type="text"
+                                placeholder="Whatsapp"
+                                [(ngModel)]="filter.filter_whatsapp"
+                                (ngModelChange)="updateFilters()"
+                            />
+                        </div>
+                        <div class="col-md-3">
+                            <select
+                                id="filter-website"
+                                class="select2 form-select dt-select"
+                                [(ngModel)]="filter.filter_website"
+                                (ngModelChange)="updateFilters()"
+                            >
+                                <option value="">Website</option>
+                                <option *ngFor="let website of allWebsite" [value]="website._id">
+                                    {{ website.name }}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <select class="select2 form-select dt-select"
+                                    name="worksheet-result-filter-status"
+                                    data-column="6" 
+                                    data-regex="false"
+                                    [(ngModel)]="filter.filter_status"
+                                    (ngModelChange)="updateFilters()">
+                                <option value="">Status</option>
+                                <option value="Registered">Registered</option>
+                                <option value="Interested">Interested</option>
+                                <option value="FollowUp">Follow Up</option>
+                                <option value="NotActive">Not Active</option>
+                                <option value="NotPickedUp">Not Picked Up</option>
+                                <option value="NotInterested">Not Interested</option>
+                                <option value="InvalidNumber">Invalid Number</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-12 overflow-auto">
+                            <table id="worksheet-result" class="table table-striped table-bordered nowrap"
+                                    style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                <thead>
+                                <tr>
+                                    <!-- <th>#</th> -->
+                                    <th>Date</th>
+                                    <th *ngIf="auth.type == 'Administrator'">User</th>
+                                    <th>Phone</th>
+                                    <th>Whatsapp</th>
+                                    <th>Username</th>
+                                    <th>Name</th>
+                                    <th>Website</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    <tr
+                                        *ngFor="
+                                            let item of allData
+                                                | paginate
+                                                    : {
+                                                          itemsPerPage: 20,
+                                                          currentPage: p,
+                                                          totalItems: totalData
+                                                      };
+                                            let i = index
+                                        "
+                                    >
+                                        <!-- <td>{{ i + 1 }}</td> -->
+                                        <td>{{ initializeTimestamp(item.created.timestamp.$date.$numberLong) }}</td>
+                                        <td *ngIf="auth.type == 'Administrator'">{{ item.database.user }}</td>
+                                        <td>{{ hidePhone(item.database[0].contact.phone) }}</td>
+                                        <td>{{ hidePhone(item.database[0].contact.whatsapp) }}</td>
+                                        <td>{{ item.databaseAccount[0].username }}</td>
+                                        <td>{{ item.database[0].name }}</td>
+                                        <td>{{ item.website.name }}</td>
+                                        <td>{{ item.status }}</td>
+                                        <td></td>
+                                        <!-- <td>
+                                            <a
+                                                (click)="edit(database._id)"
+                                                class="btn btn-info btn-sm w-lg"
+                                                >Edit</a
+                                            >
+                                            &nbsp;
+                                            <button
+                                            ng-confirm-click="Are you sure to delete this record ?"
+                                            (click)="delete(database._id, database.name)"
+                                            class="btn btn-outline-secondary btn-sm"
+                                            >
+                                            <i class="bx uil-trash"></i>
+                                            </button>
+                                        </td> -->
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <!-- <th>#</th> -->
+                                    <th>Date</th>
+                                    <th *ngIf="auth.type == 'Administrator'">User</th>
+                                    <th>Phone</th>
+                                    <th>Whatsapp</th>
+                                    <th>Username</th>
+                                    <th>Name</th>
+                                    <th>Website</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                                </tfoot>
+                            </table>
+                            <div class="spinner-border spinner-border-sm" role="status" *ngIf="loading == true">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                            <div style="float:right">
+                                <pagination-controls (pageChange)="getPage($event)"></pagination-controls>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -39,7 +39,7 @@ export class WorksheetService {
             websiteId: filter.websiteId,
             days:filter.days
         };
-        
+        console.log(this.globalRestService.initializeBody(data, 'api/worksheet/crm'))
         return this.http.post(
             this.configuration.api.url + '/api/worksheet/crm',
             this.globalRestService.initializeBody(data, 'api/worksheet/crm'),
@@ -47,54 +47,35 @@ export class WorksheetService {
         );
     }
 
-    public getDatabaseById(id): Observable<any> {
+    public getResult(filter, page): Observable<any> {
         let auth = this.userServices.Auth();
+        let limit = 20;
+        let offset = 0;
+        if(page > 1){
+            offset = limit * (page - 1);
+        }
         let data = {
             platform: 'Website',
-            id: id,
+            limit: limit,
+            offset: offset,
+            filter_name: filter.filter_name,
+            filter_phone: filter.filter_phone,
+            filter_status: filter.filter_status,
+            filter_user: filter.filter_user,
+            filter_username: filter.filter_username,
+            filter_website: filter.filter_website,
+            filter_whatsapp:filter.filter_whatsapp,
+            filter_date:filter.filter_date
         };
+
+        console.log(this.globalRestService.initializeBody(data, 'api/worksheet/result'))
         
         return this.http.post(
-            this.configuration.api.url + '/api/get-database-by-id',
-            this.globalRestService.initializeBody(
-                data,
-                'api/get-database-by-id'
-            ),
+            this.configuration.api.url + '/api/worksheet/result',
+            this.globalRestService.initializeBody(data, 'api/worksheet/result'),
             this.globalRestService.initializeHeaderGetData(auth['token-auth'])
         );
     }
 
-    public addDatabase(request): Observable<any> {
-        let auth = this.userServices.Auth();
-
-        return this.http.post(
-            this.configuration.api.url + '/api/add-database',
-            this.globalRestService.initializeBody(request, 'api/add-database'),
-            this.globalRestService.initializeHeaderGetData(auth['token-auth'])
-        );
-    }
-
-    public updateDatabase(id, request): Observable<any> {
-        let auth = this.userServices.Auth();
-        request.id = id;
-        
-        return this.http.post(
-            this.configuration.api.url + '/api/update-database',
-            this.globalRestService.initializeBody(
-                request,
-                'api/update-database'
-            ),
-            this.globalRestService.initializeHeaderGetData(auth['token-auth'])
-        );
-    }
-
-    public deleteDatabase(data): Observable<any> {
-        let auth = this.userServices.Auth();
-
-        return this.http.post(
-            this.configuration.api.url + '/api/delete-database',
-            this.globalRestService.initializeBody(data, 'api/delete-database'),
-            this.globalRestService.initializeHeaderGetData(auth['token-auth'])
-        );
-    }
+    
 }

@@ -29,7 +29,7 @@
                                 (ngModelChange)="updateFilters()"
                             />
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-2" *ngIf="auth.nucode == 'system'">
                             <input
                                 class="form-control dt-input"
                                 name="website-filter-nucode"
@@ -77,7 +77,7 @@
                             <tr>
                                 <!-- <th>#</th> -->
                                 <th>Name</th>
-                                <th>Nucode</th>
+                                <th *ngIf="auth.nucode == 'system'">Nucode</th>
                                 <th>Status</th>
                                 <th>Modified</th>
                                 <th>Action</th>
@@ -98,7 +98,7 @@
                             >
                                 <!-- <td>{{ i + 1 }}</td> -->
                                 <td>{{ website.name }}</td>
-                                <td>{{ website.nucode }}</td>
+                                <td *ngIf="auth.nucode == 'system'">{{ website.nucode }}</td>
                                 <td>{{ website.status }}</td>
                                 <td>
                                     {{ !website.modified.timestamp.$date ?  website.modified.timestamp : initializeTimestamp(website.modified.timestamp.$date.$numberLong) }}
@@ -124,7 +124,7 @@
                             <tr>
                                 <!-- <th>#</th> -->
                                 <th>Name</th>
-                                <th>Nucode</th>
+                                <th *ngIf="auth.nucode == 'system'">Nucode</th>
                                 <th>Status</th>
                                 <th>Modified</th>
                                 <th>Action</th>

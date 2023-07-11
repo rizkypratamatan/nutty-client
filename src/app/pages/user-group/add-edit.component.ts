@@ -3,6 +3,7 @@ import Swal from 'sweetalert2';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserGroupService } from 'src/app/services/user/user-group.service';
 import { WebsiteService } from 'src/app/services/website/website.service';
+import { AuthService } from 'src/app/services/global/auth.service';
 
 @Component({
     selector: 'app-add-edit',
@@ -26,15 +27,19 @@ export class AddEditGroupComponent implements OnInit {
         name: '',
         status: '',
         websites: this.selectedWebsite,
-        nucode: '',
+        nucode: 'system',
     };
+    auth: any;
 
     constructor(
         private service: UserGroupService,
         private router: Router,
         private route: ActivatedRoute,
-        private serviceWebsite: WebsiteService
-    ) {}
+        private serviceWebsite: WebsiteService,
+        private authService : AuthService
+    ) {
+        this.auth = this.authService.Auth();
+    }
 
     ngOnInit(): void {
         this.id = this.route.snapshot.params['id'];

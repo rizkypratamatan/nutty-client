@@ -31,7 +31,29 @@ export class HelperService {
   
       return ("0" + date.getDate()).slice(-2) + "/" + ("0" + (date.getMonth() + 1)).slice(-2) + "/" + date.getFullYear() + " " + ("0" + date.getHours()).slice(-2) + ":" + ("0" + date.getMinutes()).slice(-2) + ":" + ("0" + date.getSeconds()).slice(-2);
   
-  }
+    }
+
+    public hidePhone(data){
+      let result = "";
+
+      let dataArray = String(data).split("");
+
+      dataArray.forEach(function(value, key) {
+
+          if(key < dataArray.length - 3) {
+
+              result += "*";
+
+          } else {
+
+              result += value;
+
+          }
+
+      });
+
+      return result;
+    }
 
     
 }

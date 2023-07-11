@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import { ActivatedRoute, Router } from '@angular/router';
 import { WebsiteService } from 'src/app/services/website/website.service';
+import { AuthService } from 'src/app/services/global/auth.service';
+import { Auth } from 'firebase/auth';
 
 @Component({
     selector: 'app-add-edit',
@@ -22,16 +24,21 @@ export class AddEditWebsiteComponent implements OnInit {
         token: '',
         description: '',
         name: '',
-        nucode: '',
+        nucode: 'system',
         status: '',
         sync: '',
     };
 
+    auth: any;
+
     constructor(
         private router: Router,
         private route: ActivatedRoute,
-        private service: WebsiteService
-    ) {}
+        private service: WebsiteService,
+        private authService: AuthService
+    ) {
+        this.auth = this.authService.Auth();
+    }
 
     ngOnInit(): void {
         this.id = this.route.snapshot.params['id'];

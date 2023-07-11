@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 import { WebsiteService } from 'src/app/services/website/website.service';
 import { UserService } from 'src/app/services/user/user.service';
 import { WorksheetService } from 'src/app/services/worksheet/worksheet.service';
+import { HelperService } from 'src/app/services/helper.service';
 
 @Component({
   selector: 'app-worksheet-crm',
@@ -15,6 +16,7 @@ export class WorksheetCrmComponent implements OnInit {
   loading: boolean = false;
   allWebsite: any[] = [];
   websiteId: boolean= false;
+  auth:any;
 
   filter = {
       'websiteId' : '',
@@ -32,25 +34,28 @@ export class WorksheetCrmComponent implements OnInit {
       private service: WorksheetService, 
       private router: Router,
       private userService: UserService,
-      private websiteService: WebsiteService
+      private websiteService: WebsiteService,
+      private helper: HelperService
   ) {}
 
   ngOnInit(): void {
-      let auth = this.userService.Auth();
-      console.log(auth)
+      this.auth = this.userService.Auth();
       
-      if(auth['role'].name.toLowerCase() == 'system'){
-          this.websiteService.getAllWebsite({}, 1).subscribe((response) => {
-              this.allWebsite = response['data'];
-              // this.getPage(1);
-          });
-          
+      if(this.auth['role'].name.toLowerCase() == 'system'){
+        this.websiteService.getAllWebsite({}, 1).subscribe((response) => {
+            this.allWebsite = response['data'];
+            // this.getPage(1);
+        });
       }else{
-          if(auth['group']._id){
-            this.websiteId = true;
-            this.filter.websiteId = auth['group']._id;
-          }
-          this.getPage(1);
+        if(this.auth['group']._id){
+            this.websiteService.getAllWebsite({}, 1).subscribe((response) => {
+                response['data'].forEach(value => {
+                if(this.auth['group']['website']['ids'].includes(value._id)){
+                    this.allWebsite.push(value);
+                }
+                });
+            });
+        }
       }
   }
 
@@ -66,37 +71,6 @@ export class WorksheetCrmComponent implements OnInit {
 
   edit(id) {
       this.router.navigate(['/database/add-edit/' + id]);
-  }
-
-  delete(id, name) {
-      let data = {
-          platform: 'Website',
-          id: id,
-          website:{
-              id: this.filter.websiteId
-          }
-      };
-
-      if (confirm('Are you sure to delete data: ' + name)) {
-          this.service.deleteDatabase(data).subscribe((response) => {
-              if (response.result === true) {
-                  Swal.fire({
-                      title: 'Success!',
-                      text: response.response,
-                      icon: 'success',
-                      confirmButtonText: 'Close'
-                  });
-                  this.getPage(1)
-              }else{
-                  Swal.fire({
-                      title: 'Error!',
-                      text: response.response,
-                      icon: 'error',
-                      confirmButtonText: 'Close'
-                  });
-              }
-          });
-      }
   }
 
   hidePhone(data) {
@@ -130,10 +104,7 @@ export class WorksheetCrmComponent implements OnInit {
 
   initializeTimestamp(timestamp) {
 
-    let date = new Date();
-    date.setTime(timestamp);
-
-    return ("0" + date.getDate()).slice(-2) + "/" + ("0" + (date.getMonth() + 1)).slice(-2) + "/" + date.getFullYear() + " " + ("0" + date.getHours()).slice(-2) + ":" + ("0" + date.getMinutes()).slice(-2) + ":" + ("0" + date.getSeconds()).slice(-2);
+    return this.helper.initializeTimestamp(timestamp);
 
   }
 

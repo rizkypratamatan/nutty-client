@@ -44,7 +44,7 @@ export class HistoryComponent implements OnInit {
     getPage(page: number) {
         this.loading = true;
         this.service.getEmails(this.fields, page).subscribe((response) => {
-            // console.log(response);
+            
             this.allEmails = response['data'];
             this.p = page;
             this.allStatus = this.statusFilter;
@@ -61,7 +61,6 @@ export class HistoryComponent implements OnInit {
 
         if (confirm('Are you sure to delete email: ' + phone)) {
             this.service.deleteEmail(data).subscribe((response) => {
-                console.log(response);
                 if (response.result === true) {
                     Swal.fire({
                         title: 'Success!',

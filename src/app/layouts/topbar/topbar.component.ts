@@ -80,7 +80,7 @@ export class TopbarComponent implements OnInit {
     this.accountData = localStorage.getItem('nu-account');
     this.auth = this.Auth.Auth();
 
-    // console.log(this.auth);
+
   }
 
   /**

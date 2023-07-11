@@ -142,6 +142,8 @@
                                 aria-expanded="false"
                             >
                                 <li *ngFor="let subitem of item.subItems">
+
+                                    <ng-container *ngIf="auth['role']['name'] === 'System' || privilege[subitem.name][subitem.permission] == 7">
                                     <a
                                         [routerLink]="subitem.link"
                                         *ngIf="!hasItems(subitem)"
@@ -181,6 +183,8 @@
                                             </a>
                                         </li>
                                     </ul>
+                                    </ng-container>
+
                                 </li>
                             </ul>
                         </li>

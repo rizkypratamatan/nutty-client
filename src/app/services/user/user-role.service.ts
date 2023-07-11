@@ -88,4 +88,14 @@ export class UserRoleService {
             this.globalRestService.initializeHeaderGetData(auth['token-auth'])
         );
     }
+
+    public deleteRole(id): Observable<any> {
+        let auth = this.authServices.Auth();
+
+        return this.http.post(
+            this.configuration.api.url + '/api/delete-role',
+            this.globalRestService.initializeBody(id, 'api/delete-role'),
+            this.globalRestService.initializeHeaderGetData(auth['token-auth'])
+        );
+    }
 }

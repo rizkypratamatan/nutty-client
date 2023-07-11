@@ -43,7 +43,7 @@
                                 />
                                 <div id="response-name"></div>
                             </div>
-                            <div class="mb-3">
+                            <div class="mb-3" *ngIf="auth.nucode == 'system'">
                                 <label class="form-label">Nucode</label>
                                 <input
                                     id="user-role-nucode"

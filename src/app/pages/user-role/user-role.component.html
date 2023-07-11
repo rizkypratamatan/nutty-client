@@ -30,7 +30,7 @@
                                 (ngModelChange)="updateFilters()"
                             />
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-2" *ngIf="auth.nucode == 'system'">
                             <input
                                 class="form-control dt-input"
                                 type="text"
@@ -79,7 +79,7 @@
                             <tr>
                                 <!-- <th>#</th> -->
                                 <th>Name</th>
-                                <th>Nucode</th>
+                                <th *ngIf="auth.nucode == 'system'">Nucode</th>
                                 <th>Status</th>
                                 <th>Modified</th>
                                 <th>Action</th>
@@ -100,11 +100,11 @@
                             >
                                 <!-- <td>{{ i + 1 }}</td> -->
                                 <td>{{ role.name }}</td>
-                                <td>{{ role.nucode }}</td>
+                                <td *ngIf="auth.nucode == 'system'">{{ role.nucode }}</td>
                                 <td>{{ role.status }}</td>
                                 <td>
                                     {{
-                                        !role.modified.timestamp.$date ?  role.modified.timestamp : role.modified.timestamp.$date.$numberLong | date
+                                        !role.modified.timestamp.$date ?  role.modified.timestamp : initializeTimestamp(role.modified.timestamp.$date.$numberLong)
                                     }}
                                 </td>
                                 <td>
@@ -113,6 +113,14 @@
                                         class="btn btn-outline-secondary btn-sm"
                                         ><i class="bx uil-edit"></i></a
                                     >
+                                    &nbsp;
+                                    <button
+                                        ng-confirm-click="Are you sure to delete this record ?"
+                                        (click)="delete(role._id, role.name)"
+                                        class="btn btn-outline-secondary btn-sm"
+                                    >
+                                    <i class="bx uil-trash"></i>
+                                    </button>
                                 </td>
                             </tr>
                         </tbody>
@@ -120,7 +128,7 @@
                             <tr>
                                 <!-- <th>#</th> -->
                                 <th>Name</th>
-                                <th>Nucode</th>
+                                <th *ngIf="auth.nucode == 'system'">Nucode</th>
                                 <th>Status</th>
                                 <th>Modified</th>
                                 <th>Action</th>

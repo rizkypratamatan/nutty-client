@@ -44,7 +44,7 @@
                                 </option>
                             </select>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-2" *ngIf="auth.nucode == 'system'">
                             <input
                                 class="form-control dt-input"
                                 type="text"
@@ -91,7 +91,7 @@
                                 <!-- <th>#</th> -->
                                 <th>Name</th>
                                 <th>Website</th>
-                                <th>Nucode</th>
+                                <th *ngIf="auth.nucode == 'system'">Nucode</th>
                                 <th>Status</th>
                                 <th>Modified</th>
                                 <th>Action</th>
@@ -117,11 +117,11 @@
                                         {{ website }}
                                     </span>
                                 </td>
-                                <td>{{ group.nucode }}</td>
+                                <td *ngIf="auth.nucode == 'system'">{{ group.nucode }}</td>
                                 <td>{{ group.status }}</td>
                                 <td>
                                     {{
-                                        !group.modified.timestamp.$date ?  group.modified.timestamp : group.modified.timestamp.$date.$numberLong | date
+                                        !group.modified.timestamp.$date ?  group.modified.timestamp : initializeTimestamp(group.modified.timestamp.$date.$numberLong)
                                     }}
                                 </td>
                                 <td>
@@ -146,7 +146,7 @@
                                 <!-- <th>#</th> -->
                                 <th>Name</th>
                                 <th>Website</th>
-                                <th>Nucode</th>
+                                <th *ngIf="auth.nucode == 'system'">Nucode</th>
                                 <th>Status</th>
                                 <th>Modified</th>
                                 <th>Action</th>

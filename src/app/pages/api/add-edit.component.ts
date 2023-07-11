@@ -3,6 +3,7 @@ import Swal from 'sweetalert2';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api/api.service';
 import { FlatpickrOptions } from 'ng2-flatpickr';
+import { HelperService } from 'src/app/services/helper.service';
 
 
 @Component({
@@ -41,7 +42,8 @@ export class AddEditApiComponent implements OnInit {
   constructor(
       private router: Router,
       private route: ActivatedRoute,
-      private service: ApiService
+      private service: ApiService,
+      private helper: HelperService
   ) {}
 
   ngOnInit(): void {
@@ -63,16 +65,12 @@ export class AddEditApiComponent implements OnInit {
   }
 
   datePickerOption: FlatpickrOptions = {
-    "dateFormat": "Y/m/d"
+    dateFormat: 'Y/m/d',
+    onChange: ( selectedDates: any ) => {  this.fields.start = this.initializeDate(selectedDates[0]); }
   }
 
   private initializeDate(timestamp) {
-
-    let date = new Date();
-    date.setTime(timestamp);
-
-    return date.getFullYear() + "/" + ("0" + (date.getMonth() + 1)).slice(-2) + "/" + ("0" + date.getDate()).slice(-2);
-
+    return this.helper.initializeDate(timestamp);
   }
 
   submit() {
@@ -141,7 +139,7 @@ export class AddEditApiComponent implements OnInit {
 
   private update() {
       let id = this.id;
-
+      
       this.service.updateApi(id, this.fields).subscribe((response) => {
           if (response.result === true) {
               this.loadingIndicator = false
@@ -151,7 +149,6 @@ export class AddEditApiComponent implements OnInit {
                   icon: 'success',
                   confirmButtonText: 'Close'
               });
-              this.router.navigate(['/api']);
           }else{
             this.loadingIndicator = false
             Swal.fire({

@@ -62,8 +62,6 @@ export class SentComponent implements OnInit {
                         icon: 'success',
                         confirmButtonText: 'Close',
                     });
-                    // console.log('SMS sent successfully');
-                    // this.router.navigate(['/sms/sent']);
                 }
             });
         }

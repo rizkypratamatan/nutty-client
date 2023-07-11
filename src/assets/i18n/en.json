@@ -64,7 +64,7 @@
             "LIST": {
                 "WORKSHEET": "Worksheet",
                 "NEW_DATA": "New Data",
-                "WR_CRM": "Worksheet CRM",
+                "WR_CRM": "CRM",
                 "RESULT": "Result"
             }
         },
@@ -261,7 +261,9 @@
         "REPORT": {
             "TEXT": "REPORT",
             "LIST": {
-                "REPORT": "Report"
+                "REPORT": "Report",
+                "USER": "User",
+                "WEBSITE": "Website"
             }
         },
         "SMS": {

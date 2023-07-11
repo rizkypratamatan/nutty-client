@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserRoleService } from 'src/app/services/user/user-role.service';
+import { AuthService } from 'src/app/services/global/auth.service';
 
 @Component({
     selector: 'app-add-edit',
@@ -35,16 +36,21 @@ export class AddEditRoleComponent implements OnInit {
         platform: 'Website',
         description: '',
         name: '',
-        nucode: '',
+        nucode: 'system',
         privilege: this.privilege,
         status: '',
     };
 
+    auth: any;
+
     constructor(
         private router: Router,
         private route: ActivatedRoute,
-        private userRoleService: UserRoleService
-    ) {}
+        private userRoleService: UserRoleService,
+        private authService: AuthService
+    ) {
+        this.auth = this.authService.Auth();
+    }
 
     ngOnInit(): void {
         this.id = this.route.snapshot.params['id'];

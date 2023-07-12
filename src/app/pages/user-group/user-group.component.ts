@@ -76,7 +76,6 @@ export class UserGroupComponent implements OnInit {
 
     delete(id, name) {
         const currentUrl = this.router.url;
-        console.log(currentUrl);
 
         let data = {
             platform: 'Website',

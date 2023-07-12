@@ -47,9 +47,6 @@ export class AddEditMessageTemplateComponent implements OnInit {
 
         if (!this.isAddMode) {
             this.service.getMessageById(this.id).subscribe((response) => {
-                console.log(response);
-                // this.role = response.dataUser.role._id.$oid;
-                // this.group = response.dataUser.group._id.$oid
 
                 this.fields = {
                     name: response.data.name,
@@ -90,8 +87,6 @@ export class AddEditMessageTemplateComponent implements OnInit {
             format: this.fields['format'],
         };
 
-        console.log(this.fields);
-
         this.service.addMessage(this.fields).subscribe((response) => {
             if (response.result === true) {
                 this.isSubmit = false;
@@ -110,8 +105,6 @@ export class AddEditMessageTemplateComponent implements OnInit {
 
     private update() {
         let id = this.id;
-
-        console.log(this.fields);
         this.service.updateTemplate(id, this.fields).subscribe((response) => {
             if (response.result === true) {
                 this.loadingIndicator = false;

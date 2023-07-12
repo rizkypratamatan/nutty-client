@@ -41,22 +41,22 @@ export class WorksheetCrmComponent implements OnInit {
   ngOnInit(): void {
       this.auth = this.userService.Auth();
       
-      if(this.auth['role'].name.toLowerCase() == 'system'){
-        this.websiteService.getAllWebsite({}, 1).subscribe((response) => {
-            this.allWebsite = response['data'];
-            // this.getPage(1);
-        });
-      }else{
-        if(this.auth['group']._id){
+    //   if(this.auth['role'].name.toLowerCase() == 'system'){
+    //     this.websiteService.getAllWebsite({}, 1).subscribe((response) => {
+    //         this.allWebsite = response['data'];
+    //         // this.getPage(1);
+    //     });
+    //   }else{
+        if(this.auth['group']._id != "0"){
             this.websiteService.getAllWebsite({}, 1).subscribe((response) => {
                 response['data'].forEach(value => {
-                if(this.auth['group']['website']['ids'].includes(value._id)){
-                    this.allWebsite.push(value);
-                }
+                    if(this.auth['group']['website']['ids'].includes(value._id)){
+                        this.allWebsite.push(value);
+                    }
                 });
             });
         }
-      }
+    //   }
   }
 
   getPage(page: number) {

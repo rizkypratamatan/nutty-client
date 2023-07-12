@@ -39,7 +39,7 @@ export class MessageTemplateService {
             offset: offset,
             name: filter.name,
         };
-        // console.log(this.globalRestService.initializeBody(data, 'api/get-all-template'));return;
+        
         return this.http.post(
             this.configuration.api.url + '/api/get-all-template',
             this.globalRestService.initializeBody(data, 'api/get-all-template'),
@@ -64,7 +64,7 @@ export class MessageTemplateService {
             id: id,
         };
 
-        // console.log(this.globalRestService.initializeBody(data,'api/get-template-by-id'));return;
+        
 
         return this.http.post(
             this.configuration.api.url + '/api/get-template-by-id',
@@ -79,9 +79,6 @@ export class MessageTemplateService {
     public updateTemplate(id, request): Observable<any> {
         let auth = this.authServices.Auth();
         request.id = id;
-
-        // console.log(this.globalRestService.initializeBody(request, 'api/update-template'));
-        // return;
 
         return this.http.post(
             this.configuration.api.url + '/api/update-template',
@@ -99,8 +96,6 @@ export class MessageTemplateService {
             platform: 'Website',
             id: id.id,
         };
-
-        // console.log(this.globalRestService.initializeBody(id, 'api/delete-template')); return;
 
         return this.http.post(
             this.configuration.api.url + '/api/delete-template',

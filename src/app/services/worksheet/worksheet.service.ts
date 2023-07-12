@@ -39,7 +39,6 @@ export class WorksheetService {
             websiteId: filter.websiteId,
             days:filter.days
         };
-        console.log(this.globalRestService.initializeBody(data, 'api/worksheet/crm'))
         return this.http.post(
             this.configuration.api.url + '/api/worksheet/crm',
             this.globalRestService.initializeBody(data, 'api/worksheet/crm'),
@@ -67,12 +66,31 @@ export class WorksheetService {
             filter_whatsapp:filter.filter_whatsapp,
             filter_date:filter.filter_date
         };
-
-        console.log(this.globalRestService.initializeBody(data, 'api/worksheet/result'))
         
         return this.http.post(
             this.configuration.api.url + '/api/worksheet/result',
             this.globalRestService.initializeBody(data, 'api/worksheet/result'),
+            this.globalRestService.initializeHeaderGetData(auth['token-auth'])
+        );
+    }
+
+    public initializeData(filter, page): Observable<any> {
+        let auth = this.userServices.Auth();
+        
+        // let limit = 20;
+        // let offset = 0;
+        // if(page > 1){
+        //     offset = limit * (page - 1);
+        // }
+
+        let data = {
+            platform: 'Website',
+            websiteId: filter.websiteId
+        };
+        
+        return this.http.post(
+            this.configuration.api.url + '/api/worksheet/initializeData',
+            this.globalRestService.initializeBody(data, 'api/worksheet/initializeData'),
             this.globalRestService.initializeHeaderGetData(auth['token-auth'])
         );
     }

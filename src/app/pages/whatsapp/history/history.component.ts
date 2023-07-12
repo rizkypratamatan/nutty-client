@@ -59,7 +59,7 @@ export class WAHistoryComponent implements OnInit {
 
         if (confirm('Are you sure to delete Chat: ' + phone)) {
             this.service.deleteChat(data).subscribe((response) => {
-                // console.log(response);
+                
                 if (response.result === true) {
                     Swal.fire({
                         title: 'Success!',

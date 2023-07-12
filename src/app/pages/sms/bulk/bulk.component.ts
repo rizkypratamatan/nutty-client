@@ -70,8 +70,6 @@ export class SMSBulkComponent {
                         icon: 'success',
                         confirmButtonText: 'Close',
                     });
-                    // console.log('SMS sent successfully');
-                    // this.router.navigate(['/sms/sent']);
                 }
             });
         }
@@ -105,12 +103,10 @@ export class SMSBulkComponent {
     }
 
     onSelect(event) {
-        console.log(event);
         this.files.push(...event.addedFiles);
     }
 
     onRemove(event) {
-        console.log(event);
         this.files.splice(this.files.indexOf(event), 1);
     }
 }

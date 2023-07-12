@@ -68,7 +68,6 @@ export class AddEditGroupComponent implements OnInit {
                     websites: this.selectedWebsite,
                     nucode: response['dataUser'].nucode,
                 };
-                console.log(this.fields)
             });
         }
     }
@@ -158,7 +157,6 @@ export class AddEditGroupComponent implements OnInit {
     private update() {
         let id = this.id;
 
-        console.log(this.fields);
         this.service.updateGroup(id, this.fields).subscribe((response) => {
             if (response.result === true) {
                 this.loadingIndicator = false;

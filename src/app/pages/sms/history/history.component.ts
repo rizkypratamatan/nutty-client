@@ -59,7 +59,6 @@ export class HistoryComponent implements OnInit {
 
         if (confirm('Are you sure to delete sms: ' + phone)) {
             this.service.deleteSMS(data).subscribe((response) => {
-                // console.log(response);
                 if (response.result === true) {
                     Swal.fire({
                         title: 'Success!',

@@ -47,7 +47,6 @@ export class WorksheetResultComponent implements OnInit {
   }
 
   updateFilters() {
-    console.log(this.filter)
       this.getPage(1);
   }
 

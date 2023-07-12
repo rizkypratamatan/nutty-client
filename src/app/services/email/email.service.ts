@@ -40,9 +40,6 @@ export class EmailService {
             message: filter.message,
         };
 
-        // console.log(this.globalRestService.initializeBody(data, 'api/email/get-emails'));
-        // return;
-
         return this.http.post(
             this.configuration.api.url + '/api/email/get-emails',
             this.globalRestService.initializeBody(data, 'api/email/get-emails'),

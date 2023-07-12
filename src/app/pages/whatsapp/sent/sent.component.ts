@@ -70,8 +70,6 @@ export class WASentComponent implements OnInit {
                         icon: 'success',
                         confirmButtonText: 'Close',
                     });
-                    // console.log('WhatsApp Message sent successfully');
-                    // this.router.navigate(['/whatsapp/sent']);
                 }
             });
         }

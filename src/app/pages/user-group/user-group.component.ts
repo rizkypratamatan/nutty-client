@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { UserGroupService } from 'src/app/services/user/user-group.service';
 import { WebsiteService } from 'src/app/services/website/website.service';
+import { HelperService } from 'src/app/services/helper.service';
+import { AuthService } from 'src/app/services/global/auth.service';
 
 @Component({
     selector: 'app-user-group',
@@ -28,20 +30,17 @@ export class UserGroupComponent implements OnInit {
     totalGroup: any;
 
     statusFilter = ['Active', 'Inactive'];
-
-    updateFilters() {
-        // Object.keys(this.fields).forEach((key) =>
-        //     this.fields[key] === '' ? delete this.fields[key] : key
-        // );
-        // this.filter = Object.assign({}, this.fields);
-       this.getPage(1)
-    }
+    auth: any;
 
     constructor(
         private service: UserGroupService,
         private websiteService: WebsiteService,
         private router: Router,
-        ) {}
+        private helper: HelperService,
+        private authService: AuthService
+        ) {
+            this.auth = this.authService.Auth()
+        }
 
     ngOnInit(): void {
         
@@ -51,6 +50,11 @@ export class UserGroupComponent implements OnInit {
             this.allWebsite = response['data'];
         });
     }
+
+    updateFilters() {
+       this.getPage(1)
+    }
+
     getPage(page: number) {
         this.loading = true;
         this.service.getAllGroup(this.fields, page).subscribe((response) => {
@@ -72,7 +76,6 @@ export class UserGroupComponent implements OnInit {
 
     delete(id, name) {
         const currentUrl = this.router.url;
-        console.log(currentUrl);
 
         let data = {
             platform: 'Website',
@@ -99,5 +102,9 @@ export class UserGroupComponent implements OnInit {
                 }
             });
         }
+    }
+
+    initializeTimestamp(timestamp){
+        return this.helper.initializeTimestamp(timestamp);
     }
 }

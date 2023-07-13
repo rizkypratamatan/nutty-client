@@ -175,7 +175,7 @@
 
                     <!-- Filter -->
                     <div class="row g-1 mb-3">
-                        <div class="col-md-1">
+                        <div class="col-md-2">
                             <input
                                 class="form-control dt-input"
                                 type="text"
@@ -184,7 +184,7 @@
                                 (ngModelChange)="updateFilters()"
                             />
                         </div>
-                        <div class="col-md-1">
+                        <div class="col-md-2">
                             <input
                                 class="form-control dt-input"
                                 type="text"
@@ -193,7 +193,7 @@
                                 (ngModelChange)="updateFilters()"
                             />
                         </div>
-                        <div class="col-md-1">
+                        <div class="col-md-1" *ngIf="auth.nucode == 'system'">
                             <input
                                 class="form-control dt-input"
                                 type="text"
@@ -215,7 +215,7 @@
                                 </option>
                             </select>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-1">
                             <select
                                 id="user-filter-group"
                                 class="select2 form-select dt-select"
@@ -228,7 +228,7 @@
                                 </option>
                             </select>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-1">
                             <select
                                 id="user-filter-role"
                                 class="select2 form-select dt-select"
@@ -241,7 +241,7 @@
                                 </option>
                             </select>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-1">
                             <select
                                 id="user-filter-status"
                                 class="select2 form-select dt-select"
@@ -254,13 +254,13 @@
                                 </option>
                             </select>
                         </div>
-                        <!-- <div class="col-md-1" style="text-align: right">
-                            <a
+                        <div class="col-md-2" style="text-align: right">
+                            <button
                                 (click)="create()"
                                 class="btn btn-success waves-effect waves-light"
-                                ><i class="mdi mdi-plus me-2"></i> Add New</a
-                            >
-                        </div> -->
+                                ><i class="mdi mdi-plus me-2"></i> Add New
+                            </button>
+                        </div>
                     </div>
                     <div class="table-responsive">
                         <table
@@ -279,7 +279,7 @@
                                 <th>Name</th>
                                 <!-- @if(Session::has("account"))
                                         @if(Session::get("account")->nucode == "system") -->
-                                <th>Nucode</th>
+                                <th *ngIf="auth.nucode == 'system'">Nucode</th>
                                 <!-- @endif
                                         @endif -->
                                 <th>Type</th>
@@ -306,17 +306,13 @@
                                 <!-- <td>{{ i + 1 }}</td> -->
                                 <td>{{ user.username }}</td>
                                 <td>{{ user.name }}</td>
-                                <!-- @if(Session::has("account"))
-                                        @if(Session::get("account")->nucode == "system") -->
-                                <td>{{ user.nucode }}</td>
-                                <!-- @endif
-                                        @endif -->
+                                <td *ngIf="auth.nucode == 'system'">{{ user.nucode }}</td>
                                 <td>{{ user.type }}</td>
                                 <td>{{ user.group.name }}</td>
                                 <td>{{ user.role.name }}</td>
                                 <td>{{ user.status }}</td>
                                 <td>
-                                    {{ !user.modified.timestamp.$date ?  user.modified.timestamp : user.modified.timestamp.$date.$numberLong | date }}
+                                    {{ !user.modified.timestamp.$date ?  user.modified.timestamp : initializeTimestamp(user.modified.timestamp.$date.$numberLong) }}
                                 </td>
                                 <td>
                                     <a
@@ -340,11 +336,7 @@
                                 <!-- <th>#</th> -->
                                 <th>Username</th>
                                 <th>Name</th>
-                                <!-- @if(Session::has("account"))
-                                        @if(Session::get("account")->nucode == "system") -->
-                                <th>Nucode</th>
-                                <!-- @endif
-                                        @endif -->
+                                <th *ngIf="auth.nucode == 'system'">Nucode</th>
                                 <th>Type</th>
                                 <th>Group</th>
                                 <th>Role</th>

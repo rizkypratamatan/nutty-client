@@ -74,7 +74,7 @@
                                 <td>{{ website.name }}</td>
                                 <td>{{ website.nucode }}</td>
                                 <td>
-                                    {{ !website.start.$date ?  website.start : website.start.$date.$numberLong | date }}
+                                    {{ !website.start.$date ?  website.start : initializeDate(website.start.$date.$numberLong) }}
                                 </td>
                                 <td>{{ website.api.nexus.code }}</td>
                                 <td>{{ website.api.nexus.url }}</td>

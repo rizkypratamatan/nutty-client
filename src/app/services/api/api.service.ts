@@ -44,7 +44,6 @@ export class ApiService {
             type: (filter.type)?filter.type:"",
             status: (filter.status)?filter.status:"",
         };
-        console.log(data);
         return this.http.post(
             this.configuration.api.url + '/api/setting/get-api',
             this.globalRestService.initializeBody(data, 'api/setting/get-api'),

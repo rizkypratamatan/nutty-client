@@ -40,12 +40,6 @@ export class InboxComponent implements OnInit {
 
   ngOnInit() {
     this.breadCrumbItems = [{ label: 'Email' }, { label: 'Inbox', active: true }];
-    // this.service.getEmailInbox().subscribe((response) => {
-    //   console.log(response);
-    //   // return;
-    //   this.emailData = response;
-    //   // console.log(this.totalUser);
-    // });
     this.emailData = emailData;
     this.totalRecords = emailData.length;
   }

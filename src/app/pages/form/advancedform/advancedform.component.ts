@@ -51,7 +51,7 @@ export class AdvancedformComponent implements OnInit {
     inline: true,
     wrap: false,
     onChange: function (e) {
-      console.log(e);
+      // console.log(e);
       this.inlinedate = e;
     }
 

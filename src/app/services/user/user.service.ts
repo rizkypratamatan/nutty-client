@@ -90,9 +90,6 @@ export class UserService {
         let auth = this.authServices.Auth();
         request.id = id;
 
-        // console.log(this.globalRestService.initializeBody(request, 'api/update-user'));
-        // return;
-
         return this.http.post(
             this.configuration.api.url + '/api/update-user',
             this.globalRestService.initializeBody(request, 'api/update-user'),
@@ -102,8 +99,6 @@ export class UserService {
 
     public deleteUser(id): Observable<any> {
         let auth = this.authServices.Auth();
-
-        // console.log(this.globalRestService.initializeBody(body, 'api/get-database')); return;
 
         return this.http.post(
             this.configuration.api.url + '/api/delete-user',

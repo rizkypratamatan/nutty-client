@@ -15,7 +15,7 @@ export class DataService {
         const option: any = {
             html: '<span class="response-alert">' + text + '</span>',
             icon,
-            position: 'top-end',
+            // position: 'top-end',
             showClass: {
                 popup: 'animate__animated animate__bounceIn',
             },

@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UserGroupService } from 'src/app/services/user/user-group.service';
 import { UserRoleService } from 'src/app/services/user/user-role.service';
 import { UserService } from 'src/app/services/user/user.service';
+import { AuthService } from 'src/app/services/global/auth.service';
 
 @Component({
     selector: 'app-add-edit',
@@ -19,6 +20,7 @@ export class AddEditComponent implements OnInit {
     filteredGroup: any;
     confirm_password: string = '';
     status = ['Active', 'Inactive'];
+    auth: any;
 
     isValid: boolean =  true;
     errorMsg: any[] = [];
@@ -31,7 +33,7 @@ export class AddEditComponent implements OnInit {
         username: '',
         name: '',
         password: '',
-        nucode: '',
+        nucode: 'system',
         type: '',
         role: {},
         group: {},
@@ -59,10 +61,12 @@ export class AddEditComponent implements OnInit {
         private userRoleService: UserRoleService,
         private userGroupService: UserGroupService,
         private router: Router,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private authService: AuthService
     ) {}
 
     ngOnInit(): void {
+        this.auth = this.authService.Auth();
         this.id = this.route.snapshot.params['id'];
         this.isAddMode = !this.id;
 
@@ -163,6 +167,15 @@ export class AddEditComponent implements OnInit {
                 this.isValid = false;
                 this.errorMsg.push("Password is Required");
             }
+            if(this.fields.password != this.confirm_password){
+                this.isValid = false;
+                this.errorMsg.push("Password doesn't match");
+            }
+    
+            if(this.fields.password.length < 8){
+                this.isValid = false;
+                this.errorMsg.push("Min Password length 8 char");
+            }
         }
         if(!this.fields.nucode){
             this.isValid = false;
@@ -178,7 +191,7 @@ export class AddEditComponent implements OnInit {
         }
         if(!this.fields.group){
             this.isValid = false;
-            this.errorMsg.push("Type is Required");
+            this.errorMsg.push("Group is Required");
         }
         if(!this.fields.status){
             this.isValid = false;
@@ -212,17 +225,13 @@ export class AddEditComponent implements OnInit {
                     icon: 'success',
                     confirmButtonText: 'Close'
                 });
-                this.router.navigate(['/user']);
             }
         });
     }
 
     onOptionsSelectedRole() {
-        console.log(this.role);
-
         if (this.role !== null && this.role !== undefined) {
             this.filteredRole = this.allRoles.filter((t) => t._id == this.role);
-            console.log(this.filteredRole);
             if (
                 this.filteredRole !== undefined &&
                 this.filteredRole !== null &&
@@ -237,8 +246,6 @@ export class AddEditComponent implements OnInit {
     }
 
     onOptionsSelectedGroup() {
-        // console.log(this.group);
-
         if (this.group !== null && this.group !== undefined) {
             this.filteredGroup = this.allGroup.filter((t) => t._id == this.group);
 

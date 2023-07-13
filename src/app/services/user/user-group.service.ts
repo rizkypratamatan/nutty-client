@@ -66,8 +66,6 @@ export class UserGroupService {
             platform: 'Website',
             id: id,
         };
-
-        // console.log(this.globalRestService.initializeBody(data,'api/get-user-group-by-id'));return;
         
         return this.http.post(
             this.configuration.api.url + '/api/get-user-group-by-id',
@@ -96,9 +94,6 @@ export class UserGroupService {
         let auth = this.authServices.Auth();
         request.id = id;
 
-        // console.log(this.globalRestService.initializeBody(request, 'api/update-user'));
-        // return;
-
         return this.http.post(
             this.configuration.api.url + '/api/update-user-group',
             this.globalRestService.initializeBody(
@@ -111,8 +106,6 @@ export class UserGroupService {
 
     public deleteGroup(id): Observable<any> {
         let auth = this.Auth();
-
-        // console.log(this.globalRestService.initializeBody(body, 'api/get-database')); return;
 
         return this.http.post(
             this.configuration.api.url + '/api/delete-user-group',

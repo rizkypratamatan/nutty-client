@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { UserGroupService } from 'src/app/services/user/user-group.service';
 import { UserRoleService } from 'src/app/services/user/user-role.service';
 import { UserService } from 'src/app/services/user/user.service';
+import { HelperService } from 'src/app/services/helper.service';
+import { AuthService } from 'src/app/services/global/auth.service';
 
 @Component({
     selector: 'app-user',
@@ -16,6 +18,7 @@ export class UserComponent implements OnInit {
     allRole: any[] = [];
     allStatus: any[] = [];
     loading: boolean = false;
+    auth: any;
 
     fields = {
         username: '',
@@ -46,7 +49,9 @@ export class UserComponent implements OnInit {
         private service: UserService,
         private userGroupService: UserGroupService,
         private userRoleService: UserRoleService,
-        private router: Router
+        private router: Router,
+        private helper: HelperService,
+        private authservice: AuthService
     ) {}
 
     ngOnInit(): void {
@@ -60,6 +65,7 @@ export class UserComponent implements OnInit {
     }
 
     getPage(page: number) {
+        this.auth = this.authservice.Auth()
         this.loading = true;
         this.service.getAllUser(this.fields, page).subscribe((response) => {
             this.allUsers = response['dataUser'];
@@ -81,8 +87,6 @@ export class UserComponent implements OnInit {
 
     delete(id, name) {
         const currentUrl = this.router.url;
-        console.log(currentUrl);
-
         let data = {
             platform: 'Website',
             id: id,
@@ -90,7 +94,6 @@ export class UserComponent implements OnInit {
 
         if (confirm('Are you sure to delete user: ' + name)) {
             this.service.deleteUser(data).subscribe((response) => {
-                console.log(response)
                 if (response.result === true) {
                     this.router.navigate(['/user']);
                     // this.router
@@ -99,5 +102,9 @@ export class UserComponent implements OnInit {
                 }
             });
         }
+    }
+
+    initializeTimestamp(timestamp){
+        return this.helper.initializeTimestamp(timestamp);
     }
 }

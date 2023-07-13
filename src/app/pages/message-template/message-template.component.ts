@@ -52,7 +52,6 @@ export class MessageTemplateComponent implements OnInit {
     getPage(page: number) {
         this.loading = true;
         this.service.getAllMessageTemplate(this.fields, page).subscribe((response) => {
-        //   console.log(response['data']);
             this.allMessage = response['data'];
             this.allType = this.typeFilter;
             this.p = page;
@@ -72,7 +71,6 @@ export class MessageTemplateComponent implements OnInit {
 
     delete(id, name) {
         const currentUrl = this.router.url;
-        // console.log(currentUrl);
 
         let data = {
             platform: 'Website',
@@ -81,7 +79,6 @@ export class MessageTemplateComponent implements OnInit {
 
         if (confirm('Are you sure to delete message: ' + name)) {
             this.service.deleteTemplate(data).subscribe((response) => {
-                // console.log(response);
                 if (response.result === true) {
                     this.getPage(1)
                     Swal.fire({

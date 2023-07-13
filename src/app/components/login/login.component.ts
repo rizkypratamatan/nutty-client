@@ -5,6 +5,7 @@ import { UserLoginResponse } from '../../models/user/user-login-response';
 import { EncryptionService } from '../../services/global/encryption.service';
 import { DataService } from '../../services/global/data.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
     selector: 'app-login',
@@ -48,14 +49,10 @@ export class LoginComponent implements OnInit {
     public login() {
         this.submit = true;
 
-        // console.log(this.fields['password'] + ' ' + this.fields['username']);
-
         this.userLogService
             .login(this.fields['password'], this.fields['username'])
             .subscribe((response: UserLoginResponse) => {
                 if (response.result) {
-                    // console.log(response);
-                    // return;
 
                     localStorage.setItem(
                         'nu-account',
@@ -64,13 +61,11 @@ export class LoginComponent implements OnInit {
                         )
                     );
                     // localStorage.setItem('nu-authentication', this.encryptionService.aesEncrypt(response.authentication));
-
                     this.dataService.alert('success', response.response);
 
                     window.location.href = '/';
                 } else {
                     this.dataService.alert('error', response.response);
-                    console.log(response);
                 }
             });
     }

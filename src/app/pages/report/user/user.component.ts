@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { FlatpickrOptions } from 'ng2-flatpickr';
+import { HelperService } from 'src/app/services/helper.service';
 import { UserReportService } from 'src/app/services/report/user-report.service';
 
 @Component({
@@ -17,7 +19,7 @@ export class UserComponent implements OnInit {
         name: '',
         nucode: '',
         status: '',
-        date: '',
+        filter_date: '',
     };
 
     filter = {};
@@ -31,7 +33,11 @@ export class UserComponent implements OnInit {
         this.getPage(1);
     }
 
-    constructor(private service: UserReportService, private router: Router) {}
+    constructor(
+        private service: UserReportService,
+        private router: Router,
+        private helper: HelperService
+    ) {}
 
     ngOnInit(): void {
         this.getPage(1);
@@ -46,8 +52,6 @@ export class UserComponent implements OnInit {
         this.service
             .getAllUserReport(this.fields, page)
             .subscribe((response) => {
-                // console.log(response);
-                // return;
                 this.allUsers = response['data'];
                 this.nucode = response['userGroups'][0]['nucode'];
                 this.totalUser = response['total_data'];
@@ -64,5 +68,27 @@ export class UserComponent implements OnInit {
         }
 
         return total;
+    };
+
+    datePickerOption: FlatpickrOptions = {
+        dateFormat: 'Y/m/d',
+        mode: 'range',
+        onChange: (selectedDates: any) => {
+            if (selectedDates.length > 0) {
+                if (typeof selectedDates[1] != 'undefined') {
+                    this.fields.filter_date =
+                        this.helper.initializeDate(selectedDates[0]) +
+                        ' to ' +
+                        this.helper.initializeDate(selectedDates[1]);
+                } else {
+                    this.fields.filter_date = this.helper.initializeDate(
+                        selectedDates[0]
+                    );
+                }
+            } else {
+                this.fields.filter_date = '';
+            }
+            this.updateFilters();
+        },
     };
 }

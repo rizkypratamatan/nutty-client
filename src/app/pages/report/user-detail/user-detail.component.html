@@ -22,35 +22,11 @@
                     <!-- Filter -->
                     <div class="row g-1 mb-3">
                         <div class="col-md-2">
-                            <input
-                                class="form-control dt-input"
-                                type="text"
-                                placeholder="Name"
-                                [(ngModel)]="fields.name"
-                                (ngModelChange)="updateFilters()"
-                            />
-                        </div>
-                        <div class="col-md-2">
-                            <input
-                                class="form-control dt-input"
-                                type="text"
-                                placeholder="Nucode"
-                                [(ngModel)]="fields.nucode"
-                                (ngModelChange)="updateFilters()"
-                            />
-                        </div>
-                        <div class="col-md-2">
-                            <select
-                                id="user-role-filter-status"
-                                class="select2 form-select dt-select"
-                                [(ngModel)]="fields.status"
-                                (ngModelChange)="updateFilters()"
-                            >
-                                <option value="">Status</option>
-                                <option *ngFor="let status of statusFilter">
-                                    {{ status }}
-                                </option>
-                            </select>
+                            <ng2-flatpickr
+                                class="form-control flatpickr-input"
+                                [config]="datePickerOption"
+                                placeholder="Date"
+                            ></ng2-flatpickr>
                         </div>
                         <div class="col-md-4"></div>
                     </div>

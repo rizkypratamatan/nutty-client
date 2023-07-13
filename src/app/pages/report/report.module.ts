@@ -15,6 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { SimplebarAngularModule } from 'simplebar-angular';
 import { UserDetailComponent } from './user-detail/user-detail.component';
+import { Ng2FlatpickrModule } from 'ng2-flatpickr';
 
 @NgModule({
     declarations: [UserComponent, WebsiteComponent, UserDetailComponent],
@@ -36,6 +37,7 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
         HttpClientModule,
         FullCalendarModule,
         SimplebarAngularModule,
+        Ng2FlatpickrModule,
     ],
 })
 export class ReportModule {}

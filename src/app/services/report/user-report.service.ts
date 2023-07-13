@@ -38,7 +38,7 @@ export class UserReportService {
             username: filter.username,
             name: filter.name,
             nucode: filter.nucode,
-            date: filter.date,
+            date: filter.filter_date,
         };
 
         // console.log(this.globalRestService.initializeBody(data, 'api/user-report'));return;

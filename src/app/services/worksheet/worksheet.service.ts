@@ -77,20 +77,76 @@ export class WorksheetService {
     public initializeData(filter, page): Observable<any> {
         let auth = this.userServices.Auth();
         
-        // let limit = 20;
-        // let offset = 0;
-        // if(page > 1){
-        //     offset = limit * (page - 1);
-        // }
+        let limit = 20;
+        let offset = 0;
+        if(page > 1){
+            offset = limit * (page - 1);
+        }
 
         let data = {
             platform: 'Website',
-            websiteId: filter.websiteId
+            websiteId: filter.websiteId,
+            limit: limit,
+            offset: offset
         };
         
         return this.http.post(
             this.configuration.api.url + '/api/worksheet/initializeData',
             this.globalRestService.initializeBody(data, 'api/worksheet/initializeData'),
+            this.globalRestService.initializeHeaderGetData(auth['token-auth'])
+        );
+    }
+
+    public processWhatsapp(status, websiteId, days): Observable<any> {
+        let auth = this.userServices.Auth();
+        let fields = {
+            platform: 'Website',
+            status: status,
+            website: websiteId,
+            days:days
+        }
+        return this.http.post(
+            this.configuration.api.url + '/api/worksheet/process-wa',
+            this.globalRestService.initializeBody(
+                fields,
+                'api/worksheet/process-wa'
+            ),
+            this.globalRestService.initializeHeaderGetData(auth['token-auth'])
+        );
+    }
+
+    public processSms(status, websiteId, days): Observable<any> {
+        let auth = this.userServices.Auth();
+        let fields = {
+            platform: 'Website',
+            status: status,
+            website: websiteId,
+            days:days
+        }
+        return this.http.post(
+            this.configuration.api.url + '/api/worksheet/process-sms',
+            this.globalRestService.initializeBody(
+                fields,
+                'api/worksheet/process-sms'
+            ),
+            this.globalRestService.initializeHeaderGetData(auth['token-auth'])
+        );
+    }
+
+    public processEmail(status, websiteId, days): Observable<any> {
+        let auth = this.userServices.Auth();
+        let fields = {
+            platform: 'Website',
+            status: status,
+            website: websiteId,
+            days:days
+        }
+        return this.http.post(
+            this.configuration.api.url + '/api/worksheet/process-email',
+            this.globalRestService.initializeBody(
+                fields,
+                'api/worksheet/process-email'
+            ),
             this.globalRestService.initializeHeaderGetData(auth['token-auth'])
         );
     }

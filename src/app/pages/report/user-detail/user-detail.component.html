@@ -4,7 +4,7 @@
             <div
                 class="page-title-box d-flex align-items-center justify-content-between"
             >
-                <h4 class="mb-0">Report User List</h4>
+                <h4 class="mb-0">Report User {{ userName }}</h4>
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
@@ -69,7 +69,7 @@
                             <tr>
                                 <th>Username</th>
                                 <th>Name</th>
-                                <th>Nucode</th>
+                                <!-- <th>Nucode</th> -->
                                 <th>Total Call</th>
                                 <th>Website Call</th>
                                 <th>Deposited</th>
@@ -81,7 +81,6 @@
                                 <th>Not Picked Up</th>
                                 <th>Not Interested</th>
                                 <th>Invalid Number</th>
-                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -97,140 +96,110 @@
                                     let i = index
                                 "
                             >
-                                <td>{{ user.user[0]["username"] }}</td>
-                                <td>{{ user.user[0]["name"] }}</td>
-                                <td>{{ nucode }}</td>
+                                <td>{{ user.user.username }}</td>
+                                <td>{{ user.user.name }}</td>
+                                <!-- <td>{{ nucode }}</td> -->
                                 <td>{{ user.total }}</td>
                                 <td>
                                     <span
                                         *ngFor="
-                                            let website of user.website;
+                                            let website of user.website.names;
                                             let i = index
                                         "
                                     >
-                                        {{ website.names[i] }} :
-                                        {{ website.totals[i] }}
+                                        {{ user.website.names[i] }} :
+                                        {{ user.website.totals[i] }}
                                     </span>
                                 </td>
                                 <td>
-                                    <span *ngFor="let status of user.status">
-                                        {{
-                                            initializeTableStatus(
-                                                "Deposited",
-                                                status.names,
-                                                resultStatus,
-                                                status.totals
-                                            )
-                                        }}
-                                    </span>
+                                    {{
+                                        initializeTableStatus(
+                                            "Deposited",
+                                            user.status["names"],
+                                            0,
+                                            user.status["totals"]
+                                        )
+                                    }}
                                 </td>
                                 <td>
-                                    <span *ngFor="let status of user.status">
-                                        {{
-                                            initializeTableStatus(
-                                                "Redeposited",
-                                                status.names,
-                                                resultStatus,
-                                                status.totals
-                                            )
-                                        }}
-                                    </span>
+                                    {{
+                                        initializeTableStatus(
+                                            "Redeposited",
+                                            user.status["names"],
+                                            resultStatus,
+                                            user.status["totals"]
+                                        )
+                                    }}
                                 </td>
                                 <td>
-                                    <span *ngFor="let status of user.status">
-                                        {{
-                                            initializeTableStatus(
-                                                "Registered",
-                                                status.names,
-                                                resultStatus,
-                                                status.totals
-                                            )
-                                        }}
-                                    </span>
+                                    {{
+                                        initializeTableStatus(
+                                            "Registered",
+                                            user.status["names"],
+                                            resultStatus,
+                                            user.status["totals"]
+                                        )
+                                    }}
                                 </td>
                                 <td>
-                                    <span *ngFor="let status of user.status">
-                                        {{
-                                            initializeTableStatus(
-                                                "Interested",
-                                                status.names,
-                                                resultStatus,
-                                                status.totals
-                                            )
-                                        }}
-                                    </span>
+                                    {{
+                                        initializeTableStatus(
+                                            "Interested",
+                                            user.status["names"],
+                                            resultStatus,
+                                            user.status["totals"]
+                                        )
+                                    }}
                                 </td>
                                 <td>
-                                    <span *ngFor="let status of user.status">
-                                        {{
-                                            initializeTableStatus(
-                                                "FollowUp",
-                                                status.names,
-                                                resultStatus,
-                                                status.totals
-                                            )
-                                        }}
-                                    </span>
+                                    {{
+                                        initializeTableStatus(
+                                            "FollowUp",
+                                            user.status["names"],
+                                            resultStatus,
+                                            user.status["totals"]
+                                        )
+                                    }}
                                 </td>
                                 <td>
-                                    <span *ngFor="let status of user.status">
-                                        {{
-                                            initializeTableStatus(
-                                                "NotActive",
-                                                status.names,
-                                                resultStatus,
-                                                status.totals
-                                            )
-                                        }}
-                                    </span>
+                                    {{
+                                        initializeTableStatus(
+                                            "NotActive",
+                                            user.status["names"],
+                                            resultStatus,
+                                            user.status["totals"]
+                                        )
+                                    }}
                                 </td>
                                 <td>
-                                    <span *ngFor="let status of user.status">
-                                        {{
-                                            initializeTableStatus(
-                                                "NotPickedUp",
-                                                status.names,
-                                                resultStatus,
-                                                status.totals
-                                            )
-                                        }}
-                                    </span>
+                                    {{
+                                        initializeTableStatus(
+                                            "NotPickedUp",
+                                            user.status["names"],
+                                            resultStatus,
+                                            user.status["totals"]
+                                        )
+                                    }}
                                 </td>
                                 <td>
-                                    <span *ngFor="let status of user.status">
-                                        {{
-                                            initializeTableStatus(
-                                                "NotInterested",
-                                                status.names,
-                                                resultStatus,
-                                                status.totals
-                                            )
-                                        }}
-                                    </span>
+                                    {{
+                                        initializeTableStatus(
+                                            "NotInterested",
+                                            user.status["names"],
+                                            resultStatus,
+                                            user.status["totals"]
+                                        )
+                                    }}
                                 </td>
                                 <td>
-                                    <span *ngFor="let status of user.status">
-                                        {{
-                                            initializeTableStatus(
-                                                "InvalidNumber",
-                                                status.names,
-                                                resultStatus,
-                                                status.totals
-                                            )
-                                        }}
-                                    </span>
-                                </td>
-                                <td>
-                                    <a
-                                        (click)="edit(user._id)"
-                                        class="btn btn-outline-secondary btn-sm"
-                                        ><i class="bx uil-analytics"></i
-                                    ></a>
-                                    <a
-                                        (click)="edit(user._id)"
-                                        class="btn btn-outline-secondary btn-sm"
-                                        ><i class="bx uil-file-info-alt"></i
-                                    ></a>
+                                    {{
+                                        initializeTableStatus(
+                                            "InvalidNumber",
+                                            user.status["names"],
+                                            resultStatus,
+                                            user.status["totals"]
+                                        )
+                                    }}
                                 </td>
                             </tr>
                         </tbody>
@@ -238,7 +207,7 @@
                             <tr>
                                 <th>Username</th>
                                 <th>Name</th>
-                                <th>Nucode</th>
+                                <!-- <th>Nucode</th> -->
                                 <th>Total Call</th>
                                 <th>Website Call</th>
                                 <th>Deposited</th>
@@ -250,7 +219,6 @@
                                 <th>Not Picked Up</th>
                                 <th>Not Interested</th>
                                 <th>Invalid Number</th>
-                                <th>Action</th>
                             </tr>
                         </tfoot>
                     </table>
@@ -262,9 +230,9 @@
                         <span class="sr-only">Loading...</span>
                     </div>
                     <div style="float: right">
-                        <pagination-controls
+                        <!-- <pagination-controls
                             (pageChange)="getPage($event)"
-                        ></pagination-controls>
+                        ></pagination-controls> -->
                     </div>
                 </div>
             </div>

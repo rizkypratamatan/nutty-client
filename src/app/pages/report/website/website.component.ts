@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { FlatpickrOptions } from 'ng2-flatpickr';
 import { HelperService } from 'src/app/services/helper.service';
 import { WebsiteReportService } from 'src/app/services/report/website-report.service';
@@ -30,13 +31,19 @@ export class WebsiteComponent implements OnInit {
     updateFilters() {
         this.getPage(1);
     }
+    
     constructor(
         private service: WebsiteReportService,
-        private helper: HelperService
+        private helper: HelperService,
+        private router: Router
     ) {}
 
     ngOnInit(): void {
         this.getPage(1);
+    }
+
+    edit(id) {
+        this.router.navigate(['/report/website/' + id]);
     }
 
     getPage(page: number) {

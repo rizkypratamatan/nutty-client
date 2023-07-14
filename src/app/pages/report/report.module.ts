@@ -19,7 +19,7 @@ import { Ng2FlatpickrModule } from 'ng2-flatpickr';
 import { WebsiteDetailComponent } from './website-detail/website-detail.component';
 
 @NgModule({
-    declarations: [UserComponent, WebsiteComponent, UserDetailComponent, WebsiteDetailComponent],
+    declarations: [UserComponent, WebsiteComponent, UserDetailComponent, WebsiteDetailComponent, WebsiteDetailComponent],
     imports: [
         CommonModule,
         ReportRoutingModule,

@@ -41,8 +41,6 @@ export class UserReportService {
             date: filter.filter_date,
         };
 
-        // console.log(this.globalRestService.initializeBody(data, 'api/user-report'));return;
-
         return this.http.post(
             this.configuration.api.url + '/api/user-report',
             this.globalRestService.initializeBody(data, 'api/user-report'),
@@ -62,8 +60,6 @@ export class UserReportService {
             filter_date: request.filter_date,
         };
 
-        // console.log(this.globalRestService.initializeBody(data, 'api/get-report-by-id'));
-        // return;
         return this.http.post(
             this.configuration.api.url + '/api/get-report-by-id',
             this.globalRestService.initializeBody(data, 'api/get-report-by-id'),

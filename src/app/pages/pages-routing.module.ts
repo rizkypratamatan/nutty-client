@@ -76,8 +76,7 @@ const routes: Routes = [
   { path: 'message/list', component: MessageTemplateComponent },
   { path: 'message/add-edit', component: AddEditMessageTemplateComponent },
   { path: 'message/add-edit/:id', component: AddEditMessageTemplateComponent },
-  { path: 'license/add-edit/', component: AddEditLicenseComponent },
-  { path: 'message/add-edit/:id', component: AddEditMessageTemplateComponent }
+  { path: 'license/add-edit/', component: AddEditLicenseComponent }
 ];
 
 @NgModule({

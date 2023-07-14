@@ -32,20 +32,16 @@ export class LicenseService {
         let limit = 20;
         let offset = 0;
         if (page > 1) {
-            offset = limit * (page - 1);
+            offset = (limit * (page - 1));
         }
         let data = {
             platform: 'Website',
             limit: limit,
             offset: offset,
-            nucode: filter.nucode,
-            // websiteId: filter.websiteId,
-            // days:filter.days
+            nucode: (filter.nucode)?filter.nucode:""
         };
-        console.log(this.globalRestService.initializeBody(
-            data,
-            'api/get-license'
-        ));return;
+        // console.log(this.globalRestService.initializeBody(data, '/api/get-license')); return;
+
 
         return this.http.post(
             this.configuration.api.url + '/api/get-license',
@@ -61,7 +57,7 @@ export class LicenseService {
             id: id,
         };
 
-        // console.log(this.globalRestService.initializeBody(id, 'api/delete-template')); return;
+        // console.log(this.globalRestService.initializeBody(id, 'api/delete-license')); return;
 
         return this.http.post(
             this.configuration.api.url + '/api/delete-license',
@@ -69,4 +65,35 @@ export class LicenseService {
             this.globalRestService.initializeHeaderGetData(auth['token-auth'])
         );
     }
+
+    public getLicenseById(id): Observable<any> {
+      let auth = this.authServices.Auth();
+      let data = {
+          platform: 'Website',
+          id: id,
+      };
+
+      return this.http.post(
+          this.configuration.api.url + '/api/get-license-by-id',
+          this.globalRestService.initializeBody(
+              data,
+              'api/get-license-by-id'
+          ),
+          this.globalRestService.initializeHeaderGetData(auth['token-auth'])
+      );
+  }
+
+  public updateLicense(id, request): Observable<any> {
+    let auth = this.authServices.Auth();
+    request.id = id;
+    return this.http.post(
+        this.configuration.api.url + '/api/update-license',
+        this.globalRestService.initializeBody(
+            request,
+            'api/update-license'
+        ),
+        this.globalRestService.initializeHeaderGetData(auth['token-auth'])
+    );
+}
+
 }

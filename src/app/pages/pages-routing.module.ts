@@ -25,6 +25,7 @@ import { AddEditWebsiteComponent } from './website/add-edit.component';
 import { AddEditDatabaseComponent } from './database/add-edit.component';
 import { MessageTemplateComponent } from './message-template/message-template.component';
 import { AddEditMessageTemplateComponent } from './message-template/add-edit.component';
+import { AddEditLicenseComponent } from './license/add-edit.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard' },
@@ -73,6 +74,7 @@ const routes: Routes = [
   { path: 'message/list', component: MessageTemplateComponent },
   { path: 'message/add-edit', component: AddEditMessageTemplateComponent },
   { path: 'message/add-edit/:id', component: AddEditMessageTemplateComponent },
+  { path: 'license/add-edit/', component: AddEditLicenseComponent },
 ];
 
 @NgModule({

@@ -4,6 +4,7 @@ import { LicenseService } from 'src/app/services/license/license.service';
 import { UserService } from '../contacts/userlist/user.service';
 import { WebsiteService } from 'src/app/services/website/website.service';
 import Swal from 'sweetalert2';
+import { HelperService } from 'src/app/services/helper.service';
 
 @Component({
     selector: 'app-license',
@@ -16,19 +17,18 @@ export class LicenseComponent implements OnInit {
     allGroup: any[] = [];
     allRole: any[] = [];
     allStatus: any[] = [];
+    limit: number = 10;
+    offset: number = 0;
+    page: number = 1;
     loading: boolean = false;
 
     fields = {
-        name: '',
-        // format: '',
+        nucode: '',
     };
 
-    filter = {};
+    // filter = {};
     p: number = 1;
     totalLicense: number;
-
-    typeFilter = ['Administrator', 'CRM', 'Telemarketer'];
-    statusFilter = ['Active', 'Inactive'];
 
     updateFilters() {
         this.getPage(1);
@@ -36,8 +36,7 @@ export class LicenseComponent implements OnInit {
     constructor(
         private service: LicenseService,
         private router: Router,
-        // private userService: UserService,
-        private websiteService: WebsiteService
+        
     ) {}
 
     ngOnInit(): void {
@@ -49,9 +48,7 @@ export class LicenseComponent implements OnInit {
       this.service.getAllLicense(this.fields, page).subscribe((response) => {
         // console.log(response['data']);
           this.allLicense = response['data'];
-          this.allType = this.typeFilter;
           this.p = page;
-          this.allStatus = this.statusFilter;
           this.totalLicense = response['total_data'];
           this.loading = false;
       });
@@ -71,7 +68,7 @@ export class LicenseComponent implements OnInit {
 
       let data = {
           platform: 'Website',
-          id: id.$oid,
+          id: id,
       };
 
       if (confirm('Are you sure to delete license: ' + name)) {

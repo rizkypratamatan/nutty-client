@@ -56,6 +56,8 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
 import { MessageTemplateComponent } from './message-template/message-template.component';
 import { AddEditMessageTemplateComponent } from './message-template/add-edit.component';
 import { WorksheetCrmComponent } from './worksheet-crm/worksheet-crm.component';
+import { AddEditLicenseComponent } from './license/add-edit.component';
+
 
 FullCalendarModule.registerPlugins([
     dayGridPlugin,
@@ -93,6 +95,7 @@ FullCalendarModule.registerPlugins([
         MessageTemplateComponent,
         AddEditMessageTemplateComponent,
         WorksheetCrmComponent,
+        AddEditLicenseComponent,
     ],
     imports: [
         Ng2FlatpickrModule,

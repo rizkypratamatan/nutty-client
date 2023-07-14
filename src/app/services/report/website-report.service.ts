@@ -37,14 +37,34 @@ export class WebsiteReportService {
             offset: offset,
             website: filter.website,
             nucode: filter.nucode,
-            date: filter.date,
+            date: filter.filter_date,
         };
-
-        console.log(this.globalRestService.initializeBody(data, 'api/website-report'));return;
 
         return this.http.post(
             this.configuration.api.url + '/api/website-report',
             this.globalRestService.initializeBody(data, 'api/website-report'),
+            this.globalRestService.initializeHeaderGetData(auth['token-auth'])
+        );
+    }
+
+    public getWebsiteById(request): Observable<any> {
+        let auth = this.authServices.Auth();
+        let limit = 10;
+        let offset = 0;
+        let data = {
+            platform: 'Website',
+            limit: limit,
+            offset: offset,
+            websiteId: request.id,
+            filter_date: request.filter_date,
+        };
+
+        return this.http.post(
+            this.configuration.api.url + '/api/website-report-by-id',
+            this.globalRestService.initializeBody(
+                data,
+                'api/website-report-by-id'
+            ),
             this.globalRestService.initializeHeaderGetData(auth['token-auth'])
         );
     }

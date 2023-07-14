@@ -16,9 +16,10 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 import { SimplebarAngularModule } from 'simplebar-angular';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { Ng2FlatpickrModule } from 'ng2-flatpickr';
+import { WebsiteDetailComponent } from './website-detail/website-detail.component';
 
 @NgModule({
-    declarations: [UserComponent, WebsiteComponent, UserDetailComponent],
+    declarations: [UserComponent, WebsiteComponent, UserDetailComponent, WebsiteDetailComponent, WebsiteDetailComponent],
     imports: [
         CommonModule,
         ReportRoutingModule,

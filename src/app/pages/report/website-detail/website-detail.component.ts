@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { FlatpickrOptions } from 'ng2-flatpickr';
 import { HelperService } from 'src/app/services/helper.service';
 import { WebsiteReportService } from 'src/app/services/report/website-report.service';
 
 @Component({
-    selector: 'app-website',
-    templateUrl: './website.component.html',
-    styleUrls: ['./website.component.scss'],
+    selector: 'app-website-detail',
+    templateUrl: './website-detail.component.html',
+    styleUrls: ['./website-detail.component.scss'],
 })
-export class WebsiteComponent implements OnInit {
+export class WebsiteDetailComponent implements OnInit {
     allWebsites: any[] = [];
     nucode: any = '';
     loading: boolean = false;
@@ -25,50 +25,46 @@ export class WebsiteComponent implements OnInit {
     p: number = 1;
     totalWebsite: number;
     resultStatus = 0;
+    id: string;
+    websiteName: string;
 
     statusFilter = ['Active', 'Inactive'];
 
     updateFilters() {
-        this.getPage(1);
+        this.getPage(this.fields);
     }
-    
+
     constructor(
         private service: WebsiteReportService,
-        private helper: HelperService,
-        private router: Router
+        private route: ActivatedRoute,
+        private helper: HelperService
     ) {}
 
     ngOnInit(): void {
-        this.getPage(1);
+        this.id = this.route.snapshot.params['id'];
+        this.fields['id'] = this.id;
+
+        this.service.getWebsiteById(this.fields).subscribe((response) => {
+            // console.log(response);return;
+            this.allWebsites = response['data'];
+            this.websiteName = response['data'][0]['website']['name'];
+            // this.nucode = response['userGroups'][0]['nucode'];
+            this.totalWebsite = response['total_data'];
+            // this.p = page;
+            this.loading = false;
+        });
     }
 
-    edit(id) {
-        this.router.navigate(['/report/website/' + id]);
-    }
-
-    getPage(page: number) {
+    getPage(request: {}) {
         this.loading = true;
-        this.service
-            .getAllWebsiteReport(this.fields, page)
-            .subscribe((response) => {
-                // console.log(response);return;
-                this.allWebsites = response['data'];
-                // this.nucode = response['userGroups'][0]['nucode'];
-                this.totalWebsite = response['total_data'];
-                this.p = page;
-                this.loading = false;
-            });
+        this.service.getWebsiteById(request).subscribe((response) => {
+            // console.log(response['data'][0]['user']);return;
+            this.allWebsites = response['data'];
+            this.totalWebsite = response['total_data'];
+            // this.p = page;
+            this.loading = false;
+        });
     }
-
-    initializeTableStatus = function (name, names, total, totals) {
-        let index = names.indexOf(name);
-
-        if (index >= 0) {
-            total += totals[index];
-        }
-
-        return total;
-    };
 
     datePickerOption: FlatpickrOptions = {
         dateFormat: 'Y/m/d',
@@ -90,5 +86,15 @@ export class WebsiteComponent implements OnInit {
             }
             this.updateFilters();
         },
+    };
+
+    initializeTableStatus = function (name, names, total, totals) {
+        let index = names.indexOf(name);
+
+        if (index >= 0) {
+            total += totals[index];
+        }
+
+        return total;
     };
 }

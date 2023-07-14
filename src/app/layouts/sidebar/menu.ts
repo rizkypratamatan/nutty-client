@@ -258,7 +258,7 @@ export const MENU: MenuItem[] = [
         id: 30,
         label: 'MENUITEMS.TOOLS.TEXT',
         isTitle: true,
-        name: 'tools',
+        name: 'dashboard',
         permission: 0,
     },
     {
@@ -388,7 +388,7 @@ export const MENU: MenuItem[] = [
         id: 48,
         label: 'MENUITEMS.TOOLS.LIST.MESSAGE.TEXT',
         icon: 'uil-comment-message',
-        name: 'tools',
+        name: 'dashboard',
         permission: 0,
         subItems: [
             {
@@ -396,7 +396,7 @@ export const MENU: MenuItem[] = [
                 label: 'MENUITEMS.TOOLS.LIST.MESSAGE.LIST.LIST',
                 link: '/message/list',
                 parentId: 48,
-                name: 'tools',
+                name: 'dashboard',
                 permission: 0,
             },
             {
@@ -404,7 +404,7 @@ export const MENU: MenuItem[] = [
                 label: 'MENUITEMS.TOOLS.LIST.MESSAGE.LIST.ADD',
                 link: '/message/add-edit',
                 parentId: 48,
-                name: 'tools',
+                name: 'dashboard',
                 permission: 1,
             },
         ],

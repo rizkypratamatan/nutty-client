@@ -37,10 +37,11 @@ export class WebsiteReportService {
             offset: offset,
             website: filter.website,
             nucode: filter.nucode,
-            date: filter.date,
+            date: filter.filter_date,
         };
+        console.log(filter);
 
-        console.log(this.globalRestService.initializeBody(data, 'api/website-report'));return;
+        // console.log(this.globalRestService.initializeBody(data, 'api/website-report'));return;
 
         return this.http.post(
             this.configuration.api.url + '/api/website-report',

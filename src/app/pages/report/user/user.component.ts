@@ -43,8 +43,12 @@ export class UserComponent implements OnInit {
         this.getPage(1);
     }
 
-    edit(id) {
+    detail(id) {
         this.router.navigate(['/report/user/' + id]);
+    }
+
+    result(id) {
+        this.router.navigate(['/worksheet/result/' + id]);
     }
 
     getPage(page: number) {

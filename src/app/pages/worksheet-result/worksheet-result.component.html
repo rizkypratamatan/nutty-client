@@ -26,13 +26,14 @@
                                             ></ng2-flatpickr>
                         </div>
                         <div class="col-md-3" *ngIf="auth.type == 'Administrator'">
-                            <select id="worksheet-result-filter-user"
+                            <select id="filter-website"
                                     class="select2 form-select dt-select"
-                                    name="worksheet-result-filter-user" data-column="2"
-                                    data-regex="false" data-value="">
+                                    [(ngModel)]="filter.filter_user"
+                                    (ngModelChange)="updateFilters()"
+                            >
                                 <option value="">User</option>
-                                <option *ngFor="let item of allUser" value="">
-
+                                <option *ngFor="let item of allUsers" [value]="item._id">
+                                    {{ item.name }}
                                 </option>
                             </select>
                         </div>
@@ -105,7 +106,7 @@
                         </div>
                     </div>
                     <div class="row mt-2">
-                        <div class="col-12 overflow-auto">
+                        <div class="col-12 overflow-auto table-responsive">
                             <table id="worksheet-result" class="table table-striped table-bordered nowrap"
                                     style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                 <thead>
@@ -137,29 +138,27 @@
                                     >
                                         <!-- <td>{{ i + 1 }}</td> -->
                                         <td>{{ initializeTimestamp(item.created.timestamp.$date.$numberLong) }}</td>
-                                        <td *ngIf="auth.type == 'Administrator'">{{ item.database.user }}</td>
+                                        <td *ngIf="auth.type == 'Administrator'">{{ item.user.name }}</td>
                                         <td>{{ hidePhone(item.database[0].contact.phone) }}</td>
                                         <td>{{ hidePhone(item.database[0].contact.whatsapp) }}</td>
                                         <td>{{ item.databaseAccount[0].username }}</td>
                                         <td>{{ item.database[0].name }}</td>
                                         <td>{{ item.website.name }}</td>
                                         <td>{{ item.status }}</td>
-                                        <td></td>
-                                        <!-- <td>
-                                            <a
-                                                (click)="edit(database._id)"
-                                                class="btn btn-info btn-sm w-lg"
-                                                >Edit</a
-                                            >
-                                            &nbsp;
-                                            <button
-                                            ng-confirm-click="Are you sure to delete this record ?"
-                                            (click)="delete(database._id, database.name)"
-                                            class="btn btn-outline-secondary btn-sm"
-                                            >
-                                            <i class="bx uil-trash"></i>
-                                            </button>
-                                        </td> -->
+                                        <td>
+                                            <a *ngIf="auth.type != 'Administrator' && (item.status == 'Registered' || item.status == 'FollowUp'); else locked" 
+                                                class="btn btn-outline-secondary btn-sm me-2 call" 
+                                                title="Call"
+                                                (click)="followUpCall(item.database[0]._id.$oid, item.website._id.$oid)"
+                                                >
+                                                <i class="fas fa-phone-alt"></i>
+                                            </a>
+                                            
+                                            <ng-template #locked>
+                                                <a  class="btn btn-outline-secondary btn-sm me-2" title="Locked"><i class="fas fa-lock"></i></a>
+                                            </ng-template>
+                                            
+                                        </td>
                                     </tr>
                                 </tbody>
                                 <tfoot>

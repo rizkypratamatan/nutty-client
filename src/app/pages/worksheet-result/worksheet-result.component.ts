@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FlatpickrOptions } from 'ng2-flatpickr';
+import { Router } from '@angular/router';
 import { WorksheetService } from 'src/app/services/worksheet/worksheet.service';
 import { UserService } from 'src/app/services/user/user.service';
 import { WebsiteService } from 'src/app/services/website/website.service';
@@ -17,6 +18,8 @@ export class WorksheetResultComponent implements OnInit {
   allWebsite: any[] = [];
   websiteId: boolean= false;
   auth:any;
+  locked: boolean = true;
+  allUsers: any;
 
   filter = {
       'filter_name' : '',
@@ -54,16 +57,22 @@ export class WorksheetResultComponent implements OnInit {
       private service: WorksheetService,
       private userService: UserService,
       private websiteService: WebsiteService,
-      private helper: HelperService
-  ) {}
+      private helper: HelperService,
+      private router: Router,
+  ) {
+    this.auth = this.userService.Auth();
+  }
 
   ngOnInit(): void {
-      this.auth = this.userService.Auth();
       
       if(this.auth['role'].name.toLowerCase() == 'system'){
         this.websiteService.getAllWebsite({}, 1).subscribe((response) => {
             this.allWebsite = response['data'];
             // this.getPage(1);
+        });
+        
+        this.userService.getAllUser({}, 1).subscribe((response) => {
+          this.allUsers = response['dataUser'];
         });
       }else{
         if(this.auth['group']._id){
@@ -95,6 +104,11 @@ export class WorksheetResultComponent implements OnInit {
 
   initializeTimestamp(timestamp) {
     return this.helper.initializeTimestamp(timestamp);
+  }
+
+  followUpCall(id, websiteId){
+
+    this.router.navigate(['/worksheet/call/' + id + '/' + websiteId]);
   }
 
 }

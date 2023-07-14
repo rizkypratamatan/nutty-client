@@ -43,8 +43,9 @@
                     >
                         <thead>
                             <tr>
-                                <th>Username</th>
-                                <th>Name</th>
+                                <th>Date</th>
+                                <!-- <th>Username</th>
+                                <th>Name</th> -->
                                 <!-- <th>Nucode</th> -->
                                 <th>Total Call</th>
                                 <th>Website Call</th>
@@ -72,9 +73,10 @@
                                     let i = index
                                 "
                             >
-                                <td>{{ user.user.username }}</td>
-                                <td>{{ user.user.name }}</td>
+                                <!-- <td>{{ user.user.username }}</td>
+                                <td>{{ user.user.name }}</td> -->
                                 <!-- <td>{{ nucode }}</td> -->
+                                <td>{{ user.date.$date.$numberLong | date:'dd/MM/yy HH:mm:ss' }}</td>
                                 <td>{{ user.total }}</td>
                                 <td>
                                     <span
@@ -181,8 +183,9 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th>Username</th>
-                                <th>Name</th>
+                                <th>Date</th>
+                                <!-- <th>Username</th>
+                                <th>Name</th> -->
                                 <!-- <th>Nucode</th> -->
                                 <th>Total Call</th>
                                 <th>Website Call</th>

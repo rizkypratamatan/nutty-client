@@ -54,16 +54,16 @@ export class UserDetailComponent implements OnInit {
 
     getPage(request: {}) {
         this.loading = true;
-        this.service
-            .getUserById(request)
-            .subscribe((response) => {
-                // console.log(response['data'][0]['user']);return;
-                this.allUsers = response['data'];
-                this.nucode = response['userGroups'] ? response['userGroups'][0]['nucode'] : '';
-                this.totalUser = response['total_data'];
-                // this.p = page;
-                this.loading = false;
-            });
+        this.service.getUserById(request).subscribe((response) => {
+            // console.log(response['data'][0]['user']);return;
+            this.allUsers = response['data'];
+            this.nucode = response['userGroups']
+                ? response['userGroups'][0]['nucode']
+                : '';
+            this.totalUser = response['total_data'];
+            // this.p = page;
+            this.loading = false;
+        });
     }
 
     initializeTableStatus = function (name, names, total, totals) {

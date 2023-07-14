@@ -3,7 +3,6 @@ import Swal from 'sweetalert2';
 import { ActivatedRoute, Router } from '@angular/router';
 import { WebsiteService } from 'src/app/services/website/website.service';
 import { AuthService } from 'src/app/services/global/auth.service';
-import { Auth } from 'firebase/auth';
 
 @Component({
     selector: 'app-add-edit',

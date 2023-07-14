@@ -39,28 +39,38 @@
                                             <option value="90">90 days no deposit</option>
                                         </select>
                                     </div>
-                                    <div class="col-md-2 mb-1">
+                                    <div class="col-md-2">
                                         <button
-                                            (click)="create()"
+                                            (click)="processSms()"
                                             class="btn btn-success waves-effect waves-light form-control"
                                             >
-                                            Process SMS
+                                            <div class="spinner-border spinner-border-sm" role="status" *ngIf="loadingSmsBtn == true">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                            <span *ngIf="loadingSmsBtn == false">Process SMS</span>
                                         </button>
                                     </div>
-                                    <div class="col-md-3 mb-1">
+                                    <div class="col-md-3">
                                         <button
-                                            (click)="create()"
+                                            (click)="processWhatsapp()"
                                             class="btn btn-info waves-effect waves-light form-control"
                                             >
-                                            Process Wa
+                                            <div class="spinner-border spinner-border-sm" role="status" *ngIf="loadingWaBtn == true">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                            <span *ngIf="loadingWaBtn == false">Process Whatsapp</span>
                                         </button>
                                     </div>
-                                    <div class="col-md-3 mb-1">
+                                    <div class="col-md-3">
                                         <button
-                                            (click)="create()"
+                                            (click)="processEmail()"
                                             class="btn btn-warning waves-effect waves-light form-control"
                                             >
-                                            Process Email
+                                            <div class="spinner-border spinner-border-sm" role="status" *ngIf="loadingEmailBtn == true">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                            <span *ngIf="loadingEmailBtn == false">Process Email</span>
+                                            
                                         </button>
                                     </div>
                                 </form>
@@ -100,22 +110,14 @@
                                                 <td>{{ item['database'][0].name }}</td>
                                                 <td>{{ item['database'][0].status }}</td>
                                                 <td>{{ initializeTimestamp(item.deposit.last.timestamp.$date.$numberLong) }}</td>
-                                                <td></td>
-                                                <!-- <td>
+                                                <td>
                                                     <a
-                                                        (click)="edit(database._id)"
-                                                        class="btn btn-info btn-sm w-lg"
-                                                        >Edit</a
+                                                        (click)="followUpCall(item['database'][0]._id.$oid)"
+                                                        class="btn btn-outline-secondary btn-xs"
+                                                        ><i class="fas fa-phone-alt"></i></a
                                                     >
-                                                    &nbsp;
-                                                    <button
-                                                    ng-confirm-click="Are you sure to delete this record ?"
-                                                    (click)="delete(database._id, database.name)"
-                                                    class="btn btn-outline-secondary btn-sm"
-                                                    >
-                                                    <i class="bx uil-trash"></i>
-                                                    </button>
-                                                </td> -->
+                                                   
+                                                </td>
                                             </tr>
                                         </tbody>
                                         <tfoot>

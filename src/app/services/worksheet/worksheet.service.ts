@@ -151,5 +151,49 @@ export class WorksheetService {
         );
     }
 
+    public worksheetCall(id, websiteId): Observable<any> {
+        let auth = this.userServices.Auth();
+        let data = {
+            id: id,
+            websiteId: websiteId
+        };
+        return this.http.post(
+            this.configuration.api.url + '/api/worksheet/call/initialize-data',
+            this.globalRestService.initializeBody(
+                data,
+                'api/worksheet/call/initialize-data'
+            ),
+            this.globalRestService.initializeHeaderGetData(auth['token-auth'])
+        );
+    }
+
+    public updateDatabase(id, fields): Observable<any> {
+        let auth = this.userServices.Auth();
+        let data = {
+            id: id,
+            name: fields.name,
+            account: {
+              username: fields.account.username
+            },
+            log: {
+              id: fields.log.id
+            },
+            status:fields.status,
+            reference: fields.reference,
+            websiteId: fields.websiteId,
+            group: fields.group
+        };
+        
+        return this.http.post(
+            this.configuration.api.url + '/api/worksheet/update',
+            this.globalRestService.initializeBody(
+                data,
+                'api/worksheet/update'
+            ),
+            this.globalRestService.initializeHeaderGetData(auth['token-auth'])
+        );
+    }
+    
+
     
 }

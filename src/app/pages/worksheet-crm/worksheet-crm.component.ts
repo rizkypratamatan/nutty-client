@@ -17,6 +17,9 @@ export class WorksheetCrmComponent implements OnInit {
   allWebsite: any[] = [];
   websiteId: boolean= false;
   auth:any;
+  loadingSmsBtn: boolean= false;
+  loadingWaBtn: boolean= false;
+  loadingEmailBtn: boolean= false;
 
   filter = {
       'websiteId' : '',
@@ -62,6 +65,7 @@ export class WorksheetCrmComponent implements OnInit {
   getPage(page: number) {
       this.loading = true;
       this.service.getAllCrm(this.filter, page).subscribe((response) => {
+        console.log(response)
           this.allData = response['data'];
           this.p = page;
           this.totalData = response['total_data'];
@@ -110,7 +114,32 @@ export class WorksheetCrmComponent implements OnInit {
 
   
   processWhatsapp(){
-    this.service.processWhatsapp('Available', this.filter.websiteId, this.filter.days).subscribe((response) => {
+    this.loadingWaBtn = true;
+      this.service.processWhatsapp('', this.filter.websiteId, this.filter.days).subscribe((response) => {
+          if (response.result === true) {
+              Swal.fire({
+                  title: 'Success!',
+                  text: response.response,
+                  icon: 'success',
+                  confirmButtonText: 'Close'
+              });
+          }else{
+            Swal.fire({
+              title: 'Error!',
+              text: response.response,
+              icon: 'error',
+              confirmButtonText: 'Close'
+            });
+          }
+          this.loadingWaBtn = false;
+          this.getPage(1);
+      });
+      
+  }
+
+  processSms(){
+    this.loadingSmsBtn = true;
+    this.service.processSms('', this.filter.websiteId, this.filter.days).subscribe((response) => {
         if (response.result === true) {
             Swal.fire({
                 title: 'Success!',
@@ -119,54 +148,45 @@ export class WorksheetCrmComponent implements OnInit {
                 confirmButtonText: 'Close'
             });
         }else{
-          Swal.fire({
-            title: 'Error!',
-            text: response.response,
-            icon: 'error',
-            confirmButtonText: 'Close'
-        });
+            Swal.fire({
+                title: 'Error!',
+                text: response.response,
+                icon: 'error',
+                confirmButtonText: 'Close'
+            });
         }
+        this.loadingSmsBtn = false;
+        this.getPage(1);
     });
-}
+    
+  }
 
-processSms(){
-  this.service.processSms('Available', this.filter.websiteId, this.filter.days).subscribe((response) => {
-      if (response.result === true) {
-          Swal.fire({
-              title: 'Success!',
-              text: response.response,
-              icon: 'success',
-              confirmButtonText: 'Close'
-          });
-      }else{
-        Swal.fire({
-          title: 'Error!',
-          text: response.response,
-          icon: 'error',
-          confirmButtonText: 'Close'
-      });
-      }
-  });
-}
+  processEmail(){
+    this.loadingEmailBtn = true;
+    this.service.processEmail('', this.filter.websiteId, this.filter.days).subscribe((response) => {
+        if (response.result === true) {
+            Swal.fire({
+                title: 'Success!',
+                text: response.response,
+                icon: 'success',
+                confirmButtonText: 'Close'
+            });
+        }else{
+            Swal.fire({
+                title: 'Error!',
+                text: response.response,
+                icon: 'error',
+                confirmButtonText: 'Close'
+            });
+        }
+        this.loadingEmailBtn = false;
+        this.getPage(1);
+    });
+    
+  }
 
-processEmail(){
-  this.service.processEmail('Available', this.filter.websiteId, this.filter.days).subscribe((response) => {
-      if (response.result === true) {
-          Swal.fire({
-              title: 'Success!',
-              text: response.response,
-              icon: 'success',
-              confirmButtonText: 'Close'
-          });
-      }else{
-        Swal.fire({
-          title: 'Error!',
-          text: response.response,
-          icon: 'error',
-          confirmButtonText: 'Close'
-      });
-      }
-  });
-}
+  followUpCall(id){
+    this.router.navigate(['/worksheet/call/' + id + '/' + this.filter.websiteId]);
+  }
 
 }

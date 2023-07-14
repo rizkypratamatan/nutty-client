@@ -58,6 +58,7 @@ import { AddEditMessageTemplateComponent } from './message-template/add-edit.com
 import { WorksheetCrmComponent } from './worksheet-crm/worksheet-crm.component';
 import { AddEditLicenseComponent } from './license/add-edit.component';
 
+import { WorksheetCallComponent } from './worksheet-crm/worksheet-call/worksheet-call.component';
 
 FullCalendarModule.registerPlugins([
     dayGridPlugin,
@@ -96,6 +97,7 @@ FullCalendarModule.registerPlugins([
         AddEditMessageTemplateComponent,
         WorksheetCrmComponent,
         AddEditLicenseComponent,
+        WorksheetCallComponent,
     ],
     imports: [
         Ng2FlatpickrModule,

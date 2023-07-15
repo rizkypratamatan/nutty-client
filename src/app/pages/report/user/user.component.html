@@ -230,7 +230,8 @@
                                             ><i class="bx uil-analytics"></i
                                         ></a>
                                         <a
-                                            (click)="result(user._id)"
+                                            [routerLink]="['/worksheet/result']" [queryParams]="{id: user._id}" 
+                                             routerLinkActive="router-link-active"
                                             class="btn btn-outline-secondary btn-sm"
                                             ><i class="bx uil-file-info-alt"></i
                                         ></a>

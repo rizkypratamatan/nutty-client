@@ -175,7 +175,7 @@
 
                     <!-- Filter -->
                     <div class="row g-1 mb-3">
-                        <div class="col-md-1">
+                        <div class="col-md-3">
                             <input
                                 class="form-control dt-input"
                                 type="text"
@@ -184,7 +184,7 @@
                                 (ngModelChange)="updateFilters()"
                             />
                         </div>
-                        <div class="col-md-1">
+                        <!-- <div class="col-md-3">
                             <input
                                 class="form-control dt-input"
                                 type="text"
@@ -192,7 +192,7 @@
                                 [(ngModel)]="fields.format"
                                 (ngModelChange)="updateFilters()"
                             />
-                        </div>
+                        </div> -->
                     </div>
                     <div class="table-responsive">
                         <table
@@ -230,7 +230,7 @@
                                 <td>{{ message.name }}</td>
                                 <td>{{ message.format }}</td>
                                 
-                                <td>{{ !message.modified.timestamp.$date ?  message.modified.timestamp : message.modified.timestamp.$date.$numberLong | date }}</td>
+                                <td>{{ !message.modified.timestamp.$date ?  message.modified.timestamp : initializeTimestamp(message.modified.timestamp.$date.$numberLong) }}</td>
                                 <td>
                                     <a
                                         (click)="edit(message._id.$oid)"

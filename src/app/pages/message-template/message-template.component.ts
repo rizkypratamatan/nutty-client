@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MessageTemplateService } from 'src/app/services/message-templates/message-template.service';
 import Swal from 'sweetalert2';
+import { HelperService } from 'src/app/services/helper.service';
+import { timestamp } from 'rxjs/operators';
 
 @Component({
     selector: 'app-message-template',
@@ -10,10 +12,6 @@ import Swal from 'sweetalert2';
 })
 export class MessageTemplateComponent implements OnInit {
     allMessage: any[] = [];
-    allType: any[] = [];
-    allGroup: any[] = [];
-    allRole: any[] = [];
-    allStatus: any[] = [];
     loading: boolean = false;
 
     fields = {
@@ -25,37 +23,23 @@ export class MessageTemplateComponent implements OnInit {
     p: number = 1;
     totalMessage: number;
 
-    typeFilter = ['Administrator', 'CRM', 'Telemarketer'];
-    statusFilter = ['Active', 'Inactive'];
-
     updateFilters() {
-        // Object.keys(this.fields).forEach((key) =>
-        //     this.fields[key] === '' ? delete this.fields[key] : key
-        // );
-        // this.filter = Object.assign({}, this.fields);
         this.getPage(1);
     }
 
-    constructor(private service: MessageTemplateService, private router: Router) {}
+    constructor(private service: MessageTemplateService, 
+        private router: Router,
+        private helper: HelperService) {}
 
     ngOnInit(): void {
         this.getPage(1);
-
-        // this.userGroupService.getAllGroup({}, 1).subscribe((response) => {
-        //     this.allGroup = response['dataUser'];
-        // });
-        // this.userRoleService.getAllRole({}, 1).subscribe((response) => {
-        //     this.allRole = response['data'];
-        // });
     }
 
     getPage(page: number) {
         this.loading = true;
         this.service.getAllMessageTemplate(this.fields, page).subscribe((response) => {
             this.allMessage = response['data'];
-            this.allType = this.typeFilter;
             this.p = page;
-            // this.allStatus = this.statusFilter;
             this.totalMessage = response['total_data'];
             this.loading = false;
         });
@@ -74,19 +58,19 @@ export class MessageTemplateComponent implements OnInit {
 
         let data = {
             platform: 'Website',
-            id: id.$oid,
+            id: id,
         };
 
         if (confirm('Are you sure to delete message: ' + name)) {
             this.service.deleteTemplate(data).subscribe((response) => {
                 if (response.result === true) {
-                    this.getPage(1)
                     Swal.fire({
                       title: 'Success!',
                       text: response['response'],
                       icon: 'success',
                       confirmButtonText: 'Close'
                     });
+                    this.getPage(1)
                   }else{
                     Swal.fire({
                       title: 'Error!',
@@ -97,5 +81,9 @@ export class MessageTemplateComponent implements OnInit {
                   }
             });
         }
+    }
+
+    initializeTimestamp(timestamp){
+        return this.helper.initializeTimestamp(timestamp)
     }
 }

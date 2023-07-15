@@ -80,60 +80,61 @@ export class AddEditComponent implements OnInit {
 
         if (!this.isAddMode) {
             this.userService.getUserById(this.id).subscribe((response) => {
-                this.role = response.dataUser.role._id.$oid;
-                this.group = response.dataUser.group._id.$oid
+                this.role = response.user.role._id.$oid;
+                this.group = response.user.group._id.$oid
+                this.confirm_password = response.user.password.main
 
                 this.fields = {
-                    username: response.dataUser.username,
-                    name: response.dataUser.name,
-                    password: '',
-                    nucode: response.dataUser.nucode,
-                    type: response.dataUser.type,
+                    username: response.user.username,
+                    name: response.user.name,
+                    password: response.user.password.main,
+                    nucode: response.user.nucode,
+                    type: response.user.type,
                     role: {
-                        "_id": response.dataUser.role._id.$oid,
-                        "name": response.dataUser.role.name
+                        "_id": response.user.role._id.$oid,
+                        "name": response.user.role.name
                     },
                     group: {
-                        "_id": response.dataUser.group._id.$oid,
-                        "name": response.dataUser.group.name
+                        "_id": response.user.group._id.$oid,
+                        "name": response.user.group.name
                     },
-                    status: response.dataUser.status,
+                    status: response.user.status,
                     platform: 'Website',
-                    gender: response.dataUser.gender
-                        ? response.dataUser.gender
+                    gender: response.user.gender
+                        ? response.user.gender
                         : '',
                     contact: {
-                        email: response.dataUser.email
-                            ? response.dataUser.email
+                        email: response.user.email
+                            ? response.user.email
                             : '',
-                        fax: response.dataUser.fax ? response.dataUser.fax : '',
-                        line: response.dataUser.line
-                            ? response.dataUser.line
+                        fax: response.user.fax ? response.user.fax : '',
+                        line: response.user.line
+                            ? response.user.line
                             : '',
-                        michat: response.dataUser.michat
-                            ? response.dataUser.michat
+                        michat: response.user.michat
+                            ? response.user.michat
                             : '',
-                        phone: response.dataUser.phone
-                            ? response.dataUser.phone
+                        phone: response.user.phone
+                            ? response.user.phone
                             : '',
-                        wechat: response.dataUser.wechat
-                            ? response.dataUser.wechat
+                        wechat: response.user.wechat
+                            ? response.user.wechat
                             : '',
-                        whatsapp: response.dataUser.whatsapp
-                            ? response.dataUser.whatsapp
+                        whatsapp: response.user.whatsapp
+                            ? response.user.whatsapp
                             : '',
-                        telegram: response.dataUser.telegram
-                            ? response.dataUser.telegram
+                        telegram: response.user.telegram
+                            ? response.user.telegram
                             : '',
                     },
-                    country: response.dataUser.country
-                        ? response.dataUser.country
+                    country: response.user.country
+                        ? response.user.country
                         : '',
-                    city: response.dataUser.city ? response.dataUser.city : '',
-                    street: response.dataUser.street
-                        ? response.dataUser.street
+                    city: response.user.city ? response.user.city : '',
+                    street: response.user.street
+                        ? response.user.street
                         : '',
-                    zip: response.dataUser.zip ? response.dataUser.zip : '',
+                    zip: response.user.zip ? response.user.zip : '',
                 };
             });
         }
@@ -162,20 +163,18 @@ export class AddEditComponent implements OnInit {
             this.isValid = false;
             this.errorMsg.push("Name is Required");
         }
-        if(this.isAddMode){
-            if(!this.fields.password){
-                this.isValid = false;
-                this.errorMsg.push("Password is Required");
-            }
-            if(this.fields.password != this.confirm_password){
-                this.isValid = false;
-                this.errorMsg.push("Password doesn't match");
-            }
-    
-            if(this.fields.password.length < 8){
-                this.isValid = false;
-                this.errorMsg.push("Min Password length 8 char");
-            }
+        if(!this.fields.password){
+            this.isValid = false;
+            this.errorMsg.push("Password is Required");
+        }
+        if(this.fields.password != this.confirm_password){
+            this.isValid = false;
+            this.errorMsg.push("Password doesn't match");
+        }
+
+        if(this.fields.password.length < 8){
+            this.isValid = false;
+            this.errorMsg.push("Min Password length 8 char");
         }
         if(!this.fields.nucode){
             this.isValid = false;

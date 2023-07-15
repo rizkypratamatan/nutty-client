@@ -48,7 +48,7 @@ export class UserComponent implements OnInit {
     }
 
     result(id) {
-        this.router.navigate(['/worksheet/result/' + id]);
+        this.router.navigate(['/worksheet/result?id=' + id]);
     }
 
     getPage(page: number) {

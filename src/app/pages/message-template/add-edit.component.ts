@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageTemplateService } from 'src/app/services/message-templates/message-template.service';
 import Swal from 'sweetalert2';
+import { HelperService } from 'src/app/services/helper.service';
+import { timestamp } from 'rxjs/operators';
 
 @Component({
     selector: 'app-add-edit',
@@ -27,23 +29,14 @@ export class AddEditMessageTemplateComponent implements OnInit {
 
     constructor(
         private service: MessageTemplateService,
-        // private userRoleService: UserRoleService,
-        // private userGroupService: UserGroupService,
         private router: Router,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private helper: HelperService
     ) {}
 
     ngOnInit(): void {
         this.id = this.route.snapshot.params['id'];
         this.isAddMode = !this.id;
-
-        // this.userRoleService.getAllRole({}, 1).subscribe((response) => {
-        //     this.allRoles = response['data'];
-        // });
-
-        // this.userGroupService.getAllGroup({}, 1).subscribe((response) => {
-        //     this.allGroup = response['dataUser'];
-        // });
 
         if (!this.isAddMode) {
             this.service.getMessageById(this.id).subscribe((response) => {
@@ -98,7 +91,6 @@ export class AddEditMessageTemplateComponent implements OnInit {
                     confirmButtonText: 'Close',
                 });
                 this.loadingIndicator = false;
-                this.router.navigate(['/message']);
             }
         });
     }
@@ -114,7 +106,6 @@ export class AddEditMessageTemplateComponent implements OnInit {
                     icon: 'success',
                     confirmButtonText: 'Close'
                 });
-                this.router.navigate(['/message']);
             }
         });
     }
@@ -124,5 +115,9 @@ export class AddEditMessageTemplateComponent implements OnInit {
             name: '',
             format: '',
         };
+    }
+
+    initializeTimestamp(timestamp){
+        return this.helper.initializeTimestamp(timestamp);
     }
 }

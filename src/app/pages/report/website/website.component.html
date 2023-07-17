@@ -53,7 +53,7 @@
                             <thead>
                                 <tr>
                                     <th>Website</th>
-                                    <th>Nucode</th>
+                                    <!-- <th>Nucode</th> -->
                                     <th>Total Call</th>
                                     <th>Deposited</th>
                                     <th>Redeposited</th>
@@ -73,15 +73,15 @@
                                         let website of allWebsites
                                             | paginate
                                                 : {
-                                                    itemsPerPage: 10,
-                                                    currentPage: p,
-                                                    totalItems: totalWebsite
-                                                };
+                                                      itemsPerPage: 10,
+                                                      currentPage: p,
+                                                      totalItems: totalWebsite
+                                                  };
                                         let i = index
                                     "
                                 >
-                                    <td>{{ website.website[0]['name'] }}</td>
-                                    <td></td>
+                                    <td>{{ website.website[0]["name"] }}</td>
+                                    <!-- <td></td> -->
                                     <td>{{ website.total }}</td>
                                     <!-- <td>
                                         <span
@@ -95,112 +95,76 @@
                                         </span>
                                     </td> -->
                                     <td>
-                                        <span *ngFor="let status of website.status">
-                                            {{
-                                                initializeTableStatus(
-                                                    "Deposited",
-                                                    status.names,
-                                                    resultStatus,
-                                                    status.totals
-                                                )
-                                            }}
-                                        </span>
+                                        {{
+                                            initializeStatus(
+                                                website.status,
+                                                "Deposited"
+                                            )
+                                        }}
                                     </td>
                                     <td>
-                                        <span *ngFor="let status of website.status">
-                                            {{
-                                                initializeTableStatus(
-                                                    "Redeposited",
-                                                    status.names,
-                                                    resultStatus,
-                                                    status.totals
-                                                )
-                                            }}
-                                        </span>
+                                        {{
+                                            initializeStatus(
+                                                website.status,
+                                                "Redeposited"
+                                            )
+                                        }}
                                     </td>
                                     <td>
-                                        <span *ngFor="let status of website.status">
-                                            {{
-                                                initializeTableStatus(
-                                                    "Registered",
-                                                    status.names,
-                                                    resultStatus,
-                                                    status.totals
-                                                )
-                                            }}
-                                        </span>
+                                        {{
+                                            initializeStatus(
+                                                website.status,
+                                                "Registered"
+                                            )
+                                        }}
                                     </td>
                                     <td>
-                                        <span *ngFor="let status of website.status">
-                                            {{
-                                                initializeTableStatus(
-                                                    "Interested",
-                                                    status.names,
-                                                    resultStatus,
-                                                    status.totals
-                                                )
-                                            }}
-                                        </span>
+                                        {{
+                                            initializeStatus(
+                                                website.status,
+                                                "Interested"
+                                            )
+                                        }}
                                     </td>
                                     <td>
-                                        <span *ngFor="let status of website.status">
-                                            {{
-                                                initializeTableStatus(
-                                                    "FollowUp",
-                                                    status.names,
-                                                    resultStatus,
-                                                    status.totals
-                                                )
-                                            }}
-                                        </span>
+                                        {{
+                                            initializeStatus(
+                                                website.status,
+                                                "FollowUp"
+                                            )
+                                        }}
                                     </td>
                                     <td>
-                                        <span *ngFor="let status of website.status">
-                                            {{
-                                                initializeTableStatus(
-                                                    "NotActive",
-                                                    status.names,
-                                                    resultStatus,
-                                                    status.totals
-                                                )
-                                            }}
-                                        </span>
+                                        {{
+                                            initializeStatus(
+                                                website.status,
+                                                "NotActive"
+                                            )
+                                        }}
                                     </td>
                                     <td>
-                                        <span *ngFor="let status of website.status">
-                                            {{
-                                                initializeTableStatus(
-                                                    "NotPickedUp",
-                                                    status.names,
-                                                    resultStatus,
-                                                    status.totals
-                                                )
-                                            }}
-                                        </span>
+                                        {{
+                                            initializeStatus(
+                                                website.status,
+                                                "NotPickedUp"
+                                            )
+                                        }}
                                     </td>
                                     <td>
-                                        <span *ngFor="let status of website.status">
-                                            {{
-                                                initializeTableStatus(
-                                                    "NotInterested",
-                                                    status.names,
-                                                    resultStatus,
-                                                    status.totals
-                                                )
-                                            }}
-                                        </span>
+                                        {{
+                                            initializeStatus(
+                                                website.status,
+                                                "NotInterested"
+                                            )
+                                        }}
                                     </td>
                                     <td>
-                                        <span *ngFor="let status of website.status">
-                                            {{
-                                                initializeTableStatus(
-                                                    "InvalidNumber",
-                                                    status.names,
-                                                    resultStatus,
-                                                    status.totals
-                                                )
-                                            }}
-                                        </span>
+                                        {{
+                                            initializeStatus(
+                                                website.status,
+                                                "InvalidNumber"
+                                            )
+                                        }}
                                     </td>
                                     <td>
                                         <a
@@ -214,7 +178,7 @@
                             <tfoot>
                                 <tr>
                                     <th>Website</th>
-                                    <th>Nucode</th>
+                                    <!-- <th>Nucode</th> -->
                                     <th>Total Call</th>
                                     <th>Deposited</th>
                                     <th>Redeposited</th>

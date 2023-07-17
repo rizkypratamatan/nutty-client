@@ -93,10 +93,10 @@
                                         let user of allUsers
                                             | paginate
                                                 : {
-                                                    itemsPerPage: 10,
-                                                    currentPage: p,
-                                                    totalItems: totalUser
-                                                };
+                                                      itemsPerPage: 10,
+                                                      currentPage: p,
+                                                      totalItems: totalUser
+                                                  };
                                         let i = index
                                     "
                                 >
@@ -116,112 +116,78 @@
                                         </span>
                                     </td>
                                     <td>
-                                        <span *ngFor="let status of user.status">
-                                            {{
-                                                initializeTableStatus(
-                                                    "Deposited",
-                                                    status.names,
-                                                    resultStatus,
-                                                    status.totals
-                                                )
-                                            }}
-                                        </span>
+                                        {{
+                                            initializeStatus(
+                                                user.status,
+                                                "Deposited"
+                                            )
+                                        }}
                                     </td>
                                     <td>
-                                        <span *ngFor="let status of user.status">
-                                            {{
-                                                initializeTableStatus(
-                                                    "Redeposited",
-                                                    status.names,
-                                                    resultStatus,
-                                                    status.totals
-                                                )
-                                            }}
-                                        </span>
+                                        {{
+                                            initializeStatus(
+                                                user.status,
+                                                "Redeposited"
+                                            )
+                                        }}
                                     </td>
                                     <td>
-                                        <span *ngFor="let status of user.status">
-                                            {{
-                                                initializeTableStatus(
-                                                    "Registered",
-                                                    status.names,
-                                                    resultStatus,
-                                                    status.totals
-                                                )
-                                            }}
-                                        </span>
+                                        {{
+                                            initializeStatus(
+                                                user.status,
+                                                "Registered"
+                                            )
+                                        }}
                                     </td>
                                     <td>
-                                        <span *ngFor="let status of user.status">
-                                            {{
-                                                initializeTableStatus(
-                                                    "Interested",
-                                                    status.names,
-                                                    resultStatus,
-                                                    status.totals
-                                                )
-                                            }}
-                                        </span>
+                                        {{
+                                            initializeStatus(
+                                                user.status,
+                                                "Interested"
+                                            )
+                                        }}
                                     </td>
                                     <td>
-                                        <span *ngFor="let status of user.status">
-                                            {{
-                                                initializeTableStatus(
-                                                    "FollowUp",
-                                                    status.names,
-                                                    resultStatus,
-                                                    status.totals
-                                                )
-                                            }}
-                                        </span>
+                                        {{
+                                            initializeStatus(
+                                                user.status,
+                                                "FollowUp"
+                                            )
+                                        }}
+
+                                        <!-- {{ initializeStatus(user.status, "FollowUp") }} -->
                                     </td>
                                     <td>
-                                        <span *ngFor="let status of user.status">
-                                            {{
-                                                initializeTableStatus(
-                                                    "NotActive",
-                                                    status.names,
-                                                    resultStatus,
-                                                    status.totals
-                                                )
-                                            }}
-                                        </span>
+                                        {{
+                                            initializeStatus(
+                                                user.status,
+                                                "NotActive"
+                                            )
+                                        }}
                                     </td>
                                     <td>
-                                        <span *ngFor="let status of user.status">
-                                            {{
-                                                initializeTableStatus(
-                                                    "NotPickedUp",
-                                                    status.names,
-                                                    resultStatus,
-                                                    status.totals
-                                                )
-                                            }}
-                                        </span>
+                                        {{
+                                            initializeStatus(
+                                                user.status,
+                                                "NotPickedUp"
+                                            )
+                                        }}
                                     </td>
                                     <td>
-                                        <span *ngFor="let status of user.status">
-                                            {{
-                                                initializeTableStatus(
-                                                    "NotInterested",
-                                                    status.names,
-                                                    resultStatus,
-                                                    status.totals
-                                                )
-                                            }}
-                                        </span>
+                                        {{
+                                            initializeStatus(
+                                                user.status,
+                                                "NotInterested"
+                                            )
+                                        }}
                                     </td>
                                     <td>
-                                        <span *ngFor="let status of user.status">
-                                            {{
-                                                initializeTableStatus(
-                                                    "InvalidNumber",
-                                                    status.names,
-                                                    resultStatus,
-                                                    status.totals
-                                                )
-                                            }}
-                                        </span>
+                                        {{
+                                            initializeStatus(
+                                                user.status,
+                                                "InvalidNumber"
+                                            )
+                                        }}
                                     </td>
                                     <td>
                                         <a

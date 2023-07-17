@@ -60,15 +60,25 @@ export class WebsiteComponent implements OnInit {
             });
     }
 
-    initializeTableStatus = function (name, names, total, totals) {
+    initializeStatus(status, name: string) {
+        this.resultStatus = 0;
+
+        status.forEach((element) => {
+            this.initializeTableStatus(name, element.names, element.totals);
+        });
+
+        return this.resultStatus;
+    }
+
+    initializeTableStatus(name, names, totals) {
         let index = names.indexOf(name);
 
         if (index >= 0) {
-            total += totals[index];
+            this.resultStatus += totals[index];
         }
 
-        return total;
-    };
+        return this.resultStatus;
+    }
 
     datePickerOption: FlatpickrOptions = {
         dateFormat: 'Y/m/d',

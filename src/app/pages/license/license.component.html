@@ -1,59 +1,3 @@
-<!-- <div class="container-fluid">
-    <div class="row">
-        <div class="col-12">
-            <div class="page-title-box d-flex align-items-center justify-content-between">
-                <h4 class="mb-0">License</h4>
-                <div class="page-title-right">
-                    <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">License</li>
-                    </ol>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card">
-                <div class="card-body">
-                    <form class="row g-1 mb-3" method="POST" action="">
-                        <div class="col-md-2">
-                            <input class="form-control dt-input" type="text" placeholder="Nucode"
-                                   data-column="1"
-                                   data-regex="true"/>
-                        </div>
-                        <div class="col-md-10"></div>
-                    </form>
-                    <table id="license" class="table table-striped table-bordered dt-responsive nowrap"
-                           style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-                        <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Nucode</th>
-                            <th>Total Seat</th>
-                            <th>Status</th>
-                            <th>Modified</th>
-                            <th>Action</th>
-                        </tr>
-                        </thead>
-                        <tfoot>
-                        <tr>
-                            <th>#</th>
-                            <th>Nucode</th>
-                            <th>Total Seat</th>
-                            <th>Status</th>
-                            <th>Modified</th>
-                            <th>Action</th>
-                        </tr>
-                        </tfoot>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> -->
-
-
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
@@ -76,22 +20,18 @@
             <div class="card">
                 <div class="card-body">
                     <!-- Filter -->
-                    <form class="row g-1 mb-3" method="POST" action="">
-                        <div class="col-md-1">
+                    <div class="row g-1 mb-3">
+                        <div class="col-md-3">
                             <input 
-                            class="form-control dt-input" 
-                            name="license-nucode"
-                            type="text" 
-                            placeholder="Nucode"
-                            [(ngModel)]="fields.nucode" 
-                            (ngModelChange)="updateFilters()" 
+                                class="form-control dt-input" 
+                                name="license-nucode"
+                                type="text" 
+                                placeholder="Nucode"
+                                [(ngModel)]="fields.nucode" 
+                                (ngModelChange)="updateFilters()" 
                             />
                         </div>
-                        <!-- <div class="col-md-1">
-                            <input class="form-control dt-input" type="text" placeholder="Format"
-                                [(ngModel)]="fields.format" (ngModelChange)="updateFilters()" />
-                        </div> -->
-                    </form>
+                    </div>
                     <div class="table-responsive">
                         <table id="license" class="table table-striped table-bordered dt-responsive nowrap" style="
                             border-collapse: collapse;
@@ -100,16 +40,6 @@
                         ">
                             <thead>
                                 <tr>
-                                    <!-- <th>#</th> -->
-                                    <th>Nucode</th>
-                                    <th>Total Seat</th>
-                                    <th>Status</th>
-                                    <th>Modified</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <!-- <tfoot>
-                                <tr>
                                     <th>#</th>
                                     <th>Nucode</th>
                                     <th>Total Seat</th>
@@ -117,7 +47,7 @@
                                     <th>Modified</th>
                                     <th>Action</th>
                                 </tr>
-                            </tfoot> -->
+                            </thead>
                             <tbody>
                                 <tr *ngFor="
                                     let license of allLicense
@@ -129,29 +59,29 @@
                                               };
                                     let i = index
                                 ">
-                                    <!-- <td>{{ i + 1 }}</td> -->
+                                    <td>{{ i + 1 }}</td>
                                     <td>{{ license.nucode }}</td>
                                     <td>{{ license.seat }}</td>
                                     <td>{{ license.status }}</td>
 
-                                    <td>{{ !license.modified.timestamp.$date ?  license.modified.timestamp : license.modified.timestamp.$date.$numberLong | date }}
+                                    <td>{{ !license.modified.timestamp.$date ?  license.modified.timestamp : initializeTimestamp(license.modified.timestamp.$date.$numberLong) }}
                                     </td>
                                     <td>
                                         <a (click)="edit(license._id)" class="btn btn-outline-secondary btn-sm"><i
                                                 class="bx uil-edit"></i></a>
-                                        <!-- &nbsp;
+                                        &nbsp;
                                         <button ng-confirm-click="Are you sure to delete this record ?"
                                             (click)="delete(license._id, license.name)"
                                             class="btn btn-outline-secondary btn-sm">
                                             <i class="bx uil-trash"></i>
-                                        </button> -->
+                                        </button>
                                     </td>
                                 </tr>
                             </tbody>
 
                             <tfoot>
                                 <tr>
-                                    <!-- <th>#</th> -->
+                                    <th>#</th>
                                     <th>Nucode</th>
                                     <th>Total Seat</th>
                                     <th>Status</th>

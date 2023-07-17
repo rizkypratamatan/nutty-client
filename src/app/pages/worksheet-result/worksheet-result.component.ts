@@ -5,6 +5,7 @@ import { WorksheetService } from 'src/app/services/worksheet/worksheet.service';
 import { UserService } from 'src/app/services/user/user.service';
 import { WebsiteService } from 'src/app/services/website/website.service';
 import { HelperService } from 'src/app/services/helper.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-worksheet-result',
@@ -59,6 +60,7 @@ export class WorksheetResultComponent implements OnInit {
       private websiteService: WebsiteService,
       private helper: HelperService,
       private router: Router,
+      private activateRoute: ActivatedRoute
   ) {
     this.auth = this.userService.Auth();
   }
@@ -74,6 +76,12 @@ export class WorksheetResultComponent implements OnInit {
         this.userService.getAllUser({}, 1).subscribe((response) => {
           this.allUsers = response['dataUser'];
         });
+
+        this.activateRoute.queryParams
+          .subscribe(params => {
+            this.filter.filter_user = params.id;
+          }
+        );
       }else{
         if(this.auth['group']._id){
             this.websiteService.getAllWebsite({}, 1).subscribe((response) => {

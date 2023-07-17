@@ -13,10 +13,6 @@ import { HelperService } from 'src/app/services/helper.service';
 })
 export class LicenseComponent implements OnInit {
     allLicense: any[] = [];
-    allType: any[] = [];
-    allGroup: any[] = [];
-    allRole: any[] = [];
-    allStatus: any[] = [];
     limit: number = 10;
     offset: number = 0;
     page: number = 1;
@@ -24,6 +20,7 @@ export class LicenseComponent implements OnInit {
 
     fields = {
         nucode: '',
+        totalSeat: '',
     };
 
     // filter = {};
@@ -36,7 +33,7 @@ export class LicenseComponent implements OnInit {
     constructor(
         private service: LicenseService,
         private router: Router,
-        
+        private helper: HelperService
     ) {}
 
     ngOnInit(): void {
@@ -46,16 +43,11 @@ export class LicenseComponent implements OnInit {
     getPage(page: number) {
       this.loading = true;
       this.service.getAllLicense(this.fields, page).subscribe((response) => {
-        // console.log(response['data']);
           this.allLicense = response['data'];
           this.p = page;
           this.totalLicense = response['total_data'];
           this.loading = false;
       });
-  }
-
-  create() {
-      this.router.navigate(['/license/add-edit']);
   }
 
   edit(id) {
@@ -64,7 +56,6 @@ export class LicenseComponent implements OnInit {
 
   delete(id, name) {
       const currentUrl = this.router.url;
-      // console.log(currentUrl);
 
       let data = {
           platform: 'Website',
@@ -73,15 +64,14 @@ export class LicenseComponent implements OnInit {
 
       if (confirm('Are you sure to delete license: ' + name)) {
           this.service.deleteLicense(data).subscribe((response) => {
-              // console.log(response);
               if (response.result === true) {
-                  this.getPage(1)
                   Swal.fire({
                     title: 'Success!',
                     text: response['response'],
                     icon: 'success',
                     confirmButtonText: 'Close'
                   });
+                  this.getPage(1)
                 }else{
                   Swal.fire({
                     title: 'Error!',
@@ -92,5 +82,9 @@ export class LicenseComponent implements OnInit {
                 }
           });
       }
+  }
+
+  initializeTimestamp(timestamp){
+    return this.helper.initializeTimestamp(timestamp)
   }
 }

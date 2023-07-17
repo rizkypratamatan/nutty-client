@@ -9,6 +9,7 @@ import { UserRoleComponent } from './user-role/user-role.component';
 import { UserGroupComponent } from './user-group/user-group.component';
 import { WebsiteComponent } from './website/website.component';
 import { LicenseComponent } from './license/license.component';
+import { AddEditLicenseComponent } from './license/add-edit.component';
 import { ReportComponent } from './report/report.component';
 import { ApiComponent } from './api/api.component';
 import { AddEditApiComponent } from './api/add-edit.component';
@@ -25,7 +26,6 @@ import { AddEditWebsiteComponent } from './website/add-edit.component';
 import { AddEditDatabaseComponent } from './database/add-edit.component';
 import { MessageTemplateComponent } from './message-template/message-template.component';
 import { AddEditMessageTemplateComponent } from './message-template/add-edit.component';
-import { AddEditLicenseComponent } from './license/add-edit.component';
 import { WorksheetCallComponent } from './worksheet-crm/worksheet-call/worksheet-call.component';
 
 const routes: Routes = [
@@ -69,14 +69,15 @@ const routes: Routes = [
   // { path: 'report', component: ReportComponent },
   { path: 'api', component: ApiComponent },
   { path: 'api/add-edit/:id', component: AddEditApiComponent },
-  { path: 'license', component: LicenseComponent },
   { path: 'sms', loadChildren: () => import('./sms/sms.module').then(m => m.SmsModule) },
   { path: 'whatsapp', loadChildren: () => import('./whatsapp/whatsapp.module').then(m => m.WhatsappModule) },
   { path: 'report', loadChildren: () => import('./report/report.module').then(m => m.ReportModule) },
   { path: 'message/list', component: MessageTemplateComponent },
   { path: 'message/add-edit', component: AddEditMessageTemplateComponent },
   { path: 'message/add-edit/:id', component: AddEditMessageTemplateComponent },
-  { path: 'license/add-edit/', component: AddEditLicenseComponent }
+  { path: 'license', component: LicenseComponent },
+  { path: 'license/add-edit/', component: AddEditLicenseComponent },
+  { path: 'license/add-edit/:id', component: AddEditLicenseComponent }
 ];
 
 @NgModule({

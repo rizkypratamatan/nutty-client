@@ -169,7 +169,7 @@ export const MENU: MenuItem[] = [
                 label: 'MENUITEMS.APPS.LIST.WR_CRM',
                 link: '/worksheet/crm',
                 parentId: 19,
-                name: 'worksheet',
+                name: 'worksheetCrm',
                 permission: 0,
             },
             {

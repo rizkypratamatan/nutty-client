@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import { ActivatedRoute, Router } from '@angular/router';
-import { HelperService } from 'src/app/services/helper.service';
 import { LicenseService } from 'src/app/services/license/license.service';
 
 @Component({
@@ -11,46 +10,42 @@ import { LicenseService } from 'src/app/services/license/license.service';
 })
 export class AddEditLicenseComponent implements OnInit {
     id: string;
-    isAddMode: boolean;
-    status = ['Active', 'Inactive'];
     isValid: boolean = true;
     errorMsg: any[] = [];
     loadingIndicator: boolean = false;
-    loadingSync: boolean = false;
-    response: any;
-
-    name: any = '';
-    nucode: any = '';
-    // seat: any = '';
-    // status: any = '';
 
     fields = {
         platform: 'Website',
         nucode: '',
-        seat: '',
-        status: '',
+        user: {
+            total: ""
+        },
     };
 
     constructor(
         private router: Router,
         private route: ActivatedRoute,
-        private service: LicenseService,
-        private helper: HelperService
+        private service: LicenseService
     ) {}
 
     ngOnInit(): void {
         this.id = this.route.snapshot.params['id'];
-        this.isAddMode = !this.id;
 
-        if (!this.isAddMode) {
-            this.service.getLicenseById(this.id).subscribe((response) => {
-                this.response = response['data'];
-                this.name = response['data'].name;
+        this.service.getLicenseById(this.id).subscribe((response) => {
+            if(response.status){
                 this.fields.nucode = response['data'].nucode;
-                this.fields.seat = response['data'].seat;
-                this.fields.status = response['data'].status;
-            });
-        }
+                this.fields.user.total = response['data'].user.total;
+            }else{
+                Swal.fire({
+                    title: 'Error!',
+                    text: response.response,
+                    icon: 'error',
+                    confirmButtonText: 'Close',
+                });
+                // this.router.navigate(['/license']);
+            }
+            
+        });
     }
 
     submit() {
@@ -58,11 +53,7 @@ export class AddEditLicenseComponent implements OnInit {
         this.validateInput();
         if (this.isValid) {
             this.loadingIndicator = true;
-            if (this.isAddMode) {
-                this.create();
-            } else {
-                this.update();
-            }
+            this.update();
         }
     }
 
@@ -70,18 +61,18 @@ export class AddEditLicenseComponent implements OnInit {
         this.isValid = true;
         if (!this.fields.nucode) {
             this.isValid = false;
-            this.errorMsg.push();
+            this.errorMsg.push("Nucode Required");
+        }
+
+        if (!this.fields.user.total) {
+            this.isValid = false;
+            this.errorMsg.push("Seat Required");
         }
         
     }
 
-    private create(){
-      console.log("create")
-    }
-
     private update() {
         let id = this.id;
-
         this.service.updateLicense(id, this.fields).subscribe((response) => {
             if (response.result === true) {
                 this.loadingIndicator = false;

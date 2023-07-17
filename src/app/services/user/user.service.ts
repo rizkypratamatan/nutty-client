@@ -70,8 +70,8 @@ export class UserService {
         };
 
         return this.http.post(
-            this.configuration.api.url + '/api/get-user-by-id',
-            this.globalRestService.initializeBody(data, 'api/get-user-by-id'),
+            this.configuration.api.url + '/api/user/initialize-data',
+            this.globalRestService.initializeBody(data, 'api/user/initialize-data'),
             this.globalRestService.initializeHeaderGetData(auth['token-auth'])
         );
     }

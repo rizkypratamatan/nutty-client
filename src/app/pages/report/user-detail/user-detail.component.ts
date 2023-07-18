@@ -43,10 +43,12 @@ export class UserDetailComponent implements OnInit {
 
         this.service.getUserById(this.fields).subscribe((response) => {
             // console.log(response);return;
-            this.allUsers = response['data'];
-            this.userName = response['data'][0]['user']['name'];
-            // this.nucode = response['userGroups'][0]['nucode'];
-            this.totalUser = response['total_data'];
+            if(response.status == true){
+                this.allUsers = response['data'];
+                this.userName = response['data'][0]['user']['name'];
+                // this.nucode = response['userGroups'][0]['nucode'];
+                this.totalUser = response['total_data'];
+            }
             // this.p = page;
             this.loading = false;
         });

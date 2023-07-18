@@ -56,11 +56,14 @@ export class UserComponent implements OnInit {
         this.service
             .getAllUserReport(this.fields, page)
             .subscribe((response) => {
-                this.allUsers = response['data'];
-                this.nucode = response['userGroups'][0]['nucode'];
-                this.totalUser = response['total_data'];
-                this.p = page;
+                if(response.status == true){
+                    this.allUsers = response['data'];
+                    this.nucode = response['userGroups'][0]['nucode'];
+                    this.totalUser = response['total_data'];
+                    this.p = page;
+                }
                 this.loading = false;
+                
             });
     }
 

@@ -51,11 +51,13 @@ export class WebsiteComponent implements OnInit {
         this.service
             .getAllWebsiteReport(this.fields, page)
             .subscribe((response) => {
-                // console.log(response);return;
-                this.allWebsites = response['data'];
-                // this.nucode = response['userGroups'][0]['nucode'];
-                this.totalWebsite = response['total_data'];
-                this.p = page;
+                if(response.status == true){
+                    // console.log(response);return;
+                    this.allWebsites = response['data'];
+                    // this.nucode = response['userGroups'][0]['nucode'];
+                    this.totalWebsite = response['total_data'];
+                    this.p = page;
+                }
                 this.loading = false;
             });
     }

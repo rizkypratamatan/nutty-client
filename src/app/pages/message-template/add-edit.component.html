@@ -51,6 +51,22 @@
                                 </div>
                             </div>
                             <div class="mb-3">
+                                <label class="form-label">Type</label>
+                                <select
+                                    id="type"
+                                    class="form-control select2"
+                                    required
+                                    [(ngModel)]="fields.type"
+                                    [ngModelOptions]="{ standalone: true }"
+                                >
+                                    <option value="">Type</option>
+                                    <option value="Sms">Sms</option>
+                                    <option value="WA">WA</option>
+                                    <option value="Email">Email</option>
+                                </select>
+                                <div id="response-type"></div>
+                            </div>
+                            <div class="mb-3">
                                 <button *ngIf="!isAddMode" class="btn btn-outline-success waves-effect waves-light me-1"
                                     type="submit">
                                     <div class="spinner-border spinner-border-sm" role="status"

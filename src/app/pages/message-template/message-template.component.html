@@ -184,6 +184,19 @@
                                 (ngModelChange)="updateFilters()"
                             />
                         </div>
+                        <!-- <div class="col-md-2">
+                            <select
+                                id="message-filter-type"
+                                class="select2 form-select dt-select"
+                                [(ngModel)]="fields.type"
+                                (ngModelChange)="updateFilters()"
+                            >
+                                <option value="">Choose type</option>
+                                <option *ngFor="let type of allType">
+                                    {{ type }}
+                                </option>
+                            </select>
+                        </div> -->
                         <!-- <div class="col-md-3">
                             <input
                                 class="form-control dt-input"
@@ -209,6 +222,7 @@
                                 
                                 <th>Name</th>
                                 <th>Format</th>
+                                <th>Type</th>
                                 <th>Modified</th>
                                 <th>Action</th>
                             </tr>
@@ -229,6 +243,7 @@
                                 <!-- <td>{{ i + 1 }}</td> -->
                                 <td>{{ message.name }}</td>
                                 <td>{{ message.format }}</td>
+                                <td>{{ message.type }}</td>
                                 
                                 <td>{{ !message.modified.timestamp.$date ?  message.modified.timestamp : initializeTimestamp(message.modified.timestamp.$date.$numberLong) }}</td>
                                 <td>
@@ -253,6 +268,7 @@
                             <tr>
                                 <th>Name</th>
                                 <th>Format</th>
+                                <th>Type</th>
                                 <th>Modified</th>
                                 <th>Action</th>
                             </tr>

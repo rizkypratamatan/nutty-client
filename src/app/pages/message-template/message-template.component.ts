@@ -12,16 +12,20 @@ import { timestamp } from 'rxjs/operators';
 })
 export class MessageTemplateComponent implements OnInit {
     allMessage: any[] = [];
+    allType: any[] = [];
     loading: boolean = false;
 
     fields = {
         name: '',
         format: '',
+        type: '',
     };
 
     filter = {};
     p: number = 1;
     totalMessage: number;
+
+    typeFilter = ['Sms', 'WA', 'Email'];
 
     updateFilters() {
         this.getPage(1);
@@ -39,6 +43,7 @@ export class MessageTemplateComponent implements OnInit {
         this.loading = true;
         this.service.getAllMessageTemplate(this.fields, page).subscribe((response) => {
             this.allMessage = response['data'];
+            this.allType = this.typeFilter;
             this.p = page;
             this.totalMessage = response['total_data'];
             this.loading = false;

@@ -25,6 +25,7 @@ export class AddEditMessageTemplateComponent implements OnInit {
     fields = {
         name: '',
         format: '',
+        type: '',
     };
 
     constructor(
@@ -44,6 +45,7 @@ export class AddEditMessageTemplateComponent implements OnInit {
                 this.fields = {
                     name: response.data.name,
                     format: response.data.format,
+                    type: response.data.type,
                 };
             });
         }
@@ -72,12 +74,17 @@ export class AddEditMessageTemplateComponent implements OnInit {
             this.isValid = false;
             this.errorMsg.push('Format is Required');
         }
+        if (!this.fields.format) {
+            this.isValid = false;
+            this.errorMsg.push('Type is Required');
+        }
     }
 
     private create() {
         this.fields = {
             name: this.fields['name'],
             format: this.fields['format'],
+            type: this.fields['type'],
         };
 
         this.service.addMessage(this.fields).subscribe((response) => {
@@ -90,6 +97,7 @@ export class AddEditMessageTemplateComponent implements OnInit {
                     icon: 'success',
                     confirmButtonText: 'Close',
                 });
+                this.router.navigate(['/message/list']);
                 this.loadingIndicator = false;
             }
         });
@@ -114,6 +122,7 @@ export class AddEditMessageTemplateComponent implements OnInit {
         this.fields = {
             name: '',
             format: '',
+            type: '',
         };
     }
 

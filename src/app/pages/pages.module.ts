@@ -59,6 +59,7 @@ import { WorksheetCrmComponent } from './worksheet-crm/worksheet-crm.component';
 import { AddEditLicenseComponent } from './license/add-edit.component';
 
 import { WorksheetCallComponent } from './worksheet-crm/worksheet-call/worksheet-call.component';
+import { SettingsComponent } from './settings/settings.component';
 
 FullCalendarModule.registerPlugins([
     dayGridPlugin,
@@ -98,6 +99,7 @@ FullCalendarModule.registerPlugins([
         WorksheetCrmComponent,
         AddEditLicenseComponent,
         WorksheetCallComponent,
+        SettingsComponent,
     ],
     imports: [
         Ng2FlatpickrModule,

@@ -458,7 +458,7 @@ export const MENU: MenuItem[] = [
         id: 57,
         label: 'MENUITEMS.SETTING.LIST.SETTING',
         icon: 'uil-cog',
-        link: '#',
+        link: '/settings',
         name: 'setting',
         permission: 0,
     },

@@ -27,6 +27,7 @@ import { AddEditDatabaseComponent } from './database/add-edit.component';
 import { MessageTemplateComponent } from './message-template/message-template.component';
 import { AddEditMessageTemplateComponent } from './message-template/add-edit.component';
 import { WorksheetCallComponent } from './worksheet-crm/worksheet-call/worksheet-call.component';
+import { SettingsComponent } from './settings/settings.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard' },
@@ -76,6 +77,7 @@ const routes: Routes = [
   { path: 'message/add-edit', component: AddEditMessageTemplateComponent },
   { path: 'message/add-edit/:id', component: AddEditMessageTemplateComponent },
   { path: 'license', component: LicenseComponent },
+  { path: 'settings', component: SettingsComponent },
   { path: 'license/add-edit/', component: AddEditLicenseComponent },
   { path: 'license/add-edit/:id', component: AddEditLicenseComponent }
 ];

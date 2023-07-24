@@ -17,8 +17,8 @@ export class MessageTemplateComponent implements OnInit {
 
     fields = {
         name: '',
-        format: '',
         type: '',
+        format: '',
     };
 
     filter = {};

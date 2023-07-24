@@ -29,36 +29,16 @@
                     <form (ngSubmit)="submit()">
                         <div class="row">
                             <div class="mb-3">
-                                <label class="form-label">Name</label>
+                                <label class="form-label">Title</label>
                                 <input id="name" class="form-control" type="text" required [(ngModel)]="fields.name"
                                     [ngModelOptions]="{ standalone: true }" />
                                 <div id="response-name"></div>
                             </div>
-                            <!-- <div class="mb-3">
-                                <label class="form-label">Format</label>
-                                <input id="format" class="form-control" type="text" required [(ngModel)]="fields.format"
-                                    [ngModelOptions]="{ standalone: true }" />
-                                <div id="response-format"></div>
-                            </div> -->
-                            <div class="col-md-12">
-                                <div class="mb-3">
-                                    <label class="form-label">Format</label>
-                                    <textarea id="format" class="form-control" required [(ngModel)]="fields.format"
-                                        [ngModelOptions]="{
-                                            standalone: true
-                                        }" cols="20" rows="5" [readOnly]="this.isSubmit"></textarea>
-                                    <div id="response-format"></div>
-                                </div>
-                            </div>
+
                             <div class="mb-3">
                                 <label class="form-label">Type</label>
-                                <select
-                                    id="type"
-                                    class="form-control select2"
-                                    required
-                                    [(ngModel)]="fields.type"
-                                    [ngModelOptions]="{ standalone: true }"
-                                >
+                                <select id="type" class="form-control select2" required [(ngModel)]="fields.type"
+                                    [ngModelOptions]="{ standalone: true }">
                                     <option value="">Type</option>
                                     <option value="Sms">Sms</option>
                                     <option value="WA">WA</option>
@@ -66,28 +46,58 @@
                                 </select>
                                 <div id="response-type"></div>
                             </div>
-                            <div class="mb-3">
-                                <button *ngIf="!isAddMode" class="btn btn-outline-success waves-effect waves-light me-1"
-                                    type="submit">
-                                    <div class="spinner-border spinner-border-sm" role="status"
-                                        *ngIf="loadingIndicator == true">
-                                        <span class="sr-only">Loading...</span>
-                                    </div>
-                                    <span *ngIf="loadingIndicator == false">Update</span>
-                                </button>
 
-                                <button *ngIf="isAddMode" class="btn btn-outline-success waves-effect waves-light me-1"
-                                    type="submit">
-                                    <div class="spinner-border spinner-border-sm" role="status"
-                                        *ngIf="loadingIndicator == true">
-                                        <span class="sr-only">Loading...</span>
+                            <!-- <div class="mb-3">
+                                <label class="form-label">Format</label>
+                                <input id="format" class="form-control" type="text" required [(ngModel)]="fields.format"
+                                    [ngModelOptions]="{ standalone: true }" />
+                                <div id="response-format"></div>
+                            </div> -->
+                            <div class="col-md-12">
+                                <div class="mb-3" *ngIf="fields['type'] != 'Email'">
+                                    <label class="form-label">Message</label>
+                                    <textarea id="format" class="form-control" required [(ngModel)]="fields.format"
+                                        [ngModelOptions]="{
+                                            standalone: true
+                                        }" cols="20" rows="5" [readOnly]="this.isSubmit"></textarea>
+                                    <div id="response-format"></div>
+                                </div>
+                                <div class="mb-3" *ngIf="fields['type'] == 'Email'">
+                                    <label class="form-label">Email</label>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <ckeditor id="format" [editor]="Editor" placeholder="Enter Message" required
+                                                [(ngModel)]="fields.format" [ngModelOptions]="{
+                                                standalone: true
+                                            }" [readOnly]="this.isSubmit"></ckeditor>
+                                        </div>
                                     </div>
-                                    <span *ngIf="loadingIndicator == false">Add New</span>
-                                </button>
+                                    <div id="response-format"></div>
+                                </div>
 
-                                <button *ngIf="isAddMode" type="reset" class="btn btn-secondary waves-effect">
-                                    Reset
-                                </button>
+                                <div class="mb-3">
+                                    <button *ngIf="!isAddMode"
+                                        class="btn btn-outline-success waves-effect waves-light me-1" type="submit">
+                                        <div class="spinner-border spinner-border-sm" role="status"
+                                            *ngIf="loadingIndicator == true">
+                                            <span class="sr-only">Loading...</span>
+                                        </div>
+                                        <span *ngIf="loadingIndicator == false">Update</span>
+                                    </button>
+
+                                    <button *ngIf="isAddMode"
+                                        class="btn btn-outline-success waves-effect waves-light me-1" type="submit">
+                                        <div class="spinner-border spinner-border-sm" role="status"
+                                            *ngIf="loadingIndicator == true">
+                                            <span class="sr-only">Loading...</span>
+                                        </div>
+                                        <span *ngIf="loadingIndicator == false">Add New</span>
+                                    </button>
+
+                                    <button *ngIf="isAddMode" type="reset" class="btn btn-secondary waves-effect">
+                                        Reset
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </form>

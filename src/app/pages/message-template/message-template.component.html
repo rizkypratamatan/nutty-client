@@ -179,7 +179,7 @@
                             <input
                                 class="form-control dt-input"
                                 type="text"
-                                placeholder="Name"
+                                placeholder="title"
                                 [(ngModel)]="fields.name"
                                 (ngModelChange)="updateFilters()"
                             />
@@ -220,9 +220,9 @@
                         <thead>
                             <tr>
                                 
-                                <th>Name</th>
-                                <th>Format</th>
+                                <th>Title</th>
                                 <th>Type</th>
+                                <th>Message</th>
                                 <th>Modified</th>
                                 <th>Action</th>
                             </tr>
@@ -242,8 +242,8 @@
                             >
                                 <!-- <td>{{ i + 1 }}</td> -->
                                 <td>{{ message.name }}</td>
-                                <td>{{ message.format }}</td>
                                 <td>{{ message.type }}</td>
+                                <td [innerHtml]="message.format"></td>
                                 
                                 <td>{{ !message.modified.timestamp.$date ?  message.modified.timestamp : initializeTimestamp(message.modified.timestamp.$date.$numberLong) }}</td>
                                 <td>
@@ -266,9 +266,9 @@
                         
                         <tfoot>
                             <tr>
-                                <th>Name</th>
-                                <th>Format</th>
+                                <th>Title</th>
                                 <th>Type</th>
+                                <th>Message</th>
                                 <th>Modified</th>
                                 <th>Action</th>
                             </tr>

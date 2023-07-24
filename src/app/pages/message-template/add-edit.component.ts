@@ -4,6 +4,7 @@ import { MessageTemplateService } from 'src/app/services/message-templates/messa
 import Swal from 'sweetalert2';
 import { HelperService } from 'src/app/services/helper.service';
 import { timestamp } from 'rxjs/operators';
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @Component({
     selector: 'app-add-edit',
@@ -24,9 +25,11 @@ export class AddEditMessageTemplateComponent implements OnInit {
 
     fields = {
         name: '',
-        format: '',
         type: '',
+        format: '',
     };
+
+    public Editor = ClassicEditor;
 
     constructor(
         private service: MessageTemplateService,
@@ -44,8 +47,8 @@ export class AddEditMessageTemplateComponent implements OnInit {
 
                 this.fields = {
                     name: response.data.name,
-                    format: response.data.format,
                     type: response.data.type,
+                    format: response.data.format,
                 };
             });
         }
@@ -70,21 +73,21 @@ export class AddEditMessageTemplateComponent implements OnInit {
             this.isValid = false;
             this.errorMsg.push('Name is Required');
         }
-        if (!this.fields.format) {
+        if (!this.fields.type) {
             this.isValid = false;
-            this.errorMsg.push('Format is Required');
+            this.errorMsg.push('Type is Required');
         }
         if (!this.fields.format) {
             this.isValid = false;
-            this.errorMsg.push('Type is Required');
+            this.errorMsg.push('Format is Required');
         }
     }
 
     private create() {
         this.fields = {
             name: this.fields['name'],
-            format: this.fields['format'],
             type: this.fields['type'],
+            format: this.fields['format'],
         };
 
         this.service.addMessage(this.fields).subscribe((response) => {
@@ -114,6 +117,8 @@ export class AddEditMessageTemplateComponent implements OnInit {
                     icon: 'success',
                     confirmButtonText: 'Close'
                 });
+                this.router.navigate(['/message/list']);
+                this.loadingIndicator = false;
             }
         });
     }
@@ -121,8 +126,8 @@ export class AddEditMessageTemplateComponent implements OnInit {
     formReset() {
         this.fields = {
             name: '',
-            format: '',
             type: '',
+            format: '',
         };
     }
 

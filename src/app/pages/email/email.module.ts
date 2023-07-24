@@ -15,6 +15,7 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
 import { SentComponent } from './sent/sent.component';
 import { BulkComponent } from './bulk/bulk.component';
 import { HistoryComponent } from './history/history.component';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 @NgModule({
     declarations: [SentComponent, BulkComponent, HistoryComponent],
@@ -36,6 +37,7 @@ import { HistoryComponent } from './history/history.component';
         SimplebarAngularModule,
         NgxPaginationModule,
         NgxDropzoneModule,
+        CKEditorModule,
     ],
 })
 export class EmailModule {}

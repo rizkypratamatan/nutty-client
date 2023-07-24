@@ -243,7 +243,7 @@
                                 <!-- <td>{{ i + 1 }}</td> -->
                                 <td>{{ message.name }}</td>
                                 <td>{{ message.type }}</td>
-                                <td [innerHtml]="message.format"></td>
+                                <td [innerHtml]="(message.format | slice:0:30)+ (message.format.length > 100 ? '...' : '')"></td>
                                 
                                 <td>{{ !message.modified.timestamp.$date ?  message.modified.timestamp : initializeTimestamp(message.modified.timestamp.$date.$numberLong) }}</td>
                                 <td>

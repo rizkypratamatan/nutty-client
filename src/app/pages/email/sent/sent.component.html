@@ -1,9 +1,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
-            <div
-                class="page-title-box d-flex align-items-center justify-content-between"
-            >
+            <div class="page-title-box d-flex align-items-center justify-content-between">
                 <h4 class="mb-0">Email</h4>
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
@@ -32,25 +30,16 @@
             <div class="card-body">
                 <!-- <h4 class="card-title">Nav pills</h4>
                 <p class="card-title-desc">Example of Nav pills</p> -->
-                <ul
-                    ngbNav
-                    #justifiednav="ngbNav"
-                    [activeId]="1"
-                    class="nav-pills"
-                >
+                <ul ngbNav #justifiednav="ngbNav" [activeId]="1" class="nav-pills">
                     <li [ngbNavItem]="1">
                         <a ngbNavLink routerLink="/email/sent">
                             <span class="d-block d-sm-none">
                                 <i class="fas fa-home"></i>
                             </span>
-                            <span class="d-none d-sm-block"
-                                >Single Email</span
-                            >
+                            <span class="d-none d-sm-block">Single Email</span>
                         </a>
                         <ng-template ngbNavContent>
-                            <ng-template
-                                [ngTemplateOutlet]="TabContent"
-                            ></ng-template>
+                            <ng-template [ngTemplateOutlet]="TabContent"></ng-template>
                         </ng-template>
                     </li>
                     <li [ngbNavItem]="2">
@@ -61,9 +50,7 @@
                             <span class="d-none d-sm-block">Bulk Email</span>
                         </a>
                         <ng-template ngbNavContent>
-                            <ng-template
-                                [ngTemplateOutlet]="TabContent1"
-                            ></ng-template>
+                            <ng-template [ngTemplateOutlet]="TabContent1"></ng-template>
                         </ng-template>
                     </li>
                 </ul>
@@ -86,18 +73,10 @@
                                 <label class="form-label">From Name</label>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <input
-                                            id="user-from_name"
-                                            class="form-control"
-                                            type="text"
-                                            placeholder="John"
-                                            required
-                                            [(ngModel)]="fields.from_name"
-                                            [ngModelOptions]="{
+                                        <input id="user-from_name" class="form-control" type="text" placeholder="John"
+                                            required [(ngModel)]="fields.from_name" [ngModelOptions]="{
                                                 standalone: true
-                                            }"
-                                            [readOnly]="this.isSubmit"
-                                        />
+                                            }" [readOnly]="this.isSubmit" />
                                     </div>
                                 </div>
                                 <div id="response-from_name"></div>
@@ -109,18 +88,11 @@
                                 <label class="form-label">To Email</label>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <input
-                                            id="user-email"
-                                            class="form-control"
-                                            type="text"
-                                            placeholder="John@mail.com"
-                                            required
-                                            [(ngModel)]="fields.email"
+                                        <input id="user-email" class="form-control" type="text"
+                                            placeholder="John@mail.com" required [(ngModel)]="fields.email"
                                             [ngModelOptions]="{
                                                 standalone: true
-                                            }"
-                                            [readOnly]="this.isSubmit"
-                                        />
+                                            }" [readOnly]="this.isSubmit" />
                                     </div>
                                 </div>
                                 <div id="response-email"></div>
@@ -132,25 +104,18 @@
                                 <label class="form-label">Subject</label>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <input
-                                            id="user-subject"
-                                            class="form-control"
-                                            type="text"
-                                            placeholder="Enter Subject"
-                                            required
-                                            [(ngModel)]="fields.subject"
+                                        <input id="user-subject" class="form-control" type="text"
+                                            placeholder="Enter Subject" required [(ngModel)]="fields.subject"
                                             [ngModelOptions]="{
                                                 standalone: true
-                                            }"
-                                            [readOnly]="this.isSubmit"
-                                        />
+                                            }" [readOnly]="this.isSubmit" />
                                     </div>
                                 </div>
                                 <div id="response-subject"></div>
                             </div>
                         </div>
 
-                        <div class="col-md-12">
+                        <!-- <div class="col-md-12">
                             <div class="mb-3">
                                 <label class="form-label">Message</label>
                                 <textarea
@@ -167,14 +132,40 @@
                                 ></textarea>
                                 <div id="response-message"></div>
                             </div>
+                        </div> -->
+
+                        <!-- <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Email</h4>
+                                        <ckeditor [editor]="Editor" class="form-control"
+                                            placeholder="Enter your message" required [(ngModel)]="fields.message"
+                                            [ngModelOptions]="{standalone: true}" [readOnly]="this.isSubmit"></ckeditor>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+
+                        <div class="col-md-12">
+                            <div class="mb-3">
+                                <label class="form-label">Email</label>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <ckeditor [editor]="Editor"
+                                            placeholder="Enter Message" required [(ngModel)]="fields.message"
+                                            [ngModelOptions]="{
+                                                standalone: true
+                                            }" [readOnly]="this.isSubmit"></ckeditor>
+                                    </div>
+                                </div>
+                                <div id="response-message"></div>
+                            </div>
                         </div>
 
                         <div class="mb-3">
-                            <button
-                                class="btn btn-success waves-effect waves-light me-1"
-                                type="submit"
-                                style="float: right"
-                            >
+                            <button class="btn btn-success waves-effect waves-light me-1" type="submit"
+                                style="float: right">
                                 Send
                             </button>
 

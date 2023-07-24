@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { EmailService } from 'src/app/services/email/email.service';
 import { DataService } from 'src/app/services/global/data.service';
 import Swal from 'sweetalert2';
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @Component({
     selector: 'app-sent',
@@ -26,6 +27,10 @@ export class SentComponent implements OnInit {
         schedule_status: 'now',
         initiated_time: '',
     };
+    
+    breadCrumbItems: Array<{}>;
+
+    public Editor = ClassicEditor;
 
     constructor(
         private route: ActivatedRoute,
@@ -49,6 +54,7 @@ export class SentComponent implements OnInit {
             schedule_status: 'now',
             initiated_time: '',
         };
+        console.log(this.fields);
 
         if (this.isValid) {
             this.loadingIndicator = true;

@@ -60,6 +60,7 @@ import { AddEditLicenseComponent } from './license/add-edit.component';
 
 import { WorksheetCallComponent } from './worksheet-crm/worksheet-call/worksheet-call.component';
 import { SettingsComponent } from './settings/settings.component';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 FullCalendarModule.registerPlugins([
     dayGridPlugin,
@@ -121,6 +122,7 @@ FullCalendarModule.registerPlugins([
         SimplebarAngularModule,
         NgxPaginationModule,
         NgxDropzoneModule,
+        CKEditorModule,
     ],
 })
 export class PagesModule {}

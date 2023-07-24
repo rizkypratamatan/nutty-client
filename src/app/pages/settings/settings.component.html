@@ -21,8 +21,17 @@
     <!-- Single Message -->
     <div class="card col-md-6">
         <div class="row">
+            <div class="card-header" *ngIf="isValid == false">
+                <div class="alert alert-danger">
+                    <ul>
+                        <li *ngFor="let item of errorMsg">
+                            {{ item }}
+                        </li>
+                    </ul>
+                </div>
+            </div>
             <div class="card-body">
-                <form>
+                <form (ngSubmit)="submit()">
                     <!-- Interval SMS -->
                     <div class="row">
                         <div class="col-md-4">
@@ -37,10 +46,12 @@
                                 type="text"
                                 placeholder="Interval"
                                 required
+                                [(ngModel)]="fields.intervalSMS"
+                                [ngModelOptions]="{ standalone: true }"
                             />
                         </div>
                         <div class="col-md-6">
-                            <div class="form-label label">Minutes</div>
+                            <div class="form-label label">days</div>
                         </div>
                         <div id="response-phone"></div>
                     </div>
@@ -60,10 +71,12 @@
                                 type="text"
                                 placeholder="Interval"
                                 required
+                                [(ngModel)]="fields.intervalWhatsApp"
+                                [ngModelOptions]="{ standalone: true }"
                             />
                         </div>
                         <div class="col-md-6">
-                            <div class="form-label label">Minutes</div>
+                            <div class="form-label label">days</div>
                         </div>
                         <div id="response-phone"></div>
                     </div>
@@ -83,16 +96,18 @@
                                 type="text"
                                 placeholder="Interval"
                                 required
+                                [(ngModel)]="fields.intervalEmail"
+                                [ngModelOptions]="{ standalone: true }"
                             />
                         </div>
                         <div class="col-md-6">
-                            <div class="form-label label">Minutes</div>
+                            <div class="form-label label">days</div>
                         </div>
                         <div id="response-phone"></div>
                     </div>
                     <!-- Interval Email -->
 
-                    <hr>
+                    <hr />
 
                     <!-- Button Save -->
                     <div class="row">
@@ -114,7 +129,6 @@
                         </div>
                     </div>
                     <!-- Button Save -->
-
                 </form>
             </div>
         </div>

@@ -28,7 +28,7 @@ export class UserLogService {
 
         const data: UserLoginRequest = new UserLoginRequest('', '', password, Platform.Website, username);
 
-        return this.httpClient.post<UserLoginResponse>(this.configuration.api.url + '/', this.restService.initializeBody(data, '/'), this.restService.initializeOption());
+        return this.httpClient.post<UserLoginResponse>(this.configuration.api.url + '/api/login', this.restService.initializeBody(data, 'api/login'), this.restService.initializeOption());
 
     }
 
@@ -37,7 +37,7 @@ export class UserLogService {
 
         const data: UserLogoutRequest = new UserLogoutRequest('', '', this.encryptionService.aesDecrypt(authentication), Platform.Website, userId);
 
-        return this.httpClient.post<BaseResponse>(this.configuration.api.url + '/user/log/logout', this.restService.initializeBody(data, '/user/log/logout'), this.restService.initializeOption());
+        return this.httpClient.post<BaseResponse>(this.configuration.api.url + '/user/log/logout', this.restService.initializeBody(data, 'user/log/logout'), this.restService.initializeOption());
 
     }
 

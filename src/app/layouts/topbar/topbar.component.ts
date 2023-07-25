@@ -9,6 +9,10 @@ import { environment } from '../../../environments/environment';
 import { CookieService } from 'ngx-cookie-service';
 import { LanguageService } from '../../core/services/language.service';
 import { TranslateService } from '@ngx-translate/core';
+import { EncryptionService } from 'src/app/services/global/encryption.service';
+import { AuthService } from 'src/app/services/global/auth.service';
+import { UserLogService } from 'src/app/services/user/user-log.service';
+import { BaseResponse } from 'src/app/models/global/base-response';
 
 @Component({
   selector: 'app-topbar',
@@ -27,14 +31,19 @@ export class TopbarComponent implements OnInit {
   flagvalue: any;
   countryName: any;
   valueset;
+  accountData: string;
+  auth: [];
 
   constructor(@Inject(DOCUMENT) private document: any,
     private router: Router,
+    private encryptionService: EncryptionService,
     private authService: AuthenticationService,
     private authFackservice: AuthfakeauthenticationService,
     public languageService: LanguageService,
     public translate: TranslateService,
-    public _cookiesService: CookieService) {
+    public _cookiesService: CookieService,
+    private Auth: AuthService,
+    private userLogService: UserLogService) {
   }
 
   listLang = [
@@ -67,6 +76,11 @@ export class TopbarComponent implements OnInit {
     } else {
       this.flagvalue = val.map(element => element.flag);
     }
+
+    this.accountData = localStorage.getItem('nu-account');
+    this.auth = this.Auth.Auth();
+
+
   }
 
   /**
@@ -102,12 +116,16 @@ export class TopbarComponent implements OnInit {
    */
   logout() {
     //user logout
-    if (environment.defaultauth === 'firebase') {
-      this.authService.logout();
-    } else {
-      this.authFackservice.logout();
-    }
-    this.router.navigate(['/account/login']);
+    // if (environment.defaultauth === 'firebase') {
+    //   this.authService.logout();
+    // } else {
+    //   this.authFackservice.logout();
+    // }
+    // this.router.navigate(['/account/login']);
+    // let accountData = localStorage.getItem('nu-account');
+
+    localStorage.removeItem('nu-account');
+    this.router.navigate(['login']);
   }
 
   /**

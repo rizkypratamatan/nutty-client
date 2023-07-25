@@ -24,8 +24,6 @@ export class ConfigurationService extends GlobalConfiguration {
             this.encryption = data.encryption;
             this.resource = data.resource;
 
-            console.log('Configuration initialized');
-
         }).catch((exception) => {
 
             console.error(exception);

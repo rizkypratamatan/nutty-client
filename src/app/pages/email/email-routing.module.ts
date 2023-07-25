@@ -1,22 +1,22 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-
-import { InboxComponent } from './inbox/inbox.component';
-import { EmailreadComponent } from './emailread/emailread.component';
+import { CommonModule } from '@angular/common';
+import { RouterModule, Routes } from '@angular/router';
+import { SentComponent } from './sent/sent.component';
+import { BulkComponent } from './bulk/bulk.component';
 
 const routes: Routes = [
     {
-        path: 'inbox',
-        component: InboxComponent
+        path: 'sent',
+        component: SentComponent,
     },
     {
-        path: 'read/:id',
-        component: EmailreadComponent
-    }
+        path: 'bulk',
+        component: BulkComponent,
+    },
 ];
 
 @NgModule({
     imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule]
+    exports: [RouterModule],
 })
 export class EmailRoutingModule {}

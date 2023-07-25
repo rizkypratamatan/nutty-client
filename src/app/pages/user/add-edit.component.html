@@ -1,0 +1,207 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div
+                class="page-title-box d-flex align-items-center justify-content-between"
+            >
+                <h4 class="mb-0">User Entry</h4>
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">User</a></li>
+                        <li class="breadcrumb-item active">Entry</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header" *ngIf="isValid == false">
+                    <div class="alert alert-danger">
+                        <ul>
+                            <li *ngFor="let item of errorMsg">
+                                {{ item }}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form (ngSubmit)="submit()">
+                        <div class="row">
+                            <div class="mb-3">
+                                <label class="form-label">Username</label>
+                                <input
+                                    id="user-username"
+                                    class="form-control"
+                                    type="text"
+                                    required
+                                    [(ngModel)]="fields.username"
+                                    [ngModelOptions]="{ standalone: true }"
+                                />
+                                <div id="response-username"></div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Name</label>
+                                <input
+                                    id="user-name"
+                                    class="form-control"
+                                    type="text"
+                                    required
+                                    [(ngModel)]="fields.name"
+                                    [ngModelOptions]="{ standalone: true }"
+                                />
+                                <div id="response-name"></div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Password </label>
+                                <input
+                                    id="user-password"
+                                    class="form-control"
+                                    type="password"
+                                    required
+                                    [(ngModel)]="fields.password"
+                                    [ngModelOptions]="{ standalone: true }"
+                                />
+                                <div id="response-password"></div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label"
+                                    >Confirm Password</label
+                                >
+                                <input
+                                    id="user-password-confirm"
+                                    class="form-control"
+                                    type="password"
+                                    required
+                                    [(ngModel)]="confirm_password"
+                                    [ngModelOptions]="{ standalone: true }"
+                                />
+                                <div id="response-password-confirm"></div>
+                            </div>
+                            <div class="mb-3" *ngIf="auth.nucode == 'system'">
+                                <label class="form-label">Nucode</label>
+                                <input
+                                    id="user-nucode"
+                                    class="form-control"
+                                    type="text"
+                                    [(ngModel)]="fields.nucode"
+                                    [ngModelOptions]="{ standalone: true }"
+                                />
+                                <div id="response-nucode"></div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Type</label>
+                                <select
+                                    id="user-type"
+                                    class="form-control select2"
+                                    required
+                                    [(ngModel)]="fields.type"
+                                    [ngModelOptions]="{ standalone: true }"
+                                >
+                                    <option value="">Type</option>
+                                    <option value="Administrator">
+                                        Administrator
+                                    </option>
+                                    <option value="CRM">CRM</option>
+                                    <option value="Telemarketer">
+                                        Telemarketer
+                                    </option>
+                                </select>
+                                <div id="response-type"></div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Role</label>
+                                <select
+                                    id="user-role"
+                                    class="form-control select2"
+                                    required
+                                    [(ngModel)]="role"
+                                    [ngModelOptions]="{ standalone: true }"
+                                    (ngModelChange)="onOptionsSelectedRole()"
+                                >
+                                    <option value="">Role</option>
+                                    <option
+                                        *ngFor="let val of allRoles"
+                                        [value]="val._id"
+                                    >
+                                        {{ val.name }}
+                                    </option>
+                                </select>
+                                <div id="response-role"></div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Group</label>
+                                <select
+                                    id="user-group"
+                                    class="form-control select2"
+                                    required
+                                    [(ngModel)]="group"
+                                    [ngModelOptions]="{ standalone: true }"
+                                    (ngModelChange)="onOptionsSelectedGroup()"
+                                >
+                                    <option value="">Group</option>
+                                    <option
+                                        *ngFor="let val of allGroup"
+                                        [value]="val._id"
+                                    >
+                                        {{ val.name }}
+                                    </option>
+                                </select>
+                                <div id="response-group"></div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Status</label>
+                                <select
+                                    id="user-status"
+                                    class="form-control select2"
+                                    required
+                                    [(ngModel)]="fields.status"
+                                    [ngModelOptions]="{ standalone: true }"
+                                >
+                                    <option value="">Status</option>
+                                    <option *ngFor="let val of status">
+                                        {{ val }}
+                                    </option>
+                                </select>
+                                <div id="response-status"></div>
+                            </div>
+                            <div class="mb-3">
+                                <button
+                                    *ngIf="!isAddMode"
+                                    class="btn btn-outline-success waves-effect waves-light me-1"
+                                    type="submit"
+                                >
+                                <div class="spinner-border spinner-border-sm" role="status" *ngIf="loadingIndicator == true">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                                <span *ngIf="loadingIndicator == false">Update</span>
+                                </button>
+
+                                <button
+                                    *ngIf="isAddMode"
+                                    class="btn btn-outline-success waves-effect waves-light me-1"
+                                    type="submit"
+                                >
+                                <div class="spinner-border spinner-border-sm" role="status" *ngIf="loadingIndicator == true">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                                <span *ngIf="loadingIndicator == false">Add New</span>
+                                </button>
+
+                                <button
+                                    *ngIf="isAddMode"
+                                    type="reset"
+                                    class="btn btn-secondary waves-effect"
+                                >
+                                    Reset
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,155 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div
+                class="page-title-box d-flex align-items-center justify-content-between"
+            >
+                <h4 class="mb-0">Database</h4>
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Database</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <form class="row g-1 mb-3" method="POST" action="">
+                        <div class="col-md-2">
+                            <input
+                                class="form-control dt-input"
+                                type="text"
+                                placeholder="Name"
+                                data-column="1"
+                                data-regex="true"
+                            />
+                        </div>
+                        <div class="col-md-2">
+                            <input
+                                class="form-control dt-input"
+                                type="text"
+                                placeholder="Phone"
+                                data-column="2"
+                                data-regex="false"
+                            />
+                        </div>
+                        <div class="col-md-2">
+                            <select
+                                id="database-filter-website"
+                                class="select2 form-select dt-select"
+                                data-column="3"
+                                data-regex="false"
+                                [(ngModel)]="filter.website"
+                                [ngModelOptions]="{standalone: true}"
+                                (change)="updateFilters()"
+                            >
+                                <option *ngFor="let item of allWebsite;let i = index" [value]="item._id" [selected]="i==0">
+                                    {{ item.name }}
+                                </option>
+                            
+                            </select>
+                        </div>
+                        <div class="col-md-4"></div>
+                        <div class="col-md-2" style="text-align: right">
+                            <!--<a href="{{config("app.url")}}/database/entry/"
+                               class="btn btn-success waves-effect waves-light"><i
+                                    class="mdi mdi-plus me-2"></i> Add New</a>-->
+                        </div>
+                    </form>
+                    <div class="table-responsive">
+                    <table
+                        id="database"
+                        class="table table-bordered dt-responsive nowrap"
+                        style="
+                            border-collapse: collapse;
+                            border-spacing: 0;
+                            width: 100%;
+                        "
+                    >
+                        <thead>
+                            <tr>
+                                <!-- <th>#</th> -->
+                                <th>Name</th>
+                                <th>Phone</th>
+                                <th>Group</th>
+                                <th>Telemarketer</th>
+                                <th>CRM</th>
+                                <th>Status</th>
+                                <th>Modified</th>
+                                <!-- <th>Action</th> -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr
+                                *ngFor="
+                                    let database of allData
+                                        | paginate
+                                            : {
+                                                  itemsPerPage: 20,
+                                                  currentPage: p,
+                                                  totalItems: totalData
+                                              };
+                                    let i = index
+                                "
+                            >
+                                <!-- <td>{{ i + 1 }}</td> -->
+                                <td>{{ database.name }}</td>
+                                <td>{{ hidePhone(database.contact.phone) }}</td>
+                                <!-- @if(Session::has("account"))
+                                        @if(Session::get("account")->nucode == "system") -->
+                                <td>{{ database.group.name }}</td>
+                                <!-- @endif
+                                        @endif -->
+                                <td>{{ database.telemarketer.name }}</td>
+                                <td>{{ database.crm.name }}</td>
+                                <td>{{ database.status }}</td>
+                                <td>
+                                    {{ !database.modified.timestamp.$date ?  database.modified.timestamp : database.modified.timestamp.$date.$numberLong | date }}
+                                </td>
+                                <!-- <td>
+                                    <a
+                                        (click)="edit(database._id)"
+                                        class="btn btn-info btn-sm w-lg"
+                                        >Edit</a
+                                    >
+                                    &nbsp;
+                                    <button
+                                    ng-confirm-click="Are you sure to delete this record ?"
+                                    (click)="delete(database._id, database.name)"
+                                    class="btn btn-outline-secondary btn-sm"
+                                    >
+                                    <i class="bx uil-trash"></i>
+                                    </button>
+                                </td> -->
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <!-- <th>#</th> -->
+                                <th>Name</th>
+                                <th>Phone</th>
+                                <th>Group</th>
+                                <th>Telemarketer</th>
+                                <th>CRM</th>
+                                <th>Status</th>
+                                <th>Modified</th>
+                                <!-- <th>Action</th> -->
+                            </tr>
+                        </tfoot>
+                    </table>
+                    </div>
+                    <div class="spinner-border spinner-border-sm" role="status" *ngIf="loading == true">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <div style="float:right">
+                        <pagination-controls (pageChange)="getPage($event)"></pagination-controls>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

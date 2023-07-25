@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {EncryptionService} from './encryption.service';
 import {HttpHeaders} from '@angular/common/http';
 import {ConfigurationService} from '../../configurations/configuration.service';
+import { identity } from 'rxjs';
 
 
 @Injectable()
@@ -30,6 +31,33 @@ export class RestService {
 
     }
 
+    public initializeHeaderGetData(token: string): any {
+        const header = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+                'nu-key': this.configuration.api.key,
+                'token-auth': token,
+            }),
+        };
+
+        return header;
+    }
+
+    public initializeHeaderMultipartData(token: string): any {
+        const header = {
+            headers: new HttpHeaders({
+                Accept: 'application/json',
+                'nu-key': this.configuration.api.key,
+                'token-auth': token,
+            }),
+        };
+
+        header.headers.delete("Content-Type");
+        header.headers.set("Content-Type", undefined);
+
+        return header;
+    }
 
     public initializeBody(data: any, path: string): any {
 

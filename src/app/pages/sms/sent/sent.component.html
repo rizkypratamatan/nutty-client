@@ -1,0 +1,172 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div
+                class="page-title-box d-flex align-items-center justify-content-between"
+            >
+                <h4 class="mb-0">SMS</h4>
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item">
+                            <a href="#">SMS</a>
+                        </li>
+                        <li class="breadcrumb-item active">Sent</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header" *ngIf="isValid == false">
+                <div class="alert alert-danger">
+                    <ul>
+                        <li *ngFor="let item of errorMsg">
+                            {{ item }}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card-body">
+                <!-- <h4 class="card-title">Nav pills</h4>
+                <p class="card-title-desc">Example of Nav pills</p> -->
+                <ul
+                    ngbNav
+                    #justifiednav="ngbNav"
+                    [activeId]="1"
+                    class="nav-pills"
+                >
+                    <li [ngbNavItem]="1">
+                        <a ngbNavLink routerLink="/sms/sent">
+                            <span class="d-block d-sm-none">
+                                <i class="fas fa-home"></i>
+                            </span>
+                            <span class="d-none d-sm-block"
+                                >Single Message</span
+                            >
+                        </a>
+                        <ng-template ngbNavContent>
+                            <ng-template
+                                [ngTemplateOutlet]="TabContent"
+                            ></ng-template>
+                        </ng-template>
+                    </li>
+                    <li [ngbNavItem]="2">
+                        <a ngbNavLink routerLink="/sms/bulk">
+                            <span class="d-block d-sm-none">
+                                <i class="far fa-user"></i>
+                            </span>
+                            <span class="d-none d-sm-block">Bulk Message</span>
+                        </a>
+                        <ng-template ngbNavContent>
+                            <ng-template
+                                [ngTemplateOutlet]="TabContent1"
+                            ></ng-template>
+                        </ng-template>
+                    </li>
+                </ul>
+                <hr />
+                <div [ngbNavOutlet]="justifiednav"></div>
+            </div>
+        </div>
+    </div>
+    <!-- End Justified Tabs -->
+
+    <!-- Tab Content Single Message -->
+    <ng-template #TabContent>
+        <!-- Single Message -->
+        <div class="row">
+            <div class="card-body">
+                <form (ngSubmit)="submit()">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="mb-3">
+                                <label class="form-label">Phone Number</label>
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <ng-select
+                                            [items]="allPrefix"
+                                            bindLabel="countryCode"
+                                            bindValue="code"
+                                            [searchable]="true"
+                                            [(ngModel)]="selectedPrefix"
+                                            [ngModelOptions]="{
+                                                standalone: true
+                                            }"
+                                            [disabled]="isSubmit"
+                                        >
+                                            <ng-template
+                                                ng-optgroup-tmp
+                                                let-item="item"
+                                            >
+                                            </ng-template>
+                                        </ng-select>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <input
+                                            id="user-phone"
+                                            class="form-control"
+                                            type="text"
+                                            required
+                                            [(ngModel)]="phone"
+                                            [ngModelOptions]="{
+                                                standalone: true
+                                            }"
+                                            [readOnly]="this.isSubmit"
+                                        />
+                                    </div>
+                                </div>
+                                <div id="response-phone"></div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="mb-3">
+                                <label class="form-label">Message</label>
+                                <textarea
+                                    class="form-control"
+                                    required
+                                    [(ngModel)]="fields.message"
+                                    [ngModelOptions]="{
+                                        standalone: true
+                                    }"
+                                    cols="20"
+                                    rows="5"
+                                    [readOnly]="this.isSubmit"
+                                ></textarea>
+                                <div id="response-message"></div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <button
+                                class="btn btn-success waves-effect waves-light me-1"
+                                type="submit"
+                                style="float: right"
+                            >
+                                Send
+                            </button>
+
+                            <!-- <button
+                                        type="reset"
+                                        class="btn btn-secondary waves-effect"
+                                    >
+                                        Reset
+                                    </button> -->
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- Single Message -->
+    </ng-template>
+
+    <!-- Tab Content Bulk Message-->
+    <ng-template #TabContent1> </ng-template>
+
+    <!-- History -->
+    <app-history></app-history>
+    <!-- History -->
+</div>

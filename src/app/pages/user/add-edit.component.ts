@@ -154,7 +154,6 @@ export class AddEditComponent implements OnInit {
     }
 
     validateInput(){
-        console.log(this.fields);
         this.isValid = true;
         if(!this.fields.username){
             this.isValid = false;
@@ -210,7 +209,15 @@ export class AddEditComponent implements OnInit {
                     confirmButtonText: 'Close'
                 });
                 this.router.navigate(['/user']);
+            }else{
+                Swal.fire({
+                    title: 'Error!',
+                    text: response.response,
+                    icon: 'error',
+                    confirmButtonText: 'Close'
+                });
             }
+            this.loadingIndicator = false;
         });
     }
 
@@ -225,7 +232,15 @@ export class AddEditComponent implements OnInit {
                     icon: 'success',
                     confirmButtonText: 'Close'
                 });
+            }else{
+                Swal.fire({
+                    title: 'Error!',
+                    text: response.response,
+                    icon: 'error',
+                    confirmButtonText: 'Close'
+                });
             }
+            this.loadingIndicator = false;
         });
     }
 

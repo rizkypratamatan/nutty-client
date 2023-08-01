@@ -154,6 +154,7 @@ export class AddEditComponent implements OnInit {
     }
 
     validateInput(){
+        console.log(this.fields);
         this.isValid = true;
         if(!this.fields.username){
             this.isValid = false;
@@ -184,11 +185,11 @@ export class AddEditComponent implements OnInit {
             this.isValid = false;
             this.errorMsg.push("Type is Required");
         }
-        if(!this.fields.role){
+        if(Object.keys(this.fields.role).length == 0){
             this.isValid = false;
             this.errorMsg.push("Role is Required");
         }
-        if(!this.fields.group){
+        if(Object.keys(this.fields.group).length == 0){
             this.isValid = false;
             this.errorMsg.push("Group is Required");
         }

@@ -87,7 +87,6 @@
                                     <th>Username</th>
                                     <th>Name</th>
                                     <th>Status</th>
-                                    <th>Last Deposit</th>
                                     <!-- <th>Action</th> -->
                                 </tr>
                                 </thead>
@@ -105,12 +104,11 @@
                                         "
                                     >
                                         <td>{{ i + 1 }}</td>
-                                        <td>{{ hidePhone(item['database'][0].contact.phone) }}</td>
-                                        <td>{{ hidePhone(item['database'][0].contact.whatsapp) }}</td>
+                                        <td>{{ hidePhone(item.contact.phone) }}</td>
+                                        <td>{{ hidePhone(item.contact.whatsapp) }}</td>
                                         <td>{{ item.username }}</td>
-                                        <td>{{ item['database'][0].name }}</td>
-                                        <td>{{ item['database'][0].status }}</td>
-                                        <td>{{ initializeTimestamp(item.deposit.last.timestamp.$date.$numberLong) }}</td>
+                                        <td>{{ item.name }}</td>
+                                        <td>{{ item.status }}</td>
                                         <!-- <td></td> -->
                                         <!-- <td>
                                             <a
@@ -137,7 +135,6 @@
                                     <th>Username</th>
                                     <th>Name</th>
                                     <th>Status</th>
-                                    <th>Last Deposit</th>
                                     <!-- <th>Action</th> -->
                                 </tr>
                                 </tfoot>

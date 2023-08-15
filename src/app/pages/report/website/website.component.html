@@ -21,21 +21,38 @@
                 <div class="card-body">
                     <!-- Filter -->
                     <div class="row g-1 mb-3">
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             <ng2-flatpickr
                                 class="form-control flatpickr-input"
                                 [config]="datePickerOption"
                                 placeholder="Date"
                             ></ng2-flatpickr>
                         </div>
-                        <div class="col-md-2">
-                            <input
-                                class="form-control dt-input"
-                                type="text"
-                                placeholder="Website"
+                        <div class="col-md-3">
+                            <!-- <select
+                                id="database-filter-website"
+                                class="select2 form-control form-select dt-select"
                                 [(ngModel)]="fields.website"
-                                (ngModelChange)="updateFilters()"
-                            />
+                                [ngModelOptions]="{standalone: true}"
+                                (change)="updateFilters()"
+                            >
+                                <option value="">Website</option>
+                                <option *ngFor="let item of allWebsite;let i = index" [value]="item._id" [selected]="i==0">
+                                    {{ item.name }}
+                                </option>
+                            
+                            </select> -->
+                            <ng-select id="database-filter-website" 
+                                        [(ngModel)]="fields.website"
+                                        [ngModelOptions]="{standalone: true}"
+                                        (change)="updateFilters()">
+                                <ng-option value="" selected="true">
+                                    Website
+                                </ng-option>        
+                                <ng-option *ngFor="let item of allWebsite;let i = index" [value]="item._id" [selected]="i==0">
+                                    {{ item.name }}
+                                </ng-option>
+                            </ng-select>
                         </div>
                         <div class="col-md-4"></div>
                     </div>

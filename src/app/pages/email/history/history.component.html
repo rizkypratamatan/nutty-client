@@ -52,7 +52,7 @@
                             />
                         </div>
                         <div class="col-md-2">
-                            <select
+                            <!-- <select
                                 id="user-filter-status"
                                 class="select2 form-select dt-select"
                                 [(ngModel)]="fields.status"
@@ -62,7 +62,18 @@
                                 <option *ngFor="let status of allStatus">
                                     {{ status }}
                                 </option>
-                            </select>
+                            </select> -->
+
+                            <ng-select id="user-filter-status"
+                                        [(ngModel)]="fields.status"
+                                        (ngModelChange)="updateFilters()">
+                                <ng-option value="" selected="true">
+                                    Status
+                                </ng-option>        
+                                <ng-option *ngFor="let status of allStatus">
+                                    {{ status }}
+                                </ng-option>
+                            </ng-select>
                         </div>
                         <!-- <div class="col-md-1" style="text-align: right">
                             <a

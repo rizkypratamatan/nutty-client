@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { FlatpickrOptions } from 'ng2-flatpickr';
 import { HelperService } from 'src/app/services/helper.service';
 import { WebsiteReportService } from 'src/app/services/report/website-report.service';
+import { AuthService } from 'src/app/services/global/auth.service';
+import { WebsiteService } from 'src/app/services/website/website.service';
 
 @Component({
     selector: 'app-website',
@@ -13,6 +15,7 @@ export class WebsiteComponent implements OnInit {
     allWebsites: any[] = [];
     nucode: any = '';
     loading: boolean = false;
+    allWebsite: any[] = [];
 
     fields = {
         website: '',
@@ -21,12 +24,9 @@ export class WebsiteComponent implements OnInit {
         filter_date: '',
     };
 
-    filter = {};
     p: number = 1;
     totalWebsite: number;
     resultStatus = 0;
-
-    statusFilter = ['Active', 'Inactive'];
 
     updateFilters() {
         this.getPage(1);
@@ -35,11 +35,33 @@ export class WebsiteComponent implements OnInit {
     constructor(
         private service: WebsiteReportService,
         private helper: HelperService,
-        private router: Router
+        private router: Router,
+        private authService: AuthService,
+        private websiteService: WebsiteService
     ) {}
 
     ngOnInit(): void {
-        this.getPage(1);
+        let auth = this.authService.Auth();
+        if(auth['role'].name.toLowerCase() == 'system'){
+            this.websiteService.getAllWebsite({}, 1).subscribe((response) => {
+                this.allWebsite = response['data'];
+                this.fields.website = response['data'][0]['_id'];
+                this.getPage(1);
+            });
+            
+        }else{
+            let arrWeb = [];
+            auth['website']['ids'].forEach(function(value, index){
+                let data = {
+                    "_id" : auth['website']['ids'][index],
+                    "name" : auth['website']['names'][index],
+                }
+                arrWeb.push(data);
+            });
+
+            this.allWebsite = arrWeb;
+            this.getPage(1);
+        }
     }
 
     edit(id) {

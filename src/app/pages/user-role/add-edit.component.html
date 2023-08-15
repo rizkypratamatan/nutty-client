@@ -67,18 +67,20 @@
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Status</label>
-                                <select
+                                <ng-select
                                     id="user-status"
-                                    class="form-control select2"
                                     required
                                     [(ngModel)]="fields.status"
                                     [ngModelOptions]="{ standalone: true }"
                                 >
-                                    <option value="">Status</option>
-                                    <option *ngFor="let val of status">
+                                    <ng-option value="" selected="true">Status</ng-option>
+                                    <ng-option 
+                                        *ngFor="let val of status"
+                                        [value]="val"
+                                    >
                                         {{ val }}
-                                    </option>
-                                </select>
+                                    </ng-option>
+                                </ng-select>
                                 <div id="response-status"></div>
                             </div>
                             <h6 class="mt-3 mb-3">Privileges</h6>

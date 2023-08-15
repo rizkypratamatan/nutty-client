@@ -137,6 +137,8 @@ export class AddEditComponent implements OnInit {
                     zip: response.user.zip ? response.user.zip : '',
                 };
             });
+        }else{
+            this.fields.nucode = this.auth.nucode;
         }
     }
 

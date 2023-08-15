@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api/api.service';
 import { FlatpickrOptions } from 'ng2-flatpickr';
 import { HelperService } from 'src/app/services/helper.service';
+import { AuthService } from 'src/app/services/global/auth.service';
 
 
 @Component({
@@ -39,12 +40,17 @@ export class AddEditApiComponent implements OnInit {
       },
   };
 
+  auth: any;
+
   constructor(
       private router: Router,
       private route: ActivatedRoute,
+      private authService: AuthService,
       private service: ApiService,
       private helper: HelperService
-  ) {}
+  ) {
+    this.auth = this.authService.Auth();
+  }
 
   ngOnInit(): void {
       this.id = this.route.snapshot.params['id'];

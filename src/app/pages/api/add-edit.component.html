@@ -46,7 +46,7 @@
                             </div>
                             <!-- @if(Session::has("account"))
                                 @if(Session::get("account")->nucode == "system") -->
-                            <div class="mb-3">
+                            <div class="mb-3" *ngIf="auth['nucode'] == 'system'">
                                 <label class="form-label">Nucode</label>
                                 <input
                                     id="website-nucode"

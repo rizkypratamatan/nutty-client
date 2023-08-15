@@ -3,8 +3,8 @@ import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { DatabaseService } from 'src/app/services/database/database.service';
 import { AuthService } from 'src/app/services/global/auth.service';
-import { UserService } from 'src/app/services/user/user.service';
 import { WebsiteService } from 'src/app/services/website/website.service';
+import { HelperService } from 'src/app/services/helper.service';
 
 @Component({
     selector: 'app-database',
@@ -31,6 +31,7 @@ export class DatabaseComponent implements OnInit {
 
     constructor(
         private service: DatabaseService, 
+        private helper: HelperService,
         private router: Router,
         private authService: AuthService,
         private websiteService: WebsiteService
@@ -47,10 +48,19 @@ export class DatabaseComponent implements OnInit {
             });
             
         }else{
-            this.filter.website = auth['group']._id;
-            this.allWebsite = [
-                    auth['website']
-                ];
+            console.log(auth);
+            this.filter.website = auth['website']['ids'][0];
+            let arrWeb = [];
+
+            auth['website']['ids'].forEach(function(value, index){
+                let data = {
+                    "_id" : auth['website']['ids'][index],
+                    "name" : auth['website']['names'][index],
+                }
+                arrWeb.push(data);
+            });
+
+            this.allWebsite = arrWeb;
             this.getPage(1);
         }
     }
@@ -120,5 +130,9 @@ export class DatabaseComponent implements OnInit {
         });
 
         return result;
+    }
+
+    initializeTimestamp(timestamp){
+        return this.helper.initializeTimestamp(timestamp);
     }
 }

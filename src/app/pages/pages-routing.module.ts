@@ -28,6 +28,7 @@ import { MessageTemplateComponent } from './message-template/message-template.co
 import { AddEditMessageTemplateComponent } from './message-template/add-edit.component';
 import { WorksheetCallComponent } from './worksheet-crm/worksheet-call/worksheet-call.component';
 import { SettingsComponent } from './settings/settings.component';
+import { WorksheetStartComponent } from './worksheet-start/worksheet-start.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard' },
@@ -59,6 +60,7 @@ const routes: Routes = [
   { path: 'website/add-edit', component: AddEditWebsiteComponent },
   { path: 'website/add-edit/:id', component: AddEditWebsiteComponent },
   { path: 'worksheet', component: WorksheetComponent },
+  { path: 'worksheet/start/:websiteId', component: WorksheetStartComponent },
   { path: 'worksheet/result', component: WorksheetResultComponent },
   { path: 'worksheet/crm', component: WorksheetCrmComponent },
   { path: 'worksheet/call/:id/:websiteId', component: WorksheetCallComponent },

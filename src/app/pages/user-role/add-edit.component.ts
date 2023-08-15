@@ -69,6 +69,8 @@ export class AddEditRoleComponent implements OnInit {
                     status: response.data.status,
                 };
             });
+        }else{
+            this.fields.nucode = this.auth.nucode;
         }
     }
 

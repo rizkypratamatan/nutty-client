@@ -167,6 +167,23 @@ export class WorksheetService {
         );
     }
 
+    public worksheetStart(websiteId): Observable<any> {
+        console.log("masuk sini")
+        let auth = this.userServices.Auth();
+        let data = {
+            platform: 'Website',
+            websiteId: websiteId
+        };
+        return this.http.post(
+            this.configuration.api.url + '/api/worksheet/start/initializeData',
+            this.globalRestService.initializeBody(
+                data,
+                'api/worksheet/start/initializeData'
+            ),
+            this.globalRestService.initializeHeaderGetData(auth['token-auth'])
+        );
+    }
+
     public updateDatabase(id, fields): Observable<any> {
         let auth = this.userServices.Auth();
         let data = {

@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/services/global/auth.service';
 import { WorksheetService } from 'src/app/services/worksheet/worksheet.service';
 import { HelperService } from 'src/app/services/helper.service';
 import { WebsiteService } from 'src/app/services/website/website.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-worksheet',
@@ -25,7 +26,7 @@ export class WorksheetComponent implements OnInit {
     };
 
     p: number = 1;
-    totalData: number;
+    totalData: number = 0;
 
     updateFilters() {
         this.getPage(1);
@@ -35,7 +36,8 @@ export class WorksheetComponent implements OnInit {
         private service: WorksheetService,
         private authService: AuthService,
         private helper: HelperService,
-        private websiteService: WebsiteService
+        private websiteService: WebsiteService,
+        private router: Router,
     ) {}
 
     ngOnInit(): void {
@@ -57,8 +59,17 @@ export class WorksheetComponent implements OnInit {
     getPage(page: number) {
         this.loading = true;
         this.service.initializeData(this.filter, page).subscribe((response) => {
-            this.allData = response['data'];
-            this.totalData = response['total_data'];
+            if(response['total_data'] > 0){
+                this.allData = response['data'];
+                this.totalData = response['total_data'];
+            }else{
+                Swal.fire({
+                    title: 'Warning!',
+                    text: "No Data Found",
+                    icon: 'warning',
+                    confirmButtonText: 'Close',
+                });
+            }
             this.loading = false;
             this.p = page;
         });
@@ -169,5 +180,11 @@ export class WorksheetComponent implements OnInit {
                     this.getPage(1);
                 });
         }
+    }
+
+    startWorksheet() {
+        this.router.navigate([
+            '/worksheet/start/' + this.filter.websiteId,
+        ]);
     }
 }

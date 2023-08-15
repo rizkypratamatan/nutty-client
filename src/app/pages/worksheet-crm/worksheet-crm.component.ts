@@ -67,10 +67,20 @@ export class WorksheetCrmComponent implements OnInit {
     getPage(page: number) {
         this.loading = true;
         this.service.getAllCrm(this.filter, page).subscribe((response) => {
-            console.log(response);
-            this.allData = response['data'];
+            if(response['total_data'] > 0){
+                this.allData = response['data'];
+                this.totalData = response['total_data'];
+                
+            }else{
+                Swal.fire({
+                    title: 'Error!',
+                    text: "Database Empty!",
+                    icon: 'error',
+                    confirmButtonText: 'Close',
+                });
+            }
+            
             this.p = page;
-            this.totalData = response['total_data'];
             this.loading = false;
         });
     }

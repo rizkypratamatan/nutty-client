@@ -23,11 +23,11 @@ export class AddEditApiComponent implements OnInit {
   response: any;
 
   name: any = '';
-  nucode: any = '';
 
   fields = {
       platform: 'Website',
       timestamp: '',
+      nucode:'',
       token: '',
       start: '',
       sync:'Synced',
@@ -60,13 +60,17 @@ export class AddEditApiComponent implements OnInit {
           this.service.getApiById(this.id).subscribe((response) => {
                 this.response = response['data'];
                 this.name = response['data'].name;
-                this.nucode = response['data'].nucode;
+                this.fields.nucode = response['data'].nucode;
                 this.fields.sync = (response['data'].sync)?response['data'].sync:"NoSync";
                 this.fields.start = this.initializeDate(response['data'].start.$date.$numberLong);
                 this.fields.api.nexus.code = response['data'].api.nexus.code;
                 this.fields.api.nexus.url = response['data'].api.nexus.url;
                 this.fields.api.nexus.salt = response['data'].api.nexus.salt;
           });
+      }else{
+      
+        this.fields.nucode = this.auth.nucode;
+      
       }
   }
 

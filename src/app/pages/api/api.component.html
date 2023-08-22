@@ -28,7 +28,7 @@
                                 (ngModelChange)="updateFilters()"
                             />
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-2" *ngIf="auth.nucode == 'system'">
                             <input
                                 class="form-control dt-input"
                                 name="website-filter-nucode"
@@ -44,13 +44,9 @@
                             style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                             <thead>
                             <tr>
-                                <!-- <th>#</th> -->
+                                <th>#</th>
                                 <th>Name</th>
-                                <!-- @if(Session::has("account"))
-                                    @if(Session::get("account")->nucode == "system") -->
-                                        <th>Nucode</th>
-                                    <!-- @endif
-                                @endif -->
+                                <th *ngIf="auth.nucode == 'system'">Nucode</th>
                                 <th>Start Date</th>
                                 <th>Code</th>
                                 <th>URL</th>
@@ -71,9 +67,9 @@
                                         let i = index
                                     "
                                 >
-                                    <!-- <td>{{ i + 1 }}</td> -->
+                                    <td>{{ i + 1 }}</td>
                                     <td>{{ website.name }}</td>
-                                    <td>{{ website.nucode }}</td>
+                                    <td *ngIf="auth.nucode == 'system'">{{ website.nucode }}</td>
                                     <td>
                                         {{ !website.start.$date ?  website.start : initializeDate(website.start.$date.$numberLong) }}
                                     </td>
@@ -92,13 +88,9 @@
                             </tbody>
                             <tfoot>
                             <tr>
-                                <!-- <th>#</th> -->
+                                <th>#</th>
                                 <th>Name</th>
-                                <!-- @if(Session::has("account"))
-                                    @if(Session::get("account")->nucode == "system") -->
-                                        <th>Nucode</th>
-                                    <!-- @endif
-                                @endif -->
+                                <th *ngIf="auth.nucode == 'system'">Nucode</th>
                                 <th>Start Date</th>
                                 <th>Code</th>
                                 <th>URL</th>

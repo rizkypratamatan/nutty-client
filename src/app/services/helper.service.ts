@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { ConfigurationService } from 'src/app/configurations/configuration.service';
+import Swal, { SweetAlertIcon } from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class HelperService {
 
   public configuration: ConfigurationService;
@@ -54,6 +56,35 @@ export class HelperService {
 
       return result;
     }
+
+
+    showLoadingModal(title){
+      Swal.fire({
+          title: title,
+          allowEscapeKey: false,
+          allowOutsideClick: false,
+          showConfirmButton: false,
+          onOpen: ()=>{
+              Swal.showLoading();
+          },
+          onAfterClose () {
+              Swal.hideLoading()
+          }
+      });
+  }
+
+  closeLoadingModal(){
+      Swal.close();
+  }
+
+  showAlert(icon: SweetAlertIcon = 'success', title, body){
+      Swal.fire({
+          title: title,
+          text: body,
+          icon: icon,
+          confirmButtonText: 'Close',
+      });
+  }
 
     
 }

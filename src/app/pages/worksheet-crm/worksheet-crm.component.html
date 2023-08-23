@@ -57,7 +57,21 @@
                                     </option>
                                 </select>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-3" *ngIf="selectedData.length > 0">
+                                <ng-select 
+                                    (change)="processAction()"
+                                    [(ngModel)]="action"
+                                    [ngModelOptions]="{ standalone: true }"
+
+                                >
+                                    <ng-option value="">Action</ng-option>
+                                    <ng-option value="send-sms">Send SMS</ng-option>
+                                    <ng-option value="send-wa">Send WA</ng-option>
+                                    <ng-option value="send-email">Send Email</ng-option>
+                                </ng-select>
+                            </div>
+                            
+                            <!-- <div class="col-md-2">
                                 <button
                                     (click)="processSms()"
                                     class="btn btn-success waves-effect waves-light form-control"
@@ -107,7 +121,7 @@
                                         >Process Email</span
                                     >
                                 </button>
-                            </div>
+                            </div> -->
                         </form>
 
                         <div class="col-12 overflow-auto table-responsive">
@@ -145,7 +159,14 @@
                                             let i = index
                                         "
                                     >
-                                        <td>{{ i + 1 }}</td>
+                                        <td>
+                                            <input type="checkbox" 
+                                                    data-id="item._id" 
+                                                    [checked]="selectedData.indexOf(item['database'][0]._id
+                                                    .$oid) > -1"
+                                                    (change)="populateData(item['database'][0]._id
+                                                    .$oid, $event.target.checked ? true : false)">
+                                        </td>
                                         <td>
                                             {{
                                                 hidePhone(

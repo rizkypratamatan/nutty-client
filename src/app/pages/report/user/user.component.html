@@ -46,7 +46,7 @@
                                 (ngModelChange)="updateFilters()"
                             />
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-2" *ngIf="auth['nucode'] == 'system'">
                             <input
                                 class="form-control dt-input"
                                 type="text"
@@ -72,7 +72,7 @@
                                 <tr>
                                     <th>Username</th>
                                     <th>Name</th>
-                                    <th>Nucode</th>
+                                    <th *ngIf="auth['nucode'] == 'system'">Nucode</th>
                                     <th>Total Call</th>
                                     <th>Website Call</th>
                                     <th>Deposited</th>
@@ -102,7 +102,7 @@
                                 >
                                     <td>{{ user.user[0]["username"] }}</td>
                                     <td>{{ user.user[0]["name"] }}</td>
-                                    <td>{{ nucode }}</td>
+                                    <td *ngIf="auth['nucode'] == 'system'">{{ nucode }}</td>
                                     <td>{{ user.total }}</td>
                                     <td>
                                         <span
@@ -208,7 +208,7 @@
                                 <tr>
                                     <th>Username</th>
                                     <th>Name</th>
-                                    <th>Nucode</th>
+                                    <th *ngIf="auth['nucode'] == 'system'">Nucode</th>
                                     <th>Total Call</th>
                                     <th>Website Call</th>
                                     <th>Deposited</th>

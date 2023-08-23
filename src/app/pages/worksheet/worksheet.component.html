@@ -1,4 +1,3 @@
-
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
@@ -41,8 +40,17 @@
                             <div class="col-md-6"></div>
                         </form> -->
                         <div class="row mb-1 g-1" *ngIf="totalData > 0">
-                            <div class="col-md-2">
-                                <button
+                            <div class="col-md-2" *ngIf="selectedData.length > 0">
+                                <ng-select 
+                                    (change)="processAction()"
+                                    [(ngModel)]="action"    
+                                >
+                                    <ng-option value="">Action</ng-option>
+                                    <ng-option value="send-sms">Send SMS</ng-option>
+                                    <ng-option value="send-wa">Send WA</ng-option>
+                                    <ng-option value="send-email">Send Email</ng-option>
+                                </ng-select>
+                                <!-- <button
                                     (click)="processSms()"
                                     class="btn btn-success waves-effect waves-light form-control"
                                     >
@@ -50,9 +58,9 @@
                                         <span class="sr-only">Loading...</span>
                                     </div>
                                     <span *ngIf="loadingSmsBtn == false">Process SMS</span>
-                                </button>
+                                </button> -->
                             </div>
-                            <div class="col-md-3">
+                            <!-- <div class="col-md-3">
                                 <button
                                     (click)="processWhatsapp()"
                                     class="btn btn-info waves-effect waves-light form-control"
@@ -62,8 +70,8 @@
                                     </div>
                                     <span *ngIf="loadingWaBtn == false">Process Whatsapp</span>
                                 </button>
-                            </div>
-                            <div class="col-md-3">
+                            </div> -->
+                            <!-- <div class="col-md-3">
                                 <button
                                     (click)="processEmail()"
                                     class="btn btn-warning waves-effect waves-light form-control"
@@ -74,7 +82,7 @@
                                     <span *ngIf="loadingEmailBtn == false">Process Email</span>
                                     
                                 </button>
-                            </div>
+                            </div> -->
                             <div class="col-md-3">
                                 <button
                                     (click)="startWorksheet()"
@@ -91,6 +99,7 @@
                                 <thead>
                                 <tr>
                                     <th>#</th>
+                                    <!-- <th>#</th> -->
                                     <th>Phone</th>
                                     <th>Whatsapp</th>
                                     <th>Username</th>
@@ -111,7 +120,13 @@
                                             let i = index
                                         "
                                     >
-                                        <td>{{ i + 1 }}</td>
+                                        <td>
+                                            <input type="checkbox" 
+                                                    data-id="item._id" 
+                                                    [checked]="selectedData.indexOf(item._id) > -1"
+                                                    (change)="populateData(item._id, $event.target.checked ? true : false)">
+                                        </td>
+                                        <!-- <td>{{ i + 1 }}</td> -->
                                         <td>{{ hidePhone(item.contact.phone) }}</td>
                                         <td>{{ hidePhone(item.contact.whatsapp) }}</td>
                                         <td>{{ item.username }}</td>
@@ -122,6 +137,7 @@
                                 <tfoot>
                                 <tr>
                                     <th>#</th>
+                                    <!-- <th>#</th> -->
                                     <th>Phone</th>
                                     <th>Whatsapp</th>
                                     <th>Username</th>

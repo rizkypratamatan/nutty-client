@@ -46,7 +46,7 @@
                     >
                         <thead>
                             <tr>
-                                
+                                <th>#</th>
                                 <th>Title</th>
                                 <th>Type</th>
                                 <th>Message</th>
@@ -67,7 +67,7 @@
                                     let i = index
                                 "
                             >
-                                <!-- <td>{{ i + 1 }}</td> -->
+                                <td>{{ i + 1 }}</td>
                                 <td>{{ message.name }}</td>
                                 <td>{{ message.type }}</td>
                                 <td [innerHtml]="(message.format | slice:0:30)+ (message.format.length > 100 ? '...' : '')"></td>
@@ -93,6 +93,7 @@
                         
                         <tfoot>
                             <tr>
+                                <th>#</th>
                                 <th>Title</th>
                                 <th>Type</th>
                                 <th>Message</th>

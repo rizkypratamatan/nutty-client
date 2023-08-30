@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api/api.service';
 import { FlatpickrOptions } from 'ng2-flatpickr';
 import { HelperService } from 'src/app/services/helper.service';
+import { AuthService } from 'src/app/services/global/auth.service';
 
 
 @Component({
@@ -22,11 +23,11 @@ export class AddEditApiComponent implements OnInit {
   response: any;
 
   name: any = '';
-  nucode: any = '';
 
   fields = {
       platform: 'Website',
       timestamp: '',
+      nucode:'',
       token: '',
       start: '',
       sync:'Synced',
@@ -39,12 +40,17 @@ export class AddEditApiComponent implements OnInit {
       },
   };
 
+  auth: any;
+
   constructor(
       private router: Router,
       private route: ActivatedRoute,
+      private authService: AuthService,
       private service: ApiService,
       private helper: HelperService
-  ) {}
+  ) {
+    this.auth = this.authService.Auth();
+  }
 
   ngOnInit(): void {
       this.id = this.route.snapshot.params['id'];
@@ -54,13 +60,17 @@ export class AddEditApiComponent implements OnInit {
           this.service.getApiById(this.id).subscribe((response) => {
                 this.response = response['data'];
                 this.name = response['data'].name;
-                this.nucode = response['data'].nucode;
+                this.fields.nucode = response['data'].nucode;
                 this.fields.sync = (response['data'].sync)?response['data'].sync:"NoSync";
                 this.fields.start = this.initializeDate(response['data'].start.$date.$numberLong);
                 this.fields.api.nexus.code = response['data'].api.nexus.code;
                 this.fields.api.nexus.url = response['data'].api.nexus.url;
                 this.fields.api.nexus.salt = response['data'].api.nexus.salt;
           });
+      }else{
+      
+        this.fields.nucode = this.auth.nucode;
+      
       }
   }
 

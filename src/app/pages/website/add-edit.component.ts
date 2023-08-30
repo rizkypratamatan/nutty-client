@@ -56,6 +56,8 @@ export class AddEditWebsiteComponent implements OnInit {
                     sync: response.data.sync,
                 };
             });
+        }else{
+            this.fields.nucode = this.auth.nucode;
         }
     }
 

@@ -69,6 +69,8 @@ export class AddEditGroupComponent implements OnInit {
                     nucode: response['dataUser'].nucode,
                 };
             });
+        }else{
+            this.fields.nucode = this.auth.nucode;
         }
     }
 

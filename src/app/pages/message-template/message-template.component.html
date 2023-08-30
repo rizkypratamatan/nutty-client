@@ -21,157 +21,6 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
-                    <!-- <form class="row g-1 mb-3" method="POST" action="">
-                        <div class="col-md-1">
-                            <input
-                                class="form-control dt-input"
-                                type="text"
-                                placeholder="Username"
-                                data-column="1"
-                                data-regex="true"
-                            />
-                        </div>
-                        <div class="col-md-1">
-                            <input
-                                class="form-control dt-input"
-                                type="text"
-                                placeholder="Name"
-                                data-column="2"
-                                data-regex="true"
-                            />
-                        </div>
-                        @if(Session::has("account"))
-                                @if(Session::get("account")->nucode == "system")
-                        <div class="col-md-1">
-                            <input
-                                class="form-control dt-input"
-                                type="text"
-                                placeholder="Nucode"
-                                data-column="3"
-                                data-regex="false"
-                            />
-                        </div>
-                        <div class="col-md-2">
-                            <select
-                                id="user-filter-type"
-                                class="select2 form-select dt-select"
-                                data-column="4"
-                                data-regex="false"
-                            >
-                                <option value="">Type</option>
-                                <option value="Administrator">
-                                    Administrator
-                                </option>
-                                <option value="CRM">CRM</option>
-                                <option value="Telemarketer">
-                                    Telemarketer
-                                </option>
-                            </select>
-                        </div>
-                        <div class="col-md-2">
-                            <select
-                                id="user-filter-group"
-                                class="select2 form-select dt-select"
-                                data-column="5"
-                                data-regex="false"
-                            >
-                                <option value="">Group</option>
-                                @foreach($model->userGroups as $value)
-                                        <option value="{{$value->_id}}">{{$value->name}}</option>
-                                        @endforeach
-                            </select>
-                        </div>
-                        <div class="col-md-2">
-                            <select
-                                id="user-filter-role"
-                                class="select2 form-select dt-select"
-                                data-column="6"
-                                data-regex="false"
-                            >
-                                <option value="">Role</option>
-                                @foreach($model->userRoles as $value)
-                                        <option value="{{$value->_id}}">{{$value->name}}</option>
-                                        @endforeach
-                            </select>
-                        </div>
-                        <div class="col-md-1">
-                            <select
-                                id="user-filter-status"
-                                class="select2 form-select dt-select"
-                                data-column="7"
-                                data-regex="false"
-                            >
-                                <option value="">Status</option>
-                                <option value="Active">Active</option>
-                                <option value="Inactive">Inactive</option>
-                            </select>
-                        </div>
-                        @else
-                        <div class="col-md-2">
-                            <select
-                                id="user-filter-type"
-                                class="select2 form-select dt-select"
-                                data-column="3"
-                                data-regex="false"
-                            >
-                                <option value="">Type</option>
-                                <option value="Administrator">
-                                    Administrator
-                                </option>
-                                <option value="CRM">CRM</option>
-                                <option value="Telemarketer">
-                                    Telemarketer
-                                </option>
-                            </select>
-                        </div>
-                        <div class="col-md-2">
-                            <select
-                                id="user-filter-group"
-                                class="select2 form-select dt-select"
-                                data-column="4"
-                                data-regex="false"
-                            >
-                                <option value="">Group</option>
-                                @foreach($model->userGroups as $value)
-                                        <option value="{{$value->_id}}">{{$value->name}}</option>
-                                        @endforeach
-                            </select>
-                        </div>
-                        <div class="col-md-2">
-                            <select
-                                id="user-filter-role"
-                                class="select2 form-select dt-select"
-                                data-column="5"
-                                data-regex="false"
-                            >
-                                <option value="">Role</option>
-                                @foreach($model->userRoles as $value)
-                                        <option value="{{$value->_id}}">{{$value->name}}</option>
-                                        @endforeach
-                            </select>
-                        </div>
-                        <div class="col-md-2">
-                            <select
-                                id="user-filter-status"
-                                class="select2 form-select dt-select"
-                                data-column="6"
-                                data-regex="false"
-                            >
-                                <option value="">Status</option>
-                                <option value="Active">Active</option>
-                                <option value="Inactive">Inactive</option>
-                            </select>
-                        </div>
-                        @endif
-                                @endif
-                        <div class="col-md-2" style="text-align: right">
-                            <a
-                                href="#"
-                                class="btn btn-success waves-effect waves-light"
-                                ><i class="mdi mdi-plus me-2"></i> Add New</a
-                            >
-                        </div>
-                    </form> -->
 
                     <!-- Filter -->
                     <div class="row g-1 mb-3">
@@ -184,28 +33,6 @@
                                 (ngModelChange)="updateFilters()"
                             />
                         </div>
-                        <!-- <div class="col-md-2">
-                            <select
-                                id="message-filter-type"
-                                class="select2 form-select dt-select"
-                                [(ngModel)]="fields.type"
-                                (ngModelChange)="updateFilters()"
-                            >
-                                <option value="">Choose type</option>
-                                <option *ngFor="let type of allType">
-                                    {{ type }}
-                                </option>
-                            </select>
-                        </div> -->
-                        <!-- <div class="col-md-3">
-                            <input
-                                class="form-control dt-input"
-                                type="text"
-                                placeholder="Format"
-                                [(ngModel)]="fields.format"
-                                (ngModelChange)="updateFilters()"
-                            />
-                        </div> -->
                     </div>
                     <div class="table-responsive">
                         <table
@@ -219,7 +46,7 @@
                     >
                         <thead>
                             <tr>
-                                
+                                <th>#</th>
                                 <th>Title</th>
                                 <th>Type</th>
                                 <th>Message</th>
@@ -240,7 +67,7 @@
                                     let i = index
                                 "
                             >
-                                <!-- <td>{{ i + 1 }}</td> -->
+                                <td>{{ i + 1 }}</td>
                                 <td>{{ message.name }}</td>
                                 <td>{{ message.type }}</td>
                                 <td [innerHtml]="(message.format | slice:0:30)+ (message.format.length > 100 ? '...' : '')"></td>
@@ -266,6 +93,7 @@
                         
                         <tfoot>
                             <tr>
+                                <th>#</th>
                                 <th>Title</th>
                                 <th>Type</th>
                                 <th>Message</th>

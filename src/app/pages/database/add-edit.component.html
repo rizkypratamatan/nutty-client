@@ -83,7 +83,7 @@
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Group</label>
-                                <select
+                                <!-- <select
                                     id="user-group"
                                     class="form-control select2"
                                     required
@@ -98,7 +98,20 @@
                                     >
                                         {{ val.name }}
                                     </option>
-                                </select>
+                                </select> -->
+                                <ng-select id="user-group"
+                                            required
+                                            [(ngModel)]="fields.group"
+                                            [ngModelOptions]="{ standalone: true }"
+                                            (ngModelChange)="onOptionsSelectedGroup()"
+                                    >
+                                    <ng-option value="" selected="true">
+                                        Group
+                                    </ng-option>        
+                                    <ng-option *ngFor="let val of allGroup" [value]="{}">
+                                        {{ val.name }}
+                                    </ng-option>
+                                </ng-select>
                                 <div id="response-group"></div>
                             </div>
                             <div class="mb-3">

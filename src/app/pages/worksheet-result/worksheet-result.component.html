@@ -141,7 +141,7 @@
                                         <td *ngIf="auth.type == 'Administrator'">{{ item.user.name }}</td>
                                         <td>{{ hidePhone(item.database[0].contact.phone) }}</td>
                                         <td>{{ hidePhone(item.database[0].contact.whatsapp) }}</td>
-                                        <td>{{ item.databaseAccount[0].username }}</td>
+                                        <td>{{ (item.databaseAccount.length > 0)?item.databaseAccount[0].username:"" }}</td>
                                         <td>{{ item.database[0].name }}</td>
                                         <td>{{ item.website.name }}</td>
                                         <td>{{ item.status }}</td>

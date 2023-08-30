@@ -30,8 +30,24 @@
                                 (ngModelChange)="updateFilters()"
                             />
                         </div>
-                        <div class="col-md-2" *ngIf="auth.nucode == 'system'">
+                        <div class="col-md-2">
+                            <ng-select
+                                id="user-role-filter-status"
+                                [(ngModel)]="fields.status"
+                                (ngModelChange)="updateFilters()"
+                            >
+                                <ng-option value="" selected="true">Status</ng-option>
+                                <ng-option 
+                                    *ngFor="let status of statusFilter"
+                                    [value]="status"
+                                >
+                                    {{ status }}
+                                </ng-option>
+                            </ng-select>
+                        </div>
+                        <div class="col-md-2">
                             <input
+                                *ngIf="auth.nucode == 'system'"
                                 class="form-control dt-input"
                                 type="text"
                                 placeholder="Nucode"
@@ -39,30 +55,15 @@
                                 (ngModelChange)="updateFilters()"
                             />
                         </div>
-                        <div class="col-md-2">
-                            <select
-                                id="user-role-filter-status"
-                                class="select2 form-select dt-select"
-                                [(ngModel)]="fields.status"
-                                (ngModelChange)="updateFilters()"
-                            >
-                                <option value="">Status</option>
-                                <option *ngFor="let status of statusFilter">
-                                    {{ status }}
-                                </option>
-                                <!-- <option value="Active">Active</option>
-                                <option value="Inactive">Inactive</option> -->
-                            </select>
-                        </div>
                         <div class="col-md-4"></div>
-                        <!-- <div class="col-md-2" style="text-align: right">
+                        <div class="col-md-2" style="text-align: right">
                             <a
                                 (click)="create()"
                                 class="btn btn-success waves-effect waves-light"
                             >
                                 <i class="mdi mdi-plus me-2"></i> Add New
                             </a>
-                        </div> -->
+                        </div>
                     </div>
                     <!-- Filter -->
 

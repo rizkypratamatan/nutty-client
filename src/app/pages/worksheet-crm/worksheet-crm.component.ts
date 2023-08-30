@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import Swal from 'sweetalert2';
 import { WebsiteService } from 'src/app/services/website/website.service';
 import { UserService } from 'src/app/services/user/user.service';
 import { WorksheetService } from 'src/app/services/worksheet/worksheet.service';
@@ -15,11 +14,13 @@ export class WorksheetCrmComponent implements OnInit {
     allData: any[] = [];
     loading: boolean = false;
     allWebsite: any[] = [];
+    selectedData: any[] = [];
     websiteId: boolean = false;
     auth: any;
     loadingSmsBtn: boolean = false;
     loadingWaBtn: boolean = false;
     loadingEmailBtn: boolean = false;
+    action: String= "";
 
     filter = {
         websiteId: '',
@@ -43,13 +44,6 @@ export class WorksheetCrmComponent implements OnInit {
 
     ngOnInit(): void {
         this.auth = this.userService.Auth();
-
-        //   if(this.auth['role'].name.toLowerCase() == 'system'){
-        //     this.websiteService.getAllWebsite({}, 1).subscribe((response) => {
-        //         this.allWebsite = response['data'];
-        //         // this.getPage(1);
-        //     });
-        //   }else{
         if (this.auth['group']._id != '0') {
             this.websiteService.getAllWebsite({}, 1).subscribe((response) => {
                 response['data'].forEach((value) => {
@@ -67,10 +61,16 @@ export class WorksheetCrmComponent implements OnInit {
     getPage(page: number) {
         this.loading = true;
         this.service.getAllCrm(this.filter, page).subscribe((response) => {
-            console.log(response);
-            this.allData = response['data'];
+            if(response['total_data'] > 0){
+                this.allData = response['data'];
+                this.totalData = response['total_data'];
+            }else{
+                this.allData = [];
+                this.totalData = 0;
+                this.helper.showAlert('warning', 'Warning!', 'Database Empty!')
+            }
+            
             this.p = page;
-            this.totalData = response['total_data'];
             this.loading = false;
         });
     }
@@ -98,7 +98,6 @@ export class WorksheetCrmComponent implements OnInit {
     startCrm(id, event) {
         this.websiteId = true;
         this.filter.websiteId = id;
-
         this.getPage(1);
     }
 
@@ -114,24 +113,17 @@ export class WorksheetCrmComponent implements OnInit {
             )
         ) {
             this.service
-                .processWhatsapp('', this.filter.websiteId, this.filter.days)
+                .processWhatsapp('', this.filter.websiteId, this.filter.days, this.selectedData)
                 .subscribe((response) => {
                     if (response.result === true) {
-                        Swal.fire({
-                            title: 'Success!',
-                            text: response.response,
-                            icon: 'success',
-                            confirmButtonText: 'Close',
-                        });
+                        this.helper.showAlert('success', 'Success!', response.response)
+                       
                     } else {
-                        Swal.fire({
-                            title: 'Error!',
-                            text: response.response,
-                            icon: 'error',
-                            confirmButtonText: 'Close',
-                        });
+                        this.helper.showAlert('error', 'Error!', response.response)
                     }
                     this.loadingWaBtn = false;
+                    this.selectedData = [];
+                    this.action = "";
                     this.getPage(1);
                 });
         }
@@ -145,24 +137,16 @@ export class WorksheetCrmComponent implements OnInit {
             )
         ) {
             this.service
-                .processSms('', this.filter.websiteId, this.filter.days)
+                .processSms('', this.filter.websiteId, this.filter.days, this.selectedData)
                 .subscribe((response) => {
                     if (response.result === true) {
-                        Swal.fire({
-                            title: 'Success!',
-                            text: response.response,
-                            icon: 'success',
-                            confirmButtonText: 'Close',
-                        });
+                        this.helper.showAlert('success', 'Success!', response.response);
                     } else {
-                        Swal.fire({
-                            title: 'Error!',
-                            text: response.response,
-                            icon: 'error',
-                            confirmButtonText: 'Close',
-                        });
+                        this.helper.showAlert('error', 'Error!', response.response);
                     }
                     this.loadingSmsBtn = false;
+                    this.selectedData = [];
+                    this.action = "";
                     this.getPage(1);
                 });
         }
@@ -176,24 +160,16 @@ export class WorksheetCrmComponent implements OnInit {
             )
         ) {
             this.service
-                .processEmail('', this.filter.websiteId, this.filter.days)
+                .processEmail('', this.filter.websiteId, this.filter.days, this.selectedData)
                 .subscribe((response) => {
                     if (response.result === true) {
-                        Swal.fire({
-                            title: 'Success!',
-                            text: response.response,
-                            icon: 'success',
-                            confirmButtonText: 'Close',
-                        });
+                        this.helper.showAlert('success', 'Success!', response.response);
                     } else {
-                        Swal.fire({
-                            title: 'Error!',
-                            text: response.response,
-                            icon: 'error',
-                            confirmButtonText: 'Close',
-                        });
+                        this.helper.showAlert('error', 'Error!', response.response);
                     }
                     this.loadingEmailBtn = false;
+                    this.selectedData = [];
+                    this.action = "";
                     this.getPage(1);
                 });
         }
@@ -203,5 +179,36 @@ export class WorksheetCrmComponent implements OnInit {
         this.router.navigate([
             '/worksheet/call/' + id + '/' + this.filter.websiteId,
         ]);
+    }
+
+    populateData(id: any, checked: boolean){
+        if(checked){
+            this.selectedData.push(id);
+        }else{
+            if(this.selectedData.length == 1){
+                this.selectedData.pop()
+            }else{
+                let position = this.selectedData.indexOf(id);
+                    if ( position ) this.selectedData.splice(position, 1);
+            }
+            
+        }
+    }
+
+    processAction(){
+        if(this.action == 'send-sms'){
+            this.helper.showLoadingModal('Processing SMS...');
+            this.processSms();
+        }
+
+        if(this.action == 'send-wa'){
+            this.helper.showLoadingModal('Processing Whatsapp...');
+            this.processWhatsapp();
+        }
+
+        if(this.action == 'send-email'){
+            this.helper.showLoadingModal('Processing Email...');
+            this.processEmail();
+        }
     }
 }

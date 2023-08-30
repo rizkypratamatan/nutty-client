@@ -71,17 +71,19 @@
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Status</label>
-                                <select
+                                <ng-select
                                     id="website-status"
-                                    class="form-control select2"
                                     [(ngModel)]="fields.status"
                                     [ngModelOptions]="{ standalone: true }"
                                 >
-                                    <option value="">Status</option>
-                                    <option *ngFor="let val of status">
+                                    <ng-option value="" selected="true">Status</ng-option>
+                                    <ng-option 
+                                        *ngFor="let val of status"
+                                        [value]="val"
+                                    >
                                         {{ val }}
-                                    </option>
-                                </select>
+                                    </ng-option>
+                                </ng-select>
                                 <div id="response-status"></div>
                             </div>
                             <div class="mb-3">

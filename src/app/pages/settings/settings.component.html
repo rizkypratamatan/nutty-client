@@ -19,7 +19,7 @@
     <!-- End Justified Tabs -->
 
     <!-- Single Message -->
-    <div class="card col-md-6">
+    <div class="card col-md-12">
         <div class="row">
             <div class="card-header" *ngIf="isValid == false">
                 <div class="alert alert-danger">
@@ -32,11 +32,127 @@
             </div>
             <div class="card-body">
                 <form (ngSubmit)="submit()">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>MAILGUN Configuration</h4>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label class="form-label label"
+                                >MAILGUN DOMAIN</label
+                            >
+                        </div>
+                        <div class="col-md-6">
+                            <input
+                                id="user-phone"
+                                class="form-control"
+                                type="text"
+                                placeholder="Mailgun Domain"
+                                required
+                                [(ngModel)]="fields.mailgun_domain"
+                                [ngModelOptions]="{ standalone: true }"
+                            />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label class="form-label label"
+                                >MAILGUN SECRET</label
+                            >
+                        </div>
+                        <div class="col-md-6">
+                            <input
+                                id="user-phone"
+                                class="form-control"
+                                type="text"
+                                placeholder="Mailgun Secret"
+                                required
+                                [(ngModel)]="fields.mailgun_secret"
+                                [ngModelOptions]="{ standalone: true }"
+                            />
+                        </div>
+                       
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label class="form-label label"
+                                >From Name</label
+                            >
+                        </div>
+                        <div class="col-md-6">
+                            <input
+                                id="user-phone"
+                                class="form-control"
+                                type="text"
+                                placeholder="From Name"
+                                required
+                                [(ngModel)]="fields.from_name"
+                                [ngModelOptions]="{ standalone: true }"
+                            />
+                        </div>
+                       
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label class="form-label label"
+                                >From Email</label
+                            >
+                        </div>
+                        <div class="col-md-6">
+                            <input
+                                id="user-phone"
+                                class="form-control"
+                                type="text"
+                                placeholder="From Email"
+                                required
+                                [(ngModel)]="fields.from_email"
+                                [ngModelOptions]="{ standalone: true }"
+                            />
+                        </div>
+                       
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <h4>GATEWAY CONFIG</h4>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label class="form-label label"
+                                >Gateway Apikey</label
+                            >
+                        </div>
+                        <div class="col-md-6">
+                            <input
+                                id="user-phone"
+                                class="form-control"
+                                type="text"
+                                placeholder="Gateway Api Key"
+                                required
+                                [(ngModel)]="fields.gateway_apikey"
+                                [ngModelOptions]="{ standalone: true }"
+                            />
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <h4>BLAST CONFIG</h4>
+                        </div>
+                    </div>
+                    
                     <!-- Interval SMS -->
                     <div class="row">
                         <div class="col-md-4">
                             <label class="form-label label"
-                                >Interval between SMS</label
+                                >SMS Interval</label
                             >
                         </div>
                         <div class="col-md-2">
@@ -61,7 +177,7 @@
                     <div class="row">
                         <div class="col-md-4">
                             <label class="form-label label"
-                                >Interval between WhatsApp</label
+                                >WhatsApp Interval</label
                             >
                         </div>
                         <div class="col-md-2">
@@ -86,7 +202,7 @@
                     <div class="row">
                         <div class="col-md-4">
                             <label class="form-label label"
-                                >Interval between Email</label
+                                >Email Interval</label
                             >
                         </div>
                         <div class="col-md-2">

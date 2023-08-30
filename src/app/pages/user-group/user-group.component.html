@@ -30,22 +30,40 @@
                             />
                         </div>
                         <div class="col-md-2">
-                            <select
+                            <ng-select
                                 id="user-group-filter-website"
-                                class="select2 form-select dt-select"
                                 [(ngModel)]="fields.website"
                                 data-column="2"
                                 data-regex="false"
                                 (ngModelChange)="updateFilters()"
                             >
-                                <option value="">Website</option>
-                                <option *ngFor="let data of allWebsite" value="{{ data._id }}">
+                                <ng-option value="" selected="true">Website</ng-option>
+                                <ng-option 
+                                    *ngFor="let data of allWebsite" 
+                                    [value]="data._id"
+                                >
                                     {{ data.name }}
-                                </option>
-                            </select>
+                                </ng-option>
+                            </ng-select>
                         </div>
-                        <div class="col-md-2" *ngIf="auth.nucode == 'system'">
+                        <div class="col-md-2">
+                            <ng-select
+                                id="user-group-filter-status"
+                                [(ngModel)]="fields.status"
+                                (ngModelChange)="updateFilters()"
+                            >
+                                <ng-option value="" selected="true">Status</ng-option>
+                                <ng-option 
+                                    *ngFor="let status of allStatus"
+                                    [value]="status"
+                                >
+                                    {{ status }}
+                                </ng-option>
+                            </ng-select>
+                        </div>
+                        <div class="col-md-2">
                             <input
+                                *ngIf="auth.nucode == 'system'"
                                 class="form-control dt-input"
                                 type="text"
                                 placeholder="Nucode"
@@ -53,21 +71,7 @@
                                 (ngModelChange)="updateFilters()"
                             />
                         </div>
-                        <div class="col-md-2">
-                            <select
-                                id="user-group-filter-status"
-                                class="select2 form-select dt-select"
-                                [(ngModel)]="fields.status"
-                                (ngModelChange)="updateFilters()"
-                            >
-                                <option value="">Status</option>
-                                <option *ngFor="let status of allStatus">
-                                    {{ status }}
-                                </option>
-                            </select>
-                        </div>
                         <div class="col-md-2"></div>
-
                         <div class="col-md-2" style="text-align: right">
                             <a
                                 (click)="create()"
@@ -77,6 +81,7 @@
                             </a>
                         </div>
                     </div>
+                    <div class="table-responsive">
                     <table
                         id="user-group"
                         class="table table-striped table-bordered dt-responsive nowrap"
@@ -153,6 +158,7 @@
                             </tr>
                         </tfoot>
                     </table>
+                    </div>
                     <div class="spinner-border spinner-border-sm" role="status" *ngIf="loading == true">
                         <span class="sr-only">Loading...</span>
                     </div>

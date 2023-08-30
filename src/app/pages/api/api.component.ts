@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import Swal from 'sweetalert2';
 import { ApiService } from 'src/app/services/api/api.service';
 import { HelperService } from 'src/app/services/helper.service';
+import { AuthService } from 'src/app/services/global/auth.service';
 
 @Component({
     selector: 'app-api',
@@ -27,11 +27,19 @@ export class ApiComponent implements OnInit {
 
     statusFilter = ['Active', 'Inactive'];
 
+    auth: any;
+
     updateFilters() {
         this.getPage(1);
     }
 
-    constructor(private service: ApiService, private router: Router, private helper: HelperService) {}
+    constructor(private service: ApiService,
+                private router: Router, 
+                private authService: AuthService,
+                private helper: HelperService) 
+    {
+        this.auth = this.authService.Auth();
+    }
 
     ngOnInit(): void {
         this.getPage(1);

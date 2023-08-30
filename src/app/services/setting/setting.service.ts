@@ -50,6 +50,11 @@ export class SettingService {
             interval_sms: request.intervalSMS,
             interval_wa: request.intervalWhatsApp,
             interval_email: request.intervalEmail,
+            mailgun_domain: request.mailgun_domain,
+            mailgun_secret: request.mailgun_secret,
+            from_name: request.from_name,
+            from_email: request.from_email,
+            gateway_apikey: request.gateway_apikey,
         };
 
         return this.http.post(

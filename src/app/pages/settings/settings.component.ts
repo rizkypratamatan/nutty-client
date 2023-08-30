@@ -20,6 +20,11 @@ export class SettingsComponent implements OnInit {
         intervalSMS: '',
         intervalWhatsApp: '',
         intervalEmail: '',
+        mailgun_domain: '',
+        mailgun_secret: '',
+        from_name: '',
+        from_email: '',
+        gateway_apikey: '',
     };
 
     constructor(
@@ -44,11 +49,36 @@ export class SettingsComponent implements OnInit {
                     if (element.name == 'interval_email') {
                         this.fields.intervalEmail = element.value;
                     }
+
+                    if (element.name == 'mailgun_domain') {
+                        this.fields.mailgun_domain = element.value;
+                    }
+
+                    if (element.name == 'mailgun_secret') {
+                        this.fields.mailgun_secret = element.value;
+                    }
+
+                    if (element.name == 'from_email') {
+                        this.fields.from_email = element.value;
+                    }
+
+                    if (element.name == 'from_name') {
+                        this.fields.from_name = element.value;
+                    }
+
+                    if (element.name == 'gateway_apikey') {
+                        this.fields.gateway_apikey = element.value;
+                    }
                 });
             } else {
                 this.fields.intervalSMS = '';
                 this.fields.intervalWhatsApp = '';
                 this.fields.intervalEmail = '';
+                this.fields.mailgun_domain = '';
+                this.fields.mailgun_secret = '';
+                this.fields.from_name = '';
+                this.fields.from_email = '';
+                this.fields.gateway_apikey = '';
             }
         });
     }
@@ -70,7 +100,16 @@ export class SettingsComponent implements OnInit {
                     });
 
                     this.reloadComponent();
+                }else{
+                    Swal.fire({
+                        title: 'Error!',
+                        text: 'Update Setting Error',
+                        icon: 'error',
+                        confirmButtonText: 'Close',
+                    });
                 }
+
+                this.loadingIndicator = false;
             });
         }
     }
@@ -91,6 +130,21 @@ export class SettingsComponent implements OnInit {
             this.isValid = false;
             this.errorMsg.push('Interval Email Field is Required');
         }
+
+        // if (!this.fields.mailgun_domain) {
+        //     this.isValid = false;
+        //     this.errorMsg.push('Interval Email Field is Required');
+        // }
+
+        // if (!this.fields.mailgun_secret) {
+        //     this.isValid = false;
+        //     this.errorMsg.push('Interval Email Field is Required');
+        // }
+
+        // if (!this.fields.gateway_apikey) {
+        //     this.isValid = false;
+        //     this.errorMsg.push('Interval Email Field is Required');
+        // }
     }
 
     reloadComponent() {

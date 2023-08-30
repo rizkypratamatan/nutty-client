@@ -93,78 +93,79 @@
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Type</label>
-                                <select
+                                <ng-select 
                                     id="user-type"
-                                    class="form-control select2"
                                     required
                                     [(ngModel)]="fields.type"
                                     [ngModelOptions]="{ standalone: true }"
                                 >
-                                    <option value="">Type</option>
-                                    <option value="Administrator">
+                                    <ng-option value="" selected="true">Type</ng-option>
+                                    <ng-option value="Administrator">
                                         Administrator
-                                    </option>
-                                    <option value="CRM">CRM</option>
-                                    <option value="Telemarketer">
+                                    </ng-option>
+                                    <ng-option value="CRM">
+                                        CRM
+                                    </ng-option>
+                                    <ng-option value="Telemarketer">
                                         Telemarketer
-                                    </option>
-                                </select>
+                                    </ng-option>
+                                </ng-select>
                                 <div id="response-type"></div>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Role</label>
-                                <select
+                                <ng-select 
                                     id="user-role"
-                                    class="form-control select2"
                                     required
                                     [(ngModel)]="role"
                                     [ngModelOptions]="{ standalone: true }"
                                     (ngModelChange)="onOptionsSelectedRole()"
                                 >
-                                    <option value="">Role</option>
-                                    <option
+                                    <ng-option value="" selected="true">Role</ng-option>
+                                    <ng-option 
                                         *ngFor="let val of allRoles"
                                         [value]="val._id"
                                     >
-                                        {{ val.name }}
-                                    </option>
-                                </select>
+                                    {{ val.name }}
+                                    </ng-option>
+                                </ng-select>
                                 <div id="response-role"></div>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Group</label>
-                                <select
+                                <ng-select 
                                     id="user-group"
-                                    class="form-control select2"
                                     required
                                     [(ngModel)]="group"
                                     [ngModelOptions]="{ standalone: true }"
                                     (ngModelChange)="onOptionsSelectedGroup()"
                                 >
-                                    <option value="">Group</option>
-                                    <option
+                                    <ng-option value="" selected="true">Group</ng-option>
+                                    <ng-option 
                                         *ngFor="let val of allGroup"
                                         [value]="val._id"
                                     >
                                         {{ val.name }}
-                                    </option>
-                                </select>
+                                    </ng-option>
+                                </ng-select>
                                 <div id="response-group"></div>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Status</label>
-                                <select
+                                <ng-select
                                     id="user-status"
-                                    class="form-control select2"
                                     required
                                     [(ngModel)]="fields.status"
                                     [ngModelOptions]="{ standalone: true }"
                                 >
-                                    <option value="">Status</option>
-                                    <option *ngFor="let val of status">
+                                    <ng-option value="" selected="true">Status</ng-option>
+                                    <ng-option 
+                                        *ngFor="let val of status"
+                                        [value]="val"
+                                    >
                                         {{ val }}
-                                    </option>
-                                </select>
+                                    </ng-option>
+                                </ng-select>
                                 <div id="response-status"></div>
                             </div>
                             <div class="mb-3">

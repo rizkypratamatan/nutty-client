@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import Swal from 'sweetalert2';
 import { AuthService } from 'src/app/services/global/auth.service';
 import { WorksheetService } from 'src/app/services/worksheet/worksheet.service';
 import { HelperService } from 'src/app/services/helper.service';
 import { WebsiteService } from 'src/app/services/website/website.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-worksheet',
@@ -19,13 +19,15 @@ export class WorksheetComponent implements OnInit {
     loadingSmsBtn: boolean = false;
     loadingWaBtn: boolean = false;
     loadingEmailBtn: boolean = false;
+    selectedData: any[] = [];
+    action: String = "";
 
     filter = {
         websiteId: '',
     };
 
     p: number = 1;
-    totalData: number;
+    totalData: number = 0;
 
     updateFilters() {
         this.getPage(1);
@@ -35,7 +37,8 @@ export class WorksheetComponent implements OnInit {
         private service: WorksheetService,
         private authService: AuthService,
         private helper: HelperService,
-        private websiteService: WebsiteService
+        private websiteService: WebsiteService,
+        private router: Router,
     ) {}
 
     ngOnInit(): void {
@@ -57,10 +60,17 @@ export class WorksheetComponent implements OnInit {
     getPage(page: number) {
         this.loading = true;
         this.service.initializeData(this.filter, page).subscribe((response) => {
-            this.allData = response['data'];
-            this.totalData = response['total_data'];
+            if(response['total_data'] > 0){
+                this.allData = response['data'];
+                this.totalData = response['total_data'];
+            }else{
+                this.allData = [];
+                this.totalData = 0;
+                this.helper.showAlert("warning", "Warning!", "No Data Found");
+            }
             this.loading = false;
             this.p = page;
+
         });
     }
 
@@ -86,24 +96,18 @@ export class WorksheetComponent implements OnInit {
             )
         ) {
             this.service
-                .processWhatsapp('Available', this.filter.websiteId, '')
+                .processWhatsapp('Available', this.filter.websiteId, '', this.selectedData)
                 .subscribe((response) => {
                     if (response.result === true) {
-                        Swal.fire({
-                            title: 'Success!',
-                            text: response.response,
-                            icon: 'success',
-                            confirmButtonText: 'Close',
-                        });
+                        this.helper.showAlert('success', 'Success!', response.response)
+                        this.selectedData = [];
                     } else {
-                        Swal.fire({
-                            title: 'Error!',
-                            text: response.response,
-                            icon: 'error',
-                            confirmButtonText: 'Close',
-                        });
+                        this.helper.showAlert('error', 'Error!', response.response)
+                        this.selectedData = [];
                     }
                     this.loadingWaBtn = false;
+                    this.action = "";
+                    this.selectedData = [];
                     this.getPage(1);
                 });
         }
@@ -117,25 +121,18 @@ export class WorksheetComponent implements OnInit {
             )
         ) {
             this.service
-                .processSms('Available', this.filter.websiteId, '')
+                .processSms('Available', this.filter.websiteId, '', this.selectedData)
                 .subscribe((response) => {
                     if (response.result === true) {
-                        Swal.fire({
-                            title: 'Success!',
-                            text: response.response,
-                            icon: 'success',
-                            confirmButtonText: 'Close',
-                        });
+                        this.helper.showAlert('success', 'Success!', response.response)
                     } else {
-                        Swal.fire({
-                            title: 'Error!',
-                            text: response.response,
-                            icon: 'error',
-                            confirmButtonText: 'Close',
-                        });
+                        this.helper.showAlert('error', 'Error!', response.response)
                     }
                     this.loadingSmsBtn = false;
+                    this.action = "";
+                    this.selectedData = [];
                     this.getPage(1);
+                    
                 });
         }
     }
@@ -148,26 +145,59 @@ export class WorksheetComponent implements OnInit {
             )
         ) {
             this.service
-                .processEmail('Available', this.filter.websiteId, '')
+                .processEmail('Available', this.filter.websiteId, '', this.selectedData)
                 .subscribe((response) => {
                     if (response.result === true) {
-                        Swal.fire({
-                            title: 'Success!',
-                            text: response.response,
-                            icon: 'success',
-                            confirmButtonText: 'Close',
-                        });
+                        this.helper.showAlert('success', 'Success!', response.response)
                     } else {
-                        Swal.fire({
-                            title: 'Error!',
-                            text: response.response,
-                            icon: 'error',
-                            confirmButtonText: 'Close',
-                        });
+                        this.helper.showAlert('error', 'Error!', response.response)
+                       
                     }
                     this.loadingEmailBtn = false;
+                    this.action = "";
+                    this.selectedData = [];
                     this.getPage(1);
+                    
                 });
         }
     }
+
+    startWorksheet() {
+        this.router.navigate([
+            '/worksheet/start/' + this.filter.websiteId,
+        ]);
+    }
+
+    populateData(id: any, checked: boolean){
+        if(checked){
+            this.selectedData.push(id);
+        }else{
+            if(this.selectedData.length == 1){
+                this.selectedData.pop()
+            }else{
+                let position = this.selectedData.indexOf(id);
+                    if ( position ) this.selectedData.splice(position, 1);
+            }
+            
+        }
+    }
+
+    processAction(){
+        if(this.action == 'send-sms'){
+            this.helper.showLoadingModal("Processing SMS...");
+            this.processSms();
+        }
+
+        if(this.action == 'send-wa'){
+            this.helper.showLoadingModal("Processing Whatsapp...");
+            this.processWhatsapp();
+        }
+
+        if(this.action == 'send-email'){
+            this.helper.showLoadingModal("Processing Email...");
+            this.processEmail();
+        }
+    }
 }
+
+

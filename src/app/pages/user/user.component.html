@@ -175,7 +175,7 @@
 
                     <!-- Filter -->
                     <div class="row g-1 mb-3">
-                        <div class="col-md-2">
+                        <div class="col-md-1">
                             <input
                                 class="form-control dt-input"
                                 type="text"
@@ -184,7 +184,7 @@
                                 (ngModelChange)="updateFilters()"
                             />
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-1">
                             <input
                                 class="form-control dt-input"
                                 type="text"
@@ -202,57 +202,59 @@
                                 (ngModelChange)="updateFilters()"
                             />
                         </div>
-                        <div class="col-md-2">
-                            <select
+                        <div class="col-md-1">
+                            <ng-select 
                                 id="user-filter-type"
-                                class="select2 form-select dt-select"
                                 [(ngModel)]="fields.type"
                                 (ngModelChange)="updateFilters()"
                             >
-                                <option value="">Choose type</option>
-                                <option *ngFor="let type of allType">
+                                <ng-option value="" selected="true">
+                                    Type
+                                </ng-option>        
+                                <ng-option *ngFor="let type of allType" [value]="type">
                                     {{ type }}
-                                </option>
-                            </select>
+                                </ng-option>
+                            </ng-select>
                         </div>
-                        <div class="col-md-1">
-                            <select
+                        <div class="col-md-2">
+                            <ng-select 
                                 id="user-filter-group"
-                                class="select2 form-select dt-select"
                                 [(ngModel)]="fields.group"
                                 (ngModelChange)="updateFilters()"
                             >
-                                <option value="">Group</option>
-                                <option *ngFor="let group of allGroup" [value]="group._id">
+                                <ng-option value="" selected="true">
+                                    Group
+                                </ng-option>        
+                                <ng-option *ngFor="let group of allGroup" [value]="group._id">
                                     {{ group.name }}
-                                </option>
-                            </select>
+                                </ng-option>
+                            </ng-select>
                         </div>
-                        <div class="col-md-1">
-                            <select
+                        <div class="col-md-2">
+                            <ng-select 
                                 id="user-filter-role"
-                                class="select2 form-select dt-select"
                                 [(ngModel)]="fields.role"
                                 (ngModelChange)="updateFilters()"
                             >
-                                <option value="">Role</option>
-                                <option *ngFor="let role of allRole" [value]="role._id">
+                                <ng-option value="" selected="true">
+                                    Role
+                                </ng-option>        
+                                <ng-option *ngFor="let role of allRole" [value]="role._id">
                                     {{ role.name }}
-                                </option>
-                            </select>
+                                </ng-option>
+                            </ng-select>
                         </div>
-                        <div class="col-md-1">
-                            <select
+                        <div class="col-md-2">
+                            <ng-select 
                                 id="user-filter-status"
-                                class="select2 form-select dt-select"
                                 [(ngModel)]="fields.status"
                                 (ngModelChange)="updateFilters()"
                             >
-                                <option value="">Status</option>
-                                <option *ngFor="let status of allStatus">
+                                <ng-option value="" selected="true">Status</ng-option>
+                                <ng-option *ngFor="let status of allStatus" [value]="status">
                                     {{ status }}
-                                </option>
-                            </select>
+                                </ng-option>
+                            </ng-select>
                         </div>
                         <div class="col-md-2" style="text-align: right">
                             <button

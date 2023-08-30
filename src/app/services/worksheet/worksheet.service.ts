@@ -97,13 +97,14 @@ export class WorksheetService {
         );
     }
 
-    public processWhatsapp(status, websiteId, days): Observable<any> {
+    public processWhatsapp(status, websiteId, days, ids): Observable<any> {
         let auth = this.userServices.Auth();
         let fields = {
             platform: 'Website',
             status: status,
             website: websiteId,
-            days:days
+            days:days,
+            ids: ids
         }
         return this.http.post(
             this.configuration.api.url + '/api/worksheet/process-wa',
@@ -115,13 +116,14 @@ export class WorksheetService {
         );
     }
 
-    public processSms(status, websiteId, days): Observable<any> {
+    public processSms(status, websiteId, days, ids): Observable<any> {
         let auth = this.userServices.Auth();
         let fields = {
             platform: 'Website',
             status: status,
             website: websiteId,
-            days:days
+            days:days,
+            ids:ids
         }
         return this.http.post(
             this.configuration.api.url + '/api/worksheet/process-sms',
@@ -133,13 +135,14 @@ export class WorksheetService {
         );
     }
 
-    public processEmail(status, websiteId, days): Observable<any> {
+    public processEmail(status, websiteId, days, ids): Observable<any> {
         let auth = this.userServices.Auth();
         let fields = {
             platform: 'Website',
             status: status,
             website: websiteId,
-            days:days
+            days:days,
+            ids:ids
         }
         return this.http.post(
             this.configuration.api.url + '/api/worksheet/process-email',
@@ -162,6 +165,23 @@ export class WorksheetService {
             this.globalRestService.initializeBody(
                 data,
                 'api/worksheet/call/initialize-data'
+            ),
+            this.globalRestService.initializeHeaderGetData(auth['token-auth'])
+        );
+    }
+
+    public worksheetStart(websiteId): Observable<any> {
+        console.log("masuk sini")
+        let auth = this.userServices.Auth();
+        let data = {
+            platform: 'Website',
+            websiteId: websiteId
+        };
+        return this.http.post(
+            this.configuration.api.url + '/api/worksheet/start/initializeData',
+            this.globalRestService.initializeBody(
+                data,
+                'api/worksheet/start/initializeData'
             ),
             this.globalRestService.initializeHeaderGetData(auth['token-auth'])
         );
@@ -192,8 +212,5 @@ export class WorksheetService {
             ),
             this.globalRestService.initializeHeaderGetData(auth['token-auth'])
         );
-    }
-    
-
-    
+    }    
 }

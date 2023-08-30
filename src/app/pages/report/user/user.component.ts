@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { FlatpickrOptions } from 'ng2-flatpickr';
 import { HelperService } from 'src/app/services/helper.service';
 import { UserReportService } from 'src/app/services/report/user-report.service';
+import { AuthService } from 'src/app/services/global/auth.service';
 
 @Component({
     selector: 'app-user',
@@ -29,6 +30,8 @@ export class UserComponent implements OnInit {
 
     statusFilter = ['Active', 'Inactive'];
 
+    auth: any;
+
     updateFilters() {
         this.getPage(1);
     }
@@ -36,8 +39,11 @@ export class UserComponent implements OnInit {
     constructor(
         private service: UserReportService,
         private router: Router,
-        private helper: HelperService
-    ) {}
+        private helper: HelperService,
+        private authService: AuthService
+    ) {
+        this.auth = this.authService.Auth();
+    }
 
     ngOnInit(): void {
         this.getPage(1);
@@ -56,12 +62,18 @@ export class UserComponent implements OnInit {
         this.service
             .getAllUserReport(this.fields, page)
             .subscribe((response) => {
-                if(response.status == true){
-                    this.allUsers = response['data'];
-                    this.nucode = response['userGroups'][0]['nucode'];
-                    this.totalUser = response['total_data'];
-                    this.p = page;
-                }
+                // if(response.status == true){
+                //     this.allUsers = response['data'];
+                //     console.log(this.allUsers);
+                //     this.nucode = response['userGroups'][0]['nucode'];
+                //     this.totalUser = response['total_data'];
+                //     this.p = page;
+                // }
+                this.allUsers = response['data'];
+                console.log(this.allUsers);
+                this.nucode = response['userGroups'][0]['nucode'];
+                this.totalUser = response['recordsTotal'];
+                this.p = page;
                 this.loading = false;
                 
             });

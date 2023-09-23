@@ -5,6 +5,7 @@ import { UserRoleService } from 'src/app/services/user/user-role.service';
 import { UserService } from 'src/app/services/user/user.service';
 import { HelperService } from 'src/app/services/helper.service';
 import { AuthService } from 'src/app/services/global/auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
     selector: 'app-user',
@@ -94,12 +95,30 @@ export class UserComponent implements OnInit {
 
         if (confirm('Are you sure to delete user: ' + name)) {
             this.service.deleteUser(data).subscribe((response) => {
+                // if (response.result === true) {
+                //     this.router.navigate(['/user']);
+                //     this.router
+                //         .navigateByUrl('/', { skipLocationChange: true })
+                //         .then(() => this.router.navigate([currentUrl]));
+                // }
+
                 if (response.result === true) {
-                    this.router.navigate(['/user']);
-                    // this.router
-                    //     .navigateByUrl('/', { skipLocationChange: true })
-                    //     .then(() => this.router.navigate([currentUrl]));
+                    Swal.fire({
+                        title: 'Success!',
+                        text: response.response,
+                        icon: 'success',
+                        confirmButtonText: 'Close'
+                    });
+                    this.getPage(1)
+                }else{
+                    Swal.fire({
+                        title: 'Error!',
+                        text: response.response,
+                        icon: 'error',
+                        confirmButtonText: 'Close'
+                    });
                 }
+                
             });
         }
     }

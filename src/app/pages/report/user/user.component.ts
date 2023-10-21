@@ -70,8 +70,9 @@ export class UserComponent implements OnInit {
                 //     this.p = page;
                 // }
                 this.allUsers = response['data'];
-                console.log(this.allUsers);
-                this.nucode = response['userGroups'][0]['nucode'];
+                console.log(response['nucode']);
+                this.nucode = response['nucode'];
+                this.fields.nucode = response['nucode'];
                 this.totalUser = response['recordsTotal'];
                 this.p = page;
                 this.loading = false;

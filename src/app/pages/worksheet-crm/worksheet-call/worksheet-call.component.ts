@@ -84,14 +84,20 @@ export class WorksheetCallComponent implements OnInit {
     private update() {
         this.service.updateDatabase(this.id, this.fields).subscribe((response) => {
             if (response.result === true) {
-                this.loadingIndicator = false
                 Swal.fire({
                     title: 'Success!',
-                    text: 'Update Success',
+                    text: response.response,
                     icon: 'success',
                     confirmButtonText: 'Close'
                 });
+            }else{
+                Swal.fire({
+                    title: 'Error!',
+                    text: response.response,
+                    icon: 'error',
+                 });
             }
+            this.loadingIndicator = false
         });
     }
 

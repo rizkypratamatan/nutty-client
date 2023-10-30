@@ -48,7 +48,7 @@ export class DatabaseComponent implements OnInit {
             });
             
         }else{
-            console.log(auth);
+            // console.log(auth);
             this.filter.website = auth['website']['ids'][0];
             let arrWeb = [];
 

@@ -53,7 +53,7 @@ export class WorksheetCallComponent implements OnInit {
 
         if (!this.isAddMode) {
             this.service.worksheetCall(this.id, this.websiteId).subscribe((response) => {
-              console.log(response)
+            //   console.log(response)
               this.skype = response.database.contact.phone.replace("+", "");
               this.whatsapp = response.database.contact.whatsapp.replace("+", "");
               this.fields.name = response.database.name;

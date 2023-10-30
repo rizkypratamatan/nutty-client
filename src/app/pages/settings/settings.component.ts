@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { getStickyFooterScrollbar } from '@fullcalendar/core';
 import { AuthService } from 'src/app/services/global/auth.service';
 import { SettingService } from 'src/app/services/setting/setting.service';
 import Swal from 'sweetalert2';
@@ -14,6 +15,9 @@ export class SettingsComponent implements OnInit {
     errorMsg: any[] = [];
     loadingIndicator: boolean = false;
     idSetting: string = '';
+    allNucode: any[] = [];
+    nucode: string = '';
+    auth: any;
 
     fields = {
         platform: 'Website',
@@ -35,8 +39,31 @@ export class SettingsComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        this.service.getAllSetting(this.fields).subscribe((response) => {
-            if (response.dataSetting != undefined) {
+        this.auth = this.authService.Auth();
+
+
+        if (this.auth['nucode'] == "system") {
+            this.service.getAllNucode().subscribe((response) => {
+                response['data'].forEach((value) => {
+                    if(this.auth['nucode'] == "system"){
+                        this.allNucode.push(value);
+                    }
+                });
+            });
+        }else{
+            this.nucode = this.auth['nucode'];
+            this.getSetting();
+        }
+    }
+
+    showData(nucode, event){
+        this.nucode = nucode;
+        this.getSetting();
+    }
+
+    getSetting(){
+        this.service.getAllSetting(this.fields, this.nucode).subscribe((response) => {
+            if ((response.dataSetting != undefined) && (response.total_data > 0)) {
                 response.dataSetting.forEach((element) => {
                     if (element.name == 'interval_sms') {
                         this.fields.intervalSMS = element.value;
@@ -90,7 +117,7 @@ export class SettingsComponent implements OnInit {
             this.loadingIndicator = true;
             // this.update();
             // console.log(this.fields);
-            this.service.updateSetting(this.fields).subscribe((response) => {
+            this.service.updateSetting(this.fields, this.nucode).subscribe((response) => {
                 if (response.result === true) {
                     Swal.fire({
                         title: 'Success!',

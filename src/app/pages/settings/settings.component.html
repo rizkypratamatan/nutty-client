@@ -4,7 +4,6 @@
             <div
                 class="page-title-box d-flex align-items-center justify-content-between"
             >
-                <h4 class="mb-0">Settings <b>{{ nucode }}</b></h4>
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
@@ -19,6 +18,26 @@
     <!-- End Justified Tabs -->
 
     <!-- Single Message -->
+    <div class="card col-md-12">
+        <div class="row">
+            
+            <div class="card-body">
+                <div>
+                    <h5 class="mb-3" style="text-align: center;">
+                        Select one of nucode below
+                    </h5>
+                    <div *ngFor="let item of allNucode" class="col-12 mb-3">
+                        <button class="btn btn-primary waves-effect waves-light me-1" style="float:left;"
+                                (click)="showData(item, $event)">
+                                {{ item }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h4 class="mb-0">Settings <b>{{ nucode }}</b></h4>
+    <br>
     <div class="card col-md-12" *ngIf="nucode">
         <div class="row">
             <div class="card-header" *ngIf="isValid == false">
@@ -232,16 +251,13 @@
                                 class="btn btn-success waves-effect waves-light me-1"
                                 type="submit"
                                 style="float: right"
+                                [disabled]="loadingIndicator == true"
                             >
-                                Save
+                                <div class="spinner-border spinner-border-sm" role="status" *ngIf="loadingIndicator == true">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                                <span *ngIf="loadingIndicator == false">Save</span>
                             </button>
-
-                            <!-- <button
-                                            type="reset"
-                                            class="btn btn-secondary waves-effect"
-                                        >
-                                            Reset
-                                        </button> -->
                         </div>
                     </div>
                     <!-- Button Save -->
@@ -250,22 +266,5 @@
         </div>
     </div>
 
-    <div class="card col-md-12" *ngIf="!nucode">
-        <div class="row">
-            
-            <div class="card-body">
-                <div>
-                    <h5 class="mb-3" style="text-align: center;">
-                        Select one of nucode below
-                    </h5>
-                    <div *ngFor="let item of allNucode" class="col-12 mb-3">
-                        <button class="btn btn-primary waves-effect waves-light me-1" style="float:left;"
-                                (click)="showData(item, $event)">
-                                {{ item }}
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    
 </div>

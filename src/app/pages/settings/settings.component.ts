@@ -57,11 +57,21 @@ export class SettingsComponent implements OnInit {
     }
 
     showData(nucode, event){
+        this.loadingIndicator = true;
+        this.fields.intervalSMS = '';
+        this.fields.intervalWhatsApp = '';
+        this.fields.intervalEmail = '';
+        this.fields.mailgun_domain = '';
+        this.fields.mailgun_secret = '';
+        this.fields.from_name = '';
+        this.fields.from_email = '';
+        this.fields.gateway_apikey = '';
         this.nucode = nucode;
         this.getSetting();
     }
 
     getSetting(){
+        
         this.service.getAllSetting(this.fields, this.nucode).subscribe((response) => {
             if ((response.dataSetting != undefined) && (response.total_data > 0)) {
                 response.dataSetting.forEach((element) => {
@@ -106,8 +116,11 @@ export class SettingsComponent implements OnInit {
                 this.fields.from_name = '';
                 this.fields.from_email = '';
                 this.fields.gateway_apikey = '';
+
             }
+            this.loadingIndicator = false;
         });
+
     }
 
     submit() {

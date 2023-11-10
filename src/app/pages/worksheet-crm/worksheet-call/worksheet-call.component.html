@@ -136,8 +136,14 @@
                                 </div>
                             </div> -->
                             <div class="mb-3">
-                                <button class="btn btn-primary waves-effect waves-light me-1"
-                                        (click)="submit()">Update
+                                <button
+                                    class="btn btn-primary waves-effect waves-light me-1"
+                                    (click)="submit()"
+                                >
+                                <div class="spinner-border spinner-border-sm" role="status" *ngIf="loadingIndicator == true">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                                    <span *ngIf="loadingIndicator == false">Update</span>
                                 </button>
                             </div>
                         </div>

@@ -53,7 +53,7 @@ export class WorksheetCallComponent implements OnInit {
 
         if (!this.isAddMode) {
             this.service.worksheetCall(this.id, this.websiteId).subscribe((response) => {
-              console.log(response)
+            //   console.log(response)
               this.skype = response.database.contact.phone.replace("+", "");
               this.whatsapp = response.database.contact.whatsapp.replace("+", "");
               this.fields.name = response.database.name;
@@ -84,14 +84,20 @@ export class WorksheetCallComponent implements OnInit {
     private update() {
         this.service.updateDatabase(this.id, this.fields).subscribe((response) => {
             if (response.result === true) {
-                this.loadingIndicator = false
                 Swal.fire({
                     title: 'Success!',
-                    text: 'Update Success',
+                    text: response.response,
                     icon: 'success',
                     confirmButtonText: 'Close'
                 });
+            }else{
+                Swal.fire({
+                    title: 'Error!',
+                    text: response.response,
+                    icon: 'error',
+                 });
             }
+            this.loadingIndicator = false
         });
     }
 

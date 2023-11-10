@@ -22,7 +22,7 @@ export class SettingService {
         this.configuration = this.configurationService;
     }
 
-    public getAllSetting(filter): Observable<any> {
+    public getAllSetting(filter, nucode): Observable<any> {
         let auth = this.authServices.Auth();
 
         let data = {
@@ -30,6 +30,7 @@ export class SettingService {
             intervalSMS: filter.intervalSMS,
             intervalWhatsApp: filter.intervalWhatsApp,
             intervalEmail: filter.intervalEmail,
+            nucode: nucode,
         };
 
         return this.http.post(
@@ -42,7 +43,24 @@ export class SettingService {
         );
     }
 
-    public updateSetting(request): Observable<any> {
+    public getAllNucode(): Observable<any> {
+        let auth = this.authServices.Auth();
+
+        let data = {
+            platform: 'Website',
+        };
+
+        return this.http.post(
+            this.configuration.api.url + '/api/get-all-nucode',
+            this.globalRestService.initializeBody(
+                data,
+                'api/get-all-nucode'
+            ),
+            this.globalRestService.initializeHeaderGetData(auth['token-auth'])
+        );
+    }
+
+    public updateSetting(request, nucode): Observable<any> {
         let auth = this.authServices.Auth();
 
         let data = {
@@ -55,6 +73,7 @@ export class SettingService {
             from_name: request.from_name,
             from_email: request.from_email,
             gateway_apikey: request.gateway_apikey,
+            nucode: nucode
         };
 
         return this.http.post(

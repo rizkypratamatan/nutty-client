@@ -43,11 +43,15 @@ export class WorksheetComponent implements OnInit {
 
     ngOnInit(): void {
         this.auth = this.authService.Auth();
+        // console.log(this.auth);
 
-        if (this.auth['group']._id != '0') {
+        if (this.auth['group']._id != '0' || this.auth['nucode'] == "system") {
             this.websiteService.getAllWebsite({}, 1).subscribe((response) => {
                 response['data'].forEach((value) => {
-                    if (
+                    if(this.auth['nucode'] == "system"){
+                        this.allWebsite.push(value);
+                    }
+                    else if(
                         this.auth['group']['website']['ids'].includes(value._id)
                     ) {
                         this.allWebsite.push(value);

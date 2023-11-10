@@ -95,7 +95,7 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
             ? privilege['report'].split('')
             : ['0', '0', '0', '0'];
 
-        console.log(this.privilege);
+        // console.log(this.privilege);
     }
     /**
      * Change the layout onclick

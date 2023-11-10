@@ -54,7 +54,7 @@ export class SentComponent implements OnInit {
             schedule_status: 'now',
             initiated_time: '',
         };
-        console.log(this.fields);
+        // console.log(this.fields);
 
         if (this.isValid) {
             this.loadingIndicator = true;
